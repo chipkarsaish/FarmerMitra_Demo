@@ -1,0 +1,204 @@
+{
+    "nav": {
+        "login": "लॉगिन",
+        "register": "नोंदणी",
+        "home": "मुख्यपृष्ठ",
+        "features": "वैशिष्ट्ये",
+        "about": "आमच्याबद्दल",
+        "contact": "संपर्क"
+    },
+    "hero": {
+        "title": "स्मार्ट शेतकरी मार्केट-लिंकेज, किंमत शोध",
+        "subtitle": "केवळ सर्वोच्च किंमत शोधू नका. एआय-चालित मार्केट इंटेलिजन्ससह विक्रीची सर्वोत्तम वास्तविक संधी शोधा.",
+        "getStarted": "सुरू करा",
+        "learnMore": "अधिक जाणून घ्या"
+    },
+    "features": {
+        "title": "आम्ही काय ऑफर करतो",
+        "marketIntelligence": {
+            "title": "मार्केट इंटेलिजन्स",
+            "description": "बाजारभावांची तुलना करा आणि वाहतूक आणि कमिशननंतर तुमच्या वास्तविक निव्वळ प्राप्तीची गणना करा."
+        },
+        "aiPrediction": {
+            "title": "एआय किंमत अंदाज",
+            "description": "ऐतिहासिक ट्रेंडचे विश्लेषण करा आणि तुमच्या पिकांसाठी XGBoost एआय-चालित किंमत अंदाज मिळवा."
+        },
+        "buyerMatching": {
+            "title": "स्मार्ट खरेदीदार जुळणी",
+            "description": "आमच्या एआय खरेदीदार मॅच स्कोअरद्वारे रँक केलेल्या विश्वसनीय सत्यापित खरेदीदारांशी कनेक्ट व्हा."
+        }
+    },
+    "auth": {
+        "chooseRole": "तुमची भूमिका निवडा",
+        "selectRole": "तुम्हाला फार्मर कनेक्टमध्ये कसे सामील व्हायचे ते निवडा",
+        "farmer": "शेतकरी",
+        "farmerDesc": "भाडे, बाजारपेठ आणि सहकारी वैशिष्ट्यांमध्ये प्रवेश",
+        "loginAs": "म्हणून लॉगिन करा",
+        "registerAs": "म्हणून नोंदणी करा",
+        "email": "ईमेल पत्ता",
+        "password": "पासवर्ड",
+        "confirmPassword": "पासवर्डची पुष्टी करा",
+        "rememberMe": "मला लक्षात ठेवा",
+        "forgotPassword": "पासवर्ड विसरलात?",
+        "loginBtn": "लॉगिन",
+        "registerBtn": "खाते तयार करा",
+        "noAccount": "खाते नाही?",
+        "hasAccount": "आधीच खाते आहे?",
+        "registerHere": "येथे नोंदणी करा",
+        "loginHere": "येथे लॉगिन करा",
+        "fullName": "पूर्ण नाव",
+        "phone": "फोन नंबर",
+        "farmLocation": "शेताचे स्थान",
+        "farmSize": "शेताचा आकार (एकरमध्ये)",
+        "cropsGrown": "प्राथमिक पिके घेतली",
+        "department": "विभाग",
+        "agreeTerms": "मी अटी आणि शर्तींशी सहमत आहे",
+        "back": "मागे",
+        "buyer": "खरेदीदार",
+        "buyerDesc": "शेतकऱ्यांशी संपर्क साधा आणि पिके खरेदी करा"
+    },
+    "dashboard": {
+        "notifications": "सूचना",
+        "myProfile": "माझे प्रोफाइल",
+        "settings": "सेटिंग्ज",
+        "logout": "लॉगआउट",
+        "welcomeBack": "परत स्वागत आहे, शेतकरी! 👋",
+        "welcomeSubtitle": "आज तुमच्या शेतात काय चालले आहे ते येथे आहे",
+        "carbonCreditsLabel": "तुमचे कार्बन क्रेडिट्स",
+        "carbonCreditsValue": "125 क्रेडिट्स",
+        "progressLabel": "पुढील बक्षिसापर्यंत 75%",
+        "quickAccess": "द्रुत प्रवेश",
+        "recentActivity": "अलीकडील क्रियाकलाप",
+        "tiles": {
+            "amenities": {
+                "title": "सुविधा",
+                "description": "बियाणे, खते आणि उपकरणे भाड्याने घ्या"
+            },
+            "funds": {
+                "title": "निधी",
+                "description": "कर्ज आणि आर्थिक मदतीसाठी अर्ज करा"
+            },
+            "availability": {
+                "title": "उपलब्धता",
+                "description": "पीक उपलब्धता व्यवस्थापित करा"
+            },
+            "carbonCredits": {
+                "title": "कार्बन क्रेडिट्स",
+                "description": "कार्बन क्रेडिट्स पहा आणि विका"
+            },
+            "groupFarming": {
+                "title": "सामूहिक शेती",
+                "description": "शेती सहकारी संस्थांमध्ये सामील व्हा"
+            },
+            "myOrders": {
+                "title": "माझे ऑर्डर",
+                "description": "ऑर्डर आणि व्यवहार पहा"
+            }
+        },
+        "activity": {
+            "fertilizerApproved": "खत भाडे मंजूर",
+            "time1": "2 तासांपूर्वी",
+            "wheatMarked": "50 किलो गहू उपलब्ध म्हणून चिन्हांकित",
+            "time2": "5 तासांपूर्वी",
+            "carbonEarned": "25 कार्बन क्रेडिट्स मिळवले",
+            "time3": "1 दिवसापूर्वी"
+        }
+    },
+    "sidebar": {
+        "dashboard": "डॅशबोर्ड",
+        "marketIntelligence": "मार्केट इंटेलिजन्स",
+        "myCrops": "माझी पिके",
+        "buyers": "खरेदीदार",
+        "smartSelling": "स्मार्ट सेलिंग",
+        "transactions": "व्यवहार",
+        "profile": "प्रोफाइल",
+        "amenities": "सुविधा",
+        "carbonCredits": "कार्बन क्रेडिट्स",
+        "groupFarming": "सामूहिक शेती",
+        "funds": "निधी आणि कर्ज",
+        "availability": "उपलब्धता",
+        "myOrders": "माझे ऑर्डर"
+    },
+    "amenities": {
+        "pageTitle": "🌱 सुविधा भाडे",
+        "pageSubtitle": "बियाणे, खते आणि उपकरणे परवडणार्या दरांवर भाड्याने घ्या",
+        "incentive": {
+            "specialOffer": "विशेष ऑफर:",
+            "discount": "बाजारपेठेद्वारे पिके विका आणि मिळवा",
+            "discountAmount": "25% भाडे सवलत"
+        },
+        "categories": {
+            "title": "श्रेणीनुसार ब्राउझ करा",
+            "all": "सर्व वस्तू",
+            "seeds": "बियाणे",
+            "fertilizers": "खते",
+            "machinery": "यंत्रसामग्री",
+            "irrigation": "सिंचन",
+            "organic": "सेंद्रिय",
+            "itemsCount": "वस्तू"
+        },
+        "search": {
+            "placeholder": "बियाणे, ट्रॅक्टर, खत शोधा...",
+            "filters": "फिल्टर",
+            "clearAll": "सर्व साफ करा",
+            "cancel": "रद्द करा",
+            "applyFilters": "फिल्टर लागू करा"
+        },
+        "filters": {
+            "cropType": "पिकाचा प्रकार",
+            "allCrops": "सर्व पिके",
+            "wheat": "गहू",
+            "rice": "तांदूळ",
+            "cotton": "कापूस",
+            "sugarcane": "ऊस",
+            "vegetables": "भाज्या",
+            "season": "हंगाम",
+            "allSeasons": "सर्व हंगाम",
+            "kharif": "खरीप",
+            "rabi": "रब्बी",
+            "zaid": "झायद",
+            "rentalDuration": "भाड्याचा कालावधी",
+            "anyDuration": "कोणताही कालावधी",
+            "perDay": "प्रतिदिन",
+            "perWeek": "प्रति आठवडा",
+            "perSeason": "प्रति हंगाम",
+            "priceRange": "किंमत श्रेणी (₹)",
+            "min": "किमान",
+            "max": "कमाल",
+            "availability": "उपलब्धता",
+            "availableNow": "आता उपलब्ध",
+            "nearby": "जवळपास (< 10 किमी)",
+            "sortBy": "यानुसार क्रमवारी लावा",
+            "mostPopular": "सर्वात लोकप्रिय",
+            "priceLowToHigh": "किंमत: कमी ते जास्त",
+            "priceHighToLow": "किंमत: जास्त ते कमी",
+            "highestRated": "सर्वोच्च रेटेड",
+            "newestFirst": "नवीनतम प्रथम"
+        },
+        "listing": {
+            "title": "उपलब्ध सुविधा",
+            "itemsFound": "वस्तू आढळल्या",
+            "loadMore": "अधिक वस्तू लोड करा"
+        }
+    },
+    "common": {
+        "search": "शोधा",
+        "filter": "फिल्टर",
+        "sort": "क्रमवारी लावा",
+        "apply": "लागू करा",
+        "cancel": "रद्द करा",
+        "save": "जतन करा",
+        "edit": "संपादित करा",
+        "delete": "हटवा",
+        "view": "पहा",
+        "close": "बंद करा",
+        "submit": "सबमिट करा",
+        "next": "पुढे",
+        "previous": "मागे",
+        "loading": "लोड होत आहे...",
+        "noResults": "कोणतेही परिणाम आढळले नाहीत",
+        "error": "एक त्रुटी आली",
+        "success": "यश!",
+        "backToDashboard": "डॅशबोर्डवर परत जा"
+    }
+}

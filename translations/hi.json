@@ -1,0 +1,198 @@
+{
+    "nav": {
+        "login": "लॉगिन",
+        "register": "रजिस्टर",
+        "home": "होम",
+        "features": "सुविधाएं",
+        "about": "हमारे बारे में",
+        "contact": "संपर्क करें"
+    },
+    "hero": {
+        "title": "स्मार्ट किसान मार्केट-लिंकेज, मूल्य खोज",
+        "subtitle": "केवल उच्चतम मूल्य मत खोजें। AI-संचालित बाजार बुद्धिमत्ता के साथ सबसे अच्छा वास्तविक बिक्री अवसर खोजें।",
+        "getStarted": "शुरू करें",
+        "learnMore": "और जानें"
+    },
+    "features": {
+        "title": "हम क्या प्रदान करते हैं",
+        "marketIntelligence": {
+            "title": "बाजार बुद्धिमत्ता",
+            "description": "बाजार की कीमतों की तुलना करें और परिवहन और कमीशन के बाद अपनी वास्तविक शुद्ध प्राप्ति की गणना करें।"
+        },
+        "aiPrediction": {
+            "title": "AI मूल्य पूर्वानुमान",
+            "description": "ऐतिहासिक रुझानों का विश्लेषण करें और अपनी फसलों के लिए XGBoost AI-संचालित मूल्य पूर्वानुमान प्राप्त करें।"
+        },
+        "buyerMatching": {
+            "title": "स्मार्ट खरीदार मिलान",
+            "description": "विश्वसनीय सत्यापित खरीदारों से जुड़ें, जिन्हें हमारे AI खरीदार मिलान स्कोर द्वारा रैंक किया गया है।"
+        }
+    },
+    "auth": {
+        "chooseRole": "अपनी भूमिका चुनें",
+        "selectRole": "चुनें कि आप फार्मर कनेक्ट में कैसे शामिल होना चाहते हैं",
+        "farmer": "किसान",
+        "farmerDesc": "किराए, बाज़ार और सहकारी सुविधाओं तक पहुंच",
+        "loginAs": "के रूप में लॉगिन करें",
+        "registerAs": "के रूप में रजिस्टर करें",
+        "email": "ईमेल पता",
+        "password": "पासवर्ड",
+        "confirmPassword": "पासवर्ड की पुष्टि करें",
+        "rememberMe": "मुझे याद रखें",
+        "forgotPassword": "पासवर्ड भूल गए?",
+        "loginBtn": "लॉगिन",
+        "registerBtn": "खाता बनाएं",
+        "noAccount": "खाता नहीं है?",
+        "hasAccount": "पहले से खाता है?",
+        "registerHere": "यहां रजिस्टर करें",
+        "loginHere": "यहां लॉगिन करें",
+        "fullName": "पूरा नाम",
+        "phone": "फोन नंबर",
+        "farmLocation": "खेत का स्थान",
+        "farmSize": "खेत का आकार (एकड़ में)",
+        "cropsGrown": "मुख्य फसलें उगाई गईं",
+        "department": "विभाग",
+        "agreeTerms": "मैं नियम और शर्तों से सहमत हूं",
+        "back": "वापस",
+        "buyer": "खरीदार",
+        "buyerDesc": "किसानों से जुड़ें और फसलें खरीदें"
+    },
+    "dashboard": {
+        "notifications": "सूचनाएं",
+        "myProfile": "मेरी प्रोफ़ाइल",
+        "settings": "सेटिंग्स",
+        "logout": "लॉगआउट",
+        "welcomeBack": "वापस स्वागत है, किसान! 👋",
+        "welcomeSubtitle": "आज आपके खेत में क्या हो रहा है",
+        "carbonCreditsLabel": "आपके कार्बन क्रेडिट",
+        "carbonCreditsValue": "125 क्रेडिट",
+        "progressLabel": "अगले पुरस्कार तक 75%",
+        "quickAccess": "त्वरित पहुंच",
+        "recentActivity": "हाल की गतिविधि",
+        "tiles": {
+            "amenities": {
+                "title": "सुविधाएं",
+                "description": "बीज, उर्वरक और उपकरण किराए पर लें"
+            },
+            "funds": {
+                "title": "निधि",
+                "description": "ऋण और वित्तीय सहायता के लिए आवेदन करें"
+            },
+            "availability": {
+                "title": "उपलब्धता",
+                "description": "फसल उपलब्धता प्रबंधित करें"
+            },
+            "carbonCredits": {
+                "title": "कार्बन क्रेडिट",
+                "description": "कार्बन क्रेडिट देखें और बेचें"
+            },
+            "groupFarming": {
+                "title": "समूह खेती",
+                "description": "खेती सहकारी समितियों में शामिल हों"
+            },
+            "myOrders": {
+                "title": "मेरे आदेश",
+                "description": "आदेश और लेनदेन देखें"
+            }
+        },
+        "activity": {
+            "fertilizerApproved": "उर्वरक किराया स्वीकृत",
+            "time1": "2 घंटे पहले",
+            "wheatMarked": "50 किलो गेहूं उपलब्ध के रूप में चिह्नित",
+            "time2": "5 घंटे पहले",
+            "carbonEarned": "25 कार्बन क्रेडिट अर्जित किए",
+            "time3": "1 दिन पहले"
+        }
+    },
+    "sidebar": {
+        "dashboard": "डैशबोर्ड",
+        "marketIntelligence": "बाजार बुद्धिमत्ता",
+        "myCrops": "मेरी फसलें",
+        "buyers": "खरीदार",
+        "smartSelling": "स्मार्ट बिक्री",
+        "transactions": "लेनदेन",
+        "profile": "प्रोफ़ाइल"
+    },
+    "amenities": {
+        "pageTitle": "🌱 सुविधा किराया",
+        "pageSubtitle": "बीज, उर्वरक और उपकरण किफायती दरों पर किराए पर लें",
+        "incentive": {
+            "specialOffer": "विशेष प्रस्ताव:",
+            "discount": "बाज़ार के माध्यम से फसलें बेचें और पाएं",
+            "discountAmount": "25% किराया छूट"
+        },
+        "categories": {
+            "title": "श्रेणी के अनुसार ब्राउज़ करें",
+            "all": "सभी वस्तुएं",
+            "seeds": "बीज",
+            "fertilizers": "उर्वरक",
+            "machinery": "मशीनरी",
+            "irrigation": "सिंचाई",
+            "organic": "जैविक",
+            "itemsCount": "वस्तुएं"
+        },
+        "search": {
+            "placeholder": "बीज, ट्रैक्टर, उर्वरक खोजें...",
+            "filters": "फ़िल्टर",
+            "clearAll": "सभी साफ़ करें",
+            "cancel": "रद्द करें",
+            "applyFilters": "फ़िल्टर लागू करें"
+        },
+        "filters": {
+            "cropType": "फसल का प्रकार",
+            "allCrops": "सभी फसलें",
+            "wheat": "गेहूं",
+            "rice": "चावल",
+            "cotton": "कपास",
+            "sugarcane": "गन्ना",
+            "vegetables": "सब्जियां",
+            "season": "मौसम",
+            "allSeasons": "सभी मौसम",
+            "kharif": "खरीफ",
+            "rabi": "रबी",
+            "zaid": "जायद",
+            "rentalDuration": "किराये की अवधि",
+            "anyDuration": "कोई भी अवधि",
+            "perDay": "प्रति दिन",
+            "perWeek": "प्रति सप्ताह",
+            "perSeason": "प्रति मौसम",
+            "priceRange": "मूल्य सीमा (₹)",
+            "min": "न्यूनतम",
+            "max": "अधिकतम",
+            "availability": "उपलब्धता",
+            "availableNow": "अभी उपलब्ध",
+            "nearby": "पास में (< 10 किमी)",
+            "sortBy": "इसके अनुसार क्रमबद्ध करें",
+            "mostPopular": "सबसे लोकप्रिय",
+            "priceLowToHigh": "मूल्य: कम से अधिक",
+            "priceHighToLow": "मूल्य: अधिक से कम",
+            "highestRated": "सर्वोच्च रेटेड",
+            "newestFirst": "नवीनतम पहले"
+        },
+        "listing": {
+            "title": "उपलब्ध सुविधाएं",
+            "itemsFound": "वस्तुएं मिलीं",
+            "loadMore": "अधिक वस्तुएं लोड करें"
+        }
+    },
+    "common": {
+        "search": "खोजें",
+        "filter": "फ़िल्टर",
+        "sort": "क्रमबद्ध करें",
+        "apply": "लागू करें",
+        "cancel": "रद्द करें",
+        "save": "सहेजें",
+        "edit": "संपादित करें",
+        "delete": "हटाएं",
+        "view": "देखें",
+        "close": "बंद करें",
+        "submit": "जमा करें",
+        "next": "अगला",
+        "previous": "पिछला",
+        "loading": "लोड हो रहा है...",
+        "noResults": "कोई परिणाम नहीं मिला",
+        "error": "एक त्रुटि हुई",
+        "success": "सफलता!",
+        "backToDashboard": "डैशबोर्ड पर वापस जाएं"
+    }
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KisanMitra Market AI - Choose Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'farmer': {
+                            'green': {
+                                500: '#4a7c2c',
+                                600: '#2d5016',
+                            },
+                            'gold': {
+                                300: '#fcd34d',
+                                500: '#f59e0b',
+                            }
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                        'display': ['Montserrat', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'fadeInUp': 'fadeInUp 1s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.85), rgba(74, 124, 44, 0.7)),
+                url('public/farmer.png');
+            background-size: cover;
+            background-position: center 30%;
+            background-attachment: fixed;
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-gray-800 hero-bg min-h-screen flex items-center justify-center">
+    <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60"></div>
+
+    <div class="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 animate-fadeInUp">
+        <div class="text-center mb-12">
+            <span
+                class="font-display font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight text-white drop-shadow-lg">
+                Kisan<span class="text-farmer-gold-500">Mitra</span>
+            </span>
+            <p class="text-lg sm:text-xl text-white/90 mt-4 font-light drop-shadow-md">Choose your experience to
+                continue</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 max-w-4xl mx-auto">
+            <!-- Website Option -->
+            <a href="website.html"
+                class="group relative overflow-hidden rounded-3xl glass-effect p-8 sm:p-10 hover:-translate-y-2 transition-all duration-300 hover:shadow-[0_0_40px_rgba(74,124,44,0.4)] hover:bg-white/15">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-farmer-green-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                </div>
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div
+                        class="w-24 h-24 sm:w-28 sm:h-28 bg-white/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-inner">
+                        <i
+                            class="fa-solid fa-laptop text-4xl sm:text-5xl text-white drop-shadow-md group-hover:text-farmer-gold-300 transition-colors"></i>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3 tracking-wide">Website</h2>
+                    <p class="text-white/80 text-sm sm:text-base font-light">Access the full dashboard, market prices,
+                        and advanced analytics on your desktop.</p>
+
+                    <div
+                        class="mt-8 flex items-center text-farmer-gold-300 font-semibold group-hover:gap-2 transition-all">
+                        <span>Launch Web App</span>
+                        <i
+                            class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Mobile Option -->
+            <a href="mobile.html"
+                class="group relative overflow-hidden rounded-3xl glass-effect p-8 sm:p-10 hover:-translate-y-2 transition-all duration-300 hover:shadow-[0_0_40px_rgba(74,124,44,0.4)] hover:bg-white/15">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-farmer-green-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                </div>
+                <div class="relative z-10 flex flex-col items-center text-center">
+                    <div
+                        class="w-24 h-24 sm:w-28 sm:h-28 bg-white/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-inner">
+                        <i
+                            class="fa-solid fa-mobile-screen-button text-4xl sm:text-5xl text-white drop-shadow-md group-hover:text-farmer-gold-300 transition-colors"></i>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mb-3 tracking-wide">Mobile App</h2>
+                    <p class="text-white/80 text-sm sm:text-base font-light">Experience the intuitive mobile interface
+                        designed for farmers on the go.</p>
+
+                    <div
+                        class="mt-8 flex items-center text-farmer-gold-300 font-semibold group-hover:gap-2 transition-all">
+                        <span>View Mobile Prototype</span>
+                        <i
+                            class="fa-solid fa-arrow-right ml-2 opacity-0 group-hover:opacity-100 transform -translate-x-2 group-hover:translate-x-0 transition-all"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>

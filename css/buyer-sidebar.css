@@ -1,0 +1,7 @@
+/* Buyer Sidebar Specific Overrides */
+
+/* Allow text wrapping for long navigation names in buyer portal */
+.sidebar-nav a {
+    white-space: normal;
+    line-height: 1.3;
+}

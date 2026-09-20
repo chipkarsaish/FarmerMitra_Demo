@@ -1,0 +1,218 @@
+/* =======================================================
+   KISANMITRA ALWAYS-EXPANDED SIDEBAR STYLES
+   Sidebar sits BELOW the top navbar (header spans full width)
+   ======================================================= */
+
+/* Sidebar Container - Always Expanded, starts below header */
+.farmer-sidebar {
+    width: 220px;
+    background: #14230e;
+    background: linear-gradient(180deg, #182c10 0%, #101d0a 100%);
+    color: white;
+    padding: 16px 10px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 64px;
+    /* starts below the sticky header */
+    height: calc(100vh - 64px);
+    /* fills remaining viewport */
+    z-index: 1000;
+    /* below header (1100) */
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.18);
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Hide the toggle button entirely */
+.sidebar-toggle-btn,
+.sidebar-toggle {
+    display: none !important;
+}
+
+/* Hide the sidebar brand/logo section - top navbar has the logo */
+.sidebar-header {
+    display: none;
+}
+
+/* Navigation List */
+.sidebar-nav {
+    flex-grow: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-top: 4px;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sidebar-nav li {
+    margin-bottom: 0;
+}
+
+.sidebar-nav a {
+    color: #a8d5ba;
+    text-decoration: none;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 10px;
+    transition: background 0.2s ease, color 0.2s ease;
+    font-weight: 500;
+    font-size: 0.92rem;
+    white-space: nowrap;
+}
+
+.sidebar-nav a .nav-icon {
+    font-size: 1.1rem;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: inherit;
+}
+
+.sidebar-nav a .nav-text {
+    opacity: 1;
+    white-space: nowrap;
+}
+
+/* Hover State */
+.sidebar-nav a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+}
+
+/* Active State - Green highlight matching the site's brand */
+.sidebar-nav li.active a {
+    background: rgba(74, 180, 100, 0.25);
+    color: #6ee97f;
+    font-weight: 600;
+    padding-left: 14px;
+}
+
+.sidebar-nav li.active a:hover {
+    background: rgba(74, 180, 100, 0.3);
+    color: #6ee97f;
+}
+
+/* Hide flyout popups */
+.nav-flyout {
+    display: none !important;
+}
+
+/* Sidebar Footer (Sign Out) */
+.sidebar-footer {
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: auto;
+}
+
+.sidebar-logout-btn {
+    color: #f87171;
+    text-decoration: none;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 0.92rem;
+    white-space: nowrap;
+}
+
+.sidebar-logout-btn .nav-icon {
+    font-size: 1.25rem;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.sidebar-logout-btn .nav-text {
+    opacity: 1;
+}
+
+.sidebar-logout-btn:hover {
+    background: rgba(239, 68, 68, 0.15);
+    color: #fca5a5;
+}
+
+/* -------------------------------------------------------
+   Header: full width (no left margin) - spans over sidebar
+   ------------------------------------------------------- */
+.dashboard-header {
+    margin-left: 0 !important;
+    width: 100% !important;
+}
+
+/* -------------------------------------------------------
+   Main Content: offset by sidebar width only
+   ------------------------------------------------------- */
+.dashboard-main,
+.main-content-with-sidebar {
+    margin-left: 220px !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .farmer-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        top: 56px;
+        height: calc(100vh - 56px);
+    }
+
+    .farmer-sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .dashboard-main,
+    .main-content-with-sidebar {
+        margin-left: 0 !important;
+    }
+
+    .mobile-sidebar-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 14px;
+        left: 14px;
+        z-index: 1200;
+        background: #182c10;
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+}
+
+@media (min-width: 769px) {
+    .mobile-sidebar-toggle {
+        display: none !important;
+    }
+}

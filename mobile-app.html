@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KisanMitra Mobile App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'farmer': {
+                            'green': {
+                                500: '#4a7c2c',
+                                600: '#2d5016',
+                            },
+                            'gold': {
+                                300: '#fcd34d',
+                                500: '#f59e0b',
+                            }
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                        'display': ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* This hides the scrollbar but keeps functionality to simulate mobile */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        body {
+            /* Provide a background color so it doesn't look transparent if the bezel overlaps */
+            background-color: #f3f4f6; 
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800">
+
+    <!-- Mobile Header -->
+    <header class="bg-farmer-green-600 text-white p-4 sticky top-0 z-50 shadow-md flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="font-display font-black text-xl tracking-tight">
+                Kisan<span class="text-farmer-gold-500">Mitra</span>
+            </span>
+        </div>
+        <button class="text-white hover:text-farmer-gold-300 transition-colors">
+            <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+    </header>
+
+    <!-- Mobile Content -->
+    <main class="p-4 pb-24">
+        
+        <!-- Welcome Card -->
+        <div class="bg-gradient-to-br from-farmer-green-500 to-farmer-green-600 rounded-2xl p-5 text-white shadow-lg mb-6 relative overflow-hidden">
+            <div class="relative z-10">
+                <h2 class="text-lg font-light mb-1">Welcome back,</h2>
+                <h1 class="text-2xl font-bold mb-4">Farmer!</h1>
+                <p class="text-sm text-white/80 mb-4">Check today's market rates and AI price predictions.</p>
+                <button class="bg-white text-farmer-green-600 font-semibold px-4 py-2 rounded-lg text-sm shadow hover:bg-gray-100 transition-colors">
+                    View Dashboard
+                </button>
+            </div>
+            <i class="fa-solid fa-seedling absolute -bottom-4 -right-4 text-7xl text-white opacity-20"></i>
+        </div>
+
+        <h3 class="font-bold text-gray-700 mb-4">Quick Actions</h3>
+        
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <!-- Action Card 1 -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow active:scale-95 cursor-pointer">
+                <div class="w-12 h-12 bg-green-100 text-farmer-green-600 rounded-full flex items-center justify-center mb-2">
+                    <i class="fa-solid fa-chart-pie text-xl"></i>
+                </div>
+                <span class="text-xs font-medium text-gray-600">Market Prices</span>
+            </div>
+            <!-- Action Card 2 -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow active:scale-95 cursor-pointer">
+                <div class="w-12 h-12 bg-yellow-100 text-farmer-gold-500 rounded-full flex items-center justify-center mb-2">
+                    <i class="fa-solid fa-robot text-xl"></i>
+                </div>
+                <span class="text-xs font-medium text-gray-600">AI Forecast</span>
+            </div>
+            <!-- Action Card 3 -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow active:scale-95 cursor-pointer">
+                <div class="w-12 h-12 bg-blue-100 text-blue-500 rounded-full flex items-center justify-center mb-2">
+                    <i class="fa-solid fa-handshake text-xl"></i>
+                </div>
+                <span class="text-xs font-medium text-gray-600">Find Buyers</span>
+            </div>
+            <!-- Action Card 4 -->
+            <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow active:scale-95 cursor-pointer">
+                <div class="w-12 h-12 bg-purple-100 text-purple-500 rounded-full flex items-center justify-center mb-2">
+                    <i class="fa-solid fa-truck text-xl"></i>
+                </div>
+                <span class="text-xs font-medium text-gray-600">Transport</span>
+            </div>
+        </div>
+
+        <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-4">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-bold text-gray-700 text-sm">Recent Updates</h3>
+                <span class="text-xs text-farmer-green-600 font-medium">View All</span>
+            </div>
+            <div class="flex items-start gap-3 py-2 border-b border-gray-50 last:border-0">
+                <div class="w-8 h-8 rounded-full bg-farmer-green-50 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-arrow-trend-up text-farmer-green-600 text-xs"></i>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-800">Wheat prices up by 5%</p>
+                    <p class="text-xs text-gray-500">In your local mandi today</p>
+                </div>
+            </div>
+            <div class="flex items-start gap-3 py-2 border-b border-gray-50 last:border-0">
+                <div class="w-8 h-8 rounded-full bg-yellow-50 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-cloud-sun text-farmer-gold-500 text-xs"></i>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-800">Weather Alert</p>
+                    <p class="text-xs text-gray-500">Light rain expected tomorrow</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 w-full bg-white border-t border-gray-200 flex justify-around p-3 pb-safe z-50 text-gray-400">
+        <a href="#" class="flex flex-col items-center gap-1 text-farmer-green-600">
+            <i class="fa-solid fa-house text-lg"></i>
+            <span class="text-[10px] font-medium">Home</span>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 hover:text-farmer-green-500 transition-colors">
+            <i class="fa-solid fa-wallet text-lg"></i>
+            <span class="text-[10px] font-medium">Prices</span>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 hover:text-farmer-green-500 transition-colors">
+            <i class="fa-solid fa-bell text-lg"></i>
+            <span class="text-[10px] font-medium">Alerts</span>
+        </a>
+        <a href="#" class="flex flex-col items-center gap-1 hover:text-farmer-green-500 transition-colors">
+            <i class="fa-solid fa-user text-lg"></i>
+            <span class="text-[10px] font-medium">Profile</span>
+        </a>
+    </nav>
+
+</body>
+</html>
