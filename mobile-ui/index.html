@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#255c35">
+  <title>KisanMitra Mobile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="system-nav.css">
+  <link rel="stylesheet" href="welcome-layout.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div class="status-bar" aria-label="Phone status">
+      <time id="statusTime">9:41</time>
+      <div class="status-icons"><i class="fa-solid fa-signal" aria-label="Mobile signal"></i><i class="fa-solid fa-wifi" aria-label="Wi-Fi"></i><span class="battery" aria-label="Battery 86 percent"><i></i></span></div>
+    </div>
+    <header class="topbar">
+      <button class="icon-button" id="menuButton" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <button class="brand" data-page="home" aria-label="Go home">Kisan<span>Mitra</span></button>
+      <div class="header-actions"><button class="icon-button notification" data-page="alerts" aria-label="Notifications"><i class="fa-regular fa-bell"></i><b></b></button><button class="avatar" data-page="profile">RS</button></div>
+    </header>
+
+    <aside class="drawer" id="drawer" aria-hidden="true">
+      <div class="drawer-head"><div class="profile-badge"><span>RS</span><div><strong>Rahul Sharma</strong><small>Farmer · Nashik</small></div></div><button class="icon-button close" id="closeMenu" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="drawer-section">Workspace</div>
+      <nav class="menu-nav">
+        <button data-page="home"><i class="fa-solid fa-house"></i>Dashboard</button>
+        <button data-page="markets"><i class="fa-solid fa-chart-line"></i>Market prices</button>
+        <button data-page="forecast"><i class="fa-solid fa-wand-magic-sparkles"></i>AI price forecast</button>
+        <button data-page="crops"><i class="fa-solid fa-wheat-awn"></i>My crop listings</button>
+        <button data-page="buyers"><i class="fa-solid fa-handshake"></i>Buyer matching</button>
+        <button data-page="logistics"><i class="fa-solid fa-truck-fast"></i>Transport & storage</button>
+        <button data-page="transactions"><i class="fa-solid fa-receipt"></i>Transactions</button>
+      </nav>
+      <div class="drawer-section">Account</div>
+      <nav class="menu-nav"><button data-page="profile"><i class="fa-regular fa-user"></i>Farm profile</button><button data-page="settings"><i class="fa-solid fa-language"></i>Language & settings</button><button class="logout"><i class="fa-solid fa-arrow-right-from-bracket"></i>Log out</button></nav>
+    </aside><div class="scrim" id="scrim"></div>
+
+    <main id="content" class="content"></main>
+    <nav class="bottom-nav" aria-label="Primary navigation">
+      <button data-page="home" class="active"><i class="fa-solid fa-house"></i><span>Home</span></button>
+      <button data-page="markets"><i class="fa-solid fa-chart-line"></i><span>Markets</span></button>
+      <button data-page="crops"><i class="fa-solid fa-seedling"></i><span>Crops</span></button>
+      <button data-page="buyers"><i class="fa-solid fa-handshake"></i><span>Buyers</span></button>
+      <button data-page="profile"><i class="fa-regular fa-user"></i><span>Profile</span></button>
+    </nav>
+  </div>
+  <div class="toast" id="toast"></div>
+  <section class="auth-view" id="authView" aria-live="polite"></section>
+  <nav class="system-nav" aria-label="Phone navigation">
+    <button data-system="back" aria-label="Back"><i class="fa-solid fa-chevron-left"></i></button>
+    <button data-system="home" aria-label="Home"><i class="fa-regular fa-circle"></i></button>
+    <button data-system="overview" aria-label="Overview"><i class="fa-regular fa-square"></i></button>
+  </nav>
+  <script src="app.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

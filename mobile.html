@@ -29,33 +29,34 @@
 
         .bezel-wrapper {
             position: relative;
-            height: 120vh; /* Scale up beyond 100vh to compensate for transparent padding in the image */
-            display: inline-block;
+            /* phonebazzle.png is a square canvas with a portrait phone centred inside it */
+            height: 120vh;
+            width: 120vh;
+            flex: 0 0 auto;
         }
 
         .phone-bezel {
             height: 100%;
             width: auto;
-            max-width: 100%;
             object-fit: contain;
             pointer-events: none;
             display: block;
             filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+            position: relative;
+            z-index: 2;
         }
 
         .screen-container {
             position: absolute;
-            z-index: 5;
-            background-color: transparent; /* Empty phone for now */
-            
-            /* Tweak these percentages to perfectly align with the screen area of phonebazzle.png */
-            top: 4.5%;
-            bottom: 4.5%;
-            left: 5.5%;
-            right: 5.5%;
-            
-            border-radius: 35px;
+            /* Exact transparent screen aperture in the 4000 x 4000 bezel artwork */
+            z-index: 1;
+            top: 12.65%;
+            bottom: 9.75%;
+            left: 32.05%;
+            right: 32.05%;
+            border-radius: 9.5%;
             overflow: hidden;
+            background: #f5f7f2;
         }
 
         .mobile-iframe {
@@ -88,6 +89,7 @@
 
         .back-btn {
             position: fixed;
+            z-index: 20;
             top: 20px;
             left: 20px;
             color: white;
@@ -116,9 +118,8 @@
             
             <!-- The container restricted to the screen area -->
             <div class="screen-container">
-                <!-- All further mobile development loads inside this iframe -->
-                <!-- The user requested the phone to be empty for now -->
-                <iframe src="" class="mobile-iframe" title="Mobile App Screen"></iframe>
+                <!-- The standalone mobile UI is deliberately contained inside this phone screen. -->
+                <iframe src="mobile-ui/index.html" class="mobile-iframe" title="KisanMitra Mobile App"></iframe>
             </div>
         </div>
     </div>

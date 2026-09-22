@@ -1,0 +1,9 @@
+/* The welcome image fills the display; the phone controls sit on top of it. */
+.auth-view > .auth-back{display:none}
+html,body{scrollbar-width:none;-ms-overflow-style:none;overflow-x:hidden}
+html::-webkit-scrollbar,body::-webkit-scrollbar,.content::-webkit-scrollbar{width:0;height:0;display:none}
+body:has(.auth-welcome) .auth-view{padding:0}
+body:has(.auth-welcome) .auth-welcome{min-height:100vh;border-radius:0;padding:52px 28px 42px}
+body:has(.auth-welcome) .auth-status{color:#fff;text-shadow:0 1px 3px #17251b}
+body:has(.auth-welcome) .system-nav{background:linear-gradient(transparent,rgba(0,0,0,.28));border-top:0}
+body:has(.auth-welcome) .system-nav button{color:#fff;text-shadow:0 1px 3px #000}
