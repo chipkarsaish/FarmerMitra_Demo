@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketplace - Buyer Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/farmer-sidebar.css">
+    <link rel="stylesheet" href="../css/buyer-sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .dashboard-body { background-color: #f4f7f6; }
+        .dashboard-main { padding: 20px; margin-left: 220px; padding-left: 20px; padding-right: 20px; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        
+        .marketplace-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+        .tab-btn { background: transparent; border: none; padding: 10px 20px; font-size: 1rem; font-weight: 600; color: #666; cursor: pointer; border-radius: 8px; transition: 0.2s; }
+        .tab-btn:hover { background: #e0e6e3; }
+        .tab-btn.active { background: var(--primary-green); color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .search-bar { background: white; padding: 15px 20px; border-radius: 12px; display: flex; gap: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .search-bar input { flex-grow: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 1rem; }
+        .search-bar button { background: var(--primary-green); color: white; border: none; padding: 0 25px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+
+        .filter-bar { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; align-items: flex-end; }
+        .filter-group { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 140px; }
+        .filter-group label { font-size: 0.85rem; color: #666; font-weight: 600; }
+        .filter-group select, .filter-group input { padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Poppins', sans-serif; }
+        .btn-primary { background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        .btn-primary:hover { background: #2d5016; }
+        
+        .listing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+        .listing-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border: 1px solid rgba(45, 80, 22, 0.1); transition: all 0.2s ease; position: relative; display: flex; flex-direction: column; }
+        .listing-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(45, 80, 22, 0.08); border-color: rgba(45, 80, 22, 0.3); }
+        .listing-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--primary-green); }
+        
+        .crop-name { font-size: 1.4rem; font-weight: 800; color: #333; margin-bottom: 5px; }
+        .farmer-rating { color: #f59e0b; font-size: 0.9rem; margin-bottom: 15px; }
+        .farmer-name { font-size: 0.95rem; color: #555; display: flex; align-items: center; gap: 5px; }
+        .verified-badge { color: #4CAF50; font-size: 0.9rem; }
+        .price-tag { font-size: 1.3rem; font-weight: 700; color: var(--primary-green); background: #f0f7ed; padding: 5px 10px; border-radius: 8px; align-self: flex-start; margin-bottom: 15px; }
+        
+        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; flex-grow: 1; border-top: 1px solid #eee; padding-top: 15px; }
+        .detail-item { font-size: 0.85rem; }
+        .detail-label { color: #888; display: block; margin-bottom: 3px; font-size: 0.8rem; }
+        .detail-value { font-weight: 600; color: #333; }
+        
+        .card-actions { display: grid; grid-template-columns: 1fr 1fr 50px; gap: 10px; margin-top: auto; }
+        .btn-action { padding: 10px; text-align: center; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; border: none; font-family: 'Poppins', sans-serif;}
+        .btn-outline { border: 2px solid var(--primary-green); color: var(--primary-green); background: transparent; }
+        .btn-outline:hover { background: #f0f7ed; }
+        .btn-offer { background: var(--primary-green); color: white; }
+        .btn-offer:hover { background: #2d5016; }
+        .btn-save { background: #f4f7f6; color: #666; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .btn-save:hover { background: #e0e6e3; }
+        .btn-save.saved { color: #e74c3c; }
+
+        /* Matches styles */
+        .match-container { display: grid; grid-template-columns: 300px 1fr; gap: 20px; }
+        .requirement-selector { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); height: fit-content; }
+        .requirement-item { padding: 15px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; }
+        .requirement-item.active { border-color: var(--primary-green); background: #f0f7ed; }
+        .match-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; gap: 20px; align-items: center; border-left: 5px solid transparent; margin-bottom: 15px; }
+        .match-card.best-match { border-left-color: #f59e0b; }
+        .match-score-circle { width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(var(--primary-green) 95%, #eee 0); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; color: var(--primary-green); flex-shrink: 0; position: relative; }
+        .match-score-circle::after { content: ""; position: absolute; width: 65px; height: 65px; background: white; border-radius: 50%; z-index: 0; }
+        .match-score-circle span { position: relative; z-index: 1; }
+        
+        /* Modal Styles */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-content { background: white; border-radius: 16px; width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto; padding: 30px; position: relative; }
+        .modal-close { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #888; background: none; border: none; }
+        .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
+        .info-section { background: #f9fbfa; padding: 20px; border-radius: 12px; border: 1px solid #eee; }
+        .info-section h3 { margin-top: 0; color: var(--primary-green); font-size: 1.1rem; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.95rem; }
+        .info-row span:first-child { color: #666; }
+        .info-row span:last-child { font-weight: 600; color: #333; }
+        .modal-actions { margin-top: 30px; display: flex; gap: 15px; justify-content: flex-end; }
+        .modal-actions button { padding: 12px 25px; font-size: 1rem; }
+    </style>
+</head>
+<body class="dashboard-body">
+    <button class="mobile-sidebar-toggle"><i class="fa-solid fa-bars"></i></button>
+    <aside class="farmer-sidebar" id="buyerSidebar"></aside>
+
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="logo"><span class="logo-text"><span class="logo-agri">Kisan<span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span></span></div>
+            <div class="header-actions">
+                
+                <a href="#" style="margin-right: 15px; color: var(--primary-green); font-size: 1.2rem; display: flex; align-items: center; text-decoration: none;" title="click for demo">
+                    <i class="fa-solid fa-circle-question"></i>
+                </a>
+                <div class="user-menu">
+                    <div class="user-avatar" id="userMenuBtn"><span id="userInitials">B</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="page-header">
+            <h1 style="color:var(--primary-green); font-size:2rem;">Marketplace</h1>
+        </div>
+
+        <div class="marketplace-tabs">
+            <button class="tab-btn active" onclick="switchTab('discover')">Discover Produce</button>
+            <button class="tab-btn" onclick="switchTab('matches')">Matched Farmers</button>
+            <button class="tab-btn" onclick="switchTab('saved')">Saved Listings</button>
+        </div>
+
+        <div id="tab-discover" class="tab-content active">
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search by crop, farmer name, location, or listing ID..." onkeyup="if(event.key === 'Enter') renderDiscoverListings()">
+                <button onclick="renderDiscoverListings()"><i class="fa-solid fa-search"></i> Search</button>
+            </div>
+            <div class="filter-bar">
+                <div class="filter-group"><label>Crop</label><select id="filterCrop"><option value="">All Crops</option><option value="Onion">Onion</option><option value="Tomato">Tomato</option><option value="Potato">Potato</option><option value="Wheat">Wheat</option><option value="Grapes">Grapes</option></select></div>
+                <div class="filter-group"><label>Location</label><input type="text" id="filterLocation" placeholder="e.g. Nashik"></div>
+                <div class="filter-group"><label>Verified Only</label><select id="filterVerified"><option value="">Any</option><option value="true">Verified Farmers</option></select></div>
+                <div class="filter-group"><label>Sort By</label><select id="sortListings"><option value="newest">Newest First</option><option value="price_low">Lowest Price</option><option value="distance">Nearest</option><option value="quantity_high">Highest Quantity</option><option value="rating_high">Highest Rating</option></select></div>
+                <button class="btn-primary" onclick="renderDiscoverListings()" style="height: 42px;">Apply</button>
+            </div>
+            <div class="listing-grid" id="produceGrid"></div>
+        </div>
+
+        <div id="tab-matches" class="tab-content">
+            <div class="match-container">
+                <div class="requirement-selector">
+                    <h3 style="color: var(--primary-green); margin-bottom: 15px;">Select Requirement</h3>
+                    <div id="reqList"></div>
+                </div>
+                <div class="matches-panel">
+                    <div id="matchesHeader" style="display: none; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <h3 style="margin:0;">AI Suggested Farmers</h3>
+                        <span style="background: #eef2ff; color: #4f46e5; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;"><i class="fa-solid fa-robot"></i> Matching Engine</span>
+                    </div>
+                    <div id="matchesList">
+                        <div style="text-align: center; padding: 50px; color: #888;"><i class="fa-solid fa-hand-pointer" style="font-size: 3rem; margin-bottom: 15px; color: #ddd;"></i><p>Select a requirement on the left to see matched farmers.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-saved" class="tab-content">
+            <div class="listing-grid" id="savedGrid"></div>
+        </div>
+    </main>
+
+    <!-- Details Modal -->
+    <div class="modal-overlay" id="detailsModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeDetailsModal()"><i class="fa-solid fa-times"></i></button>
+            <h2 id="modalTitle" style="color:var(--primary-green); margin-top:0;">Listing Details</h2>
+            <div class="modal-grid">
+                <div class="info-section">
+                    <h3>Crop Information</h3>
+                    <div class="info-row"><span>Crop:</span><span id="modCrop"></span></div>
+                    <div class="info-row"><span>Grade:</span><span id="modGrade"></span></div>
+                    <div class="info-row"><span>Quantity Available:</span><span id="modQty"></span></div>
+                    <div class="info-row"><span>Price:</span><span id="modPrice" style="color:var(--primary-green);"></span></div>
+                    <div class="info-row"><span>Harvest Date:</span><span id="modHarvest"></span></div>
+                    <div class="info-row"><span>Availability:</span><span id="modAvailable"></span></div>
+                    <p style="font-size:0.9rem; color:#666; margin-top:15px; border-top:1px solid #ddd; padding-top:10px;" id="modDesc"></p>
+                </div>
+                <div class="info-section">
+                    <h3>Farmer Information</h3>
+                    <div class="info-row"><span>Name:</span><span id="modFarmer"></span></div>
+                    <div class="info-row"><span>Rating:</span><span id="modRating"></span></div>
+                    <div class="info-row"><span>Completed Sales:</span><span id="modSales"></span></div>
+                    <div class="info-row"><span>Response Time:</span><span id="modResponse"></span></div>
+                    <div class="info-row"><span>Location:</span><span id="modLoc"></span></div>
+                    <div class="info-row"><span>Distance:</span><span id="modDist"></span></div>
+                </div>
+            </div>
+            <div class="info-section" style="margin-top:20px;">
+                <h3>Cost Estimation</h3>
+                <div class="info-row"><span>Crop Value:</span><span id="modEstCrop"></span></div>
+                <div class="info-row"><span>Estimated Transport:</span><span>₹3,000</span></div>
+                <div class="info-row" style="border-top:2px solid #ddd; padding-top:10px; font-size:1.1rem;"><span>Total Purchase Cost:</span><span id="modEstTotal" style="color:var(--primary-green);"></span></div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-action btn-outline" id="modContactBtn">Contact Farmer</button>
+                <button class="btn-action btn-offer" id="modOfferBtn">Make Offer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Make Offer Modal -->
+    <div class="modal-overlay" id="offerModal">
+        <div class="modal-content" style="max-width: 400px;">
+            <button class="modal-close" onclick="document.getElementById('offerModal').style.display='none'"><i class="fa-solid fa-times"></i></button>
+            <h2 style="color:var(--primary-green); margin-top:0;">Make Offer</h2>
+            <p id="offerFarmerText" style="color:#666; font-size:0.9rem;"></p>
+            <div style="margin-top: 20px;">
+                <label style="font-size: 0.85rem; font-weight: 600; color: #555;">Your Offer Price (per quintal)</label>
+                <input type="number" id="offerAmountInput" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Poppins'; font-size: 1.1rem; margin-top: 5px;" placeholder="₹">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-action btn-offer" style="width: 100%;" onclick="submitOffer()">Send Offer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/buyer-data.js"></script>
+    <script src="../js/buyer-sidebar.js"></script>
+    <script>
+        let currentListingForOffer = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDiscoverListings();
+            renderRequirements();
+            renderSavedListings();
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        /* --- Discover Logic --- */
+        function renderDiscoverListings() {
+            const grid = document.getElementById('produceGrid');
+            const searchQ = document.getElementById('searchInput').value.toLowerCase();
+            const cropFilter = document.getElementById('filterCrop').value.toLowerCase();
+            const locFilter = document.getElementById('filterLocation').value.toLowerCase();
+            const verifiedFilter = document.getElementById('filterVerified').value;
+            const sortMethod = document.getElementById('sortListings').value;
+            
+            let listings = db.getListings();
+            const savedListings = db.getSavedListings();
+
+            if (searchQ) {
+                listings = listings.filter(l => 
+                    l.crop.toLowerCase().includes(searchQ) || 
+                    l.farmerName.toLowerCase().includes(searchQ) || 
+                    l.location.toLowerCase().includes(searchQ) ||
+                    l.id.toLowerCase().includes(searchQ)
+                );
+            }
+            if (cropFilter) listings = listings.filter(l => l.crop.toLowerCase() === cropFilter);
+            if (locFilter) listings = listings.filter(l => l.location.toLowerCase().includes(locFilter));
+            if (verifiedFilter === 'true') listings = listings.filter(l => l.verified);
+            
+            listings.sort((a, b) => {
+                if (sortMethod === 'price_low') return a.price - b.price;
+                if (sortMethod === 'quantity_high') return b.quantity - a.quantity;
+                if (sortMethod === 'distance') return a.distance - b.distance;
+                if (sortMethod === 'rating_high') return b.rating - a.rating;
+                return new Date(b.date) - new Date(a.date);
+            });
+
+            if(listings.length === 0) {
+                grid.innerHTML = '<div style="grid-column:1/-1; padding:40px; text-align:center; color:#888;">No listings found matching your criteria.</div>';
+                return;
+            }
+            grid.innerHTML = generateListingsHtml(listings, savedListings);
+        }
+
+        /* --- Saved Logic --- */
+        function renderSavedListings() {
+            const grid = document.getElementById('savedGrid');
+            const savedIds = db.getSavedListings();
+            const listings = db.getListings().filter(l => savedIds.includes(l.id));
+
+            if (listings.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; padding: 50px; text-align: center; color: #888; background: white; border-radius: 12px;"><i class="fa-regular fa-bookmark" style="font-size:3rem; margin-bottom:15px; color:#ddd;"></i><br>You have no saved listings.<br><button class="btn-primary" style="margin-top:15px;" onclick="switchTab(\'discover\')">Browse Marketplace</button></div>';
+                return;
+            }
+            grid.innerHTML = generateListingsHtml(listings, savedIds);
+        }
+
+        function generateListingsHtml(listings, savedListings) {
+            return listings.map(l => {
+                const isSaved = savedListings.includes(l.id);
+                return `
+                    <div class="listing-card">
+                        <div style="display: flex; justify-content: space-between;">
+                            <div class="crop-name">${l.crop} <span style="font-size:0.8rem; color:#888; font-weight:400;">#${l.id}</span></div>
+                            <div class="price-tag">₹${l.price} / ${l.priceUnit === 'quintal' ? 'q' : 'kg'}</div>
+                        </div>
+                        <div class="farmer-name">
+                            <i class="fa-solid fa-user"></i> ${l.farmerName} 
+                            ${l.verified ? '<i class="fa-solid fa-circle-check verified-badge" title="Verified Farmer"></i>' : ''}
+                        </div>
+                        <div class="farmer-rating">${l.rating} <i class="fa-solid fa-star"></i> (${l.completedSales} sales)</div>
+                        
+                        <div class="detail-grid">
+                            <div class="detail-item"><span class="detail-label">Quantity</span><span class="detail-value">${l.quantity} ${l.unit}</span></div>
+                            <div class="detail-item"><span class="detail-label">Grade</span><span class="detail-value">${l.grade}</span></div>
+                            <div class="detail-item"><span class="detail-label">Location</span><span class="detail-value">${l.location} (${l.distance}km)</span></div>
+                            <div class="detail-item"><span class="detail-label">Available</span><span class="detail-value">${l.available}</span></div>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn-action btn-outline" onclick="openDetailsModal('${l.id}')">View Details</button>
+                            <button class="btn-action btn-offer" onclick="openOfferModal('${l.id}')">Make Offer</button>
+                            <button class="btn-action btn-save ${isSaved ? 'saved' : ''}" onclick="toggleSave('${l.id}', this)"><i class="${isSaved ? 'fa-solid' : 'fa-regular'} fa-heart"></i></button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleSave(id, btn) {
+            const isSaved = db.getSavedListings().includes(id);
+            if (isSaved) {
+                db.unsaveListing(id);
+                btn.classList.remove('saved');
+                btn.innerHTML = '<i class="fa-regular fa-heart"></i>';
+            } else {
+                db.saveListing(id);
+                btn.classList.add('saved');
+                btn.innerHTML = '<i class="fa-solid fa-heart"></i>';
+            }
+            if(document.getElementById('tab-saved').classList.contains('active')) renderSavedListings();
+        }
+
+        /* --- Modals --- */
+        function openDetailsModal(id) {
+            const l = db.getListingById(id);
+            document.getElementById('modCrop').innerText = l.crop;
+            document.getElementById('modGrade').innerText = l.grade;
+            document.getElementById('modQty').innerText = `${l.quantity} ${l.unit}`;
+            document.getElementById('modPrice').innerText = `₹${l.price} / ${l.priceUnit === 'quintal' ? 'q' : 'kg'}`;
+            document.getElementById('modHarvest').innerText = l.harvestDate;
+            document.getElementById('modAvailable').innerText = l.available;
+            document.getElementById('modDesc').innerText = l.description;
+            
+            document.getElementById('modFarmer').innerHTML = `${l.farmerName} ${l.verified ? '<i class="fa-solid fa-circle-check verified-badge"></i>' : ''}`;
+            document.getElementById('modRating').innerHTML = `${l.rating} <i class="fa-solid fa-star" style="color:#f59e0b;"></i>`;
+            document.getElementById('modSales').innerText = l.completedSales;
+            document.getElementById('modResponse').innerText = l.responseTime;
+            document.getElementById('modLoc').innerText = l.location;
+            document.getElementById('modDist').innerText = `${l.distance} km`;
+
+            let cropVal = (l.quantity / 100) * l.price;
+            document.getElementById('modEstCrop').innerText = `₹${cropVal.toLocaleString()}`;
+            document.getElementById('modEstTotal').innerText = `₹${(cropVal + 3000).toLocaleString()}`;
+
+            document.getElementById('modOfferBtn').onclick = () => { closeDetailsModal(); openOfferModal(id); };
+            
+            document.getElementById('detailsModal').style.display = 'flex';
+        }
+        function closeDetailsModal() { document.getElementById('detailsModal').style.display = 'none'; }
+
+        function openOfferModal(id) {
+            currentListingForOffer = id;
+            const l = db.getListingById(id);
+            document.getElementById('offerFarmerText').innerText = `Farmer ${l.farmerName} is asking ₹${l.price} for ${l.crop}.`;
+            document.getElementById('offerAmountInput').value = l.price - 100; // Suggest slightly lower
+            document.getElementById('offerModal').style.display = 'flex';
+        }
+
+        function submitOffer() {
+            const amt = document.getElementById('offerAmountInput').value;
+            if(!amt) return alert("Enter amount");
+            db.makeOffer(currentListingForOffer, parseInt(amt));
+            document.getElementById('offerModal').style.display = 'none';
+            alert("Offer sent successfully! You can track it in the Offers & Negotiations tab.");
+        }
+
+        /* --- Matches Logic --- */
+        function renderRequirements() {
+            const reqList = document.getElementById('reqList');
+            const reqs = db.getRequirements();
+            if (reqs.length === 0) {
+                reqList.innerHTML = `<div style="text-align:center; padding: 20px; color:#888;"><p>No active requirements.</p><a href="buyer-portal-requirements.html" class="btn-primary" style="text-decoration:none; display:inline-block; margin-top:10px;">Create Requirement</a></div>`;
+                return;
+            }
+            reqList.innerHTML = reqs.map((r, i) => `
+                <div class="requirement-item ${i===0 ? 'active':''}" onclick="selectReq(this, '${r.id}')">
+                    <div style="font-weight:700;">${r.crop} - ${r.quantity}${r.unit}</div>
+                    <div style="font-size:0.8rem; color:#666; margin-top:5px;">Req ID: ${r.id} • ${r.status}</div>
+                </div>
+            `).join('');
+            if(reqs.length > 0) setTimeout(() => showMatches(reqs[0]), 100);
+        }
+
+        function selectReq(el, id) {
+            document.querySelectorAll('.requirement-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+            const req = db.getRequirements().find(r => r.id === id);
+            showMatches(req);
+        }
+
+        function showMatches(req) {
+            document.getElementById('matchesHeader').style.display = 'flex';
+            const matchesList = document.getElementById('matchesList');
+            let allListings = db.getListings().filter(l => l.crop.toLowerCase() === req.crop.toLowerCase());
+            
+            if (allListings.length === 0) {
+                matchesList.innerHTML = `<div style="padding:40px; text-align:center; background:white; border-radius:12px; color:#888;">No farmers currently have listings matching ${req.crop}.</div>`;
+                return;
+            }
+
+            // Real match calculation based on constraints
+            allListings.forEach(l => {
+                let score = 100;
+                if (l.price > req.maxPrice) score -= 15;
+                if (l.distance > req.maxDistance) score -= 10;
+                if (l.quantity < req.quantity * 0.8) score -= 20; // Only has 80% of what we need
+                if (l.grade !== req.grade) score -= 10;
+                l.matchScore = Math.max(score, 10);
+                
+                // Detailed subscores for display
+                l.priceMatch = l.price <= req.maxPrice ? 100 : Math.max(0, 100 - ((l.price - req.maxPrice)/req.maxPrice)*100);
+                l.qtyMatch = l.quantity >= req.quantity ? 100 : Math.round((l.quantity / req.quantity)*100);
+            });
+            allListings.sort((a,b) => b.matchScore - a.matchScore);
+
+            matchesList.innerHTML = allListings.map((l, i) => `
+                <div class="match-card ${i===0 ? 'best-match' : ''}">
+                    <div class="match-score-circle" style="background: conic-gradient(${i===0?'#f59e0b':'var(--primary-green)'} ${l.matchScore}%, #eee 0);">
+                        <span>${l.matchScore}%</span>
+                    </div>
+                    <div style="flex-grow:1;">
+                        <h4 style="margin:0 0 5px 0; font-size:1.1rem; color:#333;">${l.farmerName} ${i===0 ? '<span style="color:#f59e0b; font-size:0.75rem; border:1px solid #f59e0b; padding:2px 6px; border-radius:4px; margin-left:10px;">Best Match</span>' : ''}</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap:10px; font-size:0.9rem; color:#555; margin-bottom:10px;">
+                            <div><strong>Available:</strong> ${l.quantity} ${l.unit}</div>
+                            <div><strong>Price:</strong> ₹${l.price}/q (Max ₹${req.maxPrice})</div>
+                            <div><strong>Distance:</strong> ${l.distance}km (Max ${req.maxDistance}km)</div>
+                            <div><strong>Grade:</strong> ${l.grade}</div>
+                        </div>
+                        <div style="font-size:0.8rem; display:flex; gap:15px; color:#777;">
+                            <span>Quantity Match: ${l.qtyMatch}%</span>
+                            <span>Price Match: ${Math.round(l.priceMatch)}%</span>
+                        </div>
+                    </div>
+                    <div style="display:flex; flex-direction:column; gap:10px; width: 140px;">
+                        <button class="btn-action btn-outline" onclick="openDetailsModal('${l.id}')">View Farmer</button>
+                        <button class="btn-action btn-offer" onclick="openOfferModal('${l.id}')">Make Offer</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>

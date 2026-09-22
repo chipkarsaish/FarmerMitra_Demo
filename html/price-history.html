@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price History - KisanMitra Market AI</title>
+    <meta name="description" content="View historical crop price trends">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/farmer-sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/language-switcher.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .dashboard-body { background-color: #f4f7f6; }
+        .dashboard-main { padding: 20px; margin-left: 220px; }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .filter-group label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .filter-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .trend-insight {
+            background: #e1f0da;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-green);
+            color: var(--dark-green);
+            font-weight: 500;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <!-- Sidebar -->
+    <aside class="farmer-sidebar">
+        <button class="sidebar-toggle">◀</button>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="farmer-dashboard.html" data-tooltip="Dashboard"><span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span><span class="nav-text">Dashboard</span></a></li>
+                <li class="active"><a href="market-intelligence.html" data-tooltip="Market Prices"><span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span><span class="nav-text">Market Prices</span></a></li>
+                <li><a href="crop-listings.html" data-tooltip="My Crops"><span class="nav-icon"><i class="fa-solid fa-wheat-awn"></i></span><span class="nav-text">My Crops</span></a></li>
+                <li><a href="buyer-marketplace.html" data-tooltip="Buyers"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span class="nav-text">Buyers</span></a></li>
+                <li><a href="transport-optimizer.html" data-tooltip="Transport and Storage"><span class="nav-icon"><i class="fa-solid fa-truck"></i></span><span class="nav-text">Transport and Storage</span></a></li>
+                <li><a href="transactions.html" data-tooltip="Transactions"><span class="nav-icon"><i class="fa-solid fa-box"></i></span><span class="nav-text">Transactions</span></a></li>
+                <li><a href="farmer-profile.html" data-tooltip="Profile"><span class="nav-icon"><i class="fa-solid fa-user"></i></span><span class="nav-text">Profile</span></a></li>
+            </ul>
+        </nav>
+        <!-- Sidebar Footer / Logout -->
+        <div class="sidebar-footer">
+            <a href="../website.html" class="sidebar-logout-btn" id="sidebarLogoutBtn">
+                <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                <span class="nav-text" data-i18n="dashboard.logout">Logout</span>
+            </a>
+            <div class="nav-flyout">
+                <span class="flyout-title" data-i18n="dashboard.logout">Logout</span>
+                <span class="flyout-desc">Log out of account</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-text">
+                    <span class="logo-agri">Kisan<span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span>
+                </span>
+            </div>
+            <div class="header-actions">
+
+                <a href="#" style="margin-right: 15px; color: var(--primary-green); font-size: 1.2rem; display: flex; align-items: center; text-decoration: none;" title="click for demo">
+                    <i class="fa-solid fa-circle-question"></i>
+                </a>
+                <!-- Language Switcher -->
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="en">English</button>
+                    <button class="lang-btn" data-lang="hi">हिंदी</button>
+                    <button class="lang-btn" data-lang="mr">मराठी</button>
+                </div>
+                <div class="user-menu">
+                    <div class="user-avatar" id="userMenuBtn">
+                        <span id="userInitials">F</span>
+                    </div>
+                    <div class="dropdown-menu" id="userDropdown">
+                        
+                        <a href="farmer-profile.html" class="dropdown-item">
+                            <span class="item-icon"><i class="fa-solid fa-user"></i></span> <span data-i18n="dashboard.myProfile">My Profile</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-item" id="logoutBtn">
+                            <span class="item-icon"><i class="fa-solid fa-right-from-bracket"></i></span> <span data-i18n="dashboard.logout">Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="page-header">
+            <div>
+                <h1 style="color:var(--primary-green); font-size:2rem; margin-bottom: 5px;">Historical Price Trends <i class="fa-solid fa-chart-pie"></i></h1>
+                <p style="color:#666;">Analyze past market behaviors to inform your selling strategy.</p>
+            </div>
+            <div>
+                <button class="btn-primary" style="background:var(--primary-green); color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;" onclick="window.location.href='price-prediction.html'">Go to AI Forecast <i class="fa-solid fa-wand-magic-sparkles"></i></button>
+            </div>
+        </div>
+
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label>Crop</label>
+                <select>
+                    <option value="onion">Onion</option>
+                    <option value="tomato">Tomato</option>
+                    <option value="potato">Potato</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Quality/Grade</label>
+                <select>
+                    <option value="A">Grade A</option>
+                    <option value="B">Grade B</option>
+                    <option value="all">All Grades</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Market Location</label>
+                <select>
+                    <option value="nashik">Nashik APMC</option>
+                    <option value="pune">Pune APMC</option>
+                    <option value="mumbai">Mumbai Wholesale</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Date Range</label>
+                <select id="dateRange">
+                    <option value="7">Last 7 Days</option>
+                    <option value="30" selected>Last 30 Days</option>
+                    <option value="90">Last 3 Months</option>
+                    <option value="180">Last 6 Months</option>
+                    <option value="365">Last 1 Year</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <h3 style="color:var(--dark-green); margin-bottom:20px;">Onion (Grade A) - Nashik APMC (Last 30 Days)</h3>
+            <canvas id="historyChart" height="100"></canvas>
+            
+            <div class="trend-insight">
+                <i class="fa-solid fa-lightbulb"></i> <strong>Historical Trend Insight:</strong> Prices for Grade A Onions have shown an increasing trend over the last 30 days, rising from ₹2,200 to ₹2,850/Qtl, with a notable spike usually seen around festival periods in this region.
+            </div>
+        </div>
+
+    </main>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/farmer-sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('historyChart').getContext('2d');
+            
+            // Generate some mock historical data
+            const labels = [];
+            const data = [];
+            let currentPrice = 2200;
+            
+            for(let i=30; i>=0; i--) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                labels.push(d.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}));
+                
+                // Add some randomness but generally trending up
+                currentPrice = currentPrice + (Math.random() * 80 - 20);
+                data.push(Math.round(currentPrice));
+            }
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Price (₹/Qtl)',
+                        data: data,
+                        borderColor: '#2d5016',
+                        backgroundColor: 'rgba(74, 124, 44, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            grid: { color: '#f0f0f0' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

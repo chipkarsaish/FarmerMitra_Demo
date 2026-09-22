@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Market Intelligence | KisanMitra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/farmer-sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        :root {
+            --g: #2d6a3d;
+            --d: #173d25;
+            --p: #edf7ee;
+            --b: #dce7dc;
+            --t: #223329;
+            --m: #68766c;
+            --a: #a76500;
+            --r: #ae4540
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            background: #f5f8f4;
+            color: var(--t);
+            font-family: Poppins, sans-serif
+        }
+
+        .dashboard-main.mi {
+            margin-left: 210px;
+            padding: 32px;
+            max-width: 1710px
+        }
+
+        .shell {
+            max-width: 1480px;
+            margin: auto
+        }
+
+        .head {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            border-bottom: 1px solid var(--b);
+            padding: 2px 0 22px
+        }
+
+        .head h1,
+        h2,
+        h3 {
+            color: var(--d);
+            margin: 0
+        }
+
+        .head h1 {
+            font-size: 2rem
+        }
+
+        .head p,
+        .sub {
+            margin: 5px 0 0;
+            color: var(--m);
+            font-size: .85rem
+        }
+
+        .loc {
+            text-align: right;
+            color: var(--g);
+            font-size: .85rem;
+            font-weight: 700
+        }
+
+        .updated {
+            display: block;
+            color: #829083;
+            font-size: .7rem
+        }
+
+        .btn {
+            min-height: 39px;
+            padding: 0 13px;
+            border-radius: 8px;
+            border: 1px solid #bdd0be;
+            background: #fff;
+            color: var(--g);
+            font-weight: 700;
+            cursor: pointer
+        }
+
+        .btn.green {
+            background: var(--g);
+            color: #fff;
+            border-color: var(--g)
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid var(--b);
+            border-radius: 14px;
+            box-shadow: 0 3px 12px #173d250b
+        }
+
+        .context {
+            display: flex;
+            align-items: end;
+            gap: 12px;
+            padding: 17px;
+            margin-top: 22px
+        }
+
+        .context>b {
+            font-size: .82rem;
+            padding-bottom: 10px;
+            color: var(--d)
+        }
+
+        .field {
+            flex: 1;
+            min-width: 145px
+        }
+
+        .field label {
+            display: block;
+            font-size: .68rem;
+            font-weight: 700;
+            color: var(--m);
+            margin: 0 0 5px
+        }
+
+        .field select {
+            width: 100%;
+            height: 39px;
+            border: 1px solid #cfdbcf;
+            border-radius: 8px;
+            padding: 0 8px;
+            background: white;
+            color: var(--t)
+        }
+
+        .reset {
+            border: 0;
+            background: none;
+            color: var(--m);
+            font-weight: 700;
+            min-height: 39px;
+            cursor: pointer
+        }
+
+        .sec {
+            margin-top: 29px
+        }
+
+        .title {
+            margin-bottom: 13px
+        }
+
+        .title h2 {
+            font-size: 1.2rem
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 13px
+        }
+
+        .metric {
+            padding: 16px;
+            border-left: 3px solid #b6dcb9
+        }
+
+        .label {
+            color: var(--m);
+            font-size: .67rem;
+            letter-spacing: .07em;
+            font-weight: 800;
+            text-transform: uppercase
+        }
+
+        .num {
+            display: block;
+            margin: 10px 0 2px;
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--d)
+        }
+
+        .small {
+            color: var(--m);
+            font-size: .72rem
+        }
+
+        .up {
+            color: var(--g)
+        }
+
+        .down {
+            color: var(--r)
+        }
+
+        .twocol {
+            display: grid;
+            grid-template-columns: 1.85fr 1fr;
+            gap: 17px
+        }
+
+        .pad {
+            padding: 19px
+        }
+
+        .chead {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px
+        }
+
+        .chead h3 {
+            font-size: 1.03rem
+        }
+
+        .periods {
+            display: flex;
+            border: 1px solid var(--b);
+            border-radius: 7px;
+            overflow: hidden;
+            height: 31px
+        }
+
+        .periods button {
+            border: 0;
+            border-right: 1px solid var(--b);
+            background: #fff;
+            padding: 0 9px;
+            font-size: .68rem;
+            color: var(--m)
+        }
+
+        .periods button.on {
+            background: var(--p);
+            color: var(--g);
+            font-weight: 800
+        }
+
+        .chart {
+            height: 235px;
+            margin-top: 13px;
+            overflow: auto
+        }
+
+        .chart svg {
+            min-width: 560px;
+            width: 100%;
+            height: 100%
+        }
+
+        .grid {
+            stroke: #e8eee8
+        }
+
+        .line {
+            fill: none;
+            stroke: var(--g);
+            stroke-width: 3;
+            stroke-linejoin: round
+        }
+
+        .dash {
+            fill: none;
+            stroke: #528d5d;
+            stroke-width: 3;
+            stroke-dasharray: 7 6
+        }
+
+        .shade {
+            fill: #dcefe0
+        }
+
+        .fc {
+            fill: #f2f8f3
+        }
+
+        .bar {
+            fill: #c8dfca
+        }
+
+        .area {
+            fill: #d9eddd
+        }
+
+        .axis {
+            fill: #7d8a80;
+            font-size: 10px
+        }
+
+        .forecast {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            border-top: 1px solid #edf1ed;
+            padding-top: 11px;
+            color: var(--m);
+            font-size: .73rem
+        }
+
+        .forecast strong {
+            color: var(--d)
+        }
+
+        .legend {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 9px;
+            color: var(--m);
+            font-size: .7rem
+        }
+
+        .key {
+            display: inline-block;
+            width: 17px;
+            border-top: 3px solid var(--g);
+            vertical-align: middle;
+            margin-right: 4px
+        }
+
+        .key.dash {
+            border-top-style: dashed;
+            border-color: #528d5d
+        }
+
+        .key.bar {
+            width: 10px;
+            height: 10px;
+            border: 0;
+            background: #c8dfca
+        }
+
+        .factors {
+            margin-top: 10px
+        }
+
+        .factor {
+            display: grid;
+            grid-template-columns: 30px 1fr auto;
+            gap: 9px;
+            padding: 12px 0;
+            border-bottom: 1px solid #edf1ed
+        }
+
+        .factor i {
+            background: var(--p);
+            color: var(--g);
+            width: 29px;
+            height: 29px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-size: .75rem
+        }
+
+        .factor b {
+            font-size: .8rem
+        }
+
+        .factor p {
+            margin: 3px 0 0;
+            color: var(--m);
+            font-size: .7rem
+        }
+
+        .badge {
+            height: max-content;
+            border-radius: 20px;
+            padding: 4px 7px;
+            font-size: .65rem;
+            font-weight: 800;
+            background: #e3f3e5;
+            color: #286b38
+        }
+
+        .badge.amber {
+            background: #fff1d7;
+            color: #985900
+        }
+
+        .insight,
+        .info {
+            margin-top: 13px;
+            padding: 10px 12px;
+            background: #f2f8f2;
+            border-left: 3px solid #75ae7c;
+            color: #536558;
+            border-radius: 0 8px 8px 0;
+            font-size: .75rem
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            overflow: auto;
+            margin: 16px 0
+        }
+
+        .tabs button {
+            white-space: nowrap;
+            border: 1px solid #d4e1d5;
+            border-radius: 20px;
+            background: #fff;
+            padding: 7px 15px;
+            color: #526257;
+            font-weight: 700;
+            font-size: .75rem
+        }
+
+        .tabs button.on {
+            background: var(--g);
+            color: #fff;
+            border-color: var(--g)
+        }
+
+        .crops,
+        .outlook,
+        .alerts,
+        .help {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px
+        }
+
+        .crop {
+            border: 1px solid #e0e9e0;
+            border-radius: 10px;
+            padding: 14px
+        }
+
+        .crop h4 {
+            margin: 0 0 10px;
+            color: var(--d);
+            font-size: .76rem
+        }
+
+        .crop div {
+            display: flex;
+            justify-content: space-between;
+            margin: 6px 0;
+            font-size: .72rem
+        }
+
+        .crop span {
+            color: var(--m)
+        }
+
+        .outlook {
+            grid-template-columns: repeat(3, 1fr)
+        }
+
+        .out {
+            background: #f8fbf8;
+            border: 1px solid #e0ebe1;
+            border-radius: 10px;
+            padding: 16px
+        }
+
+        .out span {
+            color: var(--m);
+            font-size: .65rem;
+            font-weight: 800
+        }
+
+        .out strong {
+            display: block;
+            color: var(--d);
+            font-size: 1.05rem;
+            margin: 8px 0 3px
+        }
+
+        .out small {
+            color: var(--m);
+            font-size: .7rem
+        }
+
+        .dtop {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 17px 0 12px
+        }
+
+        .count {
+            color: var(--d);
+            font-weight: 800;
+            font-size: 1.1rem
+        }
+
+        .filters button {
+            font-size: .66rem;
+            padding: 6px;
+            border: 1px solid var(--b);
+            background: #fff;
+            border-radius: 6px;
+            color: var(--m)
+        }
+
+        .scroll {
+            overflow: auto;
+            border: 1px solid #e4ece4;
+            border-radius: 9px
+        }
+
+        .table {
+            width: 100%;
+            min-width: 710px;
+            border-collapse: collapse;
+            font-size: .72rem
+        }
+
+        .table th {
+            text-align: left;
+            padding: 10px 12px;
+            background: #f7faf7;
+            color: var(--m);
+            font-size: .65rem
+        }
+
+        .table td {
+            padding: 11px 12px;
+            border-top: 1px solid #edf1ed
+        }
+
+        .table b {
+            color: var(--d)
+        }
+
+        .link {
+            border: 0;
+            background: none;
+            color: var(--g);
+            font-weight: 800;
+            cursor: pointer
+        }
+
+        .trend {
+            margin-top: 16px;
+            padding: 17px
+        }
+
+        .trend .chart {
+            height: 150px
+        }
+
+        .sell {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 25px;
+            margin-top: 17px
+        }
+
+        .timeline {
+            border-left: 2px dashed #9dbca1;
+            padding-left: 23px
+        }
+
+        .step {
+            position: relative;
+            padding-bottom: 18px
+        }
+
+        .step:last-child {
+            padding: 0
+        }
+
+        .step:before {
+            content: "";
+            position: absolute;
+            background: var(--g);
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            left: -29px;
+            top: 2px;
+            box-shadow: 0 0 0 4px #e5f0e5
+        }
+
+        .step span {
+            font-size: .65rem;
+            color: var(--m);
+            font-weight: 800
+        }
+
+        .step b {
+            display: block;
+            color: var(--d);
+            font-size: .93rem
+        }
+
+        .step small {
+            color: var(--m);
+            font-size: .7rem
+        }
+
+        .stats {
+            padding: 14px;
+            background: #f7faf7;
+            border-radius: 10px
+        }
+
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid #e4ece4;
+            font-size: .74rem
+        }
+
+        .stat span {
+            color: var(--m)
+        }
+
+        .stat b {
+            text-align: right;
+            color: var(--d)
+        }
+
+        .note {
+            font-size: .68rem;
+            color: var(--m);
+            line-height: 1.4
+        }
+
+        .stats .btn {
+            width: 100%
+        }
+
+        .opps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid #e0eae1;
+            border-radius: 9px;
+            overflow: hidden;
+            margin-top: 14px
+        }
+
+        .opp {
+            padding: 15px;
+            border-right: 1px solid #e0eae1
+        }
+
+        .opp:last-child {
+            border: 0;
+            background: #f0f8f1
+        }
+
+        .opp span {
+            display: block;
+            color: var(--m);
+            font-size: .68rem
+        }
+
+        .opp b {
+            display: block;
+            margin-top: 5px;
+            font-size: 1rem
+        }
+
+        .alert {
+            border: 1px solid #e0eae1;
+            border-radius: 10px;
+            padding: 13px
+        }
+
+        .alert i {
+            color: var(--g)
+        }
+
+        .alert span {
+            display: block;
+            color: var(--g);
+            font-size: .64rem;
+            font-weight: 800;
+            margin-top: 7px
+        }
+
+        .alert p,
+        .help p {
+            font-size: .73rem;
+            line-height: 1.4;
+            margin: 5px 0;
+            color: var(--t)
+        }
+
+        .alert time {
+            font-size: .65rem;
+            color: #879388
+        }
+
+        .help {
+            grid-template-columns: repeat(3, 1fr)
+        }
+
+        .help div {
+            background: #f7faf7;
+            border-radius: 8px;
+            padding: 12px
+        }
+
+        .help b {
+            color: var(--d);
+            font-size: .69rem
+        }
+
+        .modalbg {
+            position: fixed;
+            inset: 0;
+            background: #173d2569;
+            display: none;
+            place-items: center;
+            padding: 16px;
+            z-index: 2200
+        }
+
+        .modalbg.show {
+            display: grid
+        }
+
+        .modal {
+            max-width: 450px;
+            width: 100%;
+            padding: 23px
+        }
+
+        .modal h2 {
+            font-size: 1.15rem
+        }
+
+        .modal p {
+            font-size: .78rem;
+            color: var(--m)
+        }
+
+        .actions {
+            display: flex;
+            justify-content: end;
+            gap: 8px;
+            margin-top: 20px
+        }
+
+        .loading {
+            opacity: .52;
+            pointer-events: none
+        }
+
+        @media(max-width:1150px) {
+            .metrics {
+                grid-template-columns: repeat(3, 1fr)
+            }
+        }
+
+        @media(max-width:850px) {
+            .dashboard-main.mi {
+                padding: 24px
+            }
+
+            .twocol,
+            .sell {
+                grid-template-columns: 1fr
+            }
+
+            .crops {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .alerts,
+            .help {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media(max-width:768px) {
+            .dashboard-main.mi {
+                margin-left: 0;
+                padding: 17px 15px
+            }
+
+            .head {
+                display: block
+            }
+
+            .loc {
+                text-align: left;
+                margin-top: 14px
+            }
+
+            .context {
+                flex-wrap: wrap
+            }
+
+            .context>b {
+                width: 100%
+            }
+
+            .field {
+                min-width: 100%
+            }
+
+            .reset {
+                width: 100%
+            }
+
+            .metrics {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 9px
+            }
+
+            .outlook,
+            .opps {
+                grid-template-columns: 1fr
+            }
+
+            .opp {
+                border-right: 0;
+                border-bottom: 1px solid #e0eae1
+            }
+
+            .crops {
+                grid-template-columns: 1fr
+            }
+
+            .forecast {
+                display: block;
+                line-height: 1.8
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <aside class="farmer-sidebar"><button class="sidebar-toggle">◀</button>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="farmer-dashboard.html"><span class="nav-icon"><i
+                                class="fa-solid fa-chart-pie"></i></span><span class="nav-text">Dashboard</span></a>
+                </li>
+                <li class="active"><a href="market-intelligence.html"><span class="nav-icon"><i
+                                class="fa-solid fa-chart-line"></i></span><span class="nav-text">Market
+                            Intelligence</span></a></li>
+                <li><a href="crop-listings.html"><span class="nav-icon"><i
+                                class="fa-solid fa-wheat-awn"></i></span><span class="nav-text">My Crops</span></a></li>
+                <li><a href="buyer-marketplace.html"><span class="nav-icon"><i
+                                class="fa-solid fa-handshake"></i></span><span class="nav-text">Buyers</span></a></li>
+                <li><a href="transport-optimizer.html"><span class="nav-icon"><i
+                                class="fa-solid fa-truck"></i></span><span class="nav-text">Transport &
+                            Storage</span></a></li>
+                <li><a href="transactions.html"><span class="nav-icon"><i class="fa-solid fa-box"></i></span><span
+                            class="nav-text">Transactions</span></a></li>
+                <li><a href="farmer-profile.html"><span class="nav-icon"><i class="fa-solid fa-user"></i></span><span
+                            class="nav-text">Profile</span></a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer"><a class="sidebar-logout-btn" href="index.html"><span class="nav-icon"><i
+                        class="fa-solid fa-right-from-bracket"></i></span><span class="nav-text">Logout</span></a></div>
+    </aside>
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="logo"><span class="logo-text"><span class="logo-agri">Kisan<span class="logo-leaf"><i
+                                class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span></span>
+            </div>
+            <div class="header-actions">
+                <div class="user-menu">
+                    <div class="user-avatar"><span id="userInitials">F</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="dashboard-main mi">
+        <div class="shell" id="app">
+            <div class="head">
+                <div>
+                    <h1>Market Intelligence</h1>
+                    <p>Understand prices, demand and market trends before you sell your produce.</p>
+                </div>
+                <div class="loc"><i class="fa-solid fa-location-dot"></i> <span id="loc">Shahapur,
+                        Maharashtra</span><span class="updated">Updated today, 10:30 AM</span><button class="btn"
+                        id="change">Change Location</button></div>
+            </div>
+            <section class="context card"><b>Market View</b>
+                <div class="field"><label>Crop</label><select id="crop">
+                        <option value="rice">Sona Masuri Rice</option>
+                        <option value="wheat">Wheat</option>
+                        <option value="onion">Onion</option>
+                        <option value="tomato">Tomato</option>
+                    </select></div>
+                <div class="field"><label>Variety</label><select>
+                        <option>All Varieties</option>
+                        <option>Grade A</option>
+                    </select></div>
+                <div class="field"><label>Market area</label><select>
+                        <option>Nearby Markets</option>
+                        <option>Within 25 km</option>
+                    </select></div>
+                <div class="field"><label>Harvest period</label><select>
+                        <option>Oct–Nov 2026</option>
+                        <option>Nov–Dec 2026</option>
+                    </select></div><button class="reset" id="reset">Reset</button>
+            </section>
+            <section class="sec">
+                <div class="title">
+                    <h2>Market Overview</h2>
+                    <p class="sub">Current market conditions for your selected crop.</p>
+                </div>
+                <div class="metrics">
+                    <article class="metric card"><span class="label">Current price</span><b class="num"
+                            data="price">₹3,250</b><span class="small">per quintal · Modal price</span></article>
+                    <article class="metric card"><span class="label">Price change</span><b class="num up"
+                            data="change">↑ 4.8%</b><span class="small">vs previous 7 days</span></article>
+                    <article class="metric card"><span class="label">Today's arrivals</span><b class="num"
+                            data="arrival">820 Tonnes</b><span class="small">Across selected markets</span></article>
+                    <article class="metric card"><span class="label">Buyer demand</span><b class="num"
+                            data="demand">High</b><span class="small" data="req">32 active requirements</span></article>
+                    <article class="metric card"><span class="label">Markets tracked</span><b class="num"
+                            data="markets">8</b><span class="small">Nearby markets</span></article>
+                </div>
+            </section>
+            <section class="sec twocol">
+                <article class="card pad">
+                    <div class="chead">
+                        <div>
+                            <h3>Price Trend</h3>
+                            <p class="sub" id="subtitle">Sona Masuri Rice — Shahapur region</p>
+                        </div>
+                        <div class="periods"><button>7 Days</button><button class="on">30 Days</button><button>3
+                                Months</button></div>
+                    </div>
+                    <div class="chart" id="priceChart" role="img"
+                        aria-label="Price trend showing actual and estimated prices"></div>
+                    <div class="forecast"><span>Current: <strong data="price">₹3,250/q</strong></span><span>Forecast
+                            range: <strong data="forecast">₹3,250–₹3,450/q</strong></span><span>Model forecast —
+                            not guaranteed</span></div>
+                    <div class="legend"><span><i class="key"></i>Actual Market Price</span><span><i
+                                class="key dash"></i>Forecast</span><span><i class="key bar"></i>Forecast range</span>
+                    </div>
+                </article>
+                <aside class="card pad">
+                    <h3>What is affecting the market?</h3>
+                    <p class="sub">Simple signals from local market activity.</p>
+                    <div class="factors">
+                        <div class="factor"><i class="fa-solid fa-boxes-stacked"></i>
+                            <div><b>Supply</b>
+                                <p>Arrivals are slightly below last week.</p>
+                            </div><span class="badge amber">Moderate</span>
+                        </div>
+                        <div class="factor"><i class="fa-solid fa-handshake"></i>
+                            <div><b>Buyer Demand</b>
+                                <p>Procurement activity is increasing.</p>
+                            </div><span class="badge" data="demand">High</span>
+                        </div>
+                        <div class="factor"><i class="fa-solid fa-arrow-trend-up"></i>
+                            <div><b>Price Momentum</b>
+                                <p>Prices have risen over the last 7 days.</p>
+                            </div><span class="badge">Positive</span>
+                        </div>
+                        <div class="factor"><i class="fa-regular fa-calendar"></i>
+                            <div><b>Seasonality</b>
+                                <p>Current movement is within seasonal range.</p>
+                            </div><span class="badge amber">Normal</span>
+                        </div>
+                    </div>
+                </aside>
+            </section>
+            <section class="sec card pad">
+                <div class="chead">
+                    <div>
+                        <h3>Price &amp; Market Arrivals</h3>
+                        <p class="sub">See how incoming supply is changing along with market prices.</p>
+                    </div>
+                    <div class="periods"><button>7 Days</button><button class="on">30 Days</button><button>3
+                            Months</button></div>
+                </div>
+                <div class="chart" id="arrChart" role="img" aria-label="Price and market arrival relationship"></div>
+                <div class="legend"><span><i class="key"></i>Price</span><span><i class="key bar"></i>Arrivals</span>
+                </div>
+                <p class="insight">Arrivals increased during the last 3 days while prices remained relatively stable.
+                </p>
+            </section>
+            <section class="sec card pad">
+                <div class="title">
+                    <h2>Crop Market Explorer</h2>
+                    <p class="sub">Compare market conditions across crops you may be considering.</p>
+                </div>
+                <div class="tabs" id="tabs"><button class="on" data-k="rice">Rice</button><button
+                        data-k="wheat">Wheat</button><button data-k="onion">Onion</button><button
+                        data-k="tomato">Tomato</button><button>Cotton</button></div>
+                <div class="crops" id="cropcards"></div>
+            </section>
+            <section class="sec card pad">
+                <div class="title">
+                    <h2>Pre-Harvest Market Outlook</h2>
+                    <p class="sub">See the expected market situation around your estimated harvest period.</p>
+                </div>
+                <div class="outlook">
+                    <div class="out"><span>EXPECTED HARVEST PERIOD</span><strong>15 Oct – 30 Oct</strong><small>Based
+                            on your selected crop</small></div>
+                    <div class="out"><span>FORECAST PRICE RANGE</span><strong
+                            data="forecast">₹3,250–₹3,450/q</strong><small>Model estimate</small></div>
+                    <div class="out"><span>EXPECTED MARKET DEMAND</span><strong data="demand">High</strong><small>Based
+                            on current buyer requirements</small></div>
+                </div>
+                <p class="info"><b>Market outlook</b><br>Current indicators show stronger demand than the previous
+                    month. Forecast values are estimates and can change as new market information becomes available.</p>
+            </section>
+            <section class="sec card pad">
+                <div class="title">
+                    <h2>Buyer Demand</h2>
+                    <p class="sub">Current procurement requirements relevant to your crop.</p>
+                </div>
+                <div class="dtop"><b class="count" data="count">32 Active Buyer Requirements</b>
+                    <div class="filters"><button>Crop⌄</button> <button>Quality⌄</button>
+                        <button>Quantity⌄</button> <button>Delivery Period⌄</button></div>
+                </div>
+                <div class="scroll">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Buyer</th>
+                                <th>Crop / Variety</th>
+                                <th>Required Quantity</th>
+                                <th>Quality</th>
+                                <th>Delivery Period</th>
+                                <th>Distance</th>
+                                <th>Demand Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="buyers"></tbody>
+                    </table>
+                </div>
+                <article class="trend card">
+                    <h3>Demand Trend</h3>
+                    <p class="sub">Past 30 days → Current → Next expected period</p>
+                    <div class="chart" id="demandChart" role="img" aria-label="Buyer demand trend"></div>
+                    <p class="up small"><b>Demand has increased by 12% over the last 30 days.</b></p>
+                </article>
+            </section>
+            <section class="sec card pad">
+                <div class="title">
+                    <h2>Selling Window</h2>
+                    <p class="sub">Review the expected price movement and holding considerations.</p>
+                </div>
+                <div class="sell">
+                    <div class="timeline">
+                        <div class="step"><span>TODAY</span><b>Current market</b><small data="price">₹3,250/q</small>
+                        </div>
+                        <div class="step"><span>POTENTIAL STRONGER PERIOD</span><b
+                                data="stronger">₹3,300–₹3,400/q</b><small>Potential upward movement</small></div>
+                        <div class="step"><span>EXPECTED HARVEST PERIOD</span><b
+                                data="forecast">₹3,250–₹3,450/q</b><small>Estimated market range</small></div>
+                    </div>
+                    <div class="stats">
+                        <div class="stat"><span>Current Price</span><b data="price">₹3,250/q</b></div>
+                        <div class="stat"><span>Forecast Range</span><b data="stronger">₹3,300–₹3,400/q</b></div>
+                        <div class="stat"><span>Expected Movement</span><b>Potential upward movement</b></div>
+                        <div class="stat"><span>Holding Period</span><b>7–14 days</b></div>
+                        <div class="stat"><span>Estimated Storage Cost</span><b>₹35/q</b></div>
+                        <p class="note">Estimated values are model outputs and depend on market conditions.</p><button
+                            class="btn">View Market Details</button>
+                    </div>
+                </div>
+            </section>
+            <section class="sec card pad">
+                <h3>Price Opportunity vs Holding Cost</h3>
+                <p class="sub">Compare a possible price change with estimated holding cost.</p>
+                <div class="opps">
+                    <div class="opp"><span>Potential price increase</span><b class="up" data="increase">+₹120/q</b>
+                    </div>
+                    <div class="opp"><span>Estimated holding cost</span><b class="down">−₹35/q</b></div>
+                    <div class="opp"><span>Illustrative difference</span><b data="diff">₹85/q</b></div>
+                </div>
+                <p class="note">Illustrative calculation based on current mock assumptions. It is not a guaranteed
+                    profit.</p>
+            </section>
+            <section class="sec card pad">
+                <div class="title">
+                    <h2>Nearby Market Comparison</h2>
+                    <p class="sub">Compare prices, arrivals and demand across tracked markets.</p>
+                </div>
+                <div class="scroll">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Market</th>
+                                <th>Current Price</th>
+                                <th>Change</th>
+                                <th>Arrivals</th>
+                                <th>Demand</th>
+                                <th>Distance</th>
+                                <th>Last Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody id="markets"></tbody>
+                    </table>
+                </div>
+                <p class="note"><i class="fa-solid fa-circle-info" style="color:var(--a)"></i> Market prices do not
+                    include your transportation, storage or other transaction costs.</p>
+            </section>
+            <section class="sec card pad">
+                <div class="title">
+                    <h2>Market Updates</h2>
+                    <p class="sub">Recent changes in the markets you are tracking.</p>
+                </div>
+                <div class="alerts">
+                    <article class="alert"><i class="fa-solid fa-arrow-trend-up"></i><span>PRICE MOVEMENT</span>
+                        <p id="alertprice">Rice prices increased 4.8% over the last 7 days.</p><time>Today, 10:30
+                            AM</time>
+                    </article>
+                    <article class="alert"><i class="fa-solid fa-handshake"></i><span>DEMAND CHANGE</span>
+                        <p>Buyer requirements increased by 12% this month.</p><time>Today, 9:45 AM</time>
+                    </article>
+                    <article class="alert"><i class="fa-solid fa-truck-ramp-box"></i><span>ARRIVAL CHANGE</span>
+                        <p>Market arrivals decreased 6% compared with last week.</p><time>Yesterday, 4:15 PM</time>
+                    </article>
+                </div>
+            </section>
+            <section class="sec card pad">
+                <div class="title">
+                    <h2>How to read this information</h2>
+                    <p class="sub">Use these simple signals while planning your sale.</p>
+                </div>
+                <div class="help">
+                    <div><b>PRICE</b>
+                        <p>Shows recent market transaction levels.</p>
+                    </div>
+                    <div><b>FORECAST</b>
+                        <p>Shows an estimated future price range based on the model.</p>
+                    </div>
+                    <div><b>DEMAND</b>
+                        <p>Shows buyer requirements currently visible on the platform.</p>
+                    </div>
+                </div>
+                <p class="note">Market information and forecasts are estimates and may change.</p>
+            </section>
+        </div>
+    </main>
+    <div class="modalbg" id="modal" role="dialog" aria-modal="true">
+        <div class="modal card">
+            <h2>Select Your Market Area</h2>
+            <p>Use this location for market information.</p>
+            <div class="field"><label>District</label><select id="district">
+                    <option>Shahapur</option>
+                    <option>Thane</option>
+                    <option>Palghar</option>
+                </select></div>
+            <div class="field"><label>Taluka</label><select>
+                    <option>Shahapur</option>
+                    <option>Kalyan</option>
+                </select></div>
+            <div class="field"><label>Radius</label><select>
+                    <option>25 km</option>
+                    <option>50 km</option>
+                </select></div>
+            <div class="actions"><button class="btn" id="cancel">Cancel</button><button class="btn green"
+                    id="apply">Apply Location</button></div>
+        </div>
+    </div>
+    <script src="../js/farmer-sidebar.js"></script>
+    <script>
+        const D = { rice: { n: 'Sona Masuri Rice', s: 'Rice', p: 3250, c: 4.8, a: 820, d: 'High', q: 32, m: 8, f: '₹3,250–₹3,450/q', st: '₹3,300–₹3,400/q', i: 120, h: [3080, 3100, 3090, 3130, 3125, 3160, 3185, 3170, 3210, 3230, 3250], z: [3260, 3280, 3305, 3320, 3350] }, wheat: { n: 'Wheat', s: 'Wheat', p: 2480, c: 2.1, a: 960, d: 'Medium', q: 18, m: 7, f: '₹2,470–₹2,580/q', st: '₹2,500–₹2,560/q', i: 80, h: [2370, 2390, 2385, 2400, 2415, 2420, 2405, 2440, 2450, 2470, 2480], z: [2485, 2500, 2510, 2535, 2550] }, onion: { n: 'Onion', s: 'Onion', p: 2900, c: -3.2, a: 1140, d: 'High', q: 28, m: 9, f: '₹2,780–₹3,050/q', st: '₹2,900–₹3,020/q', i: 105, h: [3060, 3030, 3050, 3000, 2980, 2965, 2940, 2950, 2920, 2910, 2900], z: [2890, 2910, 2930, 2960, 2980] }, tomato: { n: 'Tomato', s: 'Tomato', p: 2350, c: 6.7, a: 480, d: 'High', q: 24, m: 6, f: '₹2,300–₹2,600/q', st: '₹2,420–₹2,560/q', i: 140, h: [2050, 2080, 2100, 2090, 2150, 2180, 2200, 2240, 2290, 2320, 2350], z: [2380, 2410, 2450, 2490, 2520] } }; let K = 'rice'; const ru = n => '₹' + n.toLocaleString('en-IN'), path = (v, x, y, w, h, mi, ma) => v.map((a, i) => (i ? 'L' : 'M') + (x + i * w / (v.length - 1)) + ',' + (y + h - (a - mi) / (ma - mi) * h)).join(' '); function svg(d, type) { let v = d.h, z = d.z, all = v.concat(z), mi = Math.min(...all) - 80, ma = Math.max(...all) + 80, x = 40, y = 15, w = 610, h = 155, sp = x + w * (v.length - 1) / (all.length - 1), g = ''; for (let i = 0; i < 4; i++)g += `<line class="grid" x1="${x}" y1="${y + i * h / 3}" x2="${x + w}" y2="${y + i * h / 3}"/>`; if (type === 'a') { let bars = [70, 66, 72, 64, 68, 75, 71, 79, 82, 88, 91].map((a, i) => `<rect class="bar" x="${x + i * w / 10 - 14}" y="${y + h - a / 100 * h * .8}" width="28" height="${a / 100 * h * .8}" rx="3"/>`).join(''); return `<svg viewBox="0 0 680 210">${g}${bars}<path class="line" d="${path(v, x, y, w, h, mi, ma)}"/><text class="axis" x="40" y="195">Day 1</text><text class="axis" x="340" y="195">Day 15</text><text class="axis" x="600" y="195">Day 30</text></svg>` } let p = path(v, x, y, w, h, mi, ma), f = path([v.at(-1), ...z], sp, y, w * z.length / (all.length - 1), h, mi, ma); return `<svg viewBox="0 0 680 210"><rect class="fc" x="${sp}" y="${y}" width="${x + w - sp}" height="${h}"/>${g}<path class="shade" d="${p} L${sp},${y + h} L${x},${y + h}Z"/><path class="line" d="${p}"/><path class="dash" d="${f}"/><line x1="${sp}" y1="${y}" x2="${sp}" y2="${y + h}" stroke="#9bb9a0" stroke-dasharray="3 3"/><text class="axis" x="70" y="195">Actual</text><text class="axis" x="${sp + 25}" y="195">Forecast</text></svg>` } function demand() { let v = [14, 15, 16, 17, 18, 19, 20, 22, 24, 26], x = 40, y = 10, w = 610, h = 95, p = path(v, x, y, w, h, 12, 28); return `<svg viewBox="0 0 680 145"><path class="area" d="${p} L${x + w},${y + h} L${x},${y + h}Z"/><path class="line" d="${p}"/><text class="axis" x="40" y="130">Past 30 days</text><text class="axis" x="320" y="130">Current</text><text class="axis" x="560" y="130">Next expected</text></svg>` } function tables(d) { let buyers = [['ABC Foods Pvt. Ltd.', d.n, '50 Tonnes', 'Grade A', 'Oct 15–20', '72 km'], ['Bharat Grains', d.s, '25 Tonnes', 'Grade A', 'Oct 18–25', '48 km'], ['FreshMill', d.s, '100 Tonnes', 'Standard', 'Oct 20–30', '96 km']]; buyers = document.querySelector('#buyers'); buyers.innerHTML = buyers ? '' : ''; document.querySelector('#buyers').innerHTML = [['ABC Foods Pvt. Ltd.', d.n, '50 Tonnes', 'Grade A', 'Oct 15–20', '72 km'], ['Bharat Grains', d.s, '25 Tonnes', 'Grade A', 'Oct 18–25', '48 km'], ['FreshMill', d.s, '100 Tonnes', 'Standard', 'Oct 20–30', '96 km']].map(r => `<tr>${r.map((x, i) => `<td>${i === 0 ? '<b>' + x + '</b>' : x}</td>`).join('')}<td><span class="badge">Active</span></td><td><button class="link">View Demand</button></td></tr>`).join(''); let ns = ['Shahapur', 'Kalyan', 'Vasai', 'Navi Mumbai'], offs = [0, 70, -70, 40]; document.querySelector('#markets').innerHTML = ns.map((n, i) => `<tr><td><b>${n}</b></td><td>${ru(d.p + offs[i])}/q</td><td class="${d.c < 0 ? 'down' : 'up'}">${d.c > 0 ? '+' : ''}${d.c}%</td><td>${d.a - i * 80} T</td><td><span class="badge">${i === 1 ? 'Medium' : d.d}</span></td><td>${[32, 58, 74, 68][i]} km</td><td>Today</td></tr>`).join('') } function cards() { document.querySelector('#cropcards').innerHTML = Object.entries(D).map(([k, d]) => `<article class="crop"><h4>${d.s.toUpperCase()}</h4><div><span>Current Price</span><b>${ru(d.p)}/q</b></div><div><span>30-Day Change</span><b class="${d.c < 0 ? 'down' : 'up'}">${d.c > 0 ? '+' : ''}${d.c}%</b></div><div><span>Demand</span><b>${d.d}</b></div><div><span>Arrivals</span><b>${d.a > 1000 ? 'High' : 'Moderate'}</b></div></article>`).join('') } function render(k) { K = k; let d = D[k]; document.querySelectorAll('[data]').forEach(e => { let a = e.getAttribute('data'), mp = { price: ru(d.p) + '/q', change: (d.c >= 0 ? '↑ ' : '↓ ') + Math.abs(d.c) + '%', arrival: d.a + ' Tonnes', demand: d.d, req: d.q + ' active requirements', markets: d.m, forecast: d.f, stronger: d.st, count: d.q + ' Active Buyer Requirements', increase: '+' + ru(d.i) + '/q', diff: ru(d.i - 35) + '/q' }; if (mp[a] !== undefined) e.textContent = mp[a] }); let c = document.querySelector('[data="change"]'); c.className = 'num ' + (d.c >= 0 ? 'up' : 'down'); document.querySelector('#subtitle').textContent = d.n + ' — Shahapur region'; document.querySelector('#priceChart').innerHTML = svg(d); document.querySelector('#arrChart').innerHTML = svg(d, 'a'); document.querySelector('#demandChart').innerHTML = demand(); document.querySelector('#alertprice').textContent = d.s + ' prices ' + (d.c >= 0 ? 'increased ' : 'decreased ') + Math.abs(d.c) + '% over the last 7 days.'; tables(d); cards(); document.querySelectorAll('#tabs button[data-k]').forEach(b => b.classList.toggle('on', b.dataset.k === k)); document.querySelector('#crop').value = k } document.querySelector('#crop').onchange = e => { let a = document.querySelector('#app'); a.classList.add('loading'); setTimeout(() => { render(e.target.value); a.classList.remove('loading') }, 360) }; document.querySelectorAll('#tabs button[data-k]').forEach(b => b.onclick = () => { document.querySelector('#crop').value = b.dataset.k; document.querySelector('#crop').dispatchEvent(new Event('change')) }); document.querySelector('#reset').onclick = () => render('rice'); let M = document.querySelector('#modal'); document.querySelector('#change').onclick = () => M.classList.add('show'); document.querySelector('#cancel').onclick = () => M.classList.remove('show'); document.querySelector('#apply').onclick = () => { document.querySelector('#loc').textContent = document.querySelector('#district').value + ', Maharashtra'; M.classList.remove('show') }; M.onclick = e => { if (e.target === M) M.classList.remove('show') }; let u = JSON.parse(sessionStorage.getItem('currentUser') || 'null'); if (u?.name) document.querySelector('#userInitials').textContent = u.name[0]; render('rice');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1251 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2d5016">
+  <title>Create Digital Lot | KisanMitra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/farmer-sidebar.css">
+  <link rel="stylesheet" href="../css/language-switcher.css">
+  <style>
+    :root {
+      --green: #2d5016;
+      --green2: #4a7c2c;
+      --pale: #eef7e9;
+      --gold: #f4a51c;
+      --ink: #1c2d1a;
+      --muted: #6b7969;
+      --line: #d9e7d4;
+      --bg: #f5f8f3
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Poppins, sans-serif
+    }
+
+    .side {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: 220px;
+      background: linear-gradient(#203f12, #2d5016);
+      z-index: 20;
+      padding: 24px 14px;
+      color: #fff;
+      display: flex;
+      flex-direction: column
+    }
+
+    .brand {
+      padding: 2px 10px 31px;
+      font: 900 1.25rem Montserrat
+    }
+
+    .brand i,
+    .brand em {
+      color: var(--gold)
+    }
+
+    .brand em {
+      font-style: normal
+    }
+
+    .nav-note {
+      color: #b3caab;
+      font-size: .66rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      padding: 0 10px 9px
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: #dbead5;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 11px 12px;
+      margin: 2px 0;
+      font-size: .84rem
+    }
+
+    .nav:hover,
+    .nav.active {
+      color: white;
+      background: #ffffff1d
+    }
+
+    .nav.active {
+      box-shadow: inset 3px 0 var(--gold)
+    }
+
+    .side-foot {
+      margin-top: auto;
+      border-top: 1px solid #ffffff24;
+      padding-top: 14px
+    }
+
+    .top {
+      height: 70px;
+      margin-left: 220px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 34px
+    }
+
+    .crumb {
+      font-size: .82rem;
+      color: var(--muted)
+    }
+
+    .crumb b {
+      color: var(--green)
+    }
+
+    .ready {
+      background: var(--pale);
+      color: var(--green);
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 99px
+    }
+
+    .dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #31a354;
+      margin-right: 6px
+    }
+
+    main {
+      margin-left: 220px;
+      padding: 35px 38px 170px;
+      max-width: 1440px
+    }
+
+    .crop-page-title {
+      color: var(--primary-green);
+      font-size: 2rem;
+      margin: 0 0 24px;
+      font-weight: 700
+    }
+
+    .crop-page-title i {
+      margin-left: 8px
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 25px
+    }
+
+    .eyebrow {
+      color: var(--green2);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .11em;
+      text-transform: uppercase
+    }
+
+    .hero h1 {
+      margin: 5px 0;
+      font: 800 clamp(1.8rem, 3vw, 2.5rem)/1.15 Montserrat;
+      color: var(--green)
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .92rem
+    }
+
+    .secure {
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--green);
+      border-radius: 12px;
+      padding: 11px 13px;
+      font-size: .75rem;
+      font-weight: 700;
+      white-space: nowrap
+    }
+
+    .secure i {
+      color: var(--gold);
+      margin-right: 5px
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(310px, .82fr);
+      gap: 22px
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 8px 25px #2444150c
+    }
+
+    .card+.card {
+      margin-top: 18px
+    }
+
+    .head {
+      display: flex;
+      gap: 11px;
+      margin-bottom: 19px
+    }
+
+    .step {
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      flex: none;
+      border-radius: 9px;
+      background: var(--pale);
+      color: var(--green);
+      font-size: .72rem;
+      font-weight: 800
+    }
+
+    .head h2 {
+      font-size: 1.04rem;
+      margin: 0
+    }
+
+    .head p {
+      font-size: .76rem;
+      color: var(--muted);
+      margin: 3px 0 0
+    }
+
+    .crop-row {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 2px 1px 10px;
+      scroll-snap-type: x mandatory
+    }
+
+    .crop {
+      border: 2px solid #e2ebe0;
+      background: #fff;
+      border-radius: 16px;
+      flex: 0 0 115px;
+      padding: 9px 7px;
+      cursor: pointer;
+      scroll-snap-align: start;
+      font: 700 .78rem Poppins;
+      color: #445442;
+      transition: .18s
+    }
+
+    .crop:hover {
+      transform: translateY(-2px)
+    }
+
+    .crop.selected {
+      border: 4px solid var(--green);
+      padding: 7px 5px;
+      box-shadow: 0 7px 18px #2d501622
+    }
+
+    .crop img {
+      display: block;
+      width: 66px;
+      height: 66px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto 7px;
+      background: var(--pale)
+    }
+
+    label {
+      font-size: .77rem;
+      font-weight: 700;
+      color: #536350;
+      display: block;
+      margin: 4px 0 7px
+    }
+
+    .select,
+    input {
+      border: 1px solid #cad9c5;
+      border-radius: 12px;
+      width: 100%;
+      padding: 13px 14px;
+      color: #263d20;
+      background: #fff;
+      font: 600 .9rem Poppins;
+      outline: none
+    }
+
+    .select:focus,
+    input:focus {
+      border-color: var(--green2);
+      box-shadow: 0 0 0 3px #4a7c2c1c
+    }
+
+    .volumes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px
+    }
+
+    .volume {
+      min-height: 132px;
+      background: linear-gradient(140deg, #fff, #f2f8ef);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: inset 0 1px #fff, 0 3px 10px #31551a08
+    }
+
+    .vol-title {
+      color: #70806b;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-size: .7rem;
+      font-weight: 800
+    }
+
+    .counter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 9px 0 8px
+    }
+
+    .round {
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      border: 0;
+      border-radius: 11px;
+      background: var(--green);
+      color: #fff;
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform .16s, background .16s, box-shadow .16s
+    }
+
+    .round:hover {
+      background: #183907;
+      box-shadow: 0 5px 10px #23431333;
+      transform: translateY(-1px)
+    }
+
+    .weight {
+      font-size: 1.85rem;
+      line-height: 1;
+      color: var(--green);
+      font-weight: 800
+    }
+
+    .units {
+      display: flex;
+      justify-content: center;
+      gap: 9px;
+      align-items: center;
+      color: #647260;
+      font-size: .75rem
+    }
+
+    .toggle {
+      width: 39px;
+      height: 21px;
+      position: relative
+    }
+
+    .toggle input {
+      opacity: 0
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: #b4c5ad;
+      border-radius: 30px;
+      cursor: pointer
+    }
+
+    .slider:before {
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: #fff;
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: .2s
+    }
+
+    .toggle input:checked+.slider {
+      background: var(--green)
+    }
+
+    .toggle input:checked+.slider:before {
+      transform: translateX(18px)
+    }
+
+    .bags {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      margin-top: 12px
+    }
+
+    .bags i {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      border-radius: 10px;
+      background: #fff5e5;
+      font-size: 1rem;
+      color: #a8783e
+    }
+
+    .bags input {
+      min-width: 0;
+      height: 40px;
+      padding: 8px 11px;
+      border-radius: 11px
+    }
+
+    .bags b {
+      font-size: .78rem;
+      color: #52624d
+    }
+
+    .scan {
+      width: 100%;
+      border: 2px dashed #75a15d;
+      border-radius: 16px;
+      background: linear-gradient(105deg, #234313, #4d7c2e);
+      color: #fff;
+      padding: 17px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font: 700 .96rem Poppins;
+      box-shadow: 0 8px 20px #2d501625
+    }
+
+    .scan i:first-child {
+      font-size: 1.3rem;
+      margin-right: 8px;
+      animation: blink 1.3s infinite
+    }
+
+    .scan small {
+      display: block;
+      font-size: .7rem;
+      font-weight: 500;
+      color: #dcedd3;
+      margin: 2px 0 0
+    }
+
+    .scan-actions {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px
+    }
+
+    .upload-photo {
+      min-width: 156px;
+      border: 1px solid #b8d0ac;
+      border-radius: 14px;
+      background: #f2f8ef;
+      color: var(--green);
+      padding: 12px 14px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 3px;
+      cursor: pointer;
+      font: 700 .78rem Poppins;
+      text-align: center;
+      transition: .18s
+    }
+
+    .upload-photo:hover {
+      background: #e7f2e1;
+      border-color: var(--green2);
+      transform: translateY(-1px)
+    }
+
+    .upload-photo i {
+      font-size: 1.1rem
+    }
+
+    .upload-photo small {
+      color: #687a63;
+      font-size: .64rem;
+      font-weight: 500
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: .32
+      }
+    }
+
+    .quality,
+    .manifest {
+      display: none
+    }
+
+    .quality.show,
+    .manifest.show {
+      display: block;
+      animation: up .4s ease-out
+    }
+
+    @keyframes up {
+      from {
+        opacity: 0;
+        transform: translateY(13px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    .quality {
+      position: relative;
+      overflow: hidden
+    }
+
+    .quality-body {
+      display: flex;
+      align-items: center;
+      gap: 23px
+    }
+
+    .gauge {
+      width: 140px;
+      height: 140px;
+      flex: none;
+      border-radius: 50%;
+      background: conic-gradient(#35a35d 0 42%, #e7eee4 42%);
+      display: grid;
+      place-items: center
+    }
+
+    .gauge-in {
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      background: white;
+      display: grid;
+      place-items: center;
+      text-align: center
+    }
+
+    .gauge b {
+      display: block;
+      font-size: 1.6rem;
+      color: var(--green)
+    }
+
+    .gauge span {
+      font-size: .63rem;
+      color: #647d5d;
+      font-weight: 800;
+      text-transform: uppercase
+    }
+
+    .metrics {
+      flex: 1
+    }
+
+    .metric {
+      margin: 11px 0
+    }
+
+    .metric div {
+      display: flex;
+      justify-content: space-between;
+      color: #596955;
+      font-size: .77rem;
+      font-weight: 600
+    }
+
+    .track {
+      height: 7px !important;
+      background: #e8eee5;
+      border-radius: 99px;
+      margin-top: 5px
+    }
+
+    .track i {
+      height: 7px;
+      background: #4aa164;
+      border-radius: 99px;
+      display: block
+    }
+
+    .ribbon {
+      position: absolute;
+      top: 21px;
+      right: -22px;
+      transform: rotate(5deg);
+      background: #fff2bf;
+      color: #775800;
+      border: 1px solid #e2bb41;
+      padding: 7px 28px;
+      border-radius: 7px;
+      font-size: .73rem;
+      font-weight: 800
+    }
+
+    .manifest-card {
+      position: sticky;
+      top: 92px
+    }
+
+    .manifest-top {
+      background: linear-gradient(135deg, #2a4d18, #578638);
+      color: #fff;
+      border-radius: 14px;
+      padding: 20px
+    }
+
+    .tiny {
+      font-size: .66rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #d5eac9
+    }
+
+    .manifest-top h3 {
+      font: 800 1.22rem Montserrat;
+      margin: 7px 0 0
+    }
+
+    .manifest-top p {
+      font-size: .74rem;
+      color: #e2f0da;
+      margin: 6px 0 0
+    }
+
+    .empty {
+      padding: 18px 0 3px;
+      color: #7c8c78;
+      font-size: .78rem
+    }
+
+    .empty i {
+      color: var(--gold)
+    }
+
+    .lot-id {
+      margin-top: 16px;
+      border: 2px dashed #6b9a54;
+      background: #f3f9ee;
+      color: #245719;
+      border-radius: 13px;
+      padding: 13px;
+      font-size: 1rem;
+      font-weight: 800
+    }
+
+    .receipt {
+      background: #f7f9f6;
+      border-radius: 12px;
+      margin-top: 12px;
+      padding: 14px;
+      color: #3b4b37;
+      font-size: .8rem;
+      font-weight: 600;
+      line-height: 1.55
+    }
+
+    .metadata {
+      font-size: .67rem;
+      color: #879486;
+      line-height: 1.75
+    }
+
+    .dock {
+      position: fixed;
+      z-index: 30;
+      left: 220px;
+      right: 0;
+      bottom: 0;
+      padding: 13px 35px;
+      background: #fffffff0;
+      backdrop-filter: blur(13px);
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px
+    }
+
+    .intent-tabs {
+      display: flex;
+      gap: 3px;
+      padding: 4px;
+      background: #eaf2e5;
+      border-radius: 13px
+    }
+
+    .intent {
+      border: 0;
+      border-radius: 9px;
+      padding: 10px 13px;
+      background: transparent;
+      color: #62725c;
+      font: 600 .77rem Poppins;
+      cursor: pointer
+    }
+
+    .intent.active {
+      background: #fff;
+      color: var(--green);
+      box-shadow: 0 2px 7px #2d50161d
+    }
+
+    .publish {
+      border: 0;
+      border-radius: 12px;
+      min-width: 260px;
+      padding: 13px 20px;
+      background: linear-gradient(100deg, #2d5016, #4f8430);
+      color: #fff;
+      font: 800 .9rem Poppins;
+      cursor: pointer;
+      box-shadow: 0 7px 17px #2d501636
+    }
+
+    .publish.offline {
+      background: linear-gradient(100deg, #51665c, #75867d)
+    }
+
+    .publish.loading {
+      animation: pulse .8s infinite
+    }
+
+    @keyframes pulse {
+      50% {
+        opacity: .7;
+        transform: scale(.985)
+      }
+    }
+
+    .camera {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: #081006;
+      color: #fff;
+      place-items: center;
+      overflow: hidden
+    }
+
+    .camera.open {
+      display: grid;
+      animation: fade .25s
+    }
+
+    .camera video,
+    .fallback {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover
+    }
+
+    .fallback {
+      background: radial-gradient(circle at 50% 45%, #678b3c, #233216 52%, #081006)
+    }
+
+    .cam-top {
+      position: absolute;
+      top: 25px;
+      left: 30px;
+      right: 30px;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      font-size: .8rem;
+      font-weight: 700
+    }
+
+    .live {
+      color: #ff7575
+    }
+
+    .reticle {
+      width: min(72vw, 590px);
+      height: min(44vw, 350px);
+      border: 3px solid #fff;
+      border-radius: 12px;
+      z-index: 1;
+      box-shadow: 0 0 0 999px #0006, 0 0 20px #fff3;
+      position: relative
+    }
+
+    .reticle:before,
+    .reticle:after {
+      content: "";
+      position: absolute;
+      width: 31px;
+      height: 31px;
+      border-color: #b6ef8d
+    }
+
+    .reticle:before {
+      top: -3px;
+      left: -3px;
+      border-top: 5px solid;
+      border-left: 5px solid
+    }
+
+    .reticle:after {
+      right: -3px;
+      bottom: -3px;
+      border-bottom: 5px solid;
+      border-right: 5px solid
+    }
+
+    .guide {
+      position: absolute;
+      z-index: 2;
+      bottom: 42px;
+      background: #10200cdd;
+      border-radius: 99px;
+      padding: 12px 18px;
+      font-size: .85rem;
+      font-weight: 600
+    }
+
+    .flash {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      background: #fff;
+      opacity: 0
+    }
+
+    .flash.fire {
+      animation: flash .35s ease-out
+    }
+
+    @keyframes flash {
+      25% {
+        opacity: 1
+      }
+
+      100% {
+        opacity: 0
+      }
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    .notice {
+      position: fixed;
+      z-index: 150;
+      right: 22px;
+      top: 22px;
+      max-width: 330px;
+      background: #244d2c;
+      color: #fff;
+      border-radius: 12px;
+      padding: 14px 17px;
+      font-size: .8rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px #0003;
+      transform: translateY(-120px);
+      transition: .3s
+    }
+
+    .notice.show {
+      transform: none
+    }
+
+    @media(max-width:900px) {
+      .layout {
+        grid-template-columns: 1fr
+      }
+
+      .manifest-card {
+        position: static
+      }
+
+      .volumes {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(max-width:600px) {
+      main.dashboard-main {
+        padding: 24px 14px 166px
+      }
+
+      .hero {
+        display: block
+      }
+
+      .secure {
+        display: inline-block;
+        margin-top: 12px
+      }
+
+      .card {
+        padding: 17px;
+        border-radius: 16px
+      }
+
+      .crop {
+        flex-basis: 104px
+      }
+
+      .crop img {
+        width: 58px;
+        height: 58px
+      }
+
+      .scan-actions {
+        grid-template-columns: 1fr
+      }
+
+      .upload-photo {
+        min-width: 0;
+        display: flex;
+        justify-content: center;
+        gap: 7px
+      }
+
+      .quality-body {
+        gap: 14px
+      }
+
+      .gauge {
+        width: 120px;
+        height: 120px
+      }
+
+      .gauge-in {
+        width: 95px;
+        height: 95px
+      }
+
+      .ribbon {
+        position: static;
+        display: inline-block;
+        transform: rotate(2deg);
+        margin-top: 12px
+      }
+
+      .dock {
+        padding: 9px 12px;
+        display: block
+      }
+
+      .intent-tabs {
+        width: 100%;
+        margin-bottom: 8px
+      }
+
+      .intent {
+        flex: 1;
+        padding: 9px 3px;
+        font-size: .69rem
+      }
+
+      .publish {
+        width: 100%;
+        min-width: 0
+      }
+
+      .reticle {
+        width: 83vw;
+        height: 53vw
+      }
+
+      .cam-top {
+        left: 17px;
+        right: 17px
+      }
+
+      .guide {
+        bottom: 35px;
+        font-size: .72rem;
+        max-width: 92%;
+        text-align: center
+      }
+    }
+
+    @media(max-width:768px) {
+      main.dashboard-main {
+        margin-left: 0 !important
+      }
+
+      .dock {
+        left: 0 !important
+      }
+    }
+  </style>
+</head>
+
+<body class="dashboard-body">
+  <button class="mobile-sidebar-toggle"><i class="fa-solid fa-bars"></i></button>
+  <aside class="farmer-sidebar" id="farmerSidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="brand-logo-icon"><i class="fa-solid fa-leaf"></i></div>
+        <div class="brand-text"><span class="brand-agri">Kisan</span><span class="brand-mitra">Mitra</span></div>
+      </div><button class="sidebar-toggle-btn" id="sidebarToggleBtn" title="Toggle Sidebar"><span class="toggle-icon"><i
+            class="fa-solid fa-chevron-left"></i></span></button>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="farmer-dashboard.html"><span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span><span
+              class="nav-text">Dashboard</span></a>
+          <div class="nav-flyout"><span class="flyout-title">Dashboard</span><span class="flyout-desc">Overview &amp;
+              Insights</span></div>
+        </li>
+        <li><a href="market-intelligence.html"><span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span><span
+              class="nav-text">Market Prices</span></a>
+          <div class="nav-flyout"><span class="flyout-title">Market Prices</span><span class="flyout-desc">Live APMC
+              Prices</span></div>
+        </li>
+        <li class="active"><a href="crop-listings.html"><span class="nav-icon"><i
+                class="fa-solid fa-wheat-awn"></i></span><span class="nav-text">My Crops</span></a>
+          <div class="nav-flyout"><span class="flyout-title">My Crops</span><span class="flyout-desc">Manage
+              Listings</span></div>
+        </li>
+        <li><a href="buyer-marketplace.html"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span
+              class="nav-text">Buyers</span></a>
+          <div class="nav-flyout"><span class="flyout-title">Buyers</span><span class="flyout-desc">Verified
+              Buyers</span></div>
+        </li>
+        <li><a href="transport-optimizer.html"><span class="nav-icon"><i class="fa-solid fa-truck"></i></span><span
+              class="nav-text">Transport & Storage</span></a>
+          <div class="nav-flyout"><span class="flyout-title">Transport & Storage</span><span class="flyout-desc">Net
+              Realization</span></div>
+        </li>
+        <li><a href="transactions.html"><span class="nav-icon"><i class="fa-solid fa-box"></i></span><span
+              class="nav-text">Transactions</span></a>
+          <div class="nav-flyout"><span class="flyout-title">Transactions</span><span class="flyout-desc">Sales &amp;
+              History</span></div>
+        </li>
+        <li><a href="farmer-profile.html"><span class="nav-icon"><i class="fa-solid fa-user"></i></span><span
+              class="nav-text">Profile</span></a>
+          <div class="nav-flyout"><span class="flyout-title">Profile</span><span class="flyout-desc">Farm &amp; Personal
+              Info</span></div>
+        </li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer"><a href="#" class="sidebar-logout-btn" id="sidebarLogoutBtn"><span class="nav-icon"><i
+            class="fa-solid fa-right-from-bracket"></i></span><span class="nav-text">Logout</span></a>
+      <div class="nav-flyout"><span class="flyout-title">Logout</span><span class="flyout-desc">Log out of
+          account</span></div>
+    </div>
+  </aside>
+  <header class="dashboard-header">
+    <div class="header-container">
+      <div class="logo"><span class="logo-text"><span class="logo-agri">Kisan<span class="logo-leaf"><i
+                class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span></span></div>
+      <div class="header-actions"><a href="#"
+          style="margin-right:15px;color:var(--primary-green);font-size:1.2rem;display:flex;align-items:center;text-decoration:none"
+          title="Help"><i class="fa-solid fa-circle-question"></i></a>
+        <div class="language-switcher"><button class="lang-btn active" data-lang="en">English</button><button
+            class="lang-btn" data-lang="hi">हिंदी</button><button class="lang-btn" data-lang="mr">मराठी</button></div>
+        <div class="user-menu">
+          <div class="user-avatar" id="userMenuBtn"><span id="userInitials">F</span></div>
+          <div class="dropdown-menu" id="userDropdown"><a href="farmer-profile.html" class="dropdown-item"><span
+                class="item-icon"><i class="fa-solid fa-user"></i></span> My Profile</a>
+            <div class="dropdown-divider"></div><a href="#" class="dropdown-item logout-item" id="logoutBtn"><span
+                class="item-icon"><i class="fa-solid fa-right-from-bracket"></i></span> Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="dashboard-main">
+    <h1 class="crop-page-title">Crop Listing <i class="fa-solid fa-wheat-awn"></i></h1>
+    <div class="layout">
+      <div>
+        <section class="card">
+          <div class="head">
+            <div class="step">01</div>
+            <div>
+              <h2>Crop Identity &amp; Volume</h2>
+              <p>Select the commodity and record inventory ready for market.</p>
+            </div>
+          </div>
+          <div class="crop-row" id="crops"><button class="crop selected" data-crop="Paddy"><img
+                src="../public/lot-crops/paddy-avatar.png" alt="Paddy rice">Paddy</button><button class="crop"
+              data-crop="Wheat"><img src="../public/lot-crops/wheat-avatar.png" alt="Wheat">Wheat</button><button
+              class="crop" data-crop="Maize"><img src="../public/lot-crops/maize-avatar.png"
+                alt="Maize">Maize</button><button class="crop" data-crop="Chickpeas"><img
+                src="../public/lot-crops/chickpeas-avatar.png" alt="Chickpeas">Chickpeas</button></div>
+          <label for="variety">Variety</label><select id="variety" class="select"></select>
+          <div class="volumes">
+            <div class="volume">
+              <div class="vol-title">Total weight</div>
+              <div class="counter"><button class="round" id="down" aria-label="Decrease weight">−</button><b
+                  class="weight" id="weight">5.0</b><button class="round" id="up"
+                  aria-label="Increase weight">+</button></div>
+              <div class="units"><span>Tons</span><label class="toggle"><input id="units" type="checkbox"><span
+                    class="slider"></span></label><span>Quintals</span></div>
+            </div>
+            <div class="volume">
+              <div class="vol-title">Bag count <em style="font-weight:500;text-transform:none">(optional)</em></div>
+              <div class="bags"><i class="fa-solid fa-sack-dollar"></i><input id="bags" type="number" value="100"
+                  min="0"><b>Bags</b></div>
+            </div>
+          </div>
+        </section>
+        <section class="card">
+          <div class="head">
+            <div class="step">02</div>
+            <div>
+              <h2>AI Camera Portal</h2>
+              <p>Scan a representative grain sample. Analysis stays on this device.</p>
+            </div>
+          </div><div class="scan-actions"><button class="scan" id="scan"><span><i class="fa-solid fa-camera"></i>Tap to Scan Crop
+              Quality<small>Camera scan · Offline AI pre-grading</small></span><i
+              class="fa-solid fa-expand"></i></button><label class="upload-photo" for="cropPhoto"><i class="fa-solid fa-arrow-up-from-bracket"></i> Upload Photo<small>JPG, PNG or WEBP</small></label><input id="cropPhoto" type="file" accept="image/jpeg,image/png,image/webp" hidden></div>
+        </section>
+        <section class="card quality" id="quality">
+          <div class="head">
+            <div class="step">03</div>
+            <div>
+              <h2>Pre-Grading Quality Scorecard</h2>
+              <p>Local analysis completed — no sample data left your phone.</p>
+            </div>
+          </div>
+          <div class="quality-body">
+            <div class="gauge">
+              <div class="gauge-in">
+                <div><b>11.8%</b><span>Safe / Dry</span></div>
+              </div>
+            </div>
+            <div class="metrics">
+              <div class="metric">
+                <div><span>Broken Grains</span><span>1.2%</span></div>
+                <div class="track"><i style="width:12%"></i></div>
+              </div>
+              <div class="metric">
+                <div><span>Chaff &amp; Dust</span><span>0.4%</span></div>
+                <div class="track"><i style="width:4%"></i></div>
+              </div>
+              <div class="metric">
+                <div><span>Discolored</span><span>0.2%</span></div>
+                <div class="track"><i style="width:2%"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="ribbon"><i class="fa-solid fa-award"></i> Grade A Premium</div>
+        </section>
+      </div>
+      <aside class="card manifest-card">
+        <div class="manifest-top">
+          <div class="tiny">Digital Lot Manifest</div>
+          <h3>Your market asset</h3>
+          <p>Minted after local quality verification.</p>
+        </div>
+        <div class="empty" id="empty"><i class="fa-solid fa-circle-info"></i> Scan crop quality to create your verified
+          manifest.</div>
+        <div class="manifest" id="manifest">
+          <div class="lot-id"><i class="fa-solid fa-fingerprint"></i> Lot ID: <span id="lot">#LOT-2026-98321</span></div>
+          <div class="receipt" id="receipt"></div>
+          <p class="metadata"><i class="fa-solid fa-location-dot"></i> Indore, MP<br><i class="fa-regular fa-clock"></i> <span id="time"></span><br><i class="fa-solid fa-shield-halved"></i> Status: Verified Local Asset</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+  <div class="dock">
+    <div class="intent-tabs"><button class="intent active" data-intent="storage"><i class="fa-solid fa-warehouse"></i> Move to Storage</button><button
+        class="intent" data-intent="buyers"><i class="fa-solid fa-bolt"></i> Sell to Live Buyers</button></div><button class="publish" id="publish"><i class="fa-solid fa-paper-plane"></i>
+      Publish Digital Lot</button>
+  </div>
+  <section class="camera" id="camera"><video id="video" autoplay muted playsinline></video>
+    <div class="fallback" id="fallback"></div>
+    <div class="cam-top"><span><i class="fa-solid fa-camera"></i> AI GRAIN SCANNER</span><span class="live">●
+        LIVE</span></div>
+    <div class="reticle"></div>
+    <div class="guide" id="guide"><i class="fa-solid fa-circle-notch fa-spin"></i> Hold steady... Move to a brighter area.</div>
+    <div class="flash" id="flash"></div>
+  </section>
+  <div class="notice" id="notice"></div>
+  <script src="../js/i18n.js"></script>
+  <script src="../js/farmer-sidebar.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const varieties = { Paddy: ['Sona Masuri', 'Basmati', 'Jyothi'], Wheat: ['Sharbati', 'Lokwan', 'Durum'], Maize: ['Yellow Maize', 'White Maize', 'Sweet Corn'], Chickpeas: ['Kabuli', 'Desi', 'Pusa 372'] }; let crop = 'Paddy', weight = 5, target = 'storage', stream, scanned = false;
+      const variety = document.querySelector('#variety'), units = document.querySelector('#units'), weightEl = document.querySelector('#weight'), receipt = document.querySelector('#receipt');
+      const updateReceipt = () => receipt.textContent = `Creating Market Asset: ${weight.toFixed(1)} ${units.checked ? 'Quintals' : 'Tons'} of Grade-A ${variety.value || 'Sona Masuri'} ${crop}.`;
+      const loadVarieties = () => { variety.innerHTML = varieties[crop].map(v => `<option>${v}</option>`).join(''); updateReceipt() };
+      document.querySelectorAll('.crop').forEach(el => el.addEventListener('click', () => { document.querySelector('.crop.selected').classList.remove('selected'); el.classList.add('selected'); crop = el.dataset.crop; navigator.vibrate?.(30); loadVarieties() }));
+      document.querySelector('#down').onclick = () => { weight = Math.max(.5, weight - .5); weightEl.textContent = weight.toFixed(1); updateReceipt() }; document.querySelector('#up').onclick = () => { weight += .5; weightEl.textContent = weight.toFixed(1); updateReceipt() }; units.onchange = updateReceipt; variety.onchange = updateReceipt; loadVarieties();
+      const camera = document.querySelector('#camera'), video = document.querySelector('#video'), fallback = document.querySelector('#fallback'), guide = document.querySelector('#guide'), flash = document.querySelector('#flash');
+      const closeCamera = () => { camera.classList.remove('open'); stream?.getTracks().forEach(t => t.stop()); stream = null };
+      const finishAnalysis = () => { closeCamera(); scanned = true; document.querySelector('#quality').classList.add('show'); document.querySelector('#manifest').classList.add('show'); document.querySelector('#empty').hidden = true; document.querySelector('#time').textContent = new Intl.DateTimeFormat('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date()); updateReceipt(); document.querySelector('#quality').scrollIntoView({ behavior: 'smooth', block: 'center' }) };
+      document.querySelector('#scan').onclick = async () => { camera.classList.add('open'); guide.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Hold steady... Move to a brighter area.'; try { if (!navigator.mediaDevices?.getUserMedia) throw new Error('Camera unavailable'); stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false }); video.srcObject = stream; fallback.hidden = true } catch { fallback.hidden = false } setTimeout(() => guide.innerHTML = '<i class="fa-solid fa-circle-check"></i> Perfect! Analyzing grain surface...', 1500); setTimeout(() => flash.classList.add('fire'), 2900); setTimeout(() => { flash.classList.remove('fire'); finishAnalysis() }, 3250) };
+      document.querySelector('#cropPhoto').onchange = event => { const file = event.target.files[0]; if (!file) return; notice.textContent = `${file.name} selected. Analyzing your crop photo locally...`; notice.classList.add('show'); setTimeout(() => { notice.classList.remove('show'); finishAnalysis() }, 700); event.target.value = '' };
+      document.querySelectorAll('.intent').forEach(el => el.onclick = () => { document.querySelector('.intent.active').classList.remove('active'); el.classList.add('active'); target = el.dataset.intent });
+      const publish = document.querySelector('#publish'), notice = document.querySelector('#notice'), poor = () => { const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection; return !navigator.onLine || ['slow-2g', '2g'].includes(c?.effectiveType) }, network = () => { publish.classList.toggle('offline', poor()); publish.innerHTML = poor() ? '<i class="fa-solid fa-cloud-arrow-up"></i> Save Offline &amp; Sync' : '<i class="fa-solid fa-paper-plane"></i> Publish Digital Lot' }; window.ononline = network; window.onoffline = network; navigator.connection?.addEventListener?.('change', network); network();
+      publish.onclick = () => { if (!scanned) { notice.textContent = 'Scan crop quality first to mint a verified Digital Lot Manifest.'; notice.classList.add('show'); setTimeout(() => notice.classList.remove('show'), 3500); return } publish.classList.add('loading'); setTimeout(() => { publish.classList.remove('loading'); notice.textContent = poor() ? '✓ Lot saved safely on this device. It will sync automatically when connected.' : `✓ Digital Lot published for ${target === 'buyers' ? 'live buyer bidding' : 'storage transfer'}.`; notice.classList.add('show'); setTimeout(() => notice.classList.remove('show'), 4200) }, 800) };
+    });
+  </script>
+</body>
+
+</html>

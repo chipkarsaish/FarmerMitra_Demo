@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - KisanMitra Market AI</title>
+    <meta name="description" content="Farmer dashboard for market linkage and price discovery">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/farmer-sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/language-switcher.css">
+    <link rel="stylesheet" href="../css/walkthrough.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        .dashboard-body {
+            background-color: #f4f7f6;
+        }
+
+        .dashboard-main {
+            padding: 20px;
+            margin-left: 220px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1200px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .kpi-card {
+            background: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(45, 80, 22, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(45, 80, 22, 0.08);
+            border-color: rgba(45, 80, 22, 0.3);
+        }
+
+        /* Decorative gradient blob */
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(45, 80, 22, 0.08), rgba(45, 80, 22, 0.01));
+            border-radius: 50%;
+            z-index: 0;
+            transition: all 0.3s ease;
+        }
+
+        .kpi-card:hover::before {
+            transform: scale(1.1);
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .kpi-title {
+            color: #555;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+        }
+
+        .kpi-icon {
+            width: 32px;
+            height: 32px;
+            background: #f0f7ed;
+            color: var(--primary-green);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+        }
+
+        .kpi-value-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .kpi-value {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+        }
+
+        .kpi-subtitle {
+            font-size: 0.8rem;
+            color: #777;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 500;
+        }
+
+        .trend-up {
+            color: #2e7d32;
+        }
+
+        .trend-down {
+            color: #c62828;
+        }
+
+        .dashboard-sections {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+
+        /* Action List */
+        .action-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .action-item {
+            padding: 12px 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-item:hover {
+            border-color: var(--primary-green);
+            background: #f0f7ed;
+        }
+
+        .market-list-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .market-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .price-tag {
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <!-- Mobile Sidebar Toggle -->
+    <button class="mobile-sidebar-toggle"><i class="fa-solid fa-bars"></i></button>
+
+    <!-- Farmer Sidebar -->
+    <aside class="farmer-sidebar" id="farmerSidebar">
+        <!-- Sidebar Header with Logo & Toggle -->
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <div class="brand-logo-icon"><i class="fa-solid fa-leaf"></i></div>
+                <div class="brand-text">
+                    <span class="brand-agri">Kisan</span><span class="brand-mitra">Mitra</span>
+                </div>
+            </div>
+            <button class="sidebar-toggle-btn" id="sidebarToggleBtn" title="Toggle Sidebar" aria-label="Toggle Sidebar">
+                <span class="toggle-icon"><i class="fa-solid fa-chevron-left"></i></span>
+            </button>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active" data-tour="dashboard">
+                    <a href="farmer-dashboard.html">
+                        <span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.dashboard">Dashboard</span>
+                    </a>
+                    <div class="nav-flyout">
+                        <span class="flyout-title" data-i18n="sidebar.dashboard">Dashboard</span>
+                        <span class="flyout-desc">Overview & Insights</span>
+                    </div>
+                </li>
+                <li data-tour="market-prices">
+                    <a href="market-intelligence.html">
+                        <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.marketIntelligence">Market Prices</span>
+                    </a>
+                    <div class="nav-flyout">
+                        <span class="flyout-title" data-i18n="sidebar.marketIntelligence">Market Prices</span>
+                        <span class="flyout-desc">Live APMC Prices</span>
+                    </div>
+                </li>
+                <li data-tour="my-crops">
+                    <a href="crop-listings.html">
+                        <span class="nav-icon"><i class="fa-solid fa-wheat-awn"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.myCrops">My Crops</span>
+                    </a>
+                    <div class="nav-flyout">
+                        <span class="flyout-title" data-i18n="sidebar.myCrops">My Crops</span>
+                        <span class="flyout-desc">Manage Listings</span>
+                    </div>
+                </li>
+                <li data-tour="buyers">
+                    <a href="buyer-marketplace.html">
+                        <span class="nav-icon"><i class="fa-solid fa-handshake"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.buyers">Buyers</span>
+                    </a>
+                    <div class="nav-flyout">
+                        <span class="flyout-title" data-i18n="sidebar.buyers">Buyers</span>
+                        <span class="flyout-desc">Verified Buyers</span>
+                    </div>
+                </li>
+                <li data-tour="smart-selling">
+                    <a href="transport-optimizer.html">
+                        <span class="nav-icon"><i class="fa-solid fa-truck"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.smartSelling">Transport & Storage</span>
+                    </a>
+                    <div class="nav-flyout">
+                        <span class="flyout-title" data-i18n="sidebar.smartSelling">Transport & Storage</span>
+                        <span class="flyout-desc">Net Realization</span>
+                    </div>
+                </li>
+                <li data-tour="transactions">
+                    <a href="transactions.html">
+                        <span class="nav-icon"><i class="fa-solid fa-box"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.transactions">Transactions</span>
+                    </a>
+                    <div class="nav-flyout">
+                        <span class="flyout-title" data-i18n="sidebar.transactions">Transactions</span>
+                        <span class="flyout-desc">Sales & History</span>
+                    </div>
+                </li>
+                <li data-tour="profile">
+                    <a href="farmer-profile.html">
+                        <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.profile">Profile</span>
+                    </a>
+                    <div class="nav-flyout">
+                        <span class="flyout-title" data-i18n="sidebar.profile">Profile</span>
+                        <span class="flyout-desc">Farm & Personal Info</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Sidebar Footer / Logout -->
+        <div class="sidebar-footer">
+            <a href="#" class="sidebar-logout-btn" id="sidebarLogoutBtn">
+                <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                <span class="nav-text" data-i18n="dashboard.logout">Logout</span>
+            </a>
+            <div class="nav-flyout">
+                <span class="flyout-title" data-i18n="dashboard.logout">Logout</span>
+                <span class="flyout-desc">Log out of account</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-text">
+                    <span class="logo-agri">Kisan<span class="logo-leaf"><i
+                                class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span>
+                </span>
+            </div>
+            <div class="header-actions">
+
+                <a href="#" id="start-tour-btn"
+                    style="margin-right: 15px; color: var(--primary-green); font-size: 1.2rem; display: flex; align-items: center; text-decoration: none;"
+                    title="Start Tour">
+                    <i class="fa-solid fa-circle-question"></i>
+                </a>
+                <!-- Language Switcher -->
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="en">English</button>
+                    <button class="lang-btn" data-lang="hi">हिंदी</button>
+                    <button class="lang-btn" data-lang="mr">मराठी</button>
+                </div>
+                <div class="user-menu">
+                    <div class="user-avatar" id="userMenuBtn">
+                        <span id="userInitials">F</span>
+                    </div>
+                    <div class="dropdown-menu" id="userDropdown">
+
+                        <a href="farmer-profile.html" class="dropdown-item">
+                            <span class="item-icon"><i class="fa-solid fa-user"></i></span> <span
+                                data-i18n="dashboard.myProfile">My Profile</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-item" id="logoutBtn">
+                            <span class="item-icon"><i class="fa-solid fa-right-from-bracket"></i></span> <span
+                                data-i18n="dashboard.logout">Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+
+        <h1 style="color:var(--primary-green); margin-bottom: 20px; font-size:2rem; padding-left: 20px;">Welcome back,
+            <span id="welcomeName">Farmer</span>! <i class="fa-solid fa-hand"></i>
+        </h1>
+
+        <div style="padding: 0 20px;">
+            <!-- KPI Grid -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <div class="kpi-title">BEST MARKET (ONION)</div>
+                        <div class="kpi-icon"><i class="fa-solid fa-store"></i></div>
+                    </div>
+                    <div class="kpi-value-container">
+                        <div class="kpi-value">₹2,850 <span style="font-size: 1rem; font-weight: 600; color: #666;">/
+                                Qtl</span></div>
+                        <div class="kpi-subtitle trend-up"><i class="fa-solid fa-arrow-trend-up"></i> Nashik Market (2%
+                            today)</div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <div class="kpi-title">ACTIVE LISTINGS</div>
+                        <div class="kpi-icon"><i class="fa-solid fa-wheat-awn"></i></div>
+                    </div>
+                    <div class="kpi-value-container">
+                        <div class="kpi-value">2</div>
+                        <div class="kpi-subtitle"><i class="fa-solid fa-cubes"></i> Total 45 Qtl listed</div>
+                    </div>
+                </div>
+
+                <div class="kpi-card" data-tour="buyer-requests">
+                    <div class="kpi-header">
+                        <div class="kpi-title">PENDING BUYER REQUESTS</div>
+                        <div class="kpi-icon" style="background: #fff3e0; color: #e67e22;"><i
+                                class="fa-solid fa-bell"></i></div>
+                    </div>
+                    <div class="kpi-value-container">
+                        <div class="kpi-value">3</div>
+                        <div class="kpi-subtitle" style="color: #e67e22;"><i class="fa-solid fa-circle-exclamation"></i>
+                            Action Required</div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-header">
+                        <div class="kpi-title">EXPECTED REALIZATION</div>
+                        <div class="kpi-icon"><i class="fa-solid fa-wallet"></i></div>
+                    </div>
+                    <div class="kpi-value-container">
+                        <div class="kpi-value">₹1,12,500</div>
+                        <div class="kpi-subtitle"><i class="fa-solid fa-calculator"></i> After transport & comms</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-sections">
+                <!-- Left Column -->
+                <div>
+                    <!-- AI Price Insight -->
+                    <div class="section-card" data-tour="price-trend">
+                        <div class="section-header">
+                            <h2 class="section-title"><i class="fa-solid fa-robot"></i> AI Price Trend (Onion)</h2>
+                            <a href="price-prediction.html"
+                                style="color: var(--primary-green); text-decoration: none; font-size: 0.9rem;">Full
+                                Forecast →</a>
+                        </div>
+                        <canvas id="priceTrendChart" height="100"></canvas>
+                    </div>
+
+                    <!-- Current Market Rates -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2 class="section-title"><i class="fa-solid fa-location-dot"></i> Nearby Markets (Live)
+                            </h2>
+                            <a href="market-intelligence.html"
+                                style="color: var(--primary-green); text-decoration: none; font-size: 0.9rem;">View All
+                                →</a>
+                        </div>
+
+                        <div class="market-list-item">
+                            <div>
+                                <strong>Nashik APMC</strong>
+                                <div style="font-size: 0.85rem; color:#666;">Onion • Grade A • 30km away</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div class="price-tag">₹2,850 / Qtl</div>
+                                <div class="trend-up" style="font-size: 0.8rem;">↑ High Demand</div>
+                            </div>
+                        </div>
+
+                        <div class="market-list-item">
+                            <div>
+                                <strong>Pune APMC</strong>
+                                <div style="font-size: 0.85rem; color:#666;">Onion • Grade A • 180km away</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div class="price-tag">₹2,950 / Qtl</div>
+                                <div class="trend-up" style="font-size: 0.8rem;">↑ High Demand</div>
+                            </div>
+                        </div>
+
+                        <div class="market-list-item">
+                            <div>
+                                <strong>Lasalgaon</strong>
+                                <div style="font-size: 0.85rem; color:#666;">Onion • Grade A • 45km away</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div class="price-tag">₹2,800 / Qtl</div>
+                                <div class="trend-down" style="font-size: 0.8rem;">↓ Moderate Demand</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div>
+                    <!-- Quick Actions -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2 class="section-title"><i class="fa-solid fa-bolt"></i> Quick Actions</h2>
+                        </div>
+                        <ul class="action-list">
+                            <li class="action-item" data-tour="create-listing"
+                                onclick="window.location.href='create-listing.html'">
+                                <span><i class="fa-solid fa-plus"></i> Create Crop Listing</span>
+                                <span>→</span>
+                            </li>
+                            <li class="action-item" onclick="window.location.href='market-intelligence.html'">
+                                <span><i class="fa-solid fa-chart-pie"></i> Compare Markets</span>
+                                <span>→</span>
+                            </li>
+                            <li class="action-item" onclick="window.location.href='transport-optimizer.html'">
+                                <span><i class="fa-solid fa-truck"></i> Calculate Net Realization</span>
+                                <span>→</span>
+                            </li>
+                            <li class="action-item" onclick="window.location.href='buyer-matching.html'">
+                                <span><i class="fa-solid fa-handshake"></i> Find Best Buyers</span>
+                                <span>→</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Recent Transactions -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2 class="section-title"><i class="fa-solid fa-box"></i> Recent Activity</h2>
+                        </div>
+                        <div style="font-size: 0.9rem;">
+                            <div style="padding-bottom: 10px; border-bottom: 1px solid #eee; margin-bottom: 10px;">
+                                <strong>New Buyer Request!</strong>
+                                <p style="color:#666; margin: 5px 0;">FreshFoods Ltd offered ₹2,800/Qtl for your Onion
+                                    listing.</p>
+                                <span style="color:#888; font-size: 0.8rem;">2 hours ago</span>
+                            </div>
+                            <div>
+                                <strong>Sale Completed</strong>
+                                <p style="color:#666; margin: 5px 0;">Received payment for 15 Qtl Tomato.</p>
+                                <span style="color:#888; font-size: 0.8rem;">Yesterday</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/farmer-sidebar.js"></script>
+    <script src="../js/walkthrough.js"></script>
+
+    <!-- Inline Chart Initialization for Dashboard -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check auth
+            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+            if (!currentUser || currentUser.role !== 'farmer') {
+                window.location.href = '../index.html';
+                return;
+            }
+            document.getElementById('welcomeName').textContent = currentUser.name || "Farmer";
+
+            // Render Trend Chart
+            const ctx = document.getElementById('priceTrendChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['5 Days Ago', '4 Days Ago', '3 Days Ago', '2 Days Ago', 'Yesterday', 'Today'],
+                    datasets: [{
+                        label: 'Onion Price (₹/Qtl)',
+                        data: [2600, 2650, 2620, 2750, 2800, 2850],
+                        borderColor: '#2d5016',
+                        backgroundColor: 'rgba(45, 80, 22, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 2500
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

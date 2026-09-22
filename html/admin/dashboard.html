@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - KisanMitra Market AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --dark-green: #2d5016;
+            --primary-green: #4a7c2c;
+            --accent-green: #95d5b2;
+            --soft-green: #d8f3dc;
+            --bg-light: #f4f7f6;
+            --white: #ffffff;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: var(--bg-light);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: var(--dark-green);
+            color: white;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .sidebar-nav {
+            flex-grow: 1;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-nav a {
+            color: var(--accent-green);
+            text-decoration: none;
+            padding: 14px 18px;
+            display: block;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .sidebar-nav li.active a,
+        .sidebar-nav a:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .dashboard-main {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .search-container {
+            display: flex;
+            background: var(--white);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            width: 400px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        .search-container:focus-within {
+            border-color: var(--primary-green);
+        }
+
+        .search-container input {
+            border: none;
+            outline: none;
+            width: 100%;
+            margin-left: 10px;
+            font-size: 0.9rem;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .kpi-card {
+            background: var(--white);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-green);
+        }
+
+        .charts-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .chart-container {
+            background: var(--white);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+
+        .table-section {
+            background: var(--white);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-verified {
+            background: var(--soft-green);
+            color: var(--dark-green);
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span style="font-size: 1.5rem;"><i class="fa-solid fa-leaf"></i></span>
+            <h2 style="color:white;">KisanMitra Admin</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="active"><a href="dashboard.html"><i class="fa-solid fa-chart-pie"></i> Dashboard Overview</a></li>
+                <li><a href="#"><i class="fa-solid fa-wheat-awn"></i> Crop Listings</a></li>
+                <li><a href="#"><i class="fa-solid fa-handshake"></i> Buyers Management</a></li>
+                <li><a href="#"><i class="fa-solid fa-box"></i> Transactions</a></li>
+                <li><a href="#"><i class="fa-solid fa-chart-line"></i> AI Model Logs</a></li>
+                <li><a href="#"><i class="fa-solid fa-user"></i> User Verification</a></li>
+            </ul>
+        </nav>
+        <button style="background:transparent; border:none; color:white; padding:15px; text-align:left; cursor:pointer;" onclick="window.location.href='../../website.html'"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+    </aside>
+
+    <main class="dashboard-main">
+        <header class="dash-header">
+            <div>
+                <h1 style="color:var(--dark-green); margin-bottom:5px;">Platform Overview</h1>
+                <p style="color:#666;">Welcome back, System Admin.</p>
+            </div>
+            <div class="search-container">
+                <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                <input type="text" placeholder="Search farmers, buyers, or listings...">
+            </div>
+        </header>
+
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <p style="color:#666; margin-bottom:10px;">Total Farmers</p>
+                <p class="kpi-value">1,245</p>
+                <p style="color:var(--primary-green); font-size:0.85rem; margin-top:10px;">↑ 12% this month</p>
+            </div>
+            <div class="kpi-card">
+                <p style="color:#666; margin-bottom:10px;">Verified Buyers</p>
+                <p class="kpi-value">342</p>
+                <p style="color:var(--primary-green); font-size:0.85rem; margin-top:10px;">↑ 5% this month</p>
+            </div>
+            <div class="kpi-card">
+                <p style="color:#666; margin-bottom:10px;">Active Listings</p>
+                <p class="kpi-value">856</p>
+                <p style="color:#f59e0b; font-size:0.85rem; margin-top:10px;">45 pending review</p>
+            </div>
+            <div class="kpi-card">
+                <p style="color:#666; margin-bottom:10px;">Total GMV</p>
+                <p class="kpi-value">₹4.2 Cr</p>
+                <p style="color:var(--primary-green); font-size:0.85rem; margin-top:10px;">↑ 22% this quarter</p>
+            </div>
+        </section>
+
+        <section class="charts-section">
+            <div class="chart-container">
+                <h3 style="color:var(--dark-green); margin-bottom:20px;">Platform Transaction Volume (₹ Lakhs)</h3>
+                <canvas id="volumeChart"></canvas>
+            </div>
+            <div class="chart-container">
+                <h3 style="color:var(--dark-green); margin-bottom:20px;">Top Commodities Traded</h3>
+                <canvas id="commodityChart"></canvas>
+            </div>
+        </section>
+
+        <section class="table-section">
+            <h3 style="color:var(--dark-green); margin-bottom:10px;">Recent Registrations (Pending Verification)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Location</th>
+                        <th>Documents</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ramesh Patil</td>
+                        <td>Farmer</td>
+                        <td>Nashik, MH</td>
+                        <td>7/12 Uploaded</td>
+                        <td><span class="status-pending" style="cursor:pointer;">Verify Now</span></td>
+                    </tr>
+                    <tr>
+                        <td>AgriMart Wholesale</td>
+                        <td>Buyer</td>
+                        <td>Pune, MH</td>
+                        <td>GST & FSSAI Uploaded</td>
+                        <td><span class="status-pending" style="cursor:pointer;">Verify Now</span></td>
+                    </tr>
+                    <tr>
+                        <td>Sunita Devi</td>
+                        <td>Farmer</td>
+                        <td>Satara, MH</td>
+                        <td>Aadhar Uploaded</td>
+                        <td><span class="status-verified">Verified</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Volume Chart
+            const ctxVol = document.getElementById('volumeChart').getContext('2d');
+            new Chart(ctxVol, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Transactions (₹ Lakhs)',
+                        data: [45, 52, 38, 65, 70, 85],
+                        backgroundColor: '#4a7c2c',
+                        borderRadius: 5
+                    }]
+                },
+                options: { responsive: true }
+            });
+
+            // Commodity Chart
+            const ctxCom = document.getElementById('commodityChart').getContext('2d');
+            new Chart(ctxCom, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Onion', 'Tomato', 'Wheat', 'Soybean', 'Others'],
+                    datasets: [{
+                        data: [40, 25, 15, 10, 10],
+                        backgroundColor: ['#2d5016', '#4a7c2c', '#95d5b2', '#f59e0b', '#d8f3dc']
+                    }]
+                },
+                options: { responsive: true }
+            });
+        });
+    </script>
+</body>
+
+</html>

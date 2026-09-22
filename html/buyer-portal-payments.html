@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments - Buyer Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/farmer-sidebar.css">
+    <link rel="stylesheet" href="../css/buyer-sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .dashboard-body { background-color: #f4f7f6; }
+        .dashboard-main { padding: 20px; margin-left: 220px; padding-left: 20px; padding-right: 20px; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        
+        .marketplace-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+        .tab-btn { background: transparent; border: none; padding: 10px 20px; font-size: 1rem; font-weight: 600; color: #666; cursor: pointer; border-radius: 8px; transition: 0.2s; }
+        .tab-btn:hover { background: #e0e6e3; }
+        .tab-btn.active { background: var(--primary-green); color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .pay-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px; }
+        .pay-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; border-top: 4px solid #f59e0b; }
+        
+        .pay-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .pay-title { font-size: 1.1rem; color: #333; font-weight: 800; text-transform: uppercase; }
+        .pay-amount { font-size: 1.5rem; color: var(--primary-green); font-weight: 800; }
+        
+        .pay-details { font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1;}
+        .pay-row { display: flex; justify-content: space-between; margin-bottom: 8px; color: #555; }
+        .pay-row.total { border-top: 1px solid #ddd; padding-top: 8px; font-weight: 700; color: #333; margin-top: 8px; }
+
+        .btn-action { padding: 12px; text-align: center; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; border: none; font-family: 'Poppins', sans-serif;}
+        .btn-solid { background: var(--primary-green); color: white; width: 100%;}
+        .btn-solid:hover { background: #2d5016; }
+        .btn-outline { border: 1px solid #ddd; background: white; color: #555; width: 100%;}
+
+        /* Transactions Table */
+        .tx-table-container { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th { text-align: left; padding: 15px; border-bottom: 2px solid #eee; color: #888; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; }
+        td { padding: 15px; border-bottom: 1px solid #eee; color: #333; font-size: 0.95rem; }
+        tr:hover td { background: #f9fbfa; }
+        .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
+        .status-COMPLETED { background: #d4edda; color: #155724; }
+
+        /* Payment Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-content { background: white; border-radius: 16px; width: 90%; max-width: 500px; padding: 30px; position: relative; }
+        .modal-close { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #888; background: none; border: none; }
+        
+        .payment-method { border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; cursor: pointer; transition: 0.2s;}
+        .payment-method:hover { border-color: var(--primary-green); background: #f0f7ed; }
+        .payment-method.selected { border-color: var(--primary-green); background: #f0f7ed; box-shadow: 0 0 0 2px var(--primary-green); }
+        .payment-method i { font-size: 1.5rem; color: #555; }
+        .payment-method.selected i { color: var(--primary-green); }
+        
+        /* Invoice styles */
+        .invoice-card { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); max-width: 700px; margin: 0 auto; border: 1px solid #eee; }
+        .inv-header { display: flex; justify-content: space-between; border-bottom: 2px solid #eee; padding-bottom: 20px; margin-bottom: 20px; }
+    </style>
+</head>
+<body class="dashboard-body">
+    <button class="mobile-sidebar-toggle"><i class="fa-solid fa-bars"></i></button>
+    <aside class="farmer-sidebar" id="buyerSidebar"></aside>
+
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="logo"><span class="logo-text"><span class="logo-agri">Kisan<span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span></span></div>
+            <div class="header-actions">
+                
+                <a href="#" style="margin-right: 15px; color: var(--primary-green); font-size: 1.2rem; display: flex; align-items: center; text-decoration: none;" title="click for demo">
+                    <i class="fa-solid fa-circle-question"></i>
+                </a>
+                <div class="user-menu"><div class="user-avatar" id="userMenuBtn"><span id="userInitials">B</span></div></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="page-header">
+            <h1 style="color:var(--primary-green); font-size:2rem;">Payments & Invoices</h1>
+        </div>
+
+        <div class="marketplace-tabs">
+            <button class="tab-btn active" onclick="switchTab('pending')">Pending</button>
+            <button class="tab-btn" onclick="switchTab('transactions')">Transactions</button>
+            <button class="tab-btn" onclick="switchTab('invoices')">Invoices</button>
+        </div>
+
+        <div id="tab-pending" class="tab-content active"><div class="pay-grid" id="pendingGrid"></div></div>
+        
+        <div id="tab-transactions" class="tab-content">
+            <div class="tx-table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Transaction ID</th>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Method</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="txBody"></tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div id="tab-invoices" class="tab-content">
+            <div id="invoiceContainer"></div>
+        </div>
+    </main>
+
+    <!-- Payment Modal -->
+    <div class="modal-overlay" id="payModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('payModal').style.display='none'"><i class="fa-solid fa-times"></i></button>
+            <h2 style="color:var(--primary-green); margin-top:0;">Secure Checkout</h2>
+            <p style="color:#666; margin-bottom:25px;">Pay <strong style="color:#333; font-size:1.2rem;" id="payAmountTxt"></strong> to Escrow Account for Order <span id="payOrderTxt"></span></p>
+            
+            <h4 style="margin-bottom:10px; color:#555;">Select Payment Method</h4>
+            <div class="payment-method selected" onclick="selectMethod(this, 'UPI')">
+                <i class="fa-solid fa-qrcode"></i>
+                <div style="font-weight:600;">UPI / QR Code</div>
+            </div>
+            <div class="payment-method" onclick="selectMethod(this, 'Net Banking')">
+                <i class="fa-solid fa-building-columns"></i>
+                <div style="font-weight:600;">Net Banking</div>
+            </div>
+            <div class="payment-method" onclick="selectMethod(this, 'Credit Card')">
+                <i class="fa-solid fa-credit-card"></i>
+                <div style="font-weight:600;">Credit/Debit Card</div>
+            </div>
+            
+            <button class="btn-action btn-solid" style="margin-top:20px;" onclick="processPayment()">Confirm Payment</button>
+        </div>
+    </div>
+
+    <script src="../js/buyer-data.js"></script>
+    <script src="../js/buyer-sidebar.js"></script>
+    <script>
+        let currentPayOrderId = null;
+        let selectedPayMethod = 'UPI';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderPayments();
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function getEmptyState(icon, msg) {
+            return `
+                <div style="grid-column: 1/-1; padding: 60px; text-align: center; color: #888; background: white; border-radius: 12px;">
+                    <i class="fa-solid ${icon}" style="font-size: 3rem; margin-bottom: 15px; color: #ddd;"></i>
+                    <p>${msg}</p>
+                </div>
+            `;
+        }
+
+        function renderPayments() {
+            const orders = db.getOrders();
+            const pending = orders.filter(o => o.paymentStatus === 'PENDING');
+            const paid = orders.filter(o => o.paymentStatus === 'PAID');
+            const txs = db.getTransactions();
+
+            // Render Pending
+            document.getElementById('pendingGrid').innerHTML = pending.length ? pending.map(o => `
+                <div class="pay-card">
+                    <div class="pay-header">
+                        <div>
+                            <div class="pay-title">Payment Pending</div>
+                            <div style="font-size:0.9rem; color:#888;">Order #${o.id}</div>
+                        </div>
+                        <div class="pay-amount">₹${o.totalAmount.toLocaleString()}</div>
+                    </div>
+                    <div class="pay-details">
+                        <div class="pay-row"><span>Crop:</span><span>${o.crop} (${o.quantity} kg)</span></div>
+                        <div class="pay-row"><span>Crop Value:</span><span>₹${o.cropValue.toLocaleString()}</span></div>
+                        <div class="pay-row"><span>Transport:</span><span>₹${o.transportCost.toLocaleString()}</span></div>
+                        <div class="pay-row"><span>Other:</span><span>₹${o.otherCharges.toLocaleString()}</span></div>
+                        <div class="pay-row total"><span>TOTAL:</span><span>₹${o.totalAmount.toLocaleString()}</span></div>
+                    </div>
+                    <button class="btn-action btn-solid" onclick="openPayModal('${o.id}')">Pay Now</button>
+                </div>
+            `).join('') : getEmptyState('fa-hourglass-half', 'No pending payments.');
+
+            // Render TXs
+            document.getElementById('txBody').innerHTML = txs.length ? txs.map(t => `
+                <tr>
+                    <td style="font-weight:600; color:var(--primary-green);">${t.id}</td>
+                    <td>${t.orderId}</td>
+                    <td>${new Date(t.date).toLocaleDateString()}</td>
+                    <td>${t.method}</td>
+                    <td style="font-weight:700;">₹${t.amount.toLocaleString()}</td>
+                    <td><span class="status-badge status-${t.status}">${t.status}</span></td>
+                </tr>
+            `).join('') : `<tr><td colspan="6" style="text-align:center; padding:30px; color:#888;">No transactions found.</td></tr>`;
+
+            // Render Invoices (Demo of first paid order)
+            const invContainer = document.getElementById('invoiceContainer');
+            if(paid.length > 0) {
+                const o = paid[0];
+                invContainer.innerHTML = `
+                    <div class="invoice-card">
+                        <div class="inv-header">
+                            <div>
+                                <h1 style="margin:0; color:var(--primary-green); font-size:1.8rem; letter-spacing:1px;">KISANMITRA</h1>
+                                <p style="margin:5px 0 0 0; color:#888; font-size:0.9rem;">Invoice No: INV-2026-${o.id.replace('ORD','')}</p>
+                            </div>
+                            <div style="text-align:right;">
+                                <h2 style="margin:0; color:#333; font-size:1.4rem;">INVOICE</h2>
+                                <p style="margin:5px 0 0 0; color:#888; font-size:0.9rem;">Date: ${new Date().toLocaleDateString()}</p>
+                            </div>
+                        </div>
+                        
+                        <div style="display:flex; justify-content:space-between; margin-bottom:30px; font-size:0.95rem;">
+                            <div>
+                                <div style="color:#888; font-size:0.8rem; margin-bottom:3px;">BILLED TO:</div>
+                                <div style="font-weight:700; color:#333;">Buyer (You)</div>
+                            </div>
+                            <div style="text-align:right;">
+                                <div style="color:#888; font-size:0.8rem; margin-bottom:3px;">FARMER:</div>
+                                <div style="font-weight:700; color:#333;">${o.farmerName}</div>
+                            </div>
+                        </div>
+
+                        <div style="background:#f9fbfa; padding:15px; border-radius:8px; margin-bottom:20px;">
+                            <div style="display:flex; justify-content:space-between; margin-bottom:10px; font-weight:700; color:#555; font-size:0.9rem;">
+                                <span>DESCRIPTION</span>
+                                <span>AMOUNT</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid #eee; font-size:0.95rem;">
+                                <span>Order ${o.id} - ${o.crop} (${o.quantity}kg) @ ₹${o.price}/q</span>
+                                <span>₹${o.cropValue.toLocaleString()}</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid #eee; font-size:0.95rem;">
+                                <span>Logistics / Transport</span>
+                                <span>₹${o.transportCost.toLocaleString()}</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid #eee; font-size:0.95rem;">
+                                <span>Platform Fees</span>
+                                <span>₹${o.otherCharges.toLocaleString()}</span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; margin-top:15px; font-weight:800; font-size:1.2rem; color:var(--primary-green);">
+                                <span>TOTAL</span>
+                                <span>₹${o.totalAmount.toLocaleString()}</span>
+                            </div>
+                        </div>
+                        
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div style="font-size:1.2rem; font-weight:800; color:#10b981;"><i class="fa-solid fa-stamp"></i> PAID</div>
+                            <button class="btn-action btn-outline" style="width:auto; padding:10px 25px;" onclick="alert('PDF downloaded!')"><i class="fa-solid fa-download"></i> Download PDF</button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                invContainer.innerHTML = getEmptyState('fa-file-invoice', 'You have no invoices yet. Pay an order to generate one.');
+            }
+        }
+
+        function openPayModal(id) {
+            currentPayOrderId = id;
+            const o = db.getOrders().find(x => x.id === id);
+            document.getElementById('payAmountTxt').innerText = `₹${o.totalAmount.toLocaleString()}`;
+            document.getElementById('payOrderTxt').innerText = o.id;
+            document.getElementById('payModal').style.display = 'flex';
+        }
+
+        function selectMethod(el, method) {
+            document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedPayMethod = method;
+        }
+
+        function processPayment() {
+            db.payOrder(currentPayOrderId, selectedPayMethod);
+            document.getElementById('payModal').style.display = 'none';
+            alert("Payment Successful! The funds are secured in escrow.");
+            renderPayments();
+            switchTab('transactions');
+        }
+    </script>
+</body>
+</html>

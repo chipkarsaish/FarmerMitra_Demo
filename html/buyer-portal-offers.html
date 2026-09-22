@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Bids - Buyer Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/farmer-sidebar.css">
+    <link rel="stylesheet" href="../css/buyer-sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .dashboard-body { background-color: #f4f7f6; }
+        .dashboard-main { padding: 20px; margin-left: 220px; padding-left: 20px; padding-right: 20px; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        
+        .marketplace-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+        .tab-btn { background: transparent; border: none; padding: 10px 20px; font-size: 1rem; font-weight: 600; color: #666; cursor: pointer; border-radius: 8px; transition: 0.2s; }
+        .tab-btn:hover { background: #e0e6e3; }
+        .tab-btn.active { background: var(--primary-green); color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .offer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
+        .offer-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; position: relative; overflow: hidden;}
+        .offer-card::before { content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%; background: var(--primary-green); }
+        .offer-header { display: flex; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px;}
+        .offer-id { color: #888; font-size: 0.9rem; font-weight: 600; }
+        .offer-status { font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; }
+        
+        .status-Pending { background: #fff3cd; color: #856404; }
+        .status-Received { background: #e0f2f1; color: #00897b; }
+        .status-Negotiating { background: #eef2ff; color: #4f46e5; }
+        .status-Accepted { background: #d4edda; color: #155724; }
+
+        .offer-details { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.9rem; margin-bottom: 20px; }
+        .offer-label { color: #888; font-size: 0.8rem; display: block; }
+        .offer-val { font-weight: 600; color: #333; }
+        .price-farmer { color: #e74c3c; font-weight: 700; }
+        .price-buyer { color: var(--primary-green); font-weight: 700; }
+
+        .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+        .btn-action { padding: 10px; text-align: center; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; border: none; font-family: 'Poppins', sans-serif;}
+        .btn-outline { border: 1px solid #ddd; background: white; color: #555; }
+        .btn-outline:hover { background: #f9f9f9; }
+        .btn-solid { background: var(--primary-green); color: white; }
+        .btn-solid:hover { background: #2d5016; }
+        .btn-danger { background: #ef4444; color: white; }
+        
+        /* Negotiation Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-content { background: white; border-radius: 16px; width: 90%; max-width: 600px; max-height: 90vh; overflow-y: auto; padding: 30px; position: relative; display: flex; flex-direction: column;}
+        .modal-close { position: absolute; top: 20px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #888; background: none; border: none; }
+        
+        .chat-container { display: flex; flex-direction: column; gap: 15px; margin: 20px 0; max-height: 300px; overflow-y: auto; padding-right: 10px; }
+        .chat-bubble { padding: 12px 18px; border-radius: 12px; max-width: 75%; position: relative; }
+        .chat-buyer { background: #f0f7ed; color: #333; align-self: flex-end; border-bottom-right-radius: 0; }
+        .chat-farmer { background: #f1f5f9; color: #333; align-self: flex-start; border-bottom-left-radius: 0; }
+        .chat-meta { font-size: 0.75rem; color: #888; margin-top: 5px; text-align: right; }
+        .chat-price { font-size: 1.3rem; font-weight: 700; color: var(--primary-green); margin: 5px 0; }
+        
+        .counter-input-group { display: flex; gap: 10px; margin-top: 20px; border-top: 1px solid #eee; padding-top: 20px;}
+        .counter-input-group input { flex-grow: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Poppins'; }
+    </style>
+</head>
+<body class="dashboard-body">
+    <button class="mobile-sidebar-toggle"><i class="fa-solid fa-bars"></i></button>
+    <aside class="farmer-sidebar" id="buyerSidebar"></aside>
+
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="logo"><span class="logo-text"><span class="logo-agri">Kisan<span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span></span></div>
+            <div class="header-actions">
+                
+                <a href="#" style="margin-right: 15px; color: var(--primary-green); font-size: 1.2rem; display: flex; align-items: center; text-decoration: none;" title="click for demo">
+                    <i class="fa-solid fa-circle-question"></i>
+                </a>
+                <div class="user-menu"><div class="user-avatar" id="userMenuBtn"><span id="userInitials">B</span></div></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="page-header">
+            <h1 style="color:var(--primary-green); font-size:2rem;">Active Bids</h1>
+        </div>
+
+        <div class="marketplace-tabs">
+            <button class="tab-btn active" onclick="switchTab('sent')">Sent Offers</button>
+            <button class="tab-btn" onclick="switchTab('received')">Received Offers</button>
+            <button class="tab-btn" onclick="switchTab('negotiate')">Negotiations</button>
+        </div>
+
+        <div id="tab-sent" class="tab-content active"><div class="offer-grid" id="sentGrid"></div></div>
+        <div id="tab-received" class="tab-content"><div class="offer-grid" id="receivedGrid"></div></div>
+        <div id="tab-negotiate" class="tab-content"><div class="offer-grid" id="negotiateGrid"></div></div>
+    </main>
+
+    <!-- Negotiation Modal -->
+    <div class="modal-overlay" id="negoModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeNegoModal()"><i class="fa-solid fa-times"></i></button>
+            <h2 style="color:var(--primary-green); margin-top:0; margin-bottom:5px;">Negotiation</h2>
+            <p style="color:#666; font-size:0.9rem; margin-bottom:20px;" id="negoSubtitle"></p>
+            
+            <div class="chat-container" id="chatTimeline"></div>
+
+            <div class="counter-input-group" id="negoActionArea">
+                <input type="number" id="counterPrice" placeholder="Counter Price (₹)">
+                <button class="btn-action btn-outline" onclick="sendCounter()">Send Counter</button>
+                <button class="btn-action btn-solid" onclick="acceptOffer()">Accept Offer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/buyer-data.js"></script>
+    <script src="../js/buyer-sidebar.js"></script>
+    <script>
+        let currentOfferId = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderOffers();
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function getEmptyState(type, icon, msg) {
+            return `
+                <div style="grid-column: 1/-1; padding: 60px; text-align: center; color: #888; background: white; border-radius: 12px;">
+                    <i class="fa-solid ${icon}" style="font-size: 3rem; margin-bottom: 15px; color: #ddd;"></i>
+                    <p style="margin-bottom: 20px;">${msg}</p>
+                    <button class="btn-action btn-solid" style="padding: 10px 25px;" onclick="window.location.href='buyer-portal-marketplace.html'">Browse Marketplace</button>
+                </div>
+            `;
+        }
+
+        function renderOffers() {
+            const offers = db.getOffers();
+            
+            const sent = offers.filter(o => o.type === 'sent');
+            const received = offers.filter(o => o.type === 'received');
+            const nego = offers.filter(o => o.type === 'negotiation');
+
+            document.getElementById('sentGrid').innerHTML = sent.length ? sent.map(buildOfferCard).join('') : getEmptyState('sent', 'fa-paper-plane', 'You haven\'t sent any offers yet.');
+            document.getElementById('receivedGrid').innerHTML = received.length ? received.map(buildOfferCard).join('') : getEmptyState('received', 'fa-inbox', 'No offers received from farmers.');
+            document.getElementById('negotiateGrid').innerHTML = nego.length ? nego.map(buildOfferCard).join('') : getEmptyState('nego', 'fa-comments-dollar', 'No active negotiations right now.');
+        }
+
+        function buildOfferCard(o) {
+            const isAccepted = o.status === 'Accepted';
+            let actions = '';
+            
+            if(isAccepted) {
+                actions = `<button class="btn-action btn-outline" style="grid-column: 1/-1;" onclick="window.location.href='buyer-portal-orders.html'">View Order</button>`;
+            } else if(o.type === 'sent') {
+                actions = `<button class="btn-action btn-outline" onclick="openNegoModal('${o.id}')">View</button><button class="btn-action btn-outline" style="color:#ef4444;" onclick="alert('Offer withdrawn')">Withdraw</button>`;
+            } else if(o.type === 'received') {
+                actions = `<button class="btn-action btn-outline" onclick="openNegoModal('${o.id}')">View / Counter</button><button class="btn-action btn-solid" onclick="fastAccept('${o.id}')">Accept</button>`;
+            } else {
+                actions = `<button class="btn-action btn-outline" style="grid-column: 1/-1;" onclick="openNegoModal('${o.id}')">Continue Negotiation</button>`;
+            }
+
+            return `
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <div>
+                            <div class="offer-id">Offer #${o.id}</div>
+                            <div style="font-weight:700; color:#333; font-size:1.1rem; margin-top:5px;">${o.crop} (${o.quantity} kg)</div>
+                        </div>
+                        <div class="offer-status status-${o.status}">${o.status}</div>
+                    </div>
+                    <div class="offer-details">
+                        <div><span class="offer-label">Farmer</span><span class="offer-val">${o.farmerName}</span></div>
+                        <div><span class="offer-label">Date</span><span class="offer-val">${new Date(o.date).toLocaleDateString()}</span></div>
+                        <div><span class="offer-label">Farmer Asking</span><span class="offer-val price-farmer">₹${o.farmerAsking}/q</span></div>
+                        <div><span class="offer-label">${o.buyerOffer ? 'Your Offer' : 'Current Offer'}</span><span class="offer-val price-buyer">${o.buyerOffer ? '₹'+o.buyerOffer+'/q' : 'N/A'}</span></div>
+                    </div>
+                    <div class="card-actions">${actions}</div>
+                </div>
+            `;
+        }
+
+        function openNegoModal(id) {
+            currentOfferId = id;
+            const o = db.getOffers().find(x => x.id === id);
+            document.getElementById('negoSubtitle').innerText = `${o.crop} (${o.quantity} kg) • Farmer: ${o.farmerName}`;
+            
+            const chatBox = document.getElementById('chatTimeline');
+            chatBox.innerHTML = o.history.map(h => {
+                const isBuyer = h.sender === 'buyer';
+                return `
+                    <div class="chat-bubble ${isBuyer ? 'chat-buyer' : 'chat-farmer'}">
+                        <div style="font-size:0.85rem; font-weight:600;">${isBuyer ? 'You' : o.farmerName}</div>
+                        <div class="chat-price">₹${h.price} / q</div>
+                        <div class="chat-meta">${new Date(h.time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Scroll to bottom
+            setTimeout(() => chatBox.scrollTop = chatBox.scrollHeight, 50);
+            
+            document.getElementById('negoActionArea').style.display = o.status === 'Accepted' ? 'none' : 'flex';
+            document.getElementById('negoModal').style.display = 'flex';
+        }
+        
+        function closeNegoModal() { document.getElementById('negoModal').style.display = 'none'; }
+
+        function sendCounter() {
+            const amt = document.getElementById('counterPrice').value;
+            if(!amt) return alert("Enter counter price");
+            db.counterOffer(currentOfferId, parseInt(amt));
+            document.getElementById('counterPrice').value = '';
+            renderOffers();
+            openNegoModal(currentOfferId);
+        }
+
+        function acceptOffer() {
+            if(confirm("Accepting this offer will automatically create a purchase order. Proceed?")) {
+                db.acceptOffer(currentOfferId);
+                closeNegoModal();
+                renderOffers();
+                alert("Order successfully created! You can view it in the Orders tab.");
+                window.location.href = "buyer-portal-orders.html";
+            }
+        }
+        
+        function fastAccept(id) {
+            currentOfferId = id;
+            acceptOffer();
+        }
+    </script>
+</body>
+</html>

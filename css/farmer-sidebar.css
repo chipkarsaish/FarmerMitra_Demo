@@ -5,11 +5,10 @@
 
 /* Sidebar Container - Always Expanded, starts below header */
 .farmer-sidebar {
-    width: 220px;
-    background: #14230e;
-    background: linear-gradient(180deg, #182c10 0%, #101d0a 100%);
+    width: 210px;
+    background: linear-gradient(180deg, #173012 0%, #10200d 56%, #0d1a0b 100%);
     color: white;
-    padding: 16px 10px;
+    padding: 14px 9px 12px;
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -20,7 +19,7 @@
     /* fills remaining viewport */
     z-index: 1000;
     /* below header (1100) */
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.18);
+    box-shadow: 4px 0 18px rgba(19, 45, 15, 0.14);
     box-sizing: border-box;
     overflow: hidden;
 }
@@ -43,7 +42,17 @@
     overflow-x: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding-top: 4px;
+    padding-top: 2px;
+}
+
+.sidebar-nav::before {
+    content: 'FARMER WORKSPACE';
+    display: block;
+    padding: 0 11px 9px;
+    color: rgba(208, 237, 204, 0.52);
+    font-size: 0.61rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
 }
 
 .sidebar-nav::-webkit-scrollbar {
@@ -56,7 +65,7 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 3px;
 }
 
 .sidebar-nav li {
@@ -64,28 +73,30 @@
 }
 
 .sidebar-nav a {
-    color: #a8d5ba;
+    color: #b8dcb8;
     text-decoration: none;
-    padding: 10px 14px;
+    padding: 9px 10px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    border-radius: 10px;
-    transition: background 0.2s ease, color 0.2s ease;
-    font-weight: 500;
-    font-size: 0.92rem;
+    gap: 10px;
+    border-radius: 9px;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    font-weight: 600;
+    font-size: 0.84rem;
     white-space: nowrap;
 }
 
 .sidebar-nav a .nav-icon {
-    font-size: 1.1rem;
-    width: 28px;
-    height: 28px;
+    font-size: 0.95rem;
+    width: 29px;
+    height: 29px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: inherit;
+    color: #9fd5a2;
+    border-radius: 8px;
+    background: rgba(214, 244, 209, 0.07);
 }
 
 .sidebar-nav a .nav-text {
@@ -95,21 +106,33 @@
 
 /* Hover State */
 .sidebar-nav a:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(204, 239, 199, 0.1);
     color: #ffffff;
+    transform: translateX(2px);
+}
+
+.sidebar-nav a:hover .nav-icon {
+    color: #dff5dc;
+    background: rgba(214, 244, 209, 0.13);
 }
 
 /* Active State - Green highlight matching the site's brand */
 .sidebar-nav li.active a {
-    background: rgba(74, 180, 100, 0.25);
-    color: #6ee97f;
-    font-weight: 600;
-    padding-left: 14px;
+    background: linear-gradient(90deg, rgba(107, 226, 124, 0.15) 0%, transparent 100%);
+    color: #6be27c;
+    font-weight: 700;
+    box-shadow: inset 3px 0 0 #6be27c;
+}
+
+.sidebar-nav li.active a .nav-icon {
+    background: #6be27c;
+    color: #0d1a0b;
+    box-shadow: 0 0 12px rgba(107, 226, 124, 0.4);
 }
 
 .sidebar-nav li.active a:hover {
-    background: rgba(74, 180, 100, 0.3);
-    color: #6ee97f;
+    background: linear-gradient(90deg, rgba(107, 226, 124, 0.25) 0%, transparent 100%);
+    color: #8af59a;
 }
 
 /* Hide flyout popups */
@@ -119,29 +142,31 @@
 
 /* Sidebar Footer (Sign Out) */
 .sidebar-footer {
-    padding-top: 12px;
+    padding-top: 10px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     margin-top: auto;
 }
 
 .sidebar-logout-btn {
-    color: #f87171;
+    color: #f5a09b;
     text-decoration: none;
-    padding: 10px 14px;
+    padding: 9px 10px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    border-radius: 10px;
+    gap: 10px;
+    border-radius: 9px;
     transition: all 0.2s ease;
-    font-weight: 500;
-    font-size: 0.92rem;
+    font-weight: 700;
+    font-size: 0.84rem;
     white-space: nowrap;
 }
 
 .sidebar-logout-btn .nav-icon {
-    font-size: 1.25rem;
-    width: 28px;
-    height: 28px;
+    font-size: 1rem;
+    width: 29px;
+    height: 29px;
+    border-radius: 8px;
+    background: rgba(248, 113, 113, 0.08);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -153,8 +178,8 @@
 }
 
 .sidebar-logout-btn:hover {
-    background: rgba(239, 68, 68, 0.15);
-    color: #fca5a5;
+    background: rgba(239, 68, 68, 0.13);
+    color: #ffd1ce;
 }
 
 /* -------------------------------------------------------
@@ -170,12 +195,13 @@
    ------------------------------------------------------- */
 .dashboard-main,
 .main-content-with-sidebar {
-    margin-left: 220px !important;
+    margin-left: 210px !important;
 }
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .farmer-sidebar {
+        width: 280px;
         transform: translateX(-100%);
         transition: transform 0.3s ease;
         top: 56px;
@@ -199,7 +225,7 @@
         top: 14px;
         left: 14px;
         z-index: 1200;
-        background: #182c10;
+        background: #173012;
         color: white;
         border: 1px solid rgba(255, 255, 255, 0.15);
         width: 40px;

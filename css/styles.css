@@ -1202,3 +1202,21 @@ body {
     font-size: 24px !important;
     line-height: 1 !important;
 }
+
+/* ========================================
+   FARMER PORTAL PAGE RHYTHM
+   Keep every page title the same distance below
+   the shared dashboard navigation.
+   ======================================== */
+body.dashboard-body>main.dashboard-main {
+    padding-top: 35px;
+}
+
+body.dashboard-body>main.dashboard-main>h1,
+body.dashboard-body .page-header>h1,
+body.dashboard-body .page-header>div>h1,
+body.dashboard-body .page-head>div>h1 {
+    font-size: 2rem !important;
+    line-height: 1.2;
+    margin-top: 0;
+}

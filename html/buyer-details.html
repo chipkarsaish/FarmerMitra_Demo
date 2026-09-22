@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Profile - KisanMitra Market AI</title>
+    <meta name="description" content="View buyer reliability and profile">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/farmer-sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/language-switcher.css">
+    <style>
+        .dashboard-body { background-color: #f4f7f6; }
+        .dashboard-main { padding: 20px; margin-left: 220px; }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .buyer-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .buyer-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #e1f0da;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .badge-verified {
+            background: #e1f0da;
+            color: var(--primary-green);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .score-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .score-label {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-green);
+        }
+
+        .score-value.warning { color: #f59e0b; }
+        .score-value.danger { color: #dc3545; }
+
+        .trust-score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-green) 96%, #eee 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            position: relative;
+            margin: 0 auto 20px auto;
+        }
+
+        .trust-score-circle::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .trust-score-value { position: relative; z-index: 1; }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: 0.2s;
+            margin-bottom: 10px;
+        }
+        .btn-primary:hover { background: #2d5016; }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-green);
+            border: 1px solid var(--primary-green);
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: 0.2s;
+        }
+        .btn-outline:hover { background: #f0f7ed; }
+
+        /* Review Styles */
+        .review-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .review-item:last-child { border-bottom: none; }
+        .stars { color: #f59e0b; font-size: 1.1rem; }
+        .review-text { color: #555; margin-top: 5px; font-size: 0.95rem; }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <!-- Sidebar -->
+    <aside class="farmer-sidebar">
+        <button class="sidebar-toggle">◀</button>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="farmer-dashboard.html" data-tooltip="Dashboard"><span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span><span class="nav-text">Dashboard</span></a></li>
+                <li><a href="market-intelligence.html" data-tooltip="Market Prices"><span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span><span class="nav-text">Market Prices</span></a></li>
+                <li><a href="crop-listings.html" data-tooltip="My Crops"><span class="nav-icon"><i class="fa-solid fa-wheat-awn"></i></span><span class="nav-text">My Crops</span></a></li>
+                <li class="active"><a href="buyer-marketplace.html" data-tooltip="Buyers"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span class="nav-text">Buyers</span></a></li>
+                <li><a href="transport-optimizer.html" data-tooltip="Transport and Storage"><span class="nav-icon"><i class="fa-solid fa-truck"></i></span><span class="nav-text">Transport and Storage</span></a></li>
+                <li><a href="transactions.html" data-tooltip="Transactions"><span class="nav-icon"><i class="fa-solid fa-box"></i></span><span class="nav-text">Transactions</span></a></li>
+                <li><a href="farmer-profile.html" data-tooltip="Profile"><span class="nav-icon"><i class="fa-solid fa-user"></i></span><span class="nav-text">Profile</span></a></li>
+            </ul>
+        </nav>
+        <!-- Sidebar Footer / Logout -->
+        <div class="sidebar-footer">
+            <a href="../website.html" class="sidebar-logout-btn" id="sidebarLogoutBtn">
+                <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                <span class="nav-text" data-i18n="dashboard.logout">Logout</span>
+            </a>
+            <div class="nav-flyout">
+                <span class="flyout-title" data-i18n="dashboard.logout">Logout</span>
+                <span class="flyout-desc">Log out of account</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-text">
+                    <span class="logo-agri">Kisan<span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span>
+                </span>
+            </div>
+            <div class="header-actions">
+
+                <a href="#" style="margin-right: 15px; color: var(--primary-green); font-size: 1.2rem; display: flex; align-items: center; text-decoration: none;" title="click for demo">
+                    <i class="fa-solid fa-circle-question"></i>
+                </a>
+                <!-- Language Switcher -->
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="en">English</button>
+                    <button class="lang-btn" data-lang="hi">हिंदी</button>
+                    <button class="lang-btn" data-lang="mr">मराठी</button>
+                </div>
+                <div class="user-menu">
+                    <div class="user-avatar" id="userMenuBtn">
+                        <span id="userInitials">F</span>
+                    </div>
+                    <div class="dropdown-menu" id="userDropdown">
+                        
+                        <a href="farmer-profile.html" class="dropdown-item">
+                            <span class="item-icon"><i class="fa-solid fa-user"></i></span> <span data-i18n="dashboard.myProfile">My Profile</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-item" id="logoutBtn">
+                            <span class="item-icon"><i class="fa-solid fa-right-from-bracket"></i></span> <span data-i18n="dashboard.logout">Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="page-header">
+            <h1 style="color:var(--primary-green); font-size:2rem; margin-bottom: 5px;">Buyer Profile & Reliability</h1>
+            <button class="btn-outline" style="width:auto; padding:8px 15px;" onclick="window.location.href='buyer-marketplace.html'">← Back</button>
+        </div>
+
+        <div class="profile-container">
+            <!-- Left Column: Details -->
+            <div>
+                <div class="card">
+                    <div class="buyer-header">
+                        <div class="buyer-avatar">FF</div>
+                        <div>
+                            <h2 style="font-size: 1.5rem; color:#333; margin-bottom:5px;">FreshFoods Ltd</h2>
+                            <div style="display:flex; gap:10px; align-items:center;">
+                                <span style="color:#666; font-size:0.9rem;">Wholesaler</span>
+                                <span class="badge-verified"><i class="fa-solid fa-check"></i> KYC Verified</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="color:var(--dark-green); margin-bottom:15px;">Transaction Statistics</h3>
+                    <div class="score-grid">
+                        <div class="score-item">
+                            <div class="score-label">Completed Transactions</div>
+                            <div class="score-value">342</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Completion Rate</div>
+                            <div class="score-value">96%</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Cancellation Rate</div>
+                            <div class="score-value">2%</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Avg. Response Time</div>
+                            <div class="score-value">1.8 hrs</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 style="color:var(--dark-green); margin-bottom:15px;">Farmer Reviews & Ratings</h3>
+                    <div style="margin-bottom: 20px; display:flex; align-items:center; gap:10px;">
+                        <span style="font-size:2rem; font-weight:700; color:#333;">4.6</span>
+                        <div>
+                            <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <div style="color:#666; font-size:0.85rem;">Based on 128 reviews</div>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div style="display:flex; justify-content:space-between;">
+                            <strong>Ramesh Patil</strong>
+                            <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
+                        </div>
+                        <div class="review-text">Payment received on the same day. Very professional. Did not argue about the grade.</div>
+                        <div style="color:#888; font-size:0.8rem; margin-top:5px;">Sold 40 Qtl Onion (Grade A) - 2 weeks ago</div>
+                    </div>
+                    
+                    <div class="review-item">
+                        <div style="display:flex; justify-content:space-between;">
+                            <strong>Sunita Devi</strong>
+                            <span class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span>
+                        </div>
+                        <div class="review-text">Good buyer, but transport arrangement was slightly delayed.</div>
+                        <div style="color:#888; font-size:0.8rem; margin-top:5px;">Sold 15 Qtl Tomato - 1 month ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: AI Score & Actions -->
+            <div>
+                <div class="card" style="text-align: center;">
+                    <h3 style="color:#333; margin-bottom:20px;">Reliability Score</h3>
+                    <div class="trust-score-circle">
+                        <span class="trust-score-value">96</span>
+                    </div>
+                    <p style="color:#666; font-size:0.9rem; margin-bottom: 20px;">This buyer ranks in the <strong>top 5%</strong> for reliability based on past completed payments and low dispute history.</p>
+                    
+                    <button class="btn-primary">Initiate Trade</button>
+                    <button class="btn-outline">Send Message</button>
+                </div>
+                
+                <div class="card">
+                    <h3 style="color:var(--dark-green); margin-bottom:15px;">Buying Preferences</h3>
+                    <ul style="list-style:none; padding:0; color:#555; font-size:0.9rem;">
+                        <li style="margin-bottom:8px;"><strong><i class="fa-solid fa-location-dot"></i> Location:</strong> Pune APMC, MH</li>
+                        <li style="margin-bottom:8px;"><strong><i class="fa-solid fa-wheat-awn"></i> Crops:</strong> Onion, Tomato, Potato</li>
+                        <li style="margin-bottom:8px;"><strong>⭐ Preferred Grade:</strong> Grade A & B</li>
+                        <li style="margin-bottom:8px;"><strong>⏱️ Payment Term:</strong> Same Day / Advance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/farmer-sidebar.js"></script>
+</body>
+</html>

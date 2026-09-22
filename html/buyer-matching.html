@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Buyer Matches - KisanMitra Market AI</title>
+    <meta name="description" content="AI matched buyers for your crops">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/farmer-sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/language-switcher.css">
+    <style>
+        .dashboard-body { background-color: #f4f7f6; }
+        .dashboard-main { padding: 20px; margin-left: 220px; padding-left: 20px; padding-right: 20px; }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .match-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+        }
+
+        .listing-selector {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+
+        .listing-selector h3 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .listing-item {
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .listing-item.active {
+            border-color: var(--primary-green);
+            background: #f0f7ed;
+        }
+
+        .matches-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .match-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            border-left: 5px solid transparent;
+        }
+
+        .match-card.best-match {
+            border-left-color: #f59e0b;
+        }
+
+        .match-score-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-green) 95%, #eee 0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .match-score-circle::after {
+            content: "";
+            position: absolute;
+            width: 65px;
+            height: 65px;
+            background: white;
+            border-radius: 50%;
+        }
+        
+        .match-score-value {
+            position: relative;
+            z-index: 1;
+        }
+
+        .match-details {
+            flex: 1;
+        }
+
+        .match-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .match-reasons {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .match-reasons span {
+            background: #f8f9fa;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 5px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .btn-primary {
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+            height: fit-content;
+        }
+        .btn-primary:hover { background: #2d5016; }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-green);
+            border: 1px solid var(--primary-green);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+    <!-- Sidebar -->
+    <aside class="farmer-sidebar">
+        <button class="sidebar-toggle">◀</button>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="farmer-dashboard.html" data-tooltip="Dashboard"><span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span><span class="nav-text">Dashboard</span></a></li>
+                <li><a href="market-intelligence.html" data-tooltip="Market Prices"><span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span><span class="nav-text">Market Prices</span></a></li>
+                <li><a href="crop-listings.html" data-tooltip="My Crops"><span class="nav-icon"><i class="fa-solid fa-wheat-awn"></i></span><span class="nav-text">My Crops</span></a></li>
+                <li class="active"><a href="buyer-marketplace.html" data-tooltip="Buyers"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span class="nav-text">Buyers</span></a></li>
+                <li><a href="transport-optimizer.html" data-tooltip="Transport and Storage"><span class="nav-icon"><i class="fa-solid fa-truck"></i></span><span class="nav-text">Transport and Storage</span></a></li>
+                <li><a href="transactions.html" data-tooltip="Transactions"><span class="nav-icon"><i class="fa-solid fa-box"></i></span><span class="nav-text">Transactions</span></a></li>
+                <li><a href="farmer-profile.html" data-tooltip="Profile"><span class="nav-icon"><i class="fa-solid fa-user"></i></span><span class="nav-text">Profile</span></a></li>
+            </ul>
+        </nav>
+        <!-- Sidebar Footer / Logout -->
+        <div class="sidebar-footer">
+            <a href="../website.html" class="sidebar-logout-btn" id="sidebarLogoutBtn">
+                <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                <span class="nav-text" data-i18n="dashboard.logout">Logout</span>
+            </a>
+            <div class="nav-flyout">
+                <span class="flyout-title" data-i18n="dashboard.logout">Logout</span>
+                <span class="flyout-desc">Log out of account</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Header -->
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-text">
+                    <span class="logo-agri">Kisan<span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span>
+                </span>
+            </div>
+            <div class="header-actions">
+
+                <a href="#" style="margin-right: 15px; color: var(--primary-green); font-size: 1.2rem; display: flex; align-items: center; text-decoration: none;" title="click for demo">
+                    <i class="fa-solid fa-circle-question"></i>
+                </a>
+                <!-- Language Switcher -->
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="en">English</button>
+                    <button class="lang-btn" data-lang="hi">हिंदी</button>
+                    <button class="lang-btn" data-lang="mr">मराठी</button>
+                </div>
+                <div class="user-menu">
+                    <div class="user-avatar" id="userMenuBtn">
+                        <span id="userInitials">F</span>
+                    </div>
+                    <div class="dropdown-menu" id="userDropdown">
+                        
+                        <a href="farmer-profile.html" class="dropdown-item">
+                            <span class="item-icon"><i class="fa-solid fa-user"></i></span> <span data-i18n="dashboard.myProfile">My Profile</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item logout-item" id="logoutBtn">
+                            <span class="item-icon"><i class="fa-solid fa-right-from-bracket"></i></span> <span data-i18n="dashboard.logout">Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="page-header">
+            <div>
+                <h1 style="color:var(--primary-green); font-size:2rem; margin-bottom:5px;">AI Buyer Match <i class="fa-solid fa-wand-magic-sparkles"></i></h1>
+                <p style="color:#666;">We've analyzed historical data, transport routes, and buyer reliability to find your best matches.</p>
+            </div>
+            <button class="btn-outline" onclick="window.location.href='buyer-marketplace.html'">← Back to Directory</button>
+        </div>
+
+        <div class="match-container">
+            <!-- Left: Select Listing -->
+            <div class="listing-selector">
+                <h3>Select Your Listing</h3>
+                
+                <div class="listing-item active">
+                    <div style="font-weight:600; font-size:1.1rem;">Red Onion (Grade A)</div>
+                    <div style="color:#666; font-size:0.9rem;">40 Qtl • Target: ₹2,800/Qtl</div>
+                </div>
+
+                <div class="listing-item">
+                    <div style="font-weight:600; font-size:1.1rem;">Hybrid Tomato</div>
+                    <div style="color:#666; font-size:0.9rem;">15 Qtl • Target: ₹3,200/Qtl</div>
+                </div>
+            </div>
+
+            <!-- Right: Matches -->
+            <div class="matches-panel">
+                
+                <div class="match-card best-match">
+                    <div class="match-score-circle" style="background: conic-gradient(#f59e0b 98%, #eee 0);">
+                        <span class="match-score-value" style="color:#f59e0b;">98%</span>
+                    </div>
+                    <div class="match-details">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div class="match-title">AgriExport Global</div>
+                            <span style="color:#f59e0b; font-size:0.8rem; font-weight:700;">⭐ TOP MATCH</span>
+                        </div>
+                        <div style="color:#555; margin-bottom: 5px; font-weight:600;">Offer Range: ₹2,800 - ₹2,900 / Qtl</div>
+                        <div class="match-reasons">
+                            <span><i class="fa-solid fa-circle-check"></i> Verified Exporter</span>
+                            <span><i class="fa-solid fa-circle-check"></i> Needs Grade A Onion urgently</span>
+                            <span><i class="fa-solid fa-circle-check"></i> Pick-up from farm</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn-primary">Initiate Trade</button>
+                    </div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-score-circle" style="background: conic-gradient(var(--primary-green) 85%, #eee 0);">
+                        <span class="match-score-value">85%</span>
+                    </div>
+                    <div class="match-details">
+                        <div class="match-title">FreshFoods Ltd</div>
+                        <div style="color:#555; margin-bottom: 5px; font-weight:600;">Offer Range: ₹2,750 - ₹2,800 / Qtl</div>
+                        <div class="match-reasons">
+                            <span><i class="fa-solid fa-circle-check"></i> Reliable Wholesaler</span>
+                            <span><i class="fa-solid fa-circle-check"></i> Same-day payment history</span>
+                            <span><i class="fa-solid fa-triangle-exclamation"></i>️ Requires delivery to Pune</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn-outline">Initiate Trade</button>
+                    </div>
+                </div>
+
+                <div class="match-card">
+                    <div class="match-score-circle" style="background: conic-gradient(var(--primary-green) 72%, #eee 0);">
+                        <span class="match-score-value">72%</span>
+                    </div>
+                    <div class="match-details">
+                        <div class="match-title">Nashik Local Traders</div>
+                        <div style="color:#555; margin-bottom: 5px; font-weight:600;">Offer Range: ₹2,700 - ₹2,750 / Qtl</div>
+                        <div class="match-reasons">
+                            <span><i class="fa-solid fa-circle-check"></i> Local Buyer (Low Transport)</span>
+                            <span><i class="fa-solid fa-triangle-exclamation"></i>️ Often negotiates on site</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn-outline">Initiate Trade</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <script src="../js/i18n.js"></script>
+    <script src="../js/farmer-sidebar.js"></script>
+</body>
+</html>

@@ -1,5 +1,10 @@
 /* Buyer Sidebar Specific Overrides */
 
+/* The shared sidebar styling is reused, with buyer-specific context text. */
+.farmer-sidebar .sidebar-nav::before {
+    content: 'BUYER WORKSPACE';
+}
+
 /* Allow text wrapping for long navigation names in buyer portal */
 .sidebar-nav a {
     white-space: normal;

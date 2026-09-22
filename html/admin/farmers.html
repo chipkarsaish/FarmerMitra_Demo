@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers - KisanMitra Market AI Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-green: #2d5016;
+            --primary-green: #4a7c2c;
+            --accent-green: #95d5b2;
+            --bg-light: #f4f7f6;
+            --white: #ffffff;
+            --radius-md: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { display: flex; background-color: var(--bg-light); height: 100vh; overflow: hidden; }
+        .sidebar { width: 260px; background: var(--dark-green); color: white; padding: 30px 20px; display: flex; flex-direction: column; }
+        .sidebar-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; font-weight: bold; font-size: 1.2rem; }
+        .sidebar-nav { flex-grow: 1; }
+        .sidebar-nav ul { list-style: none; }
+        .sidebar-nav li { margin-bottom: 8px; }
+        .sidebar-nav a { color: var(--accent-green); text-decoration: none; padding: 14px 18px; display: block; border-radius: var(--radius-md); transition: all 0.3s ease; font-weight: 500; }
+        .sidebar-nav li.active a, .sidebar-nav a:hover { background: var(--primary-green); color: white; }
+        .dashboard-main { flex: 1; padding: 40px; overflow-y: auto; }
+        .page-title { color: var(--dark-green); font-size: 2rem; margin-bottom: 20px; }
+        .card { background: white; padding: 30px; border-radius: var(--radius-md); box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            ?? KisanMitra Admin
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="farmers.html">Farmers</a></li>
+                <li><a href="buyers.html">Buyers</a></li>
+                <li><a href="listings.html">Listings</a></li>
+                <li><a href="market-prices.html">Market Prices</a></li>
+                <li><a href="transactions.html">Transactions</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="analytics.html">Analytics</a></li>
+                <li style="margin-top: 40px;"><a href="../../website.html">Logout</a></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="dashboard-main">
+        <h1 class="page-title">Farmers</h1>
+        <div class="card">
+            <h2>Manage Farmers</h2>
+            <p style="margin-top: 15px; color: #666;">This module provides administrative control and moderation for Farmers within the KisanMitra Market AI platform.</p>
+        </div>
+    </main>
+</body>
+</html>

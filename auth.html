@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KisanMitra Market AI - Login / Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'farmer': {
+                            'green': {
+                                DEFAULT: '#2d5016',
+                                50: '#f0f7ed',
+                                100: '#e1f0da',
+                                200: '#c3e1b5',
+                                300: '#a5d290',
+                                400: '#87c36b',
+                                500: '#4a7c2c',
+                                600: '#2d5016',
+                                700: '#244012',
+                                800: '#1b300e',
+                                900: '#12200a',
+                            },
+                            'gold': {
+                                300: '#fcd34d',
+                                500: '#f59e0b',
+                            }
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                        'display': ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .split-bg-left {
+            background-color: #f8fafc;
+            background-image: radial-gradient(#e1f0da 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .radio-tab:checked+label {
+            background-color: #f0f7ed;
+            color: #2d5016;
+            border-color: #2d5016;
+            font-weight: 600;
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased text-gray-800 bg-white h-screen flex flex-col overflow-hidden">
+
+    <!-- Navbar -->
+    <nav class="flex-shrink-0 bg-white/95 glass-effect shadow-sm z-50">
+        <div class="w-full px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="website.html" class="flex items-center gap-2">
+                    <span class="font-display font-black text-2xl sm:text-3xl tracking-tight">
+                        <span class="text-farmer-green-600 relative">
+                            Kisan<span class="absolute -top-3 -right-2 text-base text-farmer-gold-500 animate-float"><i
+                                    class="fa-solid fa-leaf"></i></span>
+                        </span><span class="text-farmer-green-500">Mitra</span>
+                    </span>
+                </a>
+
+                <!-- Language Switcher -->
+                <div class="flex items-center gap-1 bg-gray-50 p-1 rounded-xl shadow-sm">
+                    <button
+                        class="lang-btn px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-white bg-farmer-green-600 rounded-lg transition-all duration-200 hover:bg-farmer-green-700"
+                        data-lang="en">English</button>
+                    <button
+                        class="lang-btn px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-gray-600 hover:bg-farmer-green-50 hover:text-farmer-green-600 rounded-lg transition-all duration-200"
+                        data-lang="hi">हिंदी</button>
+                    <button
+                        class="lang-btn px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-gray-600 hover:bg-farmer-green-50 hover:text-farmer-green-600 rounded-lg transition-all duration-200"
+                        data-lang="mr">मराठी</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Split Content -->
+    <div class="flex flex-1 overflow-hidden flex-col md:flex-row">
+
+        <!-- Left Side: Info & Branding -->
+        <div
+            class="hidden md:flex md:w-1/2 split-bg-left flex-col items-center justify-center p-12 relative border-r border-gray-200">
+
+            <div class="text-center mb-2">
+                <div class="text-farmer-green-600 text-6xl mb-4 relative inline-block">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+                <h1 class="font-display font-black text-4xl mb-2 text-farmer-green-700">Kisan<span
+                        class="text-farmer-gold-500">Mitra</span></h1>
+                <p class="text-xl font-medium text-gray-600 tracking-widest">Connecting Farmers, Markets & Opportunities
+                </p>
+            </div>
+
+            <!-- Already have account - shown only on Register -->
+            <div id="leftPanelLoginLink" class="hidden text-center mt-1">
+                <p class="text-gray-500 text-sm">Already have an account?</p>
+                <a href="#" id="leftPanelShowLoginBtn"
+                    class="text-farmer-green-600 font-bold text-base mt-1 inline-block hover:underline">Login Now</a>
+            </div>
+
+            <!-- Don't have account - shown only on Login -->
+            <div id="leftPanelRegisterLink" class="text-center mt-1">
+                <p class="text-gray-500 text-sm">Don't have an account?</p>
+                <a href="#" id="leftPanelShowRegisterBtn"
+                    class="text-farmer-green-600 font-bold text-base mt-1 inline-block hover:underline">Sign Up Now</a>
+            </div>
+
+
+
+            <div class="absolute bottom-6 w-full text-center px-12">
+                <div class="flex flex-wrap justify-center gap-4 text-sm text-farmer-green-600 font-medium mb-4">
+                    <a href="#" class="hover:underline">Home</a>
+                    <a href="#" class="hover:underline">Market Prices</a>
+                    <a href="#" class="hover:underline">What's New</a>
+                    <a href="#" class="hover:underline">Help Center</a>
+                    <a href="#" class="hover:underline">Privacy Policy</a>
+                </div>
+                <p class="text-xs text-gray-500">&copy; 2026 KisanMitra Market AI. All rights reserved.</p>
+            </div>
+        </div>
+
+        <!-- Right Side: Forms -->
+        <div
+            class="w-full md:w-1/2 h-full overflow-y-auto bg-white flex flex-col px-6 sm:px-12 lg:px-20 pt-6 sm:pt-8 lg:pt-8">
+
+            <!-- Mobile Header (Visible only on small screens) -->
+            <div class="md:hidden flex justify-between items-center mb-8">
+                <a href="website.html" class="text-gray-500"><i class="fa-solid fa-arrow-left"></i> Back</a>
+                <span class="font-display font-bold text-xl text-farmer-green-600">Kisan<span
+                        class="text-farmer-gold-500">Mitra</span></span>
+            </div>
+
+            <div class="max-w-md w-full mx-auto flex-1 flex flex-col">
+
+                <h2 id="formTitle" class="text-3xl font-bold text-farmer-green-700 mb-6 text-center">Login</h2>
+
+                <!-- Role Toggle -->
+                <div class="grid grid-cols-4 gap-1 p-1 bg-gray-100 rounded-xl mb-6">
+                    <label class="text-center relative cursor-pointer">
+                        <input type="radio" name="role" value="farmer" class="peer sr-only" checked>
+                        <div class="py-2 rounded-lg text-xs font-medium text-gray-600 peer-checked:bg-white peer-checked:text-farmer-green-600 peer-checked:shadow-sm transition-all flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-tractor"></i> Farmer
+                        </div>
+                    </label>
+                    <label class="text-center relative cursor-pointer">
+                        <input type="radio" name="role" value="buyer" class="peer sr-only">
+                        <div class="py-2 rounded-lg text-xs font-medium text-gray-600 peer-checked:bg-white peer-checked:text-farmer-green-600 peer-checked:shadow-sm transition-all flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-handshake"></i> Buyer
+                        </div>
+                    </label>
+                    <label class="text-center relative cursor-pointer">
+                        <input type="radio" name="role" value="logistics" class="peer sr-only">
+                        <div class="py-2 rounded-lg text-xs font-medium text-gray-600 peer-checked:bg-white peer-checked:text-farmer-green-600 peer-checked:shadow-sm transition-all flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-truck"></i> Transport
+                        </div>
+                    </label>
+                    <label class="text-center relative cursor-pointer">
+                        <input type="radio" name="role" value="storage" class="peer sr-only">
+                        <div class="py-2 rounded-lg text-xs font-medium text-gray-600 peer-checked:bg-white peer-checked:text-farmer-green-600 peer-checked:shadow-sm transition-all flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-warehouse"></i> Storage
+                        </div>
+                    </label>
+                </div>
+
+                <!-- LOGIN FORM -->
+                <form id="loginForm" class="space-y-6 block">
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-700">Registered Email or Mobile *</label>
+                        <input type="text" placeholder="Enter Email or Mobile" required
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block mb-2 text-sm font-medium text-gray-700">Password *</label>
+                        <div class="relative">
+                            <input type="password" placeholder="Enter Password" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600 transition-colors">
+                            <button type="button" class="absolute right-4 top-3.5 text-gray-400 hover:text-gray-600">
+                                <i class="fa-regular fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <a href="#" class="text-sm font-medium text-farmer-green-600 hover:underline">Forgot/Set
+                            Password?</a>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit"
+                            class="w-full px-4 py-3 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors">
+                            Login
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- REGISTER FORM -->
+                <form id="registerForm" class="space-y-5 hidden">
+
+                    <!-- FARMER REGISTRATION -->
+                    <div id="farmerRegisterFields">
+
+                        <!-- STEP 1: BASIC DETAILS -->
+                        <div id="farmerStep1" class="space-y-3">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">First Name *</label>
+                                    <input type="text" placeholder="First Name" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Middle Name</label>
+                                    <input type="text" placeholder="Middle Name"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block mb-1 text-xs font-medium text-gray-700">Last Name *</label>
+                                <input type="text" placeholder="Last Name" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Gender *</label>
+                                    <select required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Date of Birth *</label>
+                                    <input type="date" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block mb-1 text-xs font-medium text-gray-700">Phone Number *</label>
+                                <input type="tel" id="farmerPhone" placeholder="10-digit Mobile Number" required
+                                    pattern="[0-9]{10}"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+
+                            <div class="pt-2">
+                                <button type="button" id="farmerLocationNextBtn"
+                                    class="w-full px-4 py-2.5 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2">
+                                    Next
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <!-- STEP 2: FARMER LOCATION -->
+                        <div id="farmerLocationStep" class="space-y-3 hidden">
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">State *</label>
+                                    <select id="farmerState" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select State</option>
+                                        <option value="maharashtra">Maharashtra</option>
+                                        <option value="gujarat">Gujarat</option>
+                                        <option value="madhya-pradesh">Madhya Pradesh</option>
+                                        <option value="karnataka">Karnataka</option>
+                                        <option value="uttar-pradesh">Uttar Pradesh</option>
+                                        <option value="rajasthan">Rajasthan</option>
+                                        <option value="punjab">Punjab</option>
+                                        <option value="haryana">Haryana</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">District *</label>
+                                    <input type="text" id="farmerDistrict" placeholder="Enter District" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Taluka / Tehsil
+                                        *</label>
+                                    <input type="text" id="farmerTaluka" placeholder="Enter Taluka / Tehsil" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Village *</label>
+                                    <input type="text" id="farmerVillage" placeholder="Enter Village" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Pincode *</label>
+                                    <input type="text" id="farmerPincode" placeholder="6-digit Pincode" maxlength="6"
+                                        required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Nearest Town <span
+                                            class="text-gray-400 font-normal">(Optional)</span></label>
+                                    <input type="text" id="farmerNearestTown" placeholder="Nearest Town"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block mb-1 text-xs font-medium text-gray-700">Nearest / Preferred Mandi
+                                    *</label>
+                                <select id="farmerMandi" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                    <option value="">Select Mandi</option>
+                                    <option value="apmc-mumbai">APMC Mumbai</option>
+                                    <option value="apmc-vashi">APMC Vashi</option>
+                                    <option value="apmc-pune">APMC Pune</option>
+                                    <option value="apmc-nashik">APMC Nashik</option>
+                                </select>
+                            </div>
+
+                            <div class="flex gap-3 pt-2">
+                                <button type="button" id="farmerBackBtn"
+                                    class="w-1/3 px-4 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-arrow-left"></i> Back
+                                </button>
+                                <button type="button" id="farmerOtpNextBtn"
+                                    class="w-2/3 px-4 py-2.5 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2">
+                                    Next <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3: OTP VERIFICATION -->
+                        <div id="farmerOtpStep" class="hidden">
+                            <h3 class="text-xl font-semibold text-farmer-green-700 mb-2">
+                                OTP Verification
+                            </h3>
+                            <p class="text-sm text-gray-500 mb-5">
+                                Enter the OTP sent to your phone number.
+                            </p>
+
+                            <div class="mb-5">
+                                <label class="block mb-1 text-xs font-medium text-gray-700">One Time Password (OTP)
+                                    *</label>
+                                <input type="text" id="farmerOtp" placeholder="Enter 6-digit OTP" maxlength="6" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-center tracking-[0.5em] focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+
+                            <div class="flex gap-3 pt-2">
+                                <button type="button" id="farmerOtpBackBtn"
+                                    class="w-1/3 px-4 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-arrow-left"></i> Back
+                                </button>
+                                <button type="submit"
+                                    class="w-2/3 px-4 py-2.5 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2">
+                                    Register <i class="fa-solid fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- BUYER REGISTRATION -->
+                    <div class="hidden" id="buyerSpecificFields">
+
+                        <!-- STEP 1: BUSINESS / BUYER DETAILS -->
+                        <div id="buyerStep1" class="space-y-3">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">First Name *</label>
+                                    <input type="text" id="buyerFirstName" placeholder="First Name" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Middle Name</label>
+                                    <input type="text" id="buyerMiddleName" placeholder="Middle Name"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block mb-1 text-xs font-medium text-gray-700">Last Name *</label>
+                                <input type="text" id="buyerLastName" placeholder="Last Name" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Mobile Number *</label>
+                                    <input type="tel" id="buyerPhone" placeholder="Mobile Number" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Email *</label>
+                                    <input type="email" id="buyerEmail" placeholder="Email Address" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Designation / Role
+                                        *</label>
+                                    <input type="text" id="buyerDesignation" placeholder="Designation" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Business Name *</label>
+                                    <input type="text" id="buyerBusinessName" placeholder="Company Name" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="col-span-2">
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Business Type *</label>
+                                    <select id="buyerBusinessType" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select Type</option>
+                                        <option value="trader">Trader</option>
+                                        <option value="wholesaler">Wholesaler</option>
+                                        <option value="retailer">Retailer</option>
+                                        <option value="food-processor">Food Processor</option>
+                                        <option value="exporter">Exporter</option>
+                                        <option value="restaurant">Restaurant / Hospitality</option>
+                                        <option value="manufacturer">Manufacturer</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">GSTIN</label>
+                                    <input type="text" id="buyerGstin" placeholder="GST Number"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">PAN</label>
+                                    <input type="text" id="buyerPan" placeholder="PAN Number"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+
+                            <div class="pt-2">
+                                <button type="button" id="buyerStep1NextBtn"
+                                    class="w-full px-4 py-2.5 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2">
+                                    Next
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2: BUSINESS LOCATION & PROCUREMENT -->
+                        <div id="buyerStep2" class="space-y-3 hidden">
+                            <!-- BUSINESS LOCATION -->
+                            <h3 class="text-sm font-semibold text-gray-700 border-b pb-1">Business Location</h3>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">State *</label>
+                                    <select id="buyerState" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select State</option>
+                                        <option value="maharashtra">Maharashtra</option>
+                                        <option value="gujarat">Gujarat</option>
+                                        <option value="madhya-pradesh">Madhya Pradesh</option>
+                                        <option value="karnataka">Karnataka</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">District *</label>
+                                    <input type="text" id="buyerDistrict" placeholder="District" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">City / Taluka *</label>
+                                    <input type="text" id="buyerCity" placeholder="City" required
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Pincode *</label>
+                                    <input type="text" id="buyerPincode" placeholder="Pincode" required maxlength="6"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block mb-1 text-xs font-medium text-gray-700">Business Address *</label>
+                                <input type="text" id="buyerAddress" placeholder="Full Address" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+
+                            <div class="flex gap-3 pt-2">
+                                <button type="button" id="buyerStep2BackBtn"
+                                    class="w-1/3 px-4 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-arrow-left"></i> Back
+                                </button>
+                                <button type="button" id="buyerOtpNextBtn"
+                                    class="w-2/3 px-4 py-2.5 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2">
+                                    Next <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3: OTP VERIFICATION -->
+                        <div id="buyerOtpStep" class="hidden">
+                            <h3 class="text-xl font-semibold text-farmer-green-700 mb-2">
+                                OTP Verification
+                            </h3>
+                            <p class="text-sm text-gray-500 mb-5">
+                                Enter the OTP sent to your phone number.
+                            </p>
+
+                            <div class="mb-5">
+                                <label class="block mb-1 text-xs font-medium text-gray-700">One Time Password (OTP) *</label>
+                                <input type="text" id="buyerOtp" placeholder="Enter 6-digit OTP" maxlength="6" required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-center tracking-[0.5em] focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+
+                            <div class="flex gap-3 pt-2">
+                                <button type="button" id="buyerOtpBackBtn"
+                                    class="w-1/3 px-4 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-arrow-left"></i> Back
+                                </button>
+                                <button type="submit" id="buyerRegisterBtn"
+                                    class="w-2/3 px-4 py-2.5 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2">
+                                    Register <i class="fa-solid fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LOGISTICS REGISTRATION -->
+                    <div class="hidden" id="logisticsSpecificFields">
+                        <!-- Logistics Step Indicator -->
+                        <div id="logisticsStepIndicator" class="flex justify-center items-center gap-2 mb-4">
+                            <div id="logisticsStep1Indicator" class="w-6 h-6 flex items-center justify-center rounded-full bg-farmer-green-600 text-white text-xs font-bold transition-all">1</div>
+                            <div id="logisticsStepConnector1" class="w-8 h-0.5 bg-gray-300 transition-all"></div>
+                            <div id="logisticsStep2Indicator" class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-300 text-gray-500 text-xs font-bold transition-all">2</div>
+                            <div id="logisticsStepConnector2" class="w-8 h-0.5 bg-gray-300 transition-all"></div>
+                            <div id="logisticsOtpIndicator" class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-300 text-gray-500 text-xs font-bold transition-all">3</div>
+                        </div>
+
+                        <!-- STEP 1: PROVIDER & BUSINESS DETAILS -->
+                        <div id="logisticsStep1" class="space-y-3">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">First Name *</label>
+                                    <input type="text" id="logisticsFirstName" placeholder="First Name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Middle Name</label>
+                                    <input type="text" id="logisticsMiddleName" placeholder="Middle Name" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block mb-1 text-xs font-medium text-gray-700">Last Name *</label>
+                                <input type="text" id="logisticsLastName" placeholder="Last Name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Mobile Number *</label>
+                                    <input type="tel" id="logisticsPhone" placeholder="10-digit Mobile" required pattern="[0-9]{10}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Email *</label>
+                                    <input type="email" id="logisticsEmail" placeholder="Email Address" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Designation *</label>
+                                    <select id="logisticsDesignation" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select Role</option>
+                                        <option value="owner">Owner</option>
+                                        <option value="manager">Manager</option>
+                                        <option value="operations_manager">Operations Manager</option>
+                                        <option value="fleet_manager">Fleet Manager</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Company Name *</label>
+                                    <input type="text" id="logisticsCompanyName" placeholder="Company Name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Provider Type *</label>
+                                    <select id="logisticsProviderType" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select Type</option>
+                                        <option value="fleet_owner">Fleet Owner</option>
+                                        <option value="transport_company">Transport Company</option>
+                                        <option value="individual">Individual Operator</option>
+                                        <option value="aggregator">Logistics Aggregator</option>
+                                        <option value="fpo">FPO / Cooperative</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Business Reg. Type *</label>
+                                    <select id="logisticsBusinessType" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select Registration</option>
+                                        <option value="proprietorship">Proprietorship</option>
+                                        <option value="partnership">Partnership</option>
+                                        <option value="llp">LLP</option>
+                                        <option value="private_limited">Private Limited</option>
+                                        <option value="cooperative">Cooperative</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">GSTIN</label>
+                                    <input type="text" id="logisticsGstin" placeholder="GST Number" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">PAN</label>
+                                    <input type="text" id="logisticsPan" placeholder="PAN Number" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div class="pt-2">
+                                <button type="button" id="logisticsStep1NextBtn" class="w-full px-4 py-2.5 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2">
+                                    Next <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2: OPERATING AREA & CAPACITY -->
+                        <div id="logisticsStep2" class="space-y-3 hidden">
+                            <p class="text-xs font-semibold text-gray-600 uppercase tracking-wide border-b pb-1">Business Location</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">State *</label>
+                                    <select id="logisticsState" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select State</option>
+                                        <option value="maharashtra">Maharashtra</option>
+                                        <option value="gujarat">Gujarat</option>
+                                        <option value="karnataka">Karnataka</option>
+                                        <option value="punjab">Punjab</option>
+                                        <option value="rajasthan">Rajasthan</option>
+                                        <option value="uttar_pradesh">Uttar Pradesh</option>
+                                        <option value="madhya_pradesh">Madhya Pradesh</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">District *</label>
+                                    <input type="text" id="logisticsDistrict" placeholder="District" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">City / Taluka *</label>
+                                    <input type="text" id="logisticsCity" placeholder="City" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Pincode *</label>
+                                    <input type="text" id="logisticsPincode" placeholder="6-digit Pincode" required maxlength="6" pattern="[0-9]{6}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block mb-1 text-xs font-medium text-gray-700">Business / Office Address *</label>
+                                <input type="text" id="logisticsAddress" placeholder="Full Address" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+                            <button type="button" id="logisticsGpsBtn" class="w-full px-3 py-2 text-farmer-green-600 bg-farmer-green-50 hover:bg-farmer-green-100 border border-farmer-green-200 text-sm font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-location-dot"></i> Use My Current Business Location
+                            </button>
+                            <p id="logisticsGpsMsg" class="text-xs text-green-600 text-center hidden">Business location captured ✓</p>
+                            <input type="hidden" id="logisticsLatitude">
+                            <input type="hidden" id="logisticsLongitude">
+
+                            <p class="text-xs font-semibold text-gray-600 uppercase tracking-wide border-b pb-1 mt-1">Transportation Capabilities</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Service Coverage *</label>
+                                    <select id="logisticsCoverage" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select Coverage</option>
+                                        <option value="district">Within District</option>
+                                        <option value="state">Within State</option>
+                                        <option value="inter_state">Inter-State</option>
+                                        <option value="multiple_states">Multiple States</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Fleet Size *</label>
+                                    <input type="number" id="logisticsFleetSize" placeholder="No. of vehicles" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-3 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Vehicle Type *</label>
+                                    <select id="logisticsVehicleType" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Type</option>
+                                        <option value="pickup">Pickup</option>
+                                        <option value="mini_truck">Mini Truck</option>
+                                        <option value="lcv">LCV</option>
+                                        <option value="truck">Truck</option>
+                                        <option value="heavy_truck">Heavy Truck</option>
+                                        <option value="container">Container</option>
+                                        <option value="refrigerated">Refrigerated</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Capacity *</label>
+                                    <input type="number" id="logisticsCapacity" placeholder="Qty" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Unit *</label>
+                                    <select id="logisticsUnit" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="kg">Kg</option>
+                                        <option value="quintal">Quintal</option>
+                                        <option value="tonnes">Tonnes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                                <label class="flex items-center gap-2"><input type="checkbox" id="logCapNormal" class="rounded"> Normal / Dry Transport</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" id="logCapRefrig" class="rounded"> Refrigerated</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" id="logCapTemp" class="rounded"> Temperature-Controlled</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" id="logCapBulk" class="rounded"> Bulk Transport</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" id="logCapPickup" class="rounded"> Available for Pickup</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" id="logCapDelivery" class="rounded"> Available for Delivery</label>
+                            </div>
+                            <div class="flex gap-3 pt-2">
+                                <button type="button" id="logisticsStep2BackBtn" class="w-1/3 px-4 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-arrow-left"></i> Back
+                                </button>
+                                <button type="button" id="logisticsOtpNextBtn" class="w-2/3 px-4 py-2.5 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2">
+                                    Next <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3: OTP VERIFICATION -->
+                        <div id="logisticsOtpStep" class="hidden">
+                            <h3 class="text-xl font-semibold text-farmer-green-700 mb-2">Verify Your Mobile Number</h3>
+                            <p class="text-sm text-gray-500 mb-5">Enter the OTP sent to your registered mobile number.</p>
+                            <div class="mb-5">
+                                <label class="block mb-1 text-xs font-medium text-gray-700">One Time Password (OTP) *</label>
+                                <input type="text" id="logisticsOtp" placeholder="Enter 6-digit OTP" maxlength="6" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-center tracking-[0.5em] focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+                            <div class="flex gap-3 pt-2">
+                                <button type="button" id="logisticsOtpBackBtn" class="w-1/3 px-4 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-arrow-left"></i> Back
+                                </button>
+                                <button type="submit" id="logisticsRegisterBtn" class="w-2/3 px-4 py-2.5 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2">
+                                    Register <i class="fa-solid fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- STORAGE REGISTRATION -->
+                    <div class="hidden" id="storageSpecificFields">
+                        <!-- Storage Step Indicator -->
+                        <div id="storageStepIndicator" class="flex justify-center items-center gap-2 mb-4">
+                            <div id="storageStep1Indicator" class="w-6 h-6 flex items-center justify-center rounded-full bg-farmer-green-600 text-white text-xs font-bold transition-all">1</div>
+                            <div id="storageStepConnector1" class="w-8 h-0.5 bg-gray-300 transition-all"></div>
+                            <div id="storageStep2Indicator" class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-300 text-gray-500 text-xs font-bold transition-all">2</div>
+                            <div id="storageStepConnector2" class="w-8 h-0.5 bg-gray-300 transition-all"></div>
+                            <div id="storageOtpIndicator" class="w-6 h-6 flex items-center justify-center rounded-full bg-gray-300 text-gray-500 text-xs font-bold transition-all">3</div>
+                        </div>
+
+                        <!-- STEP 1: PROVIDER & BUSINESS DETAILS -->
+                        <div id="storageStep1" class="space-y-3">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">First Name *</label>
+                                    <input type="text" id="storageFirstName" placeholder="First Name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Middle Name</label>
+                                    <input type="text" id="storageMiddleName" placeholder="Middle Name" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block mb-1 text-xs font-medium text-gray-700">Last Name *</label>
+                                <input type="text" id="storageLastName" placeholder="Last Name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Mobile Number *</label>
+                                    <input type="tel" id="storagePhone" placeholder="10-digit Mobile" required pattern="[0-9]{10}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Email *</label>
+                                    <input type="email" id="storageEmail" placeholder="Email Address" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Designation *</label>
+                                    <select id="storageDesignation" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select Role</option>
+                                        <option value="owner">Owner</option>
+                                        <option value="facility_manager">Facility Manager</option>
+                                        <option value="operations_manager">Operations Manager</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Facility Name *</label>
+                                    <input type="text" id="storageFacilityName" placeholder="Facility Name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block mb-1 text-xs font-medium text-gray-700">Company / Business Name *</label>
+                                <input type="text" id="storageCompanyName" placeholder="Company Name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Provider Type *</label>
+                                    <select id="storageProviderType" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select Type</option>
+                                        <option value="warehouse">Warehouse</option>
+                                        <option value="cold_storage">Cold Storage</option>
+                                        <option value="cold_chain">Cold Chain Facility</option>
+                                        <option value="grain">Grain Storage</option>
+                                        <option value="agri_warehouse">Agri Commodity Warehouse</option>
+                                        <option value="fpo_storage">FPO Storage</option>
+                                        <option value="private">Private Storage</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Business Reg. Type *</label>
+                                    <select id="storageBusinessType" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select Registration</option>
+                                        <option value="proprietorship">Proprietorship</option>
+                                        <option value="partnership">Partnership</option>
+                                        <option value="llp">LLP</option>
+                                        <option value="private_limited">Private Limited</option>
+                                        <option value="cooperative">Cooperative</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">GSTIN</label>
+                                    <input type="text" id="storageGstin" placeholder="GST Number" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">PAN</label>
+                                    <input type="text" id="storagePan" placeholder="PAN Number" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div class="pt-2">
+                                <button type="button" id="storageStep1NextBtn" class="w-full px-4 py-2.5 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2">
+                                    Next <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 2: FACILITY LOCATION & CAPACITY -->
+                        <div id="storageStep2" class="space-y-3 hidden">
+                            <p class="text-xs font-semibold text-gray-600 uppercase tracking-wide border-b pb-1">Facility Location</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">State *</label>
+                                    <select id="storageState" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="">Select State</option>
+                                        <option value="maharashtra">Maharashtra</option>
+                                        <option value="gujarat">Gujarat</option>
+                                        <option value="karnataka">Karnataka</option>
+                                        <option value="punjab">Punjab</option>
+                                        <option value="rajasthan">Rajasthan</option>
+                                        <option value="uttar_pradesh">Uttar Pradesh</option>
+                                        <option value="madhya_pradesh">Madhya Pradesh</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">District *</label>
+                                    <input type="text" id="storageDistrict" placeholder="District" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">City / Taluka *</label>
+                                    <input type="text" id="storageCity" placeholder="City" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Pincode *</label>
+                                    <input type="text" id="storagePincode" placeholder="6-digit Pincode" required maxlength="6" pattern="[0-9]{6}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block mb-1 text-xs font-medium text-gray-700">Village / Area</label>
+                                <input type="text" id="storageVillage" placeholder="Village or Area" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+                            <div>
+                                <label class="block mb-1 text-xs font-medium text-gray-700">Full Facility Address *</label>
+                                <input type="text" id="storageAddress" placeholder="Full Address" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+                            <button type="button" id="storageGpsBtn" class="w-full px-3 py-2 text-farmer-green-600 bg-farmer-green-50 hover:bg-farmer-green-100 border border-farmer-green-200 text-sm font-medium rounded-lg transition-colors flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-location-dot"></i> Use Facility Location
+                            </button>
+                            <p id="storageGpsMsg" class="text-xs text-green-600 text-center hidden">Facility location captured ✓</p>
+                            <input type="hidden" id="storageLatitude">
+                            <input type="hidden" id="storageLongitude">
+
+                            <p class="text-xs font-semibold text-gray-600 uppercase tracking-wide border-b pb-1 mt-1">Storage Capacity</p>
+                            <div class="grid grid-cols-3 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Total Capacity *</label>
+                                    <input type="number" id="storageTotalCap" placeholder="Total" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Available *</label>
+                                    <input type="number" id="storageAvailCap" placeholder="Available" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Unit *</label>
+                                    <select id="storageUnit" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                        <option value="kg">Kg</option>
+                                        <option value="quintal">Quintal</option>
+                                        <option value="tonnes">Tonnes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block mb-1 text-xs font-medium text-gray-700">Storage Type *</label>
+                                <select id="storageType" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                    <option value="ambient">Ambient Warehouse</option>
+                                    <option value="cold_storage">Cold Storage</option>
+                                    <option value="temp_controlled">Temperature-Controlled</option>
+                                    <option value="grain">Grain Storage</option>
+                                    <option value="commodity">Commodity Warehouse</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                                <label class="flex items-center gap-2"><input type="checkbox" id="storCapTemp" class="rounded"> Temp Controlled</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" id="storCapHumidity" class="rounded"> Humidity Controlled</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" id="storCapRefrig" class="rounded"> Refrigerated</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" id="storCapGrain" class="rounded"> Grain Storage</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" id="storCapFruits" class="rounded"> Fruits & Vegetables</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" id="storCapPulses" class="rounded"> Pulses</label>
+                                <label class="flex items-center gap-2"><input type="checkbox" id="storCapCereals" class="rounded"> Cereals</label>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Min Temp (Optional)</label>
+                                    <input type="text" id="storageMinTemp" placeholder="e.g. 2°C" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                                <div>
+                                    <label class="block mb-1 text-xs font-medium text-gray-700">Max Temp (Optional)</label>
+                                    <input type="text" id="storageMaxTemp" placeholder="e.g. 8°C" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                                </div>
+                            </div>
+                            <div class="flex gap-3 pt-2">
+                                <button type="button" id="storageStep2BackBtn" class="w-1/3 px-4 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-arrow-left"></i> Back
+                                </button>
+                                <button type="button" id="storageOtpNextBtn" class="w-2/3 px-4 py-2.5 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2">
+                                    Next <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3: OTP VERIFICATION -->
+                        <div id="storageOtpStep" class="hidden">
+                            <h3 class="text-xl font-semibold text-farmer-green-700 mb-2">Verify Your Mobile Number</h3>
+                            <p class="text-sm text-gray-500 mb-5">Enter the OTP sent to your registered mobile number.</p>
+                            <div class="mb-5">
+                                <label class="block mb-1 text-xs font-medium text-gray-700">One Time Password (OTP) *</label>
+                                <input type="text" id="storageOtp" placeholder="Enter 6-digit OTP" maxlength="6" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-center tracking-[0.5em] focus:outline-none focus:border-farmer-green-600 focus:ring-1 focus:ring-farmer-green-600">
+                            </div>
+                            <div class="flex gap-3 pt-2">
+                                <button type="button" id="storageOtpBackBtn" class="w-1/3 px-4 py-2.5 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-arrow-left"></i> Back
+                                </button>
+                                <button type="submit" id="storageRegisterBtn" class="w-2/3 px-4 py-2.5 text-white bg-farmer-green-500/90 hover:bg-farmer-green-600 font-semibold rounded-lg shadow-md transition-colors flex items-center justify-center gap-2">
+                                    Register <i class="fa-solid fa-check"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const loginForm = document.getElementById('loginForm');
+                const registerForm = document.getElementById('registerForm');
+                const formTitle = document.getElementById('formTitle');
+                const showRegisterBtn = document.getElementById('showRegisterBtn');
+                const showLoginBtn = document.getElementById('showLoginBtn');
+                const roleRadios = document.querySelectorAll('input[name="role"]');
+                const farmerRegisterFields = document.getElementById('farmerRegisterFields');
+                const buyerSpecificFields = document.getElementById('buyerSpecificFields');
+
+                // Toggle logic
+                const leftPanelLoginLink = document.getElementById('leftPanelLoginLink');
+                const leftPanelRegisterLink = document.getElementById('leftPanelRegisterLink');
+                function toggleForm(type) {
+                    if (type === 'register') {
+                        loginForm.classList.add('hidden');
+                        registerForm.classList.remove('hidden');
+                        formTitle.textContent = 'Register';
+                        if (leftPanelLoginLink) leftPanelLoginLink.classList.remove('hidden');
+                        if (leftPanelRegisterLink) leftPanelRegisterLink.classList.add('hidden');
+                    } else {
+                        registerForm.classList.add('hidden');
+                        loginForm.classList.remove('hidden');
+                        formTitle.textContent = 'Login';
+                        if (leftPanelLoginLink) leftPanelLoginLink.classList.add('hidden');
+                        if (leftPanelRegisterLink) leftPanelRegisterLink.classList.remove('hidden');
+                    }
+                }
+
+                // Handle URL Parameters to show correct form initially
+                const urlParams = new URLSearchParams(window.location.search);
+                const action = urlParams.get('action');
+                if (action === 'register') {
+                    toggleForm('register');
+                }
+
+                loginForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+
+                    const selectedRole = document.querySelector('input[name="role"]:checked');
+                    if (selectedRole) {
+                        const loginIdentifier = loginForm.querySelector('input[type="text"]').value.trim();
+                        const name = loginIdentifier.includes('@')
+                            ? loginIdentifier.split('@')[0]
+                            : ({ buyer: 'Buyer', logistics: 'Transport Provider', storage: 'Storage Provider' }[selectedRole.value] || 'Farmer');
+                        sessionStorage.setItem('currentUser', JSON.stringify({
+                            role: selectedRole.value,
+                            email: loginIdentifier,
+                            name,
+                            loginTime: new Date().toISOString()
+                        }));
+                        const destinations = {
+                            farmer: 'html/farmer-dashboard.html',
+                            buyer: 'html/buyer-dashboard.html',
+                            logistics: 'html/transport-dashboard.html',
+                            storage: 'html/storage-dashboard.html'
+                        };
+                        window.location.href = destinations[selectedRole.value] || 'html/farmer-dashboard.html';
+                    }
+                });
+
+                const leftPanelShowRegisterBtn = document.getElementById('leftPanelShowRegisterBtn');
+                if (leftPanelShowRegisterBtn) {
+                    leftPanelShowRegisterBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        toggleForm('register');
+                        window.history.replaceState(null, null, '?action=register');
+                    });
+                }
+                
+                if(showRegisterBtn) showRegisterBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleForm('register');
+                    window.history.replaceState(null, null, '?action=register');
+                });
+
+                const leftPanelShowLoginBtn = document.getElementById('leftPanelShowLoginBtn');
+                if (leftPanelShowLoginBtn) {
+                    leftPanelShowLoginBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        toggleForm('login');
+                        window.history.replaceState(null, null, '?action=login');
+                    });
+                }
+
+                const farmerStep1 = document.getElementById('farmerStep1');
+                const farmerLocationStep = document.getElementById('farmerLocationStep');
+                const farmerOtpStep = document.getElementById('farmerOtpStep');
+
+                const farmerLocationNextBtn = document.getElementById('farmerLocationNextBtn');
+                const farmerBackBtn = document.getElementById('farmerBackBtn');
+                const farmerOtpNextBtn = document.getElementById('farmerOtpNextBtn');
+                const farmerOtpBackBtn = document.getElementById('farmerOtpBackBtn');
+
+
+                // Step 1 → Step 2
+                if (farmerLocationNextBtn) {
+
+                    farmerLocationNextBtn.addEventListener('click', () => {
+
+                        // Validate Step 1 fields
+                        const step1Inputs =
+                            farmerStep1.querySelectorAll('input, select');
+
+                        let valid = true;
+
+                        step1Inputs.forEach(input => {
+
+                            if (!input.checkValidity()) {
+
+                                input.reportValidity();
+                                valid = false;
+                                return;
+
+                            }
+
+                        });
+
+                        if (!valid) return;
+
+
+                        // Hide Step 1
+                        farmerStep1.classList.add('hidden');
+
+                        // Show Location Step
+                        farmerLocationStep.classList.remove('hidden');
+
+                        // Change heading
+                        formTitle.textContent = 'Farmer Location';
+
+                    });
+
+                }
+
+
+                // Step 2 → Step 1
+                if (farmerBackBtn) {
+                    farmerBackBtn.addEventListener('click', () => {
+                        farmerLocationStep.classList.add('hidden');
+                        farmerStep1.classList.remove('hidden');
+                        formTitle.textContent = 'Register';
+                    });
+                }
+
+                // Step 2 → Step 3 (OTP)
+                if (farmerOtpNextBtn) {
+                    farmerOtpNextBtn.addEventListener('click', () => {
+                        // Validate Step 2 fields
+                        const step2Inputs = farmerLocationStep.querySelectorAll('input, select');
+                        let valid = true;
+                        step2Inputs.forEach(input => {
+                            if (!input.checkValidity()) {
+                                input.reportValidity();
+                                valid = false;
+                            }
+                        });
+                        if (!valid) return;
+
+                        farmerLocationStep.classList.add('hidden');
+                        farmerOtpStep.classList.remove('hidden');
+                        formTitle.textContent = 'Verify Phone';
+                    });
+                }
+
+                // Step 3 → Step 2
+                if (farmerOtpBackBtn) {
+                    farmerOtpBackBtn.addEventListener('click', () => {
+                        farmerOtpStep.classList.add('hidden');
+                        farmerLocationStep.classList.remove('hidden');
+                        formTitle.textContent = 'Farmer Location';
+                    });
+                }
+
+                // Buyer Navigation Elements
+                const buyerStep1 = document.getElementById('buyerStep1');
+                const buyerStep2 = document.getElementById('buyerStep2');
+                const buyerOtpStep = document.getElementById('buyerOtpStep');
+
+                const buyerStep1NextBtn = document.getElementById('buyerStep1NextBtn');
+                const buyerStep2BackBtn = document.getElementById('buyerStep2BackBtn');
+                const buyerOtpNextBtn = document.getElementById('buyerOtpNextBtn');
+                const buyerOtpBackBtn = document.getElementById('buyerOtpBackBtn');
+                const buyerRegisterBtn = document.getElementById('buyerRegisterBtn');
+                const buyerGpsBtn = document.getElementById('buyerGpsBtn');
+
+                // Buyer Step 1 -> Step 2
+                if (buyerStep1NextBtn) {
+                    buyerStep1NextBtn.addEventListener('click', () => {
+                        const step1Inputs = buyerStep1.querySelectorAll('input, select');
+                        let valid = true;
+                        step1Inputs.forEach(input => {
+                            if (!input.checkValidity()) {
+                                input.reportValidity();
+                                valid = false;
+                            }
+                        });
+                        if (!valid) return;
+
+                        buyerStep1.classList.add('hidden');
+                        buyerStep2.classList.remove('hidden');
+                        formTitle.textContent = 'Business & Procurement';
+                    });
+                }
+
+                // Buyer Step 2 -> Step 1
+                if (buyerStep2BackBtn) {
+                    buyerStep2BackBtn.addEventListener('click', () => {
+                        buyerStep2.classList.add('hidden');
+                        buyerStep1.classList.remove('hidden');
+                        formTitle.textContent = 'Register';
+                    });
+                }
+
+                // Buyer Step 2 -> Step 3 (OTP)
+                if (buyerOtpNextBtn) {
+                    buyerOtpNextBtn.addEventListener('click', () => {
+                        const step2Inputs = buyerStep2.querySelectorAll('input, select');
+                        let valid = true;
+                        step2Inputs.forEach(input => {
+                            if (!input.checkValidity()) {
+                                input.reportValidity();
+                                valid = false;
+                            }
+                        });
+                        if (!valid) return;
+
+                        buyerStep2.classList.add('hidden');
+                        buyerOtpStep.classList.remove('hidden');
+                        formTitle.textContent = 'Verify Phone';
+                    });
+                }
+
+                // Buyer Step 3 -> Step 2
+                if (buyerOtpBackBtn) {
+                    buyerOtpBackBtn.addEventListener('click', () => {
+                        buyerOtpStep.classList.add('hidden');
+                        buyerStep2.classList.remove('hidden');
+                        formTitle.textContent = 'Business & Procurement';
+                    });
+                }
+
+                // Complete Registration
+                if (buyerRegisterBtn) {
+                    buyerRegisterBtn.addEventListener('click', (e) => {
+                        const otpInput = document.getElementById('buyerOtp');
+                        if (otpInput && !otpInput.checkValidity()) {
+                            return;
+                        }
+                        
+                        alert('Buyer registration details completed successfully.');
+                    });
+                }
+
+                // GPS Location
+                if (buyerGpsBtn) {
+                    buyerGpsBtn.addEventListener('click', () => {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition((position) => {
+                                document.getElementById('buyerLatitude').value = position.coords.latitude;
+                                document.getElementById('buyerLongitude').value = position.coords.longitude;
+                                document.getElementById('buyerGpsMsg').classList.remove('hidden');
+                            }, (err) => {
+                                console.warn("Geolocation failed or denied.");
+                            });
+                        }
+                    });
+                }
+
+                // GPS Location - Buyer
+                if (buyerGpsBtn) {
+                    // already handled above
+                }
+
+                // Handle Role Selection change
+                const logisticsSpecificFields = document.getElementById('logisticsSpecificFields');
+                const storageSpecificFields   = document.getElementById('storageSpecificFields');
+
+                function resetRole(role) {
+                    // Hide all role containers
+                    [farmerRegisterFields, buyerSpecificFields, logisticsSpecificFields, storageSpecificFields].forEach(el => {
+                        if (el) el.classList.add('hidden');
+                    });
+
+                    if (role === 'farmer') {
+                        if (farmerRegisterFields) {
+                            farmerRegisterFields.classList.remove('hidden');
+                            // Reset farmer to step 1
+                            const fs1 = document.getElementById('farmerStep1');
+                            const fsL = document.getElementById('farmerLocationStep');
+                            const fsO = document.getElementById('farmerOtpStep');
+                            if (fs1) fs1.classList.remove('hidden');
+                            if (fsL) fsL.classList.add('hidden');
+                            if (fsO) fsO.classList.add('hidden');
+                        }
+                        formTitle.textContent = 'Register';
+                    } else if (role === 'buyer') {
+                        if (buyerSpecificFields) {
+                            buyerSpecificFields.classList.remove('hidden');
+                            if (buyerStep1) buyerStep1.classList.remove('hidden');
+                            if (buyerStep2) buyerStep2.classList.add('hidden');
+                            if (buyerOtpStep) buyerOtpStep.classList.add('hidden');
+                        }
+                        formTitle.textContent = 'Register';
+                    } else if (role === 'logistics') {
+                        if (logisticsSpecificFields) {
+                            logisticsSpecificFields.classList.remove('hidden');
+                            const ls1 = document.getElementById('logisticsStep1');
+                            const ls2 = document.getElementById('logisticsStep2');
+                            const lo  = document.getElementById('logisticsOtpStep');
+                            if (ls1) ls1.classList.remove('hidden');
+                            if (ls2) ls2.classList.add('hidden');
+                            if (lo)  lo.classList.add('hidden');
+                        }
+                        formTitle.textContent = 'Register';
+                    } else if (role === 'storage') {
+                        if (storageSpecificFields) {
+                            storageSpecificFields.classList.remove('hidden');
+                            const ss1 = document.getElementById('storageStep1');
+                            const ss2 = document.getElementById('storageStep2');
+                            const so  = document.getElementById('storageOtpStep');
+                            if (ss1) ss1.classList.remove('hidden');
+                            if (ss2) ss2.classList.add('hidden');
+                            if (so)  so.classList.add('hidden');
+                        }
+                        formTitle.textContent = 'Register';
+                    }
+                }
+
+                roleRadios.forEach(radio => {
+                    radio.addEventListener('change', (e) => {
+                        // Role-specific fields belong to registration only.  Changing
+                        // roles while logging in must not replace the Login heading.
+                        if (!registerForm.classList.contains('hidden')) {
+                            resetRole(e.target.value);
+                        }
+                    });
+                });
+
+                // Wire Logistics navigation
+                const logisticsStep1NextBtn = document.getElementById('logisticsStep1NextBtn');
+                const logisticsStep2BackBtn = document.getElementById('logisticsStep2BackBtn');
+                const logisticsOtpNextBtn   = document.getElementById('logisticsOtpNextBtn');
+                const logisticsGpsBtn       = document.getElementById('logisticsGpsBtn');
+
+                if (logisticsStep1NextBtn) {
+                    logisticsStep1NextBtn.addEventListener('click', () => {
+                        const inputs = document.getElementById('logisticsStep1').querySelectorAll('input[required], select[required]');
+                        let valid = true;
+                        inputs.forEach(i => { if (!i.checkValidity()) { i.reportValidity(); valid = false; } });
+                        if (!valid) return;
+                        document.getElementById('logisticsStep1').classList.add('hidden');
+                        document.getElementById('logisticsStep2').classList.remove('hidden');
+                        formTitle.textContent = 'Logistics Capability';
+                    });
+                }
+                if (logisticsStep2BackBtn) {
+                    logisticsStep2BackBtn.addEventListener('click', () => {
+                        document.getElementById('logisticsStep2').classList.add('hidden');
+                        document.getElementById('logisticsStep1').classList.remove('hidden');
+                        formTitle.textContent = 'Register';
+                    });
+                }
+                if (logisticsOtpNextBtn) {
+                    logisticsOtpNextBtn.addEventListener('click', () => {
+                        const inputs = document.getElementById('logisticsStep2').querySelectorAll('input[required], select[required]');
+                        let valid = true;
+                        inputs.forEach(i => { if (!i.checkValidity()) { i.reportValidity(); valid = false; } });
+                        if (!valid) return;
+                        document.getElementById('logisticsStep2').classList.add('hidden');
+                        document.getElementById('logisticsOtpStep').classList.remove('hidden');
+                        formTitle.textContent = 'Verify Phone';
+                    });
+                }
+                if (logisticsGpsBtn) {
+                    logisticsGpsBtn.addEventListener('click', () => {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(pos => {
+                                document.getElementById('logisticsLatitude').value = pos.coords.latitude;
+                                document.getElementById('logisticsLongitude').value = pos.coords.longitude;
+                                document.getElementById('logisticsGpsMsg').classList.remove('hidden');
+                            }, () => console.warn('Geolocation denied'));
+                        }
+                    });
+                }
+
+                // Wire Storage navigation
+                const storageStep1NextBtn = document.getElementById('storageStep1NextBtn');
+                const storageStep2BackBtn = document.getElementById('storageStep2BackBtn');
+                const storageOtpNextBtn   = document.getElementById('storageOtpNextBtn');
+                const storageGpsBtn       = document.getElementById('storageGpsBtn');
+
+                if (storageStep1NextBtn) {
+                    storageStep1NextBtn.addEventListener('click', () => {
+                        const inputs = document.getElementById('storageStep1').querySelectorAll('input[required], select[required]');
+                        let valid = true;
+                        inputs.forEach(i => { if (!i.checkValidity()) { i.reportValidity(); valid = false; } });
+                        if (!valid) return;
+                        document.getElementById('storageStep1').classList.add('hidden');
+                        document.getElementById('storageStep2').classList.remove('hidden');
+                        formTitle.textContent = 'Facility Details';
+                    });
+                }
+                if (storageStep2BackBtn) {
+                    storageStep2BackBtn.addEventListener('click', () => {
+                        document.getElementById('storageStep2').classList.add('hidden');
+                        document.getElementById('storageStep1').classList.remove('hidden');
+                        formTitle.textContent = 'Register';
+                    });
+                }
+                if (storageOtpNextBtn) {
+                    storageOtpNextBtn.addEventListener('click', () => {
+                        const inputs = document.getElementById('storageStep2').querySelectorAll('input[required], select[required]');
+                        let valid = true;
+                        inputs.forEach(i => { if (!i.checkValidity()) { i.reportValidity(); valid = false; } });
+                        if (!valid) return;
+                        document.getElementById('storageStep2').classList.add('hidden');
+                        document.getElementById('storageOtpStep').classList.remove('hidden');
+                        formTitle.textContent = 'Verify Phone';
+                    });
+                }
+                if (storageGpsBtn) {
+                    storageGpsBtn.addEventListener('click', () => {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(pos => {
+                                document.getElementById('storageLatitude').value = pos.coords.latitude;
+                                document.getElementById('storageLongitude').value = pos.coords.longitude;
+                                document.getElementById('storageGpsMsg').classList.remove('hidden');
+                            }, () => console.warn('Geolocation denied'));
+                        }
+                    });
+                }
+            });
+        </script>
+    </div> <!-- end split content wrapper -->
+</body>
+
+</html>

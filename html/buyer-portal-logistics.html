@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistics - Buyer Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/farmer-sidebar.css">
+    <link rel="stylesheet" href="../css/buyer-sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .dashboard-body { background-color: #f4f7f6; }
+        .dashboard-main { padding: 20px; margin-left: 220px; padding-left: 20px; padding-right: 20px; }
+        .page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        
+        .marketplace-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #ddd; padding-bottom: 10px; }
+        .tab-btn { background: transparent; border: none; padding: 10px 20px; font-size: 1rem; font-weight: 600; color: #666; cursor: pointer; border-radius: 8px; transition: 0.2s; }
+        .tab-btn:hover { background: #e0e6e3; }
+        .tab-btn.active { background: var(--primary-green); color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .ship-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
+        .ship-card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); display: flex; flex-direction: column; border-left: 5px solid var(--primary-green); }
+        .ship-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .ship-id { font-size: 1.1rem; color: #333; font-weight: 700; text-transform: uppercase; }
+        .ship-status { padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; background: #eef2ff; color: #4f46e5; }
+        
+        .ship-details { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.9rem; margin-bottom: 20px; flex-grow: 1;}
+        .ship-label { color: #888; font-size: 0.8rem; display: block; }
+        .ship-val { font-weight: 600; color: #333; }
+
+        .btn-action { padding: 10px; text-align: center; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s; border: none; font-family: 'Poppins', sans-serif;}
+        .btn-solid { background: var(--primary-green); color: white; width: 100%;}
+        .btn-solid:hover { background: #2d5016; }
+
+        /* Tracking Timeline */
+        .tracking-container { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); margin-bottom: 20px; }
+        .track-header { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 25px; }
+        
+        .timeline-horizontal { display: flex; justify-content: space-between; position: relative; margin-top: 40px; margin-bottom: 20px;}
+        .timeline-horizontal::before { content: ''; position: absolute; top: 15px; left: 0; width: 100%; height: 4px; background: #eee; z-index: 0; }
+        .time-node { display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; width: 20%; text-align: center;}
+        .node-circle { width: 34px; height: 34px; border-radius: 50%; background: #eee; border: 4px solid white; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; color: transparent; transition: 0.3s; margin-bottom: 10px;}
+        .time-node.active .node-circle { background: var(--primary-green); color: white; box-shadow: 0 0 0 4px rgba(74,180,100,0.2); }
+        .time-node.completed .node-circle { background: var(--primary-green); color: white; }
+        .node-label { font-size: 0.85rem; font-weight: 600; color: #888; }
+        .time-node.active .node-label, .time-node.completed .node-label { color: #333; }
+        .node-date { font-size: 0.75rem; color: #888; margin-top: 5px; }
+        
+        .progress-bar-fill { position: absolute; top: 15px; left: 0; height: 4px; background: var(--primary-green); z-index: 0; transition: width 0.5s ease; }
+    </style>
+</head>
+<body class="dashboard-body">
+    <button class="mobile-sidebar-toggle"><i class="fa-solid fa-bars"></i></button>
+    <aside class="farmer-sidebar" id="buyerSidebar"></aside>
+
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="logo"><span class="logo-text"><span class="logo-agri">Kisan<span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span></span></div>
+            <div class="header-actions">
+                
+                <a href="#" style="margin-right: 15px; color: var(--primary-green); font-size: 1.2rem; display: flex; align-items: center; text-decoration: none;" title="click for demo">
+                    <i class="fa-solid fa-circle-question"></i>
+                </a>
+                <div class="user-menu"><div class="user-avatar" id="userMenuBtn"><span id="userInitials">B</span></div></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="page-header">
+            <h1 style="color:var(--primary-green); font-size:2rem;">Logistics</h1>
+        </div>
+
+        <div class="marketplace-tabs">
+            <button class="tab-btn active" onclick="switchTab('shipments')">Shipments</button>
+            <button class="tab-btn" onclick="switchTab('tracking')">Tracking</button>
+        </div>
+
+        <div id="tab-shipments" class="tab-content active"><div class="ship-grid" id="shipGrid"></div></div>
+        <div id="tab-tracking" class="tab-content">
+            <div id="trackView"></div>
+        </div>
+    </main>
+
+    <script src="../js/buyer-data.js"></script>
+    <script src="../js/buyer-sidebar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderShipments();
+        });
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function renderShipments() {
+            const ships = db.getShipments();
+            const grid = document.getElementById('shipGrid');
+            const track = document.getElementById('trackView');
+
+            if(ships.length === 0) {
+                const empty = `
+                    <div style="grid-column: 1/-1; padding: 60px; text-align: center; color: #888; background: white; border-radius: 12px;">
+                        <i class="fa-solid fa-truck-fast" style="font-size: 3rem; margin-bottom: 15px; color: #ddd;"></i>
+                        <p style="margin-bottom: 20px;">You have no active shipments.</p>
+                    </div>`;
+                grid.innerHTML = empty;
+                track.innerHTML = empty;
+                return;
+            }
+
+            grid.innerHTML = ships.map(s => `
+                <div class="ship-card">
+                    <div class="ship-header">
+                        <div class="ship-id">Shipment #${s.id}</div>
+                        <div class="ship-status">${s.status}</div>
+                    </div>
+                    <div class="ship-details">
+                        <div><span class="ship-label">Order</span><span class="ship-val">${s.orderId}</span></div>
+                        <div><span class="ship-label">Crop</span><span class="ship-val">${s.crop} (${s.quantity} kg)</span></div>
+                        <div><span class="ship-label">Pickup</span><span class="ship-val">${s.pickupLocation}</span></div>
+                        <div><span class="ship-label">Destination</span><span class="ship-val">${s.destination}</span></div>
+                        <div><span class="ship-label">Distance</span><span class="ship-val">${s.distance} km</span></div>
+                        <div><span class="ship-label">Expected</span><span class="ship-val" style="color:var(--primary-green);">${new Date(s.expectedDelivery).toLocaleDateString()}</span></div>
+                    </div>
+                    <button class="btn-action btn-solid" onclick="viewTracking('${s.id}')">Track Shipment</button>
+                </div>
+            `).join('');
+
+            // Auto-render first tracking
+            viewTracking(ships[0].id);
+        }
+
+        function viewTracking(id) {
+            const s = db.getShipments().find(x => x.id === id);
+            if(!s) return;
+            
+            const track = document.getElementById('trackView');
+            
+            // Calculate progress width
+            const nodes = ['Origin', 'Pickup Scheduled', 'Picked Up', 'In Transit', 'Delivered'];
+            let completedIdx = -1;
+            s.timeline.forEach((t, i) => { if(t.completed) completedIdx = i + 1; });
+            const progressPct = completedIdx >= 0 ? (completedIdx / (nodes.length - 1)) * 100 : 0;
+
+            track.innerHTML = `
+                <div class="tracking-container">
+                    <div class="track-header">
+                        <div>
+                            <h2 style="margin:0; color:var(--primary-green);">Tracking #${s.id}</h2>
+                            <p style="margin:5px 0 0 0; color:#666;">Vehicle: ${s.vehicle} • Est Delivery: ${new Date(s.expectedDelivery).toLocaleDateString()}</p>
+                        </div>
+                        <div style="text-align:right;">
+                            <div style="font-size:0.9rem; color:#888; font-weight:600;">STATUS</div>
+                            <div style="font-size:1.2rem; font-weight:800; color:#333;">${s.status}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-horizontal">
+                        <div class="progress-bar-fill" style="width: ${progressPct}%;"></div>
+                        
+                        <div class="time-node completed">
+                            <div class="node-circle"><i class="fa-solid fa-check"></i></div>
+                            <div class="node-label">Origin (${s.pickupLocation})</div>
+                        </div>
+                        
+                        ${s.timeline.map((t, i) => {
+                            const isCompleted = t.completed;
+                            const isActive = i === completedIdx - 1 && !isCompleted;
+                            const statusClass = isCompleted ? 'completed' : (isActive ? 'active' : '');
+                            const icon = isCompleted ? 'fa-check' : (isActive ? 'fa-truck' : 'fa-circle');
+                            return `
+                                <div class="time-node ${statusClass}">
+                                    <div class="node-circle"><i class="fa-solid ${icon}"></i></div>
+                                    <div class="node-label">${t.status === 'Delivered' ? s.destination : t.status}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+            
+            switchTab('tracking');
+        }
+    </script>
+</body>
+</html>
