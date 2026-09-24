@@ -108,8 +108,8 @@
         "dashboard": "Dashboard",
         "marketIntelligence": "Market Prices",
         "myCrops": "My Crops",
-        "buyers": "Buyers",
-        "smartSelling": "Transport and Storage",
+        "buyers": "Live Bids",
+        "smartSelling": "Transport & Storage",
         "transactions": "Transactions",
         "profile": "Profile"
     },

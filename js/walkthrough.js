@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             target: '[data-tour="smart-selling"]',
-            title: 'Transport and Storage',
+            title: 'Transport & Storage',
             desc: 'Get smart suggestions to help you decide when and where to sell your crops.'
         },
         {

@@ -250,45 +250,382 @@
       margin: 3px 0 0
     }
 
-    .crop-row {
+    .crop-picker-label {
+      margin-top: 2px
+    }
+
+    .crop-picker {
+      width: 100%;
       display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding: 2px 1px 10px;
-      scroll-snap-type: x mandatory
-    }
-
-    .crop {
-      border: 2px solid #e2ebe0;
+      align-items: center;
+      gap: 13px;
+      border: 1px solid #cad9c5;
+      border-radius: 14px;
+      padding: 15px 17px;
       background: #fff;
-      border-radius: 16px;
-      flex: 0 0 115px;
-      padding: 9px 7px;
+      color: var(--ink);
+      text-align: left;
       cursor: pointer;
-      scroll-snap-align: start;
-      font: 700 .78rem Poppins;
-      color: #445442;
-      transition: .18s
+      transition: border-color .18s, box-shadow .18s, background .18s
     }
 
-    .crop:hover {
-      transform: translateY(-2px)
+    .crop-picker:hover,
+    .crop-picker:focus-visible {
+      border-color: var(--green2);
+      box-shadow: 0 0 0 3px #4a7c2c1c;
+      outline: 0
     }
 
-    .crop.selected {
-      border: 4px solid var(--green);
-      padding: 7px 5px;
-      box-shadow: 0 7px 18px #2d501622
+    .crop-picker-icon {
+      width: 46px;
+      height: 46px;
+      flex: none;
+      object-fit: cover;
+      border-radius: 12px;
+      background: var(--pale);
+      display: grid;
+      place-items: center;
+      font-size: 1.7rem
     }
 
-    .crop img {
+    .crop-picker-copy {
+      min-width: 0;
+      flex: 1
+    }
+
+    .crop-picker-title {
       display: block;
-      width: 66px;
-      height: 66px;
+      color: var(--green);
+      font-weight: 800;
+      font-size: .91rem
+    }
+
+    .crop-picker-help,
+    .crop-picker-meta {
+      display: block;
+      color: var(--muted);
+      font-size: .72rem;
+      margin-top: 3px
+    }
+
+    .crop-picker-arrow {
+      color: var(--green);
+      font-size: 1.2rem;
+      flex: none
+    }
+
+    .crop-picker-summary {
+      color: var(--muted);
+      font-size: .7rem;
+      margin: 7px 2px 0
+    }
+
+    .crop-picker-summary strong {
+      color: #536350
+    }
+
+    .crop-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      background: #10220d99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s
+    }
+
+    .crop-modal.open {
+      opacity: 1;
+      pointer-events: auto
+    }
+
+    .crop-modal-panel {
+      width: min(820px, 100%);
+      height: min(740px, calc(100vh - 32px));
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 22px 60px #11250d33
+    }
+
+    .crop-modal-header {
+      display: flex;
+      flex: none;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 17px 22px 10px
+    }
+
+    .crop-modal-header h2 {
+      margin: 0;
+      color: var(--green);
+      font: 800 1.35rem Montserrat
+    }
+
+    .crop-modal-header p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: .78rem
+    }
+
+    .crop-modal-close {
+      border: 0;
+      background: var(--pale);
+      color: var(--green);
+      border-radius: 10px;
+      width: 34px;
+      height: 34px;
+      font-size: 1.35rem;
+      line-height: 1;
+      cursor: pointer
+    }
+
+    .crop-modal-search {
+      flex: none;
+      margin: 0 22px 9px;
+      position: relative
+    }
+
+    .crop-modal-search i {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      color: var(--green2)
+    }
+
+    .crop-modal-search input {
+      padding-left: 39px
+    }
+
+    .crop-modal-body {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 0 22px 14px
+    }
+
+    .crop-modal-heading {
+      margin: 10px 0 7px;
+      color: var(--green);
+      font-size: .86rem
+    }
+
+    .crop-grid,
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px
+    }
+
+    .modal-crop,
+    .crop-category,
+    .variety-option {
+      border: 1px solid #dbe7d7;
+      border-radius: 11px;
+      background: #fff;
+      color: #445442;
+      cursor: pointer;
+      font: 600 .72rem Poppins;
+      transition: .16s
+    }
+
+    .modal-crop {
+      min-height: 76px;
+      padding: 5px;
+      text-align: center
+    }
+
+    .modal-crop:hover,
+    .modal-crop.selected,
+    .crop-category:hover,
+    .crop-category.selected,
+    .variety-option.selected {
+      border-color: var(--green);
+      background: var(--pale);
+      color: var(--green)
+    }
+
+    .modal-crop img {
+      display: block;
+      width: 34px;
+      height: 34px;
       object-fit: cover;
       border-radius: 50%;
-      margin: 0 auto 7px;
-      background: var(--pale)
+      margin: 0 auto 4px
+    }
+
+    .modal-crop .crop-visual {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      margin: 0 auto 2px;
+      border-radius: 50%;
+      background: var(--pale);
+      font-size: 1.55rem
+    }
+
+    .modal-crop small,
+    .crop-category small {
+      display: block;
+      color: var(--muted);
+      font-size: .6rem;
+      font-weight: 500
+    }
+
+    .crop-category {
+      min-height: 59px;
+      padding: 5px 4px;
+      text-align: center
+    }
+
+    .crop-category i {
+      display: block;
+      color: var(--green2);
+      margin-bottom: 2px
+    }
+
+    .crop-all-label {
+      display: block;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      color: var(--muted);
+      font-size: .72rem;
+      margin: 8px 0 4px;
+      cursor: pointer
+    }
+
+    .crop-detail {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #f8fbf6
+    }
+
+    .crop-detail-title {
+      color: var(--green);
+      font-weight: 800;
+      font-size: .82rem
+    }
+
+    .crop-detail-sub {
+      color: var(--muted);
+      font-size: .7rem
+    }
+
+    .crop-detail-sub img {
+      width: 34px;
+      height: 34px;
+      object-fit: cover;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin-right: 6px
+    }
+
+    .crop-detail-sub .crop-visual {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin-right: 6px;
+      border-radius: 50%;
+      background: var(--pale);
+      font-size: 1.25rem;
+      vertical-align: middle
+    }
+
+    .variety-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 8px
+    }
+
+    .variety-option {
+      padding: 7px 10px
+    }
+
+    .variety-search {
+      width: 100%;
+      margin-top: 9px;
+      padding: 9px 11px;
+      font-size: .75rem
+    }
+
+    .unknown-variety {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: .7rem;
+      cursor: pointer
+    }
+
+    .unknown-variety input {
+      width: auto;
+      accent-color: var(--green)
+    }
+
+    .crop-modal-footer {
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      border-top: 1px solid var(--line);
+      padding: 10px 22px;
+      background: #fff
+    }
+
+    .crop-modal-selected {
+      min-width: 0;
+      color: var(--green);
+      font-size: .76rem;
+      font-weight: 700
+    }
+
+    .crop-modal-selected small {
+      display: block;
+      color: var(--muted);
+      font-weight: 500
+    }
+
+    .crop-modal-actions {
+      display: flex;
+      gap: 8px
+    }
+
+    .crop-modal-actions button {
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font: 700 .74rem Poppins;
+      cursor: pointer
+    }
+
+    .crop-cancel {
+      background: #eef3ec;
+      color: var(--green)
+    }
+
+    .crop-confirm {
+      background: var(--green);
+      color: #fff
+    }
+
+    .crop-confirm:disabled {
+      cursor: not-allowed;
+      opacity: .45
     }
 
     label {
@@ -320,24 +657,24 @@
     .volumes {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 14px
+      gap: 10px;
+      margin-top: 12px
     }
 
     .volume {
-      min-height: 132px;
+      min-height: 116px;
       background: linear-gradient(140deg, #fff, #f2f8ef);
       border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 14px 16px;
+      border-radius: 13px;
+      padding: 12px 14px;
       box-shadow: inset 0 1px #fff, 0 3px 10px #31551a08
     }
 
     .vol-title {
       color: #70806b;
       text-transform: uppercase;
-      letter-spacing: .06em;
-      font-size: .7rem;
+      letter-spacing: .055em;
+      font-size: .68rem;
       font-weight: 800
     }
 
@@ -345,14 +682,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      margin: 9px 0 8px
+      gap: 8px;
+      margin: 7px 0 6px
     }
 
     .round {
-      width: 38px;
-      height: 38px;
-      flex: 0 0 38px;
+      width: 36px;
+      height: 36px;
+      flex: 0 0 36px;
       border: 0;
       border-radius: 11px;
       background: var(--green);
@@ -370,7 +707,13 @@
     }
 
     .weight {
-      font-size: 1.85rem;
+      width: 78px;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      text-align: center;
+      font-size: 1.72rem;
       line-height: 1;
       color: var(--green);
       font-weight: 800
@@ -379,10 +722,10 @@
     .units {
       display: flex;
       justify-content: center;
-      gap: 9px;
+      gap: 7px;
       align-items: center;
       color: #647260;
-      font-size: .75rem
+      font-size: .72rem
     }
 
     .toggle {
@@ -425,18 +768,18 @@
 
     .bags {
       display: flex;
-      gap: 9px;
+      gap: 8px;
       align-items: center;
-      margin-top: 12px
+      margin-top: 10px
     }
 
     .bags i {
       display: grid;
       place-items: center;
-      width: 34px;
-      height: 34px;
-      flex: 0 0 34px;
-      border-radius: 10px;
+      width: 32px;
+      height: 32px;
+      flex: 0 0 32px;
+      border-radius: 9px;
       background: #fff5e5;
       font-size: 1rem;
       color: #a8783e
@@ -444,9 +787,9 @@
 
     .bags input {
       min-width: 0;
-      height: 40px;
-      padding: 8px 11px;
-      border-radius: 11px
+      height: 38px;
+      padding: 7px 10px;
+      border-radius: 10px
     }
 
     .bags b {
@@ -456,53 +799,56 @@
 
     .scan {
       width: 100%;
-      border: 2px dashed #75a15d;
-      border-radius: 16px;
+      min-height: 78px;
+      border: 1px dashed #75a15d;
+      border-radius: 13px;
       background: linear-gradient(105deg, #234313, #4d7c2e);
       color: #fff;
-      padding: 17px;
+      padding: 11px 14px;
       text-align: left;
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-      font: 700 .96rem Poppins;
-      box-shadow: 0 8px 20px #2d501625
+      font: 700 .86rem Poppins;
+      box-shadow: 0 6px 14px #2d501625
     }
 
     .scan i:first-child {
-      font-size: 1.3rem;
-      margin-right: 8px;
+      font-size: 1.15rem;
+      margin-right: 6px;
       animation: blink 1.3s infinite
     }
 
     .scan small {
       display: block;
-      font-size: .7rem;
+      font-size: .64rem;
       font-weight: 500;
       color: #dcedd3;
-      margin: 2px 0 0
+      margin: 1px 0 0
     }
 
     .scan-actions {
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
-      gap: 10px
+      gap: 8px;
+      align-items: stretch
     }
 
     .upload-photo {
-      min-width: 156px;
+      min-width: 136px;
+      min-height: 78px;
       border: 1px solid #b8d0ac;
-      border-radius: 14px;
+      border-radius: 13px;
       background: #f2f8ef;
       color: var(--green);
-      padding: 12px 14px;
+      padding: 9px 11px;
       display: grid;
       place-items: center;
       align-content: center;
       gap: 3px;
       cursor: pointer;
-      font: 700 .78rem Poppins;
+      font: 700 .72rem Poppins;
       text-align: center;
       transition: .18s
     }
@@ -514,12 +860,12 @@
     }
 
     .upload-photo i {
-      font-size: 1.1rem
+      font-size: 1rem
     }
 
     .upload-photo small {
       color: #687a63;
-      font-size: .64rem;
+      font-size: .6rem;
       font-weight: 500
     }
 
@@ -715,14 +1061,13 @@
       left: 220px;
       right: 0;
       bottom: 0;
-      padding: 13px 35px;
+      padding: 8px 28px;
       background: #fffffff0;
       backdrop-filter: blur(13px);
       border-top: 1px solid var(--line);
       display: flex;
       justify-content: center;
-      align-items: center;
-      gap: 15px
+      align-items: center
     }
 
     .intent-tabs {
@@ -752,13 +1097,30 @@
     .publish {
       border: 0;
       border-radius: 12px;
-      min-width: 260px;
-      padding: 13px 20px;
+      width: min(340px, 100%);
+      min-width: 0;
+      padding: 11px 20px;
       background: linear-gradient(100deg, #2d5016, #4f8430);
       color: #fff;
-      font: 800 .9rem Poppins;
+      font: 800 .88rem Poppins;
       cursor: pointer;
-      box-shadow: 0 7px 17px #2d501636
+      box-shadow: 0 6px 15px #2d501636;
+      transition: transform .18s, box-shadow .18s, filter .18s
+    }
+
+    .publish:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px #2d50164a
+    }
+
+    .publish:active {
+      transform: translateY(0)
+    }
+
+    .publish:focus-visible {
+      outline: 3px solid #b8d3a9;
+      outline-offset: 3px
     }
 
     .publish.offline {
@@ -951,13 +1313,41 @@
         border-radius: 16px
       }
 
-      .crop {
-        flex-basis: 104px
+      .crop-modal {
+        padding: 0
       }
 
-      .crop img {
-        width: 58px;
-        height: 58px
+      .crop-modal-panel {
+        width: 100%;
+        height: 100%;
+        max-height: none;
+        border-radius: 0
+      }
+
+      .crop-modal-header,
+      .crop-modal-body,
+      .crop-modal-footer {
+        padding-left: 17px;
+        padding-right: 17px
+      }
+
+      .crop-modal-search {
+        margin-left: 17px;
+        margin-right: 17px
+      }
+
+      .crop-grid,
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .crop-modal-footer {
+        align-items: stretch;
+        flex-direction: column
+      }
+
+      .crop-modal-actions button {
+        flex: 1
       }
 
       .scan-actions {
@@ -997,20 +1387,10 @@
         display: block
       }
 
-      .intent-tabs {
-        width: 100%;
-        margin-bottom: 8px
-      }
-
-      .intent {
-        flex: 1;
-        padding: 9px 3px;
-        font-size: .69rem
-      }
-
       .publish {
         width: 100%;
-        min-width: 0
+        min-width: 0;
+        padding: 13px 18px
       }
 
       .reticle {
@@ -1070,10 +1450,14 @@
           <div class="nav-flyout"><span class="flyout-title">My Crops</span><span class="flyout-desc">Manage
               Listings</span></div>
         </li>
-        <li><a href="buyer-marketplace.html"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span
-              class="nav-text">Buyers</span></a>
-          <div class="nav-flyout"><span class="flyout-title">Buyers</span><span class="flyout-desc">Verified
-              Buyers</span></div>
+        <li><a href="my-lots.html"><span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span
+              class="nav-text">My Lots</span></a>
+          <div class="nav-flyout"><span class="flyout-title">My Lots</span><span class="flyout-desc">Release lots for bidding</span></div>
+        </li>
+        <li><a href="buyer-portal-offers.html"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span
+                class="nav-text">Live Bids</span></a>
+              <div class="nav-flyout"><span class="flyout-title">Live Bids</span><span class="flyout-desc">Live buyer
+                offers</span></div>
         </li>
         <li><a href="transport-optimizer.html"><span class="nav-icon"><i class="fa-solid fa-truck"></i></span><span
               class="nav-text">Transport & Storage</span></a>
@@ -1130,18 +1514,36 @@
               <p>Select the commodity and record inventory ready for market.</p>
             </div>
           </div>
-          <div class="crop-row" id="crops"><button class="crop selected" data-crop="Paddy"><img
-                src="../public/lot-crops/paddy-avatar.png" alt="Paddy rice">Paddy</button><button class="crop"
-              data-crop="Wheat"><img src="../public/lot-crops/wheat-avatar.png" alt="Wheat">Wheat</button><button
-              class="crop" data-crop="Maize"><img src="../public/lot-crops/maize-avatar.png"
-                alt="Maize">Maize</button><button class="crop" data-crop="Chickpeas"><img
-                src="../public/lot-crops/chickpeas-avatar.png" alt="Chickpeas">Chickpeas</button></div>
-          <label for="variety">Variety</label><select id="variety" class="select"></select>
+          <label class="crop-picker-label" for="cropPicker">Crop</label>
+          <button class="crop-picker" id="cropPicker" type="button" aria-haspopup="dialog">
+            <span class="crop-picker-icon crop-visual" id="cropPickerIcon" role="img" aria-label="Crop">🌾</span>
+            <span class="crop-picker-copy"><span class="crop-picker-title" id="cropPickerTitle">Select your crop</span><span
+                class="crop-picker-help" id="cropPickerHelp">Choose from cereals, pulses, vegetables, fruits and more.</span></span>
+            <span class="crop-picker-arrow" aria-hidden="true">&#8594;</span>
+          </button>
+          <div class="crop-picker-summary" id="cropPickerSummary" hidden>Category: <strong></strong></div>
+          <input id="variety" type="hidden" value="">
+          <div class="crop-modal" id="cropModal" role="dialog" aria-modal="true" aria-labelledby="cropModalTitle">
+            <div class="crop-modal-panel">
+              <div class="crop-modal-header"><div><h2 id="cropModalTitle">Select Your Crop</h2><p>Choose the crop you are growing or preparing for market.</p></div><button class="crop-modal-close" id="cropModalClose" type="button" aria-label="Close">&times;</button></div>
+              <div class="crop-modal-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="cropSearch" type="search" placeholder="Rice, Paddy, Basmati, Chana..." aria-label="Search crop, local name or variety"></div>
+              <div class="crop-modal-body">
+                <h3 class="crop-modal-heading">Browse by Category</h3>
+                <div class="category-grid" id="categoryGrid"></div>
+                <h3 class="crop-modal-heading" id="cropBrowseHeading">Popular Crops</h3>
+                <div class="crop-grid" id="cropGrid"></div>
+                <button class="crop-all-label" id="viewAllCrops" type="button">View All Crops</button>
+                <div class="crop-detail" id="cropDetail" hidden></div>
+              </div>
+              <div class="crop-modal-footer"><div class="crop-modal-selected" id="cropModalSelected">No crop selected<small>Choose a crop to continue</small></div><div class="crop-modal-actions"><button class="crop-cancel" id="cropCancel" type="button">Cancel</button><button class="crop-confirm" id="cropConfirm" type="button" disabled>Confirm Selection</button></div></div>
+            </div>
+          </div>
           <div class="volumes">
             <div class="volume">
               <div class="vol-title">Total weight</div>
-              <div class="counter"><button class="round" id="down" aria-label="Decrease weight">−</button><b
-                  class="weight" id="weight">5.0</b><button class="round" id="up"
+                <div class="counter"><button class="round" id="down" aria-label="Decrease weight">−</button><input
+                  class="weight" id="weight" type="number" inputmode="decimal" min="0.5" step="0.1" value="5.0"
+                  aria-label="Total weight"><button class="round" id="up"
                   aria-label="Increase weight">+</button></div>
               <div class="units"><span>Tons</span><label class="toggle"><input id="units" type="checkbox"><span
                     class="slider"></span></label><span>Quintals</span></div>
@@ -1213,9 +1615,7 @@
     </div>
   </main>
   <div class="dock">
-    <div class="intent-tabs"><button class="intent active" data-intent="storage"><i class="fa-solid fa-warehouse"></i> Move to Storage</button><button
-        class="intent" data-intent="buyers"><i class="fa-solid fa-bolt"></i> Sell to Live Buyers</button></div><button class="publish" id="publish"><i class="fa-solid fa-paper-plane"></i>
-      Publish Digital Lot</button>
+    <button class="publish" id="publish"><i class="fa-solid fa-plus"></i> Create Lot</button>
   </div>
   <section class="camera" id="camera"><video id="video" autoplay muted playsinline></video>
     <div class="fallback" id="fallback"></div>
@@ -1228,22 +1628,39 @@
   <div class="notice" id="notice"></div>
   <script src="../js/i18n.js"></script>
   <script src="../js/farmer-sidebar.js"></script>
+  <script src="../js/my-lots.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const varieties = { Paddy: ['Sona Masuri', 'Basmati', 'Jyothi'], Wheat: ['Sharbati', 'Lokwan', 'Durum'], Maize: ['Yellow Maize', 'White Maize', 'Sweet Corn'], Chickpeas: ['Kabuli', 'Desi', 'Pusa 372'] }; let crop = 'Paddy', weight = 5, target = 'storage', stream, scanned = false;
+      const crops = [{ name: 'Paddy / Rice', local: 'धान • तांदूळ', key: 'Paddy', icon: '🌾', category: 'Cereals & Grains', varieties: ['Basmati', 'Sona Masuri', 'Indrayani', 'Kolam', 'Swarna'] }, { name: 'Wheat', local: 'गहू', key: 'Wheat', icon: '🌾', category: 'Cereals & Grains', varieties: ['Sharbati', 'Lokwan', 'Durum'] }, { name: 'Maize', local: 'मका', key: 'Maize', icon: '🌽', category: 'Cereals & Grains', varieties: ['Yellow Maize', 'White Maize', 'Sweet Corn'] }, { name: 'Chickpea / Chana', local: 'हरभरा', key: 'Chickpeas', icon: '🫘', category: 'Pulses', varieties: ['Kabuli', 'Desi', 'Pusa 372'] }, { name: 'Tur / Arhar', local: 'तूर • तुअर', key: 'Tur', icon: '🫘', category: 'Pulses', varieties: ['BSMR 736', 'Asha'] }, { name: 'Moong', local: 'मूग', key: 'Moong', icon: '🫘', category: 'Pulses', varieties: ['Green Moong', 'Shining'] }, { name: 'Onion', local: 'कांदा', key: 'Onion', icon: '🧅', category: 'Vegetables', varieties: ['Red Onion', 'White Onion'] }, { name: 'Potato', local: 'बटाटा', key: 'Potato', icon: '🥔', category: 'Vegetables', varieties: ['Pukhraj', 'Jyoti'] }, { name: 'Soybean', local: 'सोयाबीन', key: 'Soybean', icon: '🌱', category: 'Oilseeds', varieties: ['JS 335', 'JS 95-60'] }, { name: 'Groundnut', local: 'भुईमूग', key: 'Groundnut', icon: '🥜', category: 'Oilseeds', varieties: ['JL 24', 'TAG 24'] }, { name: 'Bajra', local: 'बाजरी', key: 'Bajra', icon: '🌾', category: 'Cereals & Grains', varieties: ['Hybrid Bajra'] }, { name: 'Tomato', local: 'टोमॅटो', key: 'Tomato', icon: '🍅', category: 'Vegetables', varieties: ['Local', 'Hybrid'] }, { name: 'Mango', local: 'आंबा', key: 'Mango', icon: '🥭', category: 'Fruits', varieties: ['Alphonso', 'Kesar', 'Ratnagiri'] }, { name: 'Banana', local: 'केळी', key: 'Banana', icon: '🍌', category: 'Fruits', varieties: ['Cavendish', 'Robusta'] }, { name: 'Grapes', local: 'द्राक्षे', key: 'Grapes', icon: '🍇', category: 'Fruits', varieties: ['Thompson Seedless', 'Sonaka'] }, { name: 'Chilli', local: 'मिरची', key: 'Chilli', icon: '🌶️', category: 'Spices', varieties: ['Byadgi', 'Teja'] }, { name: 'Turmeric', local: 'हळद', key: 'Turmeric', icon: '🫚', category: 'Spices', varieties: ['Salem', 'Rajapuri'] }, { name: 'Cumin', local: 'जिरे', key: 'Cumin', icon: '🌿', category: 'Spices', varieties: ['GC 4', 'RZ 19'] }, { name: 'Cotton', local: 'कापूस', key: 'Cotton', icon: '🌼', category: 'Commercial Crops', varieties: ['Bt Cotton', 'Desi Cotton'] }, { name: 'Sugarcane', local: 'ऊस', key: 'Sugarcane', icon: '🎋', category: 'Commercial Crops', varieties: ['Co 86032', 'CoM 0265'] }, { name: 'Flowers', local: 'फुले', key: 'Flowers', icon: '🌸', category: 'Other', varieties: ['Marigold', 'Rose'] }, { name: 'Fodder', local: 'चारा', key: 'Fodder', icon: '🌿', category: 'Other', varieties: ['Napier Grass', 'Sorghum Fodder'] }];
+      const categories = [['Cereals & Grains', 'fa-wheat-awn', 12, 'Rice, Wheat, Maize'], ['Pulses', 'fa-seedling', 10, 'Chana, Tur, Moong'], ['Oilseeds', 'fa-droplet', 8, 'Soybean, Groundnut'], ['Vegetables', 'fa-carrot', 14, 'Onion, Tomato, Potato'], ['Fruits', 'fa-apple-whole', 3, 'Mango, Banana, Grapes'], ['Spices', 'fa-pepper-hot', 3, 'Chilli, Turmeric, Cumin'], ['Commercial Crops', 'fa-leaf', 2, 'Cotton, Sugarcane'], ['Other', 'fa-ellipsis', 2, 'Flowers, Fodder']];
+      let crop = '', selectedCrop = null, selectedVariety = '', activeCategory = '', weight = 5, target = 'storage', stream, scanned = false;
       const variety = document.querySelector('#variety'), units = document.querySelector('#units'), weightEl = document.querySelector('#weight'), receipt = document.querySelector('#receipt');
-      const updateReceipt = () => receipt.textContent = `Creating Market Asset: ${weight.toFixed(1)} ${units.checked ? 'Quintals' : 'Tons'} of Grade-A ${variety.value || 'Sona Masuri'} ${crop}.`;
-      const loadVarieties = () => { variety.innerHTML = varieties[crop].map(v => `<option>${v}</option>`).join(''); updateReceipt() };
-      document.querySelectorAll('.crop').forEach(el => el.addEventListener('click', () => { document.querySelector('.crop.selected').classList.remove('selected'); el.classList.add('selected'); crop = el.dataset.crop; navigator.vibrate?.(30); loadVarieties() }));
-      document.querySelector('#down').onclick = () => { weight = Math.max(.5, weight - .5); weightEl.textContent = weight.toFixed(1); updateReceipt() }; document.querySelector('#up').onclick = () => { weight += .5; weightEl.textContent = weight.toFixed(1); updateReceipt() }; units.onchange = updateReceipt; variety.onchange = updateReceipt; loadVarieties();
+      const updateReceipt = () => receipt.textContent = `Creating Market Asset: ${weight.toFixed(1)} ${units.checked ? 'Quintals' : 'Tons'} of Grade-A ${selectedVariety || 'Not specified'} ${crop || 'crop'}.`;
+      const setWeight = (value, syncInput = true) => { const nextWeight = Number(value); if (!Number.isFinite(nextWeight) || nextWeight < .5) return false; weight = Math.round(nextWeight * 10) / 10; if (syncInput) weightEl.value = weight.toFixed(1); updateReceipt(); return true };
+      const cropModal = document.querySelector('#cropModal'), cropGrid = document.querySelector('#cropGrid'), categoryGrid = document.querySelector('#categoryGrid'), cropDetail = document.querySelector('#cropDetail'), cropSearch = document.querySelector('#cropSearch'), cropModalSelected = document.querySelector('#cropModalSelected'), cropConfirm = document.querySelector('#cropConfirm');
+      const cropImage = item => `<span class="crop-visual" role="img" aria-label="${item.name}">${item.icon}</span>`;
+      const renderCategories = () => { categoryGrid.innerHTML = categories.map(([name, icon, count, examples]) => `<button class="crop-category${activeCategory === name ? ' selected' : ''}" type="button" data-category="${name}"><i class="fa-solid ${icon}"></i>${name}<small>${count ? `${count} crops · ${examples}` : 'No crops yet'}</small></button>`).join('') };
+      const renderCropGrid = (items = crops, heading = 'Popular Crops') => { document.querySelector('#cropBrowseHeading').textContent = heading; cropGrid.innerHTML = items.length ? items.map(item => `<button class="modal-crop${selectedCrop?.key === item.key ? ' selected' : ''}" type="button" data-crop-key="${item.key}">${cropImage(item)}${item.name}<small>${item.local}</small></button>`).join('') : '<div class="crop-all-label">No crops have been added in this category yet. Choose another category or view all crops.</div>' };
+      const renderDetail = () => { if (!selectedCrop) { cropDetail.hidden = true; return } cropDetail.hidden = false; cropDetail.innerHTML = `<div class="crop-detail-title">SELECTED CROP</div><div class="crop-detail-sub">${cropImage(selectedCrop)}<strong>${selectedCrop.name}</strong> · ${selectedCrop.local}<br>Category: ${selectedCrop.category}</div><div class="crop-detail-title" style="margin-top:10px">Choose Variety</div><div class="variety-options">${selectedCrop.varieties.map(item => `<button class="variety-option${selectedVariety === item ? ' selected' : ''}" type="button" data-variety="${item}">${item}</button>`).join('')}<button class="variety-option${selectedVariety === 'Not specified' ? ' selected' : ''}" type="button" data-variety="Not specified">Other</button></div><input class="variety-search" id="varietySearch" type="search" placeholder="Search variety..." aria-label="Search variety"><label class="unknown-variety"><input type="checkbox" id="unknownVariety" ${selectedVariety === 'Not specified' ? 'checked' : ''}> I don't know the variety</label>`; cropDetail.querySelectorAll('[data-variety]').forEach(button => button.onclick = () => { selectedVariety = button.dataset.variety; renderDetail(); updateModalFooter() }); cropDetail.querySelector('#varietySearch').oninput = event => { const query = event.target.value.toLowerCase(); cropDetail.querySelectorAll('[data-variety]').forEach(button => { button.hidden = query && !button.dataset.variety.toLowerCase().includes(query) }) }; cropDetail.querySelector('#unknownVariety').onchange = event => { selectedVariety = event.target.checked ? 'Not specified' : ''; renderDetail(); updateModalFooter() } };
+      const updateModalFooter = () => { cropModalSelected.innerHTML = selectedCrop ? `${selectedCrop.name}<small>${selectedVariety || 'Variety not specified'}</small>` : 'No crop selected<small>Choose a crop to continue</small>'; cropConfirm.disabled = !selectedCrop };
+      const chooseCrop = item => { selectedCrop = item; selectedVariety = ''; const visibleCrops = activeCategory ? crops.filter(cropItem => cropItem.category === activeCategory) : crops; renderCropGrid(visibleCrops, activeCategory || 'All Crops'); renderDetail(); updateModalFooter() };
+      const openCropModal = () => { cropSearch.value = ''; renderCropGrid(); renderCategories(); renderDetail(); updateModalFooter(); cropModal.classList.add('open'); cropSearch.focus() };
+      const closeCropModal = () => cropModal.classList.remove('open');
+      document.querySelector('#cropPicker').onclick = openCropModal; document.querySelector('#cropModalClose').onclick = closeCropModal; document.querySelector('#cropCancel').onclick = closeCropModal; cropModal.onclick = event => { if (event.target === cropModal) closeCropModal() }; document.addEventListener('keydown', event => { if (event.key === 'Escape' && cropModal.classList.contains('open')) closeCropModal() });
+      cropSearch.oninput = () => { const query = cropSearch.value.toLowerCase().trim(); activeCategory = ''; renderCategories(); renderCropGrid(crops.filter(item => `${item.name} ${item.local} ${item.varieties.join(' ')}`.toLowerCase().includes(query)), query ? 'Search Results' : 'Popular Crops') };
+      cropGrid.onclick = event => { const button = event.target.closest('[data-crop-key]'); if (button) chooseCrop(crops.find(item => item.key === button.dataset.cropKey)) };
+      categoryGrid.onclick = event => { const button = event.target.closest('[data-category]'); if (button) { activeCategory = button.dataset.category; renderCategories(); renderCropGrid(crops.filter(item => item.category === activeCategory), activeCategory) } };
+      document.querySelector('#viewAllCrops').onclick = () => { activeCategory = ''; renderCategories(); renderCropGrid(crops, 'All Crops') };
+      cropConfirm.onclick = () => { crop = selectedCrop.key; variety.value = selectedVariety || 'Not specified'; document.querySelector('#cropPickerIcon').textContent = selectedCrop.icon; document.querySelector('#cropPickerIcon').setAttribute('aria-label', selectedCrop.name); document.querySelector('#cropPickerTitle').textContent = selectedCrop.name; document.querySelector('#cropPickerHelp').textContent = `${selectedCrop.local} · Variety: ${variety.value}`; document.querySelector('#cropPickerSummary').hidden = false; document.querySelector('#cropPickerSummary strong').textContent = selectedCrop.category; navigator.vibrate?.(30); updateReceipt(); closeCropModal() };
+      document.querySelector('#down').onclick = () => setWeight(weight - .5); document.querySelector('#up').onclick = () => setWeight(weight + .5); weightEl.oninput = () => setWeight(weightEl.value, false); weightEl.onblur = () => { if (!setWeight(weightEl.value)) setWeight(weight) }; units.onchange = updateReceipt; variety.onchange = updateReceipt; updateReceipt();
       const camera = document.querySelector('#camera'), video = document.querySelector('#video'), fallback = document.querySelector('#fallback'), guide = document.querySelector('#guide'), flash = document.querySelector('#flash');
       const closeCamera = () => { camera.classList.remove('open'); stream?.getTracks().forEach(t => t.stop()); stream = null };
-      const finishAnalysis = () => { closeCamera(); scanned = true; document.querySelector('#quality').classList.add('show'); document.querySelector('#manifest').classList.add('show'); document.querySelector('#empty').hidden = true; document.querySelector('#time').textContent = new Intl.DateTimeFormat('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date()); updateReceipt(); document.querySelector('#quality').scrollIntoView({ behavior: 'smooth', block: 'center' }) };
+      const finishAnalysis = () => { closeCamera(); scanned = true; document.querySelector('#quality').classList.add('show'); updateReceipt(); document.querySelector('#quality').scrollIntoView({ behavior: 'smooth', block: 'center' }) };
       document.querySelector('#scan').onclick = async () => { camera.classList.add('open'); guide.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Hold steady... Move to a brighter area.'; try { if (!navigator.mediaDevices?.getUserMedia) throw new Error('Camera unavailable'); stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' } }, audio: false }); video.srcObject = stream; fallback.hidden = true } catch { fallback.hidden = false } setTimeout(() => guide.innerHTML = '<i class="fa-solid fa-circle-check"></i> Perfect! Analyzing grain surface...', 1500); setTimeout(() => flash.classList.add('fire'), 2900); setTimeout(() => { flash.classList.remove('fire'); finishAnalysis() }, 3250) };
       document.querySelector('#cropPhoto').onchange = event => { const file = event.target.files[0]; if (!file) return; notice.textContent = `${file.name} selected. Analyzing your crop photo locally...`; notice.classList.add('show'); setTimeout(() => { notice.classList.remove('show'); finishAnalysis() }, 700); event.target.value = '' };
       document.querySelectorAll('.intent').forEach(el => el.onclick = () => { document.querySelector('.intent.active').classList.remove('active'); el.classList.add('active'); target = el.dataset.intent });
-      const publish = document.querySelector('#publish'), notice = document.querySelector('#notice'), poor = () => { const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection; return !navigator.onLine || ['slow-2g', '2g'].includes(c?.effectiveType) }, network = () => { publish.classList.toggle('offline', poor()); publish.innerHTML = poor() ? '<i class="fa-solid fa-cloud-arrow-up"></i> Save Offline &amp; Sync' : '<i class="fa-solid fa-paper-plane"></i> Publish Digital Lot' }; window.ononline = network; window.onoffline = network; navigator.connection?.addEventListener?.('change', network); network();
-      publish.onclick = () => { if (!scanned) { notice.textContent = 'Scan crop quality first to mint a verified Digital Lot Manifest.'; notice.classList.add('show'); setTimeout(() => notice.classList.remove('show'), 3500); return } publish.classList.add('loading'); setTimeout(() => { publish.classList.remove('loading'); notice.textContent = poor() ? '✓ Lot saved safely on this device. It will sync automatically when connected.' : `✓ Digital Lot published for ${target === 'buyers' ? 'live buyer bidding' : 'storage transfer'}.`; notice.classList.add('show'); setTimeout(() => notice.classList.remove('show'), 4200) }, 800) };
+      const publish = document.querySelector('#publish'), notice = document.querySelector('#notice'), poor = () => { const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection; return !navigator.onLine || ['slow-2g', '2g'].includes(c?.effectiveType) }, network = () => { publish.classList.toggle('offline', poor()); publish.innerHTML = poor() ? '<i class="fa-solid fa-cloud-arrow-up"></i> Create Lot' : '<i class="fa-solid fa-plus"></i> Create Lot' }; window.ononline = network; window.onoffline = network; navigator.connection?.addEventListener?.('change', network); network();
+      publish.onclick = () => { if (!scanned) { notice.textContent = 'Scan crop quality first to create your Digital Lot.'; notice.classList.add('show'); setTimeout(() => notice.classList.remove('show'), 3500); return } publish.classList.add('loading'); setTimeout(() => { publish.classList.remove('loading'); document.querySelector('#empty').hidden = true; document.querySelector('#manifest').classList.add('show'); document.querySelector('#time').textContent = new Intl.DateTimeFormat('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date()); notice.textContent = poor() ? '✓ Lot saved safely on this device. It will sync automatically when connected.' : `✓ Digital Lot created for ${crop || 'your crop'}.`; notice.classList.add('show'); setTimeout(() => notice.classList.remove('show'), 4200) }, 800) };
     });
   </script>
 </body>

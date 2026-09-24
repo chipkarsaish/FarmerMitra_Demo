@@ -37,4 +37,5 @@
     document.addEventListener('DOMContentLoaded',()=>{const u=JSON.parse(sessionStorage.getItem('currentUser')||'null');if(u?.name)document.getElementById('userInitials').textContent=u.name[0];renderServices();renderActive()});
   </script>
 </body>
+<script>document.addEventListener('DOMContentLoaded',()=>{const nav=document.querySelector('.sidebar-nav ul');if(!nav)return;const buyer=nav.querySelector('a[href="buyer-marketplace.html"]');if(buyer){buyer.href='buyer-portal-offers.html';buyer.dataset.tooltip='Live Bids';buyer.querySelector('.nav-text').textContent='Live Bids';const item=buyer.closest('li');if(item&&!nav.querySelector('a[href="my-lots.html"]'))item.insertAdjacentHTML('beforebegin','<li><a href="my-lots.html" data-tooltip="My Lots"><span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">My Lots</span></a></li>');}});</script>
 </html>

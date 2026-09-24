@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Lots - KisanMitra</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/farmer-sidebar.css">
+    <link rel="stylesheet" href="../css/language-switcher.css">
+    <link rel="stylesheet" href="../css/my-lots.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body class="dashboard-body lots-body"><button class="mobile-sidebar-toggle" aria-label="Open navigation"><i
+            class="fa-solid fa-bars"></i></button>
+    <aside class="farmer-sidebar" id="farmerSidebar">
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="farmer-dashboard.html"><span class="nav-icon"><i
+                                class="fa-solid fa-chart-pie"></i></span><span class="nav-text">Dashboard</span></a>
+                </li>
+                <li><a href="market-intelligence.html"><span class="nav-icon"><i
+                                class="fa-solid fa-chart-line"></i></span><span class="nav-text">Market
+                            Prices</span></a></li>
+                <li><a href="crop-listings.html"><span class="nav-icon"><i
+                                class="fa-solid fa-wheat-awn"></i></span><span class="nav-text">My Crops</span></a></li>
+                <li class="active"><a href="my-lots.html"><span class="nav-icon"><i
+                                class="fa-solid fa-layer-group"></i></span><span class="nav-text">My Lots</span></a>
+                </li>
+                <li><a href="buyer-portal-offers.html"><span class="nav-icon"><i
+                                class="fa-solid fa-handshake"></i></span><span class="nav-text">Live Bids</span></a></li>
+                <li><a href="transport-optimizer.html"><span class="nav-icon"><i
+                                class="fa-solid fa-truck"></i></span><span class="nav-text">Transport &amp;
+                            Storage</span></a></li>
+                <li><a href="transactions.html"><span class="nav-icon"><i class="fa-solid fa-box"></i></span><span
+                            class="nav-text">Transactions</span></a></li>
+                <li><a href="farmer-profile.html"><span class="nav-icon"><i class="fa-solid fa-user"></i></span><span
+                            class="nav-text">Profile</span></a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer"><a href="#" class="sidebar-logout-btn" id="sidebarLogoutBtn"><span
+                    class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span><span
+                    class="nav-text">Logout</span></a></div>
+    </aside>
+    <header class="dashboard-header">
+        <div class="header-container">
+            <div class="logo"><span class="logo-text"><span class="logo-agri">Kisan<span class="logo-leaf"><i
+                                class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span></span>
+            </div>
+            <div class="header-actions">
+                <div class="language-switcher"><button class="lang-btn active">English</button><button
+                        class="lang-btn">हिंदी</button><button class="lang-btn">मराठी</button></div>
+                <div class="user-menu">
+                    <div class="user-avatar" id="userMenuBtn"><span id="userInitials">F</span></div>
+                    <div class="dropdown-menu" id="userDropdown"><a href="farmer-profile.html"
+                            class="dropdown-item"><span class="item-icon"><i class="fa-solid fa-user"></i></span> My
+                            Profile</a>
+                        <div class="dropdown-divider"></div><a href="#" class="dropdown-item logout-item"
+                            id="logoutBtn"><span class="item-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                            Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="lots-main">
+        <div class="lots-wrap">
+            <section class="lots-hero">
+                <div>
+                    <p class="eyebrow">Farmer workspace · Market access</p>
+                    <h1>My Lots</h1>
+                    <p>Review your verified crop lots and release them when you are ready for buyer bids.</p>
+                </div><a class="create-lot" href="crop-listings.html"><i class="fa-solid fa-plus"></i> Create a new
+                    lot</a>
+            </section>
+            <section class="lot-stats">
+                <article class="lot-stat"><span>Total lots</span><strong id="totalLots">0</strong><i
+                        class="fa-solid fa-layer-group"></i></article>
+                <article class="lot-stat"><span>Live for bidding</span><strong id="liveLots">0</strong><i
+                        class="fa-solid fa-gavel"></i></article>
+                <article class="lot-stat"><span>Ready to release</span><strong id="readyLots">0</strong><i
+                        class="fa-solid fa-clock"></i></article>
+            </section>
+            <section>
+                <div class="lots-toolbar">
+                    <div>
+                        <h2>Lot inventory</h2>
+                        <p>Only lots released for bid are visible to verified buyers.</p>
+                    </div><select class="lot-filter" id="lotFilter" aria-label="Filter lots">
+                        <option value="all">All lots</option>
+                        <option value="ready">Ready to release</option>
+                        <option value="live">Live for bidding</option>
+                    </select>
+                </div>
+                <div class="lots-grid" id="lotsGrid"></div>
+            </section>
+        </div>
+    </main>
+    <div class="toast-lot" id="lotToast"><i class="fa-solid fa-circle-check"></i> Lot released — verified buyers can now
+        place bids.</div>
+    <script src="../js/farmer-sidebar.js"></script>
+    <script src="../js/my-lots.js"></script>
+</body>
+
+</html>
