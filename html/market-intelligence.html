@@ -167,7 +167,7 @@
 
         .metrics {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 13px
         }
 
@@ -269,6 +269,13 @@
             stroke: var(--g);
             stroke-width: 3;
             stroke-linejoin: round
+        }
+
+        .seasonal-line {
+            fill: none;
+            stroke: #a9c9ad;
+            stroke-width: 2;
+            stroke-dasharray: 5 5
         }
 
         .dash {
@@ -457,6 +464,213 @@
             color: var(--m)
         }
 
+        .mandi-heading {
+            margin: 22px 0 10px;
+            color: var(--d);
+            font-size: 1rem
+        }
+
+        .mandi-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left
+        }
+
+        .mandi-table th,
+        .mandi-table td {
+            padding: 13px 12px;
+            border-bottom: 1px solid #e5ece5
+        }
+
+        .mandi-table th {
+            color: var(--m);
+            font-size: .72rem;
+            font-weight: 800;
+            text-transform: uppercase
+        }
+
+        .mandi-table td {
+            color: var(--d);
+            font-size: .85rem
+        }
+
+        .mandi-table .mandi-price {
+            color: var(--g);
+            font-size: 1rem;
+            font-weight: 800
+        }
+
+        .mandi-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px
+        }
+
+        .mandi-card {
+            border: 1px solid #e0e9e0;
+            border-radius: 10px;
+            padding: 14px;
+            background: #fff
+        }
+
+        .mandi-card h4 {
+            margin: 0 0 5px;
+            color: var(--d);
+            font-size: .86rem
+        }
+
+        .mandi-card .mandi-location,
+        .mandi-card .mandi-updated {
+            display: block;
+            color: var(--m);
+            font-size: .72rem
+        }
+
+        .mandi-card .mandi-price {
+            display: block;
+            margin: 14px 0 8px;
+            color: var(--g);
+            font-size: 1.15rem;
+            font-weight: 800
+        }
+
+        .responsive-table {
+            overflow-x: auto
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e5ece5;
+            white-space: nowrap
+        }
+
+        .data-table th {
+            color: var(--m);
+            font-size: .68rem;
+            text-transform: uppercase
+        }
+
+        .data-table td {
+            color: var(--d);
+            font-size: .78rem
+        }
+
+        .table-price {
+            color: var(--g);
+            font-size: .95rem
+        }
+
+        .spread-insight {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+            padding: 11px 13px;
+            background: #f2f8f2;
+            border-left: 3px solid #75ae7c;
+            border-radius: 0 8px 8px 0
+        }
+
+        .spread-insight b,
+        .spread-insight strong {
+            color: var(--d)
+        }
+
+        .spread-insight small {
+            flex-basis: 100%;
+            color: var(--m)
+        }
+
+        .realisation {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px
+        }
+
+        .realisation>div {
+            padding: 13px;
+            background: #f8fbf8;
+            border: 1px solid #e0ebe1;
+            border-radius: 9px
+        }
+
+        .realisation span,
+        .condition-row span {
+            display: block;
+            color: var(--m);
+            font-size: .68rem
+        }
+
+        .realisation strong {
+            display: block;
+            margin-top: 7px;
+            color: var(--d);
+            font-size: 1rem
+        }
+
+        .realisation-total {
+            border-color: #b6dcb9 !important
+        }
+
+        .trend-summary {
+            display: flex;
+            gap: 24px;
+            margin-top: 12px;
+            color: var(--m);
+            font-size: .75rem
+        }
+
+        .trend-summary strong {
+            color: var(--d)
+        }
+
+        .condition-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px
+        }
+
+        .condition-row>div {
+            padding: 12px;
+            border: 1px solid #e0ebe1;
+            border-radius: 9px
+        }
+
+        .condition-row b {
+            display: block;
+            margin-top: 6px;
+            color: var(--g);
+            font-size: .9rem
+        }
+
+        .page-source {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 22px 0 8px;
+            color: var(--m);
+            font-size: .7rem
+        }
+
+        .page-source b {
+            color: var(--d)
+        }
+
+        .empty-message {
+            margin: 0;
+            padding: 14px;
+            color: var(--m);
+            font-size: .78rem
+        }
+
         .outlook {
             grid-template-columns: repeat(3, 1fr)
         }
@@ -484,6 +698,73 @@
         .out small {
             color: var(--m);
             font-size: .7rem
+        }
+
+        .harvest-date {
+            margin: 14px 0 5px
+        }
+
+        .harvest-date label {
+            display: block;
+            margin-bottom: 7px;
+            color: var(--d);
+            font-size: .78rem;
+            font-weight: 800
+        }
+
+        .harvest-date input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 9px 12px;
+            border: 1px solid #d3e1d4;
+            border-radius: 8px;
+            color: var(--d);
+            font: inherit;
+            background: #fff
+        }
+
+        .harvest-helper,
+        .harvest-note {
+            color: var(--m);
+            font-size: .72rem
+        }
+
+        .harvest-helper {
+            margin: 6px 0 10px
+        }
+
+        .harvest-calculate {
+            margin: 0 0 14px;
+            padding: 9px 16px
+        }
+
+        .forecast-result {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-top: 0
+        }
+
+        .forecast-result .out {
+            padding: 14px
+        }
+
+        .forecast-result .out strong {
+            font-size: 1.12rem
+        }
+
+        .current-price {
+            margin: 14px 0 4px;
+            color: var(--d);
+            font-size: .78rem
+        }
+
+        .estimate-note {
+            margin: 0 0 12px
+        }
+
+        .forecast-output[hidden] {
+            display: none
         }
 
         .dtop {
@@ -824,6 +1105,25 @@
                 grid-template-columns: 1fr
             }
 
+            .realisation,
+            .condition-row {
+                grid-template-columns: 1fr
+            }
+
+            .page-source {
+                display: block
+                
+            }
+
+            .page-source span {
+                display: block;
+                margin-top: 5px
+            }
+
+            .forecast-result {
+                grid-template-columns: 1fr
+            }
+
             .opp {
                 border-right: 0;
                 border-bottom: 1px solid #e0eae1
@@ -836,6 +1136,93 @@
             .forecast {
                 display: block;
                 line-height: 1.8
+            }
+
+            .chart svg {
+                min-width: 100%
+            }
+
+            .data-table,
+            .data-table tbody,
+            .data-table tr,
+            .data-table td {
+                display: block
+            }
+
+            .data-table thead {
+                display: none
+            }
+
+            .data-table tr {
+                margin-bottom: 10px;
+                padding: 7px 12px;
+                border: 1px solid #e0e9e0;
+                border-radius: 9px
+            }
+
+            .data-table td {
+                display: grid;
+                grid-template-columns: 145px 1fr;
+                gap: 8px;
+                padding: 6px 0;
+                border: 0;
+                white-space: normal
+            }
+
+            .data-table td::before {
+                color: var(--m);
+                content: attr(data-label);
+                font-size: .68rem;
+                font-weight: 800
+            }
+
+            .mandi-table,
+            .mandi-table tbody,
+            .mandi-table tr,
+            .mandi-table td {
+                display: block
+            }
+
+            .mandi-table thead {
+                display: none
+            }
+
+            .mandi-table tr {
+                margin-bottom: 10px;
+                padding: 8px 12px;
+                border: 1px solid #e0e9e0;
+                border-radius: 10px
+            }
+
+            .mandi-table td {
+                display: grid;
+                grid-template-columns: 115px 1fr;
+                gap: 10px;
+                padding: 7px 0;
+                border-bottom: 0
+            }
+
+            .mandi-table td::before {
+                color: var(--m);
+                content: attr(data-label);
+                font-size: .72rem;
+                font-weight: 800
+            }
+
+            .mandi-table .mandi-price::after {
+                content: ' / Quintal';
+                font-size: .78rem;
+                font-weight: 600
+            }
+
+            .mandi-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media(max-width:480px) {
+            .mandi-grid {
+                grid-template-columns: 1fr
             }
         }
     </style>
@@ -886,293 +1273,222 @@
             <div class="head">
                 <div>
                     <h1>Market Intelligence</h1>
-                    <p>Understand prices, demand and market trends before you sell your produce.</p>
+                    <p>Understand market prices, selling opportunities and expected price conditions before harvest.</p>
                 </div>
-                <div class="loc"><i class="fa-solid fa-location-dot"></i> <span id="loc">Shahapur,
-                        Maharashtra</span><span class="updated">Updated today, 10:30 AM</span><button class="btn"
-                        id="change">Change Location</button></div>
+                <div class="loc"><i class="fa-solid fa-location-dot"></i> <span id="location"></span><span class="updated" id="headerMeta"></span></div>
             </div>
-            <section class="context card"><b>Market View</b>
-                <div class="field"><label>Crop</label><select id="crop">
-                        <option value="rice">Sona Masuri Rice</option>
-                        <option value="wheat">Wheat</option>
-                        <option value="onion">Onion</option>
-                        <option value="tomato">Tomato</option>
-                    </select></div>
-                <div class="field"><label>Variety</label><select>
-                        <option>All Varieties</option>
-                        <option>Grade A</option>
-                    </select></div>
-                <div class="field"><label>Market area</label><select>
-                        <option>Nearby Markets</option>
-                        <option>Within 25 km</option>
-                    </select></div>
-                <div class="field"><label>Harvest period</label><select>
-                        <option>Oct–Nov 2026</option>
-                        <option>Nov–Dec 2026</option>
-                    </select></div><button class="reset" id="reset">Reset</button>
-            </section>
             <section class="sec">
                 <div class="title">
                     <h2>Market Overview</h2>
-                    <p class="sub">Current market conditions for your selected crop.</p>
+                    <p class="sub">A quick view of the selected crop's current market.</p>
                 </div>
-                <div class="metrics">
-                    <article class="metric card"><span class="label">Current price</span><b class="num"
-                            data="price">₹3,250</b><span class="small">per quintal · Modal price</span></article>
-                    <article class="metric card"><span class="label">Price change</span><b class="num up"
-                            data="change">↑ 4.8%</b><span class="small">vs previous 7 days</span></article>
-                    <article class="metric card"><span class="label">Today's arrivals</span><b class="num"
-                            data="arrival">820 Tonnes</b><span class="small">Across selected markets</span></article>
-                    <article class="metric card"><span class="label">Buyer demand</span><b class="num"
-                            data="demand">High</b><span class="small" data="req">32 active requirements</span></article>
-                    <article class="metric card"><span class="label">Markets tracked</span><b class="num"
-                            data="markets">8</b><span class="small">Nearby markets</span></article>
-                </div>
-            </section>
-            <section class="sec twocol">
-                <article class="card pad">
-                    <div class="chead">
-                        <div>
-                            <h3>Price Trend</h3>
-                            <p class="sub" id="subtitle">Sona Masuri Rice — Shahapur region</p>
-                        </div>
-                        <div class="periods"><button>7 Days</button><button class="on">30 Days</button><button>3
-                                Months</button></div>
-                    </div>
-                    <div class="chart" id="priceChart" role="img"
-                        aria-label="Price trend showing actual and estimated prices"></div>
-                    <div class="forecast"><span>Current: <strong data="price">₹3,250/q</strong></span><span>Forecast
-                            range: <strong data="forecast">₹3,250–₹3,450/q</strong></span><span>Model forecast —
-                            not guaranteed</span></div>
-                    <div class="legend"><span><i class="key"></i>Actual Market Price</span><span><i
-                                class="key dash"></i>Forecast</span><span><i class="key bar"></i>Forecast range</span>
-                    </div>
-                </article>
-                <aside class="card pad">
-                    <h3>What is affecting the market?</h3>
-                    <p class="sub">Simple signals from local market activity.</p>
-                    <div class="factors">
-                        <div class="factor"><i class="fa-solid fa-boxes-stacked"></i>
-                            <div><b>Supply</b>
-                                <p>Arrivals are slightly below last week.</p>
-                            </div><span class="badge amber">Moderate</span>
-                        </div>
-                        <div class="factor"><i class="fa-solid fa-handshake"></i>
-                            <div><b>Buyer Demand</b>
-                                <p>Procurement activity is increasing.</p>
-                            </div><span class="badge" data="demand">High</span>
-                        </div>
-                        <div class="factor"><i class="fa-solid fa-arrow-trend-up"></i>
-                            <div><b>Price Momentum</b>
-                                <p>Prices have risen over the last 7 days.</p>
-                            </div><span class="badge">Positive</span>
-                        </div>
-                        <div class="factor"><i class="fa-regular fa-calendar"></i>
-                            <div><b>Seasonality</b>
-                                <p>Current movement is within seasonal range.</p>
-                            </div><span class="badge amber">Normal</span>
-                        </div>
-                    </div>
-                </aside>
-            </section>
-            <section class="sec card pad">
-                <div class="chead">
-                    <div>
-                        <h3>Price &amp; Market Arrivals</h3>
-                        <p class="sub">See how incoming supply is changing along with market prices.</p>
-                    </div>
-                    <div class="periods"><button>7 Days</button><button class="on">30 Days</button><button>3
-                            Months</button></div>
-                </div>
-                <div class="chart" id="arrChart" role="img" aria-label="Price and market arrival relationship"></div>
-                <div class="legend"><span><i class="key"></i>Price</span><span><i class="key bar"></i>Arrivals</span>
-                </div>
-                <p class="insight">Arrivals increased during the last 3 days while prices remained relatively stable.
-                </p>
+                <div class="metrics" id="snapshot"></div>
             </section>
             <section class="sec card pad">
                 <div class="title">
-                    <h2>Crop Market Explorer</h2>
-                    <p class="sub">Compare market conditions across crops you may be considering.</p>
+                    <h2>Where Can I Sell?</h2>
+                    <p class="sub">Compare current indicative prices across different market channels.</p>
                 </div>
-                <div class="tabs" id="tabs"><button class="on" data-k="rice">Rice</button><button
-                        data-k="wheat">Wheat</button><button data-k="onion">Onion</button><button
-                        data-k="tomato">Tomato</button><button>Cotton</button></div>
-                <div class="crops" id="cropcards"></div>
+                <div class="responsive-table" id="channelTable"></div>
+            </section>
+            <section class="sec card pad">
+                <div class="title">
+                    <h2>Current Mandi Prices</h2>
+                    <p class="sub">Current prices for the selected crop across tracked mandis.</p>
+                </div>
+                <div class="tabs" id="cropTabs"></div>
+                <div class="responsive-table" id="mandiTable"></div>
+                <div class="spread-insight" id="spreadInsight"></div>
+            </section>
+            <section class="sec card pad">
+                <div class="title">
+                    <h2>Estimated Net Realisation</h2>
+                    <p class="sub">Indicative value after estimated movement and storage costs.</p>
+                </div>
+                <div class="realisation" id="realisation"></div>
+            </section>
+            <section class="sec card pad">
+                <div class="title">
+                    <h2>Price Trend</h2>
+                    <p class="sub">Historical and seasonal values for context.</p>
+                </div>
+                <div class="chead"><span></span><div class="periods" id="trendPeriods"><button class="on" data-period="30">30 Days</button><button data-period="90">90 Days</button><button data-period="365">1 Year</button></div></div>
+                <div class="chart" id="priceChart" role="img" aria-label="Historical price trend"></div>
+                <div class="trend-summary"><span>Current: <strong id="trendCurrent"></strong></span><span>30-day change: <strong id="trendChange"></strong></span></div>
+            </section>
+            <section class="sec card pad">
+                <div class="title">
+                    <h2>Current Market Condition</h2>
+                </div>
+                <div class="condition-row" id="conditionRow"></div>
             </section>
             <section class="sec card pad">
                 <div class="title">
                     <h2>Pre-Harvest Market Outlook</h2>
-                    <p class="sub">See the expected market situation around your estimated harvest period.</p>
+                    <p class="sub">Enter your expected harvest date to see the estimated price range around harvest.</p>
                 </div>
-                <div class="outlook">
-                    <div class="out"><span>EXPECTED HARVEST PERIOD</span><strong>15 Oct – 30 Oct</strong><small>Based
-                            on your selected crop</small></div>
-                    <div class="out"><span>FORECAST PRICE RANGE</span><strong
-                            data="forecast">₹3,250–₹3,450/q</strong><small>Model estimate</small></div>
-                    <div class="out"><span>EXPECTED MARKET DEMAND</span><strong data="demand">High</strong><small>Based
-                            on current buyer requirements</small></div>
-                </div>
-                <p class="info"><b>Market outlook</b><br>Current indicators show stronger demand than the previous
-                    month. Forecast values are estimates and can change as new market information becomes available.</p>
+                <div class="harvest-date"><label for="harvestDate">Expected Harvest Date</label><input id="harvestDate" type="date"></div>
+                <div class="forecast-result" id="forecastResult"></div>
             </section>
-            <section class="sec card pad">
-                <div class="title">
-                    <h2>Buyer Demand</h2>
-                    <p class="sub">Current procurement requirements relevant to your crop.</p>
-                </div>
-                <div class="dtop"><b class="count" data="count">32 Active Buyer Requirements</b>
-                    <div class="filters"><button>Crop⌄</button> <button>Quality⌄</button>
-                        <button>Quantity⌄</button> <button>Delivery Period⌄</button></div>
-                </div>
-                <div class="scroll">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Buyer</th>
-                                <th>Crop / Variety</th>
-                                <th>Required Quantity</th>
-                                <th>Quality</th>
-                                <th>Delivery Period</th>
-                                <th>Distance</th>
-                                <th>Demand Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="buyers"></tbody>
-                    </table>
-                </div>
-                <article class="trend card">
-                    <h3>Demand Trend</h3>
-                    <p class="sub">Past 30 days → Current → Next expected period</p>
-                    <div class="chart" id="demandChart" role="img" aria-label="Buyer demand trend"></div>
-                    <p class="up small"><b>Demand has increased by 12% over the last 30 days.</b></p>
-                </article>
+            <section class="sec card pad" id="cropOutlookSection">
+                <div class="title"><h2>Crop Outlook</h2><p class="sub">Compare the market outlook for crops in your farm profile.</p></div>
+                <div class="responsive-table" id="cropOutlook"></div>
             </section>
-            <section class="sec card pad">
-                <div class="title">
-                    <h2>Selling Window</h2>
-                    <p class="sub">Review the expected price movement and holding considerations.</p>
-                </div>
-                <div class="sell">
-                    <div class="timeline">
-                        <div class="step"><span>TODAY</span><b>Current market</b><small data="price">₹3,250/q</small>
-                        </div>
-                        <div class="step"><span>POTENTIAL STRONGER PERIOD</span><b
-                                data="stronger">₹3,300–₹3,400/q</b><small>Potential upward movement</small></div>
-                        <div class="step"><span>EXPECTED HARVEST PERIOD</span><b
-                                data="forecast">₹3,250–₹3,450/q</b><small>Estimated market range</small></div>
-                    </div>
-                    <div class="stats">
-                        <div class="stat"><span>Current Price</span><b data="price">₹3,250/q</b></div>
-                        <div class="stat"><span>Forecast Range</span><b data="stronger">₹3,300–₹3,400/q</b></div>
-                        <div class="stat"><span>Expected Movement</span><b>Potential upward movement</b></div>
-                        <div class="stat"><span>Holding Period</span><b>7–14 days</b></div>
-                        <div class="stat"><span>Estimated Storage Cost</span><b>₹35/q</b></div>
-                        <p class="note">Estimated values are model outputs and depend on market conditions.</p><button
-                            class="btn">View Market Details</button>
-                    </div>
-                </div>
-            </section>
-            <section class="sec card pad">
-                <h3>Price Opportunity vs Holding Cost</h3>
-                <p class="sub">Compare a possible price change with estimated holding cost.</p>
-                <div class="opps">
-                    <div class="opp"><span>Potential price increase</span><b class="up" data="increase">+₹120/q</b>
-                    </div>
-                    <div class="opp"><span>Estimated holding cost</span><b class="down">−₹35/q</b></div>
-                    <div class="opp"><span>Illustrative difference</span><b data="diff">₹85/q</b></div>
-                </div>
-                <p class="note">Illustrative calculation based on current mock assumptions. It is not a guaranteed
-                    profit.</p>
-            </section>
-            <section class="sec card pad">
-                <div class="title">
-                    <h2>Nearby Market Comparison</h2>
-                    <p class="sub">Compare prices, arrivals and demand across tracked markets.</p>
-                </div>
-                <div class="scroll">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Market</th>
-                                <th>Current Price</th>
-                                <th>Change</th>
-                                <th>Arrivals</th>
-                                <th>Demand</th>
-                                <th>Distance</th>
-                                <th>Last Updated</th>
-                            </tr>
-                        </thead>
-                        <tbody id="markets"></tbody>
-                    </table>
-                </div>
-                <p class="note"><i class="fa-solid fa-circle-info" style="color:var(--a)"></i> Market prices do not
-                    include your transportation, storage or other transaction costs.</p>
-            </section>
-            <section class="sec card pad">
-                <div class="title">
-                    <h2>Market Updates</h2>
-                    <p class="sub">Recent changes in the markets you are tracking.</p>
-                </div>
-                <div class="alerts">
-                    <article class="alert"><i class="fa-solid fa-arrow-trend-up"></i><span>PRICE MOVEMENT</span>
-                        <p id="alertprice">Rice prices increased 4.8% over the last 7 days.</p><time>Today, 10:30
-                            AM</time>
-                    </article>
-                    <article class="alert"><i class="fa-solid fa-handshake"></i><span>DEMAND CHANGE</span>
-                        <p>Buyer requirements increased by 12% this month.</p><time>Today, 9:45 AM</time>
-                    </article>
-                    <article class="alert"><i class="fa-solid fa-truck-ramp-box"></i><span>ARRIVAL CHANGE</span>
-                        <p>Market arrivals decreased 6% compared with last week.</p><time>Yesterday, 4:15 PM</time>
-                    </article>
-                </div>
-            </section>
-            <section class="sec card pad">
-                <div class="title">
-                    <h2>How to read this information</h2>
-                    <p class="sub">Use these simple signals while planning your sale.</p>
-                </div>
-                <div class="help">
-                    <div><b>PRICE</b>
-                        <p>Shows recent market transaction levels.</p>
-                    </div>
-                    <div><b>FORECAST</b>
-                        <p>Shows an estimated future price range based on the model.</p>
-                    </div>
-                    <div><b>DEMAND</b>
-                        <p>Shows buyer requirements currently visible on the platform.</p>
-                    </div>
-                </div>
-                <p class="note">Market information and forecasts are estimates and may change.</p>
-            </section>
+            <footer class="page-source"><span>Market information is based on the latest available data.</span><span>Source: <b id="source"></b> · Last Updated: <b id="timestamp"></b></span></footer>
         </div>
     </main>
-    <div class="modalbg" id="modal" role="dialog" aria-modal="true">
-        <div class="modal card">
-            <h2>Select Your Market Area</h2>
-            <p>Use this location for market information.</p>
-            <div class="field"><label>District</label><select id="district">
-                    <option>Shahapur</option>
-                    <option>Thane</option>
-                    <option>Palghar</option>
-                </select></div>
-            <div class="field"><label>Taluka</label><select>
-                    <option>Shahapur</option>
-                    <option>Kalyan</option>
-                </select></div>
-            <div class="field"><label>Radius</label><select>
-                    <option>25 km</option>
-                    <option>50 km</option>
-                </select></div>
-            <div class="actions"><button class="btn" id="cancel">Cancel</button><button class="btn green"
-                    id="apply">Apply Location</button></div>
-        </div>
-    </div>
     <script src="../js/farmer-sidebar.js"></script>
-    <script>
+    <script>if (false) {
         const D = { rice: { n: 'Sona Masuri Rice', s: 'Rice', p: 3250, c: 4.8, a: 820, d: 'High', q: 32, m: 8, f: '₹3,250–₹3,450/q', st: '₹3,300–₹3,400/q', i: 120, h: [3080, 3100, 3090, 3130, 3125, 3160, 3185, 3170, 3210, 3230, 3250], z: [3260, 3280, 3305, 3320, 3350] }, wheat: { n: 'Wheat', s: 'Wheat', p: 2480, c: 2.1, a: 960, d: 'Medium', q: 18, m: 7, f: '₹2,470–₹2,580/q', st: '₹2,500–₹2,560/q', i: 80, h: [2370, 2390, 2385, 2400, 2415, 2420, 2405, 2440, 2450, 2470, 2480], z: [2485, 2500, 2510, 2535, 2550] }, onion: { n: 'Onion', s: 'Onion', p: 2900, c: -3.2, a: 1140, d: 'High', q: 28, m: 9, f: '₹2,780–₹3,050/q', st: '₹2,900–₹3,020/q', i: 105, h: [3060, 3030, 3050, 3000, 2980, 2965, 2940, 2950, 2920, 2910, 2900], z: [2890, 2910, 2930, 2960, 2980] }, tomato: { n: 'Tomato', s: 'Tomato', p: 2350, c: 6.7, a: 480, d: 'High', q: 24, m: 6, f: '₹2,300–₹2,600/q', st: '₹2,420–₹2,560/q', i: 140, h: [2050, 2080, 2100, 2090, 2150, 2180, 2200, 2240, 2290, 2320, 2350], z: [2380, 2410, 2450, 2490, 2520] } }; let K = 'rice'; const ru = n => '₹' + n.toLocaleString('en-IN'), path = (v, x, y, w, h, mi, ma) => v.map((a, i) => (i ? 'L' : 'M') + (x + i * w / (v.length - 1)) + ',' + (y + h - (a - mi) / (ma - mi) * h)).join(' '); function svg(d, type) { let v = d.h, z = d.z, all = v.concat(z), mi = Math.min(...all) - 80, ma = Math.max(...all) + 80, x = 40, y = 15, w = 610, h = 155, sp = x + w * (v.length - 1) / (all.length - 1), g = ''; for (let i = 0; i < 4; i++)g += `<line class="grid" x1="${x}" y1="${y + i * h / 3}" x2="${x + w}" y2="${y + i * h / 3}"/>`; if (type === 'a') { let bars = [70, 66, 72, 64, 68, 75, 71, 79, 82, 88, 91].map((a, i) => `<rect class="bar" x="${x + i * w / 10 - 14}" y="${y + h - a / 100 * h * .8}" width="28" height="${a / 100 * h * .8}" rx="3"/>`).join(''); return `<svg viewBox="0 0 680 210">${g}${bars}<path class="line" d="${path(v, x, y, w, h, mi, ma)}"/><text class="axis" x="40" y="195">Day 1</text><text class="axis" x="340" y="195">Day 15</text><text class="axis" x="600" y="195">Day 30</text></svg>` } let p = path(v, x, y, w, h, mi, ma), f = path([v.at(-1), ...z], sp, y, w * z.length / (all.length - 1), h, mi, ma); return `<svg viewBox="0 0 680 210"><rect class="fc" x="${sp}" y="${y}" width="${x + w - sp}" height="${h}"/>${g}<path class="shade" d="${p} L${sp},${y + h} L${x},${y + h}Z"/><path class="line" d="${p}"/><path class="dash" d="${f}"/><line x1="${sp}" y1="${y}" x2="${sp}" y2="${y + h}" stroke="#9bb9a0" stroke-dasharray="3 3"/><text class="axis" x="70" y="195">Actual</text><text class="axis" x="${sp + 25}" y="195">Forecast</text></svg>` } function demand() { let v = [14, 15, 16, 17, 18, 19, 20, 22, 24, 26], x = 40, y = 10, w = 610, h = 95, p = path(v, x, y, w, h, 12, 28); return `<svg viewBox="0 0 680 145"><path class="area" d="${p} L${x + w},${y + h} L${x},${y + h}Z"/><path class="line" d="${p}"/><text class="axis" x="40" y="130">Past 30 days</text><text class="axis" x="320" y="130">Current</text><text class="axis" x="560" y="130">Next expected</text></svg>` } function tables(d) { let buyers = [['ABC Foods Pvt. Ltd.', d.n, '50 Tonnes', 'Grade A', 'Oct 15–20', '72 km'], ['Bharat Grains', d.s, '25 Tonnes', 'Grade A', 'Oct 18–25', '48 km'], ['FreshMill', d.s, '100 Tonnes', 'Standard', 'Oct 20–30', '96 km']]; buyers = document.querySelector('#buyers'); buyers.innerHTML = buyers ? '' : ''; document.querySelector('#buyers').innerHTML = [['ABC Foods Pvt. Ltd.', d.n, '50 Tonnes', 'Grade A', 'Oct 15–20', '72 km'], ['Bharat Grains', d.s, '25 Tonnes', 'Grade A', 'Oct 18–25', '48 km'], ['FreshMill', d.s, '100 Tonnes', 'Standard', 'Oct 20–30', '96 km']].map(r => `<tr>${r.map((x, i) => `<td>${i === 0 ? '<b>' + x + '</b>' : x}</td>`).join('')}<td><span class="badge">Active</span></td><td><button class="link">View Demand</button></td></tr>`).join(''); let ns = ['Shahapur', 'Kalyan', 'Vasai', 'Navi Mumbai'], offs = [0, 70, -70, 40]; document.querySelector('#markets').innerHTML = ns.map((n, i) => `<tr><td><b>${n}</b></td><td>${ru(d.p + offs[i])}/q</td><td class="${d.c < 0 ? 'down' : 'up'}">${d.c > 0 ? '+' : ''}${d.c}%</td><td>${d.a - i * 80} T</td><td><span class="badge">${i === 1 ? 'Medium' : d.d}</span></td><td>${[32, 58, 74, 68][i]} km</td><td>Today</td></tr>`).join('') } function cards() { document.querySelector('#cropcards').innerHTML = Object.entries(D).map(([k, d]) => `<article class="crop"><h4>${d.s.toUpperCase()}</h4><div><span>Current Price</span><b>${ru(d.p)}/q</b></div><div><span>30-Day Change</span><b class="${d.c < 0 ? 'down' : 'up'}">${d.c > 0 ? '+' : ''}${d.c}%</b></div><div><span>Demand</span><b>${d.d}</b></div><div><span>Arrivals</span><b>${d.a > 1000 ? 'High' : 'Moderate'}</b></div></article>`).join('') } function render(k) { K = k; let d = D[k]; document.querySelectorAll('[data]').forEach(e => { let a = e.getAttribute('data'), mp = { price: ru(d.p) + '/q', change: (d.c >= 0 ? '↑ ' : '↓ ') + Math.abs(d.c) + '%', arrival: d.a + ' Tonnes', demand: d.d, req: d.q + ' active requirements', markets: d.m, forecast: d.f, stronger: d.st, count: d.q + ' Active Buyer Requirements', increase: '+' + ru(d.i) + '/q', diff: ru(d.i - 35) + '/q' }; if (mp[a] !== undefined) e.textContent = mp[a] }); let c = document.querySelector('[data="change"]'); c.className = 'num ' + (d.c >= 0 ? 'up' : 'down'); document.querySelector('#subtitle').textContent = d.n + ' — Shahapur region'; document.querySelector('#priceChart').innerHTML = svg(d); document.querySelector('#arrChart').innerHTML = svg(d, 'a'); document.querySelector('#demandChart').innerHTML = demand(); document.querySelector('#alertprice').textContent = d.s + ' prices ' + (d.c >= 0 ? 'increased ' : 'decreased ') + Math.abs(d.c) + '% over the last 7 days.'; tables(d); cards(); document.querySelectorAll('#tabs button[data-k]').forEach(b => b.classList.toggle('on', b.dataset.k === k)); document.querySelector('#crop').value = k } document.querySelector('#crop').onchange = e => { let a = document.querySelector('#app'); a.classList.add('loading'); setTimeout(() => { render(e.target.value); a.classList.remove('loading') }, 360) }; document.querySelectorAll('#tabs button[data-k]').forEach(b => b.onclick = () => { document.querySelector('#crop').value = b.dataset.k; document.querySelector('#crop').dispatchEvent(new Event('change')) }); document.querySelector('#reset').onclick = () => render('rice'); let M = document.querySelector('#modal'); document.querySelector('#change').onclick = () => M.classList.add('show'); document.querySelector('#cancel').onclick = () => M.classList.remove('show'); document.querySelector('#apply').onclick = () => { document.querySelector('#loc').textContent = document.querySelector('#district').value + ', Maharashtra'; M.classList.remove('show') }; M.onclick = e => { if (e.target === M) M.classList.remove('show') }; let u = JSON.parse(sessionStorage.getItem('currentUser') || 'null'); if (u?.name) document.querySelector('#userInitials').textContent = u.name[0]; render('rice');
+    }
+    </script>
+    <script>if (false) {
+        const mandiPrices = {
+            rice: [['Wardha APMC', 'Wardha', '₹2,360', 'Today, 10:15 AM'], ['Nagpur APMC', 'Nagpur', '₹2,420', 'Today, 10:05 AM'], ['Akola APMC', 'Akola', '₹2,390', 'Today, 9:55 AM'], ['Amravati APMC', 'Amravati', '₹2,450', 'Today, 10:20 AM'], ['Washim APMC', 'Washim', '₹2,340', 'Today, 9:45 AM']],
+            wheat: [['Nashik APMC', 'Nashik', '₹2,480', 'Today, 10:10 AM'], ['Pune APMC', 'Pune', '₹2,520', 'Today, 10:00 AM'], ['Ahmednagar APMC', 'Ahmednagar', '₹2,465', 'Today, 9:50 AM'], ['Jalgaon APMC', 'Jalgaon', '₹2,495', 'Today, 10:15 AM'], ['Solapur APMC', 'Solapur', '₹2,440', 'Today, 9:40 AM']],
+            onion: [['Lasalgaon APMC', 'Lasalgaon', '₹2,900', 'Today, 10:20 AM'], ['Pimpalgaon APMC', 'Pimpalgaon', '₹2,840', 'Today, 10:05 AM'], ['Yeola APMC', 'Yeola', '₹2,780', 'Today, 9:55 AM'], ['Manmad APMC', 'Manmad', '₹2,825', 'Today, 10:10 AM'], ['Nashik APMC', 'Nashik', '₹2,875', 'Today, 9:45 AM']],
+            tomato: [['Pune APMC', 'Pune', '₹2,350', 'Today, 10:15 AM'], ['Nashik APMC', 'Nashik', '₹2,280', 'Today, 10:00 AM'], ['Sangli APMC', 'Sangli', '₹2,420', 'Today, 9:50 AM'], ['Satara APMC', 'Satara', '₹2,315', 'Today, 10:20 AM'], ['Kolhapur APMC', 'Kolhapur', '₹2,390', 'Today, 9:40 AM']],
+            cotton: [['Akola APMC', 'Akola', '₹7,180', 'Today, 10:10 AM'], ['Amravati APMC', 'Amravati', '₹7,240', 'Today, 10:00 AM'], ['Yavatmal APMC', 'Yavatmal', '₹7,095', 'Today, 9:50 AM'], ['Wardha APMC', 'Wardha', '₹7,165', 'Today, 10:20 AM'], ['Buldhana APMC', 'Buldhana', '₹7,220', 'Today, 9:45 AM']]
+        };
+
+        function renderMandiPrices(crop) {
+            document.querySelector('#cropcards').innerHTML = `<div class="mandi-grid">${mandiPrices[crop].map(row => `<article class="mandi-card"><h4>${row[0]}</h4><span class="mandi-location">${row[1]}</span><strong class="mandi-price">${row[2]} / Quintal</strong><span class="mandi-updated">${row[3]}</span></article>`).join('')}</div>`;
+        }
+
+        const harvestPrices = { rice: 3200, wheat: 2480, onion: 2900, tomato: 2350, cotton: 7180 };
+        function updateCurrentHarvestPrice(crop = 'rice') {
+            const currentPrice = harvestPrices[crop];
+            document.querySelector('#currentHarvestPrice').textContent = `Current market price: ${ru(currentPrice)} / Quintal`;
+        }
+        function updateHarvestForecast(crop = 'rice') {
+            const currentPrice = harvestPrices[crop];
+            const lower = currentPrice + Math.floor(Math.random() * 121) - 80;
+            const upper = lower + 150 + Math.floor(Math.random() * 101);
+            const movement = lower >= currentPrice ? 'Potential Increase ↑' : 'Potential Decrease ↓';
+            document.querySelector('#forecastRange').textContent = `${ru(lower)} – ${ru(upper)} / Quintal`;
+            document.querySelector('#priceMovement').textContent = movement;
+            updateCurrentHarvestPrice(crop);
+            document.querySelector('#forecastOutput').hidden = false;
+        }
+
+        const mandiTabButtons = [...document.querySelectorAll('#tabs button[data-k]')].map(button => {
+            const cleanButton = button.cloneNode(true);
+            button.replaceWith(cleanButton);
+            return cleanButton;
+        });
+        mandiTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                mandiTabButtons.forEach(tab => tab.classList.toggle('on', tab === button));
+                renderMandiPrices(button.dataset.k);
+                updateCurrentHarvestPrice(button.dataset.k);
+                document.querySelector('#forecastOutput').hidden = true;
+            });
+        });
+        renderMandiPrices('rice');
+        updateCurrentHarvestPrice();
+        document.querySelector('#harvestDate').addEventListener('change', () => document.querySelector('#forecastOutput').hidden = true);
+        document.querySelector('#harvestDate').addEventListener('input', () => document.querySelector('#forecastOutput').hidden = true);
+        document.querySelector('#calculateForecast').addEventListener('click', () => updateHarvestForecast(mandiTabButtons.find(button => button.classList.contains('on')).dataset.k));
+    }
+    </script>
+    <script>
+        const marketIntelligenceData = {
+            farmer: {
+                location: { district: 'Wardha', state: 'Maharashtra' },
+                crops: ['paddy', 'onion', 'soybean'],
+                selectedCrop: 'paddy',
+                expectedHarvestDate: '2026-10-15'
+            },
+            source: 'KisanMitra Market Signals',
+            updated: 'Today, 10:30 AM',
+            crops: {
+                paddy: {
+                    name: 'Paddy / Rice', currentPrice: 2360, priceChange: 4.8, spread: 90, logisticsCost: 115,
+                    condition: { momentum: 'Rising', stability: 'Moderate', supplyPressure: 'Low' },
+                    demand: 'High', forecast: [2400, 2520],
+                    priceHistory: [2280, 2310, 2295, 2330, 2345, 2325, 2350, 2360], seasonalReference: [2240, 2270, 2300, 2320, 2335, 2350, 2370, 2390],
+                    marketChannels: [['APMC Mandi', 2360, 'Wardha', '10:15 AM'], ['Processor', 2410, 'Nagpur Region', '10:05 AM'], ['Institutional Buyer', 2450, 'Maharashtra', '9:50 AM'], ['Digital Market', 2430, 'Online', '10:20 AM']],
+                    mandiPrices: [['Wardha APMC', 'Wardha', 2360, 3.2, '10:15 AM'], ['Nagpur APMC', 'Nagpur', 2420, 4.1, '10:05 AM'], ['Akola APMC', 'Akola', 2390, 2.8, '9:55 AM'], ['Amravati APMC', 'Amravati', 2450, 4.6, '10:20 AM']]
+                },
+                onion: {
+                    name: 'Onion', currentPrice: 2900, priceChange: -3.2, spread: 120, logisticsCost: 135,
+                    condition: { momentum: 'Stable', stability: 'Moderate', supplyPressure: 'Moderate' },
+                    demand: 'Medium', forecast: [2850, 3020],
+                    priceHistory: [3060, 3030, 3050, 3000, 2980, 2940, 2920, 2900], seasonalReference: [3010, 3000, 2980, 2970, 2960, 2950, 2940, 2930],
+                    marketChannels: [['APMC Mandi', 2900, 'Lasalgaon', '10:20 AM'], ['Processor', 2960, 'Nashik Region', '10:05 AM'], ['Institutional Buyer', 3010, 'Maharashtra', '9:50 AM'], ['Digital Market', 2980, 'Online', '10:10 AM']],
+                    mandiPrices: [['Lasalgaon APMC', 'Lasalgaon', 2900, -2.4, '10:20 AM'], ['Pimpalgaon APMC', 'Pimpalgaon', 2840, -3.8, '10:05 AM'], ['Yeola APMC', 'Yeola', 2780, -4.1, '9:55 AM'], ['Nashik APMC', 'Nashik', 2875, -2.9, '9:45 AM']]
+                },
+                soybean: {
+                    name: 'Soybean', currentPrice: 4680, priceChange: 2.6, spread: 150, logisticsCost: 160,
+                    condition: { momentum: 'Rising', stability: 'Stable', supplyPressure: 'Low' },
+                    demand: 'High', forecast: [4720, 4880],
+                    priceHistory: [4470, 4510, 4550, 4580, 4610, 4630, 4660, 4680], seasonalReference: [4420, 4470, 4520, 4560, 4600, 4640, 4680, 4720],
+                    marketChannels: [['APMC Mandi', 4680, 'Latur', '10:15 AM'], ['Processor', 4760, 'Akola Region', '10:00 AM'], ['Institutional Buyer', 4810, 'Maharashtra', '9:50 AM'], ['Digital Market', 4780, 'Online', '10:20 AM']],
+                    mandiPrices: [['Latur APMC', 'Latur', 4680, 2.6, '10:15 AM'], ['Hingoli APMC', 'Hingoli', 4710, 3.1, '9:50 AM'], ['Washim APMC', 'Washim', 4590, 1.8, '10:10 AM'], ['Akola APMC', 'Akola', 4740, 3.4, '9:45 AM']]
+                }
+            }
+        };
+
+        const formatPrice = value => `₹${value.toLocaleString('en-IN')}`;
+        let selectedCrop = marketIntelligenceData.farmer.selectedCrop;
+        let selectedPeriod = 30;
+        const getCrop = () => marketIntelligenceData.crops[selectedCrop];
+        const rowTable = (headers, rows, mobileLabels) => `<table class="data-table"><thead><tr>${headers.map(header => `<th>${header}</th>`).join('')}</tr></thead><tbody>${rows.map(row => `<tr>${row.map((cell, index) => `<td data-label="${mobileLabels[index]}">${cell}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+
+        function renderPage() {
+            const crop = getCrop();
+            const farmer = marketIntelligenceData.farmer;
+            document.querySelector('#location').textContent = `${farmer.location.district}, ${farmer.location.state}`;
+            document.querySelector('#headerMeta').textContent = `${crop.name} · Harvest ${new Date(farmer.expectedHarvestDate).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })} · Updated ${marketIntelligenceData.updated}`;
+            document.querySelector('#source').textContent = marketIntelligenceData.source;
+            document.querySelector('#timestamp').textContent = marketIntelligenceData.updated;
+            document.querySelector('#snapshot').innerHTML = [['Current price', `${formatPrice(crop.currentPrice)} / Quintal`, 'Current modal price'], ['Price change', `${crop.priceChange > 0 ? '+' : ''}${crop.priceChange}%`, 'vs last 30 days'], ['Market spread', `${formatPrice(crop.spread)} / Quintal`, 'Difference across tracked markets'], ['Market condition', crop.condition.momentum, 'Current price behaviour']].map(card => `<article class="metric card"><span class="label">${card[0]}</span><b class="num">${card[1]}</b><span class="small">${card[2]}</span></article>`).join('');
+            document.querySelector('#channelTable').innerHTML = rowTable(['Market Channel', 'Current Indicative Price', 'Location / Coverage', 'Last Updated'], crop.marketChannels.map(row => [row[0], `${formatPrice(row[1])} / Quintal`, row[2], row[3]]), ['Market Channel', 'Current Indicative Price', 'Location / Coverage', 'Last Updated']);
+            document.querySelector('#cropTabs').innerHTML = farmer.crops.map(id => `<button type="button" data-crop="${id}" class="${id === selectedCrop ? 'on' : ''}">${marketIntelligenceData.crops[id].name}</button>`).join('');
+            document.querySelectorAll('#cropTabs button').forEach(button => button.addEventListener('click', () => { selectedCrop = button.dataset.crop; renderPage(); }));
+            document.querySelector('#mandiTable').innerHTML = rowTable(['Mandi', 'Location', 'Price / Quintal', 'Change', 'Updated'], crop.mandiPrices.map(row => [row[0], row[1], `<strong class="table-price">${formatPrice(row[2])}</strong>`, `<span class="${row[3] >= 0 ? 'up' : 'down'}">${row[3] > 0 ? '+' : ''}${row[3]}%</span>`, row[4]]), ['Mandi', 'Location', 'Price / Quintal', 'Change', 'Updated']);
+            const values = crop.mandiPrices.map(row => row[2]);
+            const spread = Math.max(...values) - Math.min(...values);
+            const spreadPercent = ((spread / Math.min(...values)) * 100).toFixed(1);
+            document.querySelector('#spreadInsight').innerHTML = `<b>Market spread</b><strong>${formatPrice(spread)} / Quintal</strong><small>The selected crop currently shows a ${spreadPercent}% difference between the highest and lowest tracked mandi price.</small>`;
+            const net = crop.currentPrice - crop.logisticsCost;
+            document.querySelector('#realisation').innerHTML = `<div><span>Indicative Market Price</span><strong>${formatPrice(crop.currentPrice)} / Quintal</strong></div><div><span>Estimated Transport + Storage</span><strong class="down">- ${formatPrice(crop.logisticsCost)} / Quintal</strong></div><div class="realisation-total"><span>Estimated Net Realisation</span><strong>${formatPrice(net)} / Quintal</strong></div>`;
+            renderTrend(crop);
+            document.querySelector('#conditionRow').innerHTML = [['Price Momentum', crop.condition.momentum], ['Price Stability', crop.condition.stability], ['Supply Pressure', crop.condition.supplyPressure]].map(signal => `<div><span>${signal[0]}</span><b>${signal[1]}</b></div>`).join('');
+            renderForecast(crop);
+            renderCropOutlook();
+        }
+
+        function renderTrend(crop) {
+            const history = crop.priceHistory.slice(-selectedPeriod);
+            const chart = document.querySelector('#priceChart');
+            document.querySelector('#trendCurrent').textContent = `${formatPrice(crop.currentPrice)} / q`;
+            document.querySelector('#trendChange').textContent = `${crop.priceChange > 0 ? '+' : ''}${crop.priceChange}%`;
+            if (!history.length) { chart.className = 'chart empty'; chart.textContent = 'Price trend unavailable for this crop.'; return; }
+            chart.className = 'chart';
+            const min = Math.min(...history) - 40, max = Math.max(...history) + 40, left = 40, width = 640, top = 15, height = 155;
+            const points = history.map((price, index) => `${left + index * width / (history.length - 1)},${top + height - (price - min) / (max - min) * height}`).join(' ');
+            const seasonal = crop.seasonalReference.slice(-selectedPeriod).map((price, index) => `${left + index * width / (history.length - 1)},${top + height - (price - min) / (max - min) * height}`).join(' ');
+            chart.innerHTML = `<svg viewBox="0 0 700 205" role="img" aria-label="Price trend for ${crop.name}"><line class="grid" x1="40" y1="15" x2="680" y2="15"/><line class="grid" x1="40" y1="92" x2="680" y2="92"/><line class="grid" x1="40" y1="170" x2="680" y2="170"/><polyline class="seasonal-line" points="${seasonal}"/><polyline class="line" points="${points}"/></svg>`;
+        }
+
+        function renderForecast(crop) {
+            const date = new Date(marketIntelligenceData.farmer.expectedHarvestDate);
+            const shift = date.getDate() % 31;
+            const low = crop.forecast[0] + shift + Math.floor(Math.random() * 35);
+            const high = crop.forecast[1] + shift + Math.floor(Math.random() * 35);
+            document.querySelector('#forecastResult').innerHTML = `<div class="out"><span>FORECAST PRICE RANGE</span><strong>${formatPrice(low)} - ${formatPrice(high)} / Quintal</strong><small>Current price: ${formatPrice(crop.currentPrice)} / Quintal</small></div><div class="out"><span>EXPECTED MOVEMENT</span><strong>${low >= crop.currentPrice ? 'Potential Increase ↑' : 'Potential Decrease ↓'}</strong><small>Demo forecast - estimates may change as market conditions change.</small></div>`;
+        }
+
+        function renderCropOutlook() {
+            const crops = marketIntelligenceData.farmer.crops;
+            document.querySelector('#cropOutlook').innerHTML = crops.length < 2 ? '<p class="empty-message">Add more crops to compare market outlook.</p>' : rowTable(['Crop', 'Current Price', '30-Day Trend', 'Forecast Range', 'Demand'], crops.map(id => { const crop = marketIntelligenceData.crops[id]; return [crop.name, `${formatPrice(crop.currentPrice)} / q`, `<span class="${crop.priceChange >= 0 ? 'up' : 'down'}">${crop.priceChange > 0 ? '↑' : '↓'} ${Math.abs(crop.priceChange)}%</span>`, `${formatPrice(crop.forecast[0])}-${formatPrice(crop.forecast[1])} / q`, crop.demand]; }), ['Crop', 'Current Price', '30-Day Trend', 'Forecast Range', 'Demand']);
+        }
+
+        document.querySelectorAll('#trendPeriods button').forEach(button => button.addEventListener('click', () => { selectedPeriod = Number(button.dataset.period); document.querySelectorAll('#trendPeriods button').forEach(item => item.classList.toggle('on', item === button)); renderTrend(getCrop()); }));
+        document.querySelector('#harvestDate').value = marketIntelligenceData.farmer.expectedHarvestDate;
+        document.querySelector('#harvestDate').addEventListener('input', event => { marketIntelligenceData.farmer.expectedHarvestDate = event.target.value; renderPage(); });
+        renderPage();
     </script>
 </body>
 
