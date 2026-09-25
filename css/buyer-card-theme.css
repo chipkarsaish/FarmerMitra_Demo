@@ -1,0 +1,263 @@
+/* Buyer-only card treatment based on the farmer dashboard KPI visual language. */
+.dashboard-body .buyer-card,
+.dashboard-body .dash-kpi,
+.dashboard-body .dash-panel,
+.dashboard-body .lot,
+.dashboard-body .source-card,
+.dashboard-body .shortlist-box,
+.dashboard-body .demand-bar,
+.dashboard-body .match-bar,
+.dashboard-body .auction-card,
+.dashboard-body .direct-offers,
+.dashboard-body .card,
+.dashboard-body .match-card,
+.dashboard-body .listing-card,
+.dashboard-body .live-offer,
+.dashboard-body .offer-panel,
+.dashboard-body .offer-aside,
+.dashboard-body .offer-summary,
+.dashboard-body .offer-hero,
+.dashboard-body .matches-panel,
+.dashboard-body .listing-item,
+.dashboard-body .ship-card,
+.dashboard-body .order-card,
+.dashboard-body .req-card,
+.dashboard-body .pay-card,
+.dashboard-body .invoice-card,
+.dashboard-body .summary-card {
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid rgba(45, 80, 22, .1);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .04);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+/* Buyer KPI cards deliberately mirror the farmer dashboard's .kpi-card. */
+.dashboard-body .dash-kpi,
+.dashboard-body .verify-kpi,
+.dashboard-body .settle-kpi {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 0;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(45, 80, 22, .1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .04);
+    color: inherit;
+    text-align: left;
+}
+
+.dashboard-body .dash-kpi::before,
+.dashboard-body .verify-kpi::before,
+.dashboard-body .settle-kpi::before {
+    top: -20px;
+    right: -20px;
+    bottom: auto;
+    left: auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(45, 80, 22, .08), rgba(45, 80, 22, .01));
+}
+
+.dashboard-body .verify-kpi::after,
+.dashboard-body .settle-kpi::after {
+    display: none;
+}
+
+.dashboard-body .dash-kpi:hover,
+.dashboard-body .verify-kpi:hover,
+.dashboard-body .settle-kpi:hover {
+    transform: translateY(-3px);
+    border-color: rgba(45, 80, 22, .3);
+    box-shadow: 0 8px 20px rgba(45, 80, 22, .08);
+}
+
+.dashboard-body .buyer-kpi-header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.dashboard-body .dash-kpi > .buyer-kpi-header > i,
+.dashboard-body .verify-kpi > .buyer-kpi-header > i,
+.dashboard-body .settle-kpi > .buyer-kpi-header > i {
+    position: static;
+    display: flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #f0f7ed;
+    color: var(--primary-green, #2d5016);
+    font-size: .95rem;
+}
+
+.dashboard-body .buyer-kpi-title,
+.dashboard-body .dash-kpi .buyer-kpi-title,
+.dashboard-body .verify-kpi .buyer-kpi-title,
+.dashboard-body .settle-kpi .buyer-kpi-title {
+    margin: 0;
+    color: #555;
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+}
+
+.dashboard-body .buyer-kpi-value {
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard-body .dash-kpi b,
+.dashboard-body .verify-kpi b,
+.dashboard-body .settle-kpi b {
+    margin: 0 0 4px;
+    color: #1a1a1a;
+    font: 800 1.6rem Poppins, sans-serif;
+}
+
+.dashboard-body .dash-kpi small,
+.dashboard-body .verify-kpi small,
+.dashboard-body .settle-kpi small {
+    color: #777;
+    font-size: .8rem;
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+.dashboard-body .verify-kpi.pending b,
+.dashboard-body .settle-kpi.pending b { color: #9b7314; }
+.dashboard-body .verify-kpi.done b,
+.dashboard-body .settle-kpi.paid b { color: #26713b; }
+.dashboard-body .verify-kpi.dispute b,
+.dashboard-body .settle-kpi.issue b { color: #ad5145; }
+
+.dashboard-body .buyer-card::before,
+.dashboard-body .dash-kpi::before,
+.dashboard-body .dash-panel::before,
+.dashboard-body .lot::before,
+.dashboard-body .source-card::before,
+.dashboard-body .auction-card::before,
+.dashboard-body .card::before,
+.dashboard-body .match-card::before,
+.dashboard-body .listing-card::before,
+.dashboard-body .live-offer::before,
+.dashboard-body .offer-summary::before,
+.dashboard-body .offer-hero::before,
+.dashboard-body .matches-panel::before,
+.dashboard-body .listing-item::before,
+.dashboard-body .ship-card::before,
+.dashboard-body .order-card::before,
+.dashboard-body .req-card::before,
+.dashboard-body .pay-card::before,
+.dashboard-body .invoice-card::before,
+.dashboard-body .summary-card::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(45, 80, 22, .08), rgba(45, 80, 22, .01));
+    pointer-events: none;
+}
+
+.dashboard-body .buyer-card:hover,
+.dashboard-body .dash-kpi:hover,
+.dashboard-body .dash-panel:hover,
+.dashboard-body .lot:hover,
+.dashboard-body .source-card:hover,
+.dashboard-body .auction-card:hover,
+.dashboard-body .card:hover,
+.dashboard-body .match-card:hover,
+.dashboard-body .listing-card:hover,
+.dashboard-body .live-offer:hover,
+.dashboard-body .offer-summary:hover,
+.dashboard-body .offer-hero:hover,
+.dashboard-body .matches-panel:hover,
+.dashboard-body .listing-item:hover,
+.dashboard-body .ship-card:hover,
+.dashboard-body .order-card:hover,
+.dashboard-body .req-card:hover,
+.dashboard-body .pay-card:hover,
+.dashboard-body .invoice-card:hover,
+.dashboard-body .summary-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(45, 80, 22, .3);
+    box-shadow: 0 8px 20px rgba(45, 80, 22, .08);
+}
+
+.dashboard-body .dash-kpi > i,
+.dashboard-body .kpi-icon,
+.dashboard-body .dash-lot-icon,
+.dashboard-body .card > i:first-child,
+.dashboard-body .pay-card > i:first-child {
+    position: relative;
+    z-index: 1;
+    background: #f0f7ed;
+    color: #2d5016;
+}
+
+.dashboard-body .dash-kpi span,
+.dashboard-body .kpi-title,
+.dashboard-body .card h3,
+.dashboard-body .match-card h3,
+.dashboard-body .listing-card h3,
+.dashboard-body .ship-id,
+.dashboard-body .order-id,
+.dashboard-body .req-card h3,
+.dashboard-body .summary-card strong {
+    color: #555;
+    font-weight: 700;
+}
+
+.dashboard-body .dash-kpi b,
+.dashboard-body .kpi-value,
+.dashboard-body .summary-card strong {
+    color: #1a1a1a;
+    font-weight: 800;
+}
+
+.dashboard-body .kpi-subtitle,
+.dashboard-body .card p,
+.dashboard-body .match-card p,
+.dashboard-body .listing-card p,
+.dashboard-body .ship-label,
+.dashboard-body .order-label,
+.dashboard-body .summary-card small {
+    color: #777;
+}
+
+@media (max-width: 768px) {
+    .dashboard-body .buyer-card,
+    .dashboard-body .dash-kpi,
+    .dashboard-body .dash-panel,
+    .dashboard-body .lot,
+    .dashboard-body .source-card,
+    .dashboard-body .auction-card,
+    .dashboard-body .card,
+    .dashboard-body .match-card,
+    .dashboard-body .listing-card,
+    .dashboard-body .live-offer,
+    .dashboard-body .offer-summary,
+    .dashboard-body .offer-hero,
+    .dashboard-body .matches-panel,
+    .dashboard-body .listing-item,
+    .dashboard-body .ship-card,
+    .dashboard-body .order-card,
+    .dashboard-body .req-card,
+    .dashboard-body .pay-card,
+    .dashboard-body .invoice-card,
+    .dashboard-body .summary-card {
+        transform: none;
+    }
+}
