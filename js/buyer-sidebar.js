@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <li class="nav-item"><a href="buyer-bidding.html" class="nav-link category-link"><span class="nav-icon"><i class="fa-solid fa-gavel"></i></span><span class="nav-text">Offers &amp; Bids</span></a></li>
                 <li class="nav-item"><a href="buyer-verification.html" class="nav-link category-link"><span class="nav-icon"><i class="fa-solid fa-clipboard-check"></i></span><span class="nav-text">Verify Delivery</span></a></li>
                 <li class="nav-item"><a href="buyer-settlement.html" class="nav-link category-link"><span class="nav-icon"><i class="fa-solid fa-wallet"></i></span><span class="nav-text">Settlement</span></a></li>
+                <li class="nav-item"><a href="buyer-profile.html" class="nav-link category-link"><span class="nav-icon"><i class="fa-solid fa-user"></i></span><span class="nav-text">Profile</span></a></li>
             </ul>
         </nav>
         <div class="sidebar-footer">

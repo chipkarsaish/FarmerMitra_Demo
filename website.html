@@ -132,9 +132,6 @@
                             data-lang="en">English</button>
                         <button
                             class="lang-btn px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-gray-600 hover:bg-farmer-green-50 hover:text-farmer-green-600 rounded-lg transition-all duration-200"
-                            data-lang="hi">हिंदी</button>
-                        <button
-                            class="lang-btn px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-gray-600 hover:bg-farmer-green-50 hover:text-farmer-green-600 rounded-lg transition-all duration-200"
                             data-lang="mr">मराठी</button>
                     </div>
 
@@ -228,6 +225,46 @@
 
     <script src="js/i18n.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/registration-toast.js"></script>
+    <style>
+        .registration-toast {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.25rem;
+            z-index: 100;
+            display: grid;
+            gap: .2rem;
+            min-width: 260px;
+            padding: 1rem 1.1rem;
+            border: 1px solid #b8d6c0;
+            border-radius: .75rem;
+            background: #fff;
+            color: #183b26;
+            box-shadow: 0 10px 25px rgba(24, 59, 38, .16);
+            animation: registration-toast-in .25s ease-out;
+        }
+
+        .registration-toast strong {
+            color: #2d6a3d;
+            font-weight: 800;
+        }
+
+        .registration-toast span {
+            color: #68776d;
+            font-size: .85rem;
+        }
+
+        .registration-toast.is-hidden {
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: opacity .25s ease, transform .25s ease;
+        }
+
+        @keyframes registration-toast-in {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </body>
 
 </html>

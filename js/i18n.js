@@ -1,170 +1,107 @@
-// i18n.js - Internationalization Module for FarmerConnect
-// Supports English, Hindi, and Marathi
+// i18n.js - Google Translate Integration for FarmerMitra
+// Automatically translates the entire portal (Farmer & Buyer side) using Google Translate widget.
 
 class I18n {
     constructor() {
         this.currentLang = localStorage.getItem('language') || 'en';
-        this.translations = {};
-        this.fallbackLang = 'en';
     }
 
-    // Load translation file for a specific language
-    async loadTranslations(lang) {
-        try {
-            // Automatically detect base path for GitHub Pages or local server
-            let basePath = '/translations/';
-
-            // If on GitHub Pages, extract repository name from URL
-            if (window.location.hostname.includes('github.io')) {
-                const pathParts = window.location.pathname.split('/').filter(p => p);
-                if (pathParts.length > 0) {
-                    basePath = `/${pathParts[0]}/translations/`;
-                }
-            }
-
-            const response = await fetch(`${basePath}${lang}.json`);
-            if (!response.ok) throw new Error(`Failed to load ${lang}.json`);
-            this.translations[lang] = await response.json();
-            return true;
-        } catch (error) {
-            console.error(`Error loading translations for ${lang}:`, error);
-            return false;
-        }
-    }
-
-    // Initialize i18n system
-    async init() {
-        // Load current language
-        await this.loadTranslations(this.currentLang);
-
-        // Load fallback language if different
-        if (this.currentLang !== this.fallbackLang) {
-            await this.loadTranslations(this.fallbackLang);
+    init() {
+        // The landing page can retain Google's Marathi cookie even after English
+        // is selected. Clear it before the widget initializes.
+        if (location.pathname.endsWith('/website.html') && this.currentLang === 'en') {
+            this.clearGoogleTranslateCookie();
         }
 
-        // Apply translations to page
-        this.translatePage();
-
-        // Update language switcher UI
+        // Always inject Google Translate script to handle translations based on cookie
+        this.injectGoogleTranslate();
         this.updateLanguageSwitcher();
     }
 
-    // Get translation by key path (e.g., "nav.login")
-    t(key, lang = this.currentLang) {
-        const keys = key.split('.');
-        let translation = this.translations[lang];
-
-        // Traverse the nested object
-        for (const k of keys) {
-            if (translation && translation[k]) {
-                translation = translation[k];
-            } else {
-                // Fallback to English if key not found
-                if (lang !== this.fallbackLang) {
-                    return this.t(key, this.fallbackLang);
-                }
-                console.warn(`Translation key not found: ${key}`);
-                return key;
-            }
+    clearGoogleTranslateCookie() {
+        const expires = 'expires=Thu, 01 Jan 1970 00:00:00 UTC;';
+        document.cookie = `googtrans=; ${expires} path=/;`;
+        if (location.hostname) {
+            document.cookie = `googtrans=; ${expires} domain=${location.hostname}; path=/;`;
         }
-
-        return translation;
     }
 
-    // Translate all elements on the page
-    translatePage() {
-        // Translate text content
-        document.querySelectorAll('[data-i18n]').forEach(element => {
-            const key = element.getAttribute('data-i18n');
-            element.textContent = this.t(key);
-        });
+    injectGoogleTranslate() {
+        // Create hidden container for the widget
+        const container = document.createElement('div');
+        container.id = 'google_translate_element';
+        container.style.display = 'none';
+        document.body.appendChild(container);
 
-        // Translate placeholders
-        document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
-            const key = element.getAttribute('data-i18n-placeholder');
-            element.placeholder = this.t(key);
-        });
+        // Define the global callback required by Google Translate
+        window.googleTranslateElementInit = () => {
+            new window.google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,mr,hi',
+                autoDisplay: false
+            }, 'google_translate_element');
+        };
 
-        // Translate titles
-        document.querySelectorAll('[data-i18n-title]').forEach(element => {
-            const key = element.getAttribute('data-i18n-title');
-            element.title = this.t(key);
-        });
-
-        // Translate aria-labels
-        document.querySelectorAll('[data-i18n-aria]').forEach(element => {
-            const key = element.getAttribute('data-i18n-aria');
-            element.setAttribute('aria-label', this.t(key));
-        });
-
-        // Update document title
-        const titleElement = document.querySelector('[data-i18n-page-title]');
-        if (titleElement) {
-            const key = titleElement.getAttribute('data-i18n-page-title');
-            document.title = this.t(key);
-        }
-
-        // Update HTML lang attribute
-        document.documentElement.lang = this.currentLang;
+        // Inject the Google Translate script
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        document.body.appendChild(script);
+        
+        // Hide all Google Translate UI elements (banners, tooltips, highlights)
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .goog-te-banner-frame { display: none !important; }
+            body { top: 0px !important; }
+            .goog-tooltip { display: none !important; }
+            .goog-tooltip:hover { display: none !important; }
+            .goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
+            #goog-gt-tt { display: none !important; }
+            body > .skiptranslate { display: none !important; }
+        `;
+        document.head.appendChild(style);
     }
 
-    // Change language
-    async changeLanguage(lang) {
-        if (lang === this.currentLang) return;
-
-        // Load translations if not already loaded
-        if (!this.translations[lang]) {
-            const loaded = await this.loadTranslations(lang);
-            if (!loaded) {
-                console.error(`Failed to change language to ${lang}`);
-                return;
+    changeLanguage(lang) {
+        if (lang === this.currentLang) {
+            if (location.pathname.endsWith('/website.html') && lang === 'en') {
+                this.clearGoogleTranslateCookie();
+                window.location.reload();
             }
+            return;
         }
-
-        // Update current language
+        
         this.currentLang = lang;
         localStorage.setItem('language', lang);
-
-        // Re-translate page
-        this.translatePage();
-
-        // Update language switcher UI
-        this.updateLanguageSwitcher();
-
-        // Dispatch custom event for other components to react
-        window.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang } }));
+        localStorage.setItem('farmer-language', lang); // for backwards compatibility
+        
+        // We use cookies and reload for a clean 100% translation without dealing with iframe hacks.
+        if (lang === 'en') {
+            this.clearGoogleTranslateCookie();
+        } else {
+            document.cookie = "googtrans=/en/" + lang + "; path=/;";
+            document.cookie = "googtrans=/en/" + lang + "; domain=" + location.hostname + "; path=/;";
+        }
+        
+        // Reload to apply the translation natively across the entire page
+        window.location.reload();
     }
 
-    // Update language switcher button states
     updateLanguageSwitcher() {
         document.querySelectorAll('.lang-btn').forEach(btn => {
             const btnLang = btn.getAttribute('data-lang');
             if (btnLang === this.currentLang) {
-                // Active state - Tailwind classes
+                btn.classList.add('active');
+                // Support for Tailwind styled buttons (like in website.html)
                 btn.classList.add('bg-farmer-green-600', 'text-white');
                 btn.classList.remove('text-gray-600', 'hover:bg-farmer-green-50', 'hover:text-farmer-green-600');
             } else {
-                // Inactive state - Tailwind classes
+                btn.classList.remove('active');
+                // Support for Tailwind styled buttons (like in website.html)
                 btn.classList.remove('bg-farmer-green-600', 'text-white');
                 btn.classList.add('text-gray-600', 'hover:bg-farmer-green-50', 'hover:text-farmer-green-600');
             }
         });
-
-        // Update dropdown display if exists
-        const currentLangDisplay = document.querySelector('.current-lang-display');
-        if (currentLangDisplay) {
-            const langNames = {
-                'en': 'English',
-                'hi': 'हिंदी',
-                'mr': 'मराठी'
-            };
-            currentLangDisplay.textContent = langNames[this.currentLang];
-        }
-    }
-
-    // Get current language
-    getCurrentLanguage() {
-        return this.currentLang;
     }
 }
 
@@ -172,13 +109,32 @@ class I18n {
 const i18n = new I18n();
 
 // Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', async () => {
-    await i18n.init();
+document.addEventListener('DOMContentLoaded', () => {
+    i18n.init();
 
-    // Setup language switcher event listeners
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const lang = btn.getAttribute('data-lang');
+    // Setup language switcher event listeners across all pages
+    // Find all language switchers first (for dynamically fixing missing data-langs)
+    document.querySelectorAll('.language-switcher, .flex.items-center.gap-1').forEach(sw => {
+        const buttons = [...sw.querySelectorAll('.lang-btn')];
+        buttons.forEach((b, i) => {
+            if (!b.hasAttribute('data-lang')) {
+                b.setAttribute('data-lang', i ? 'mr' : 'en');
+            }
+        });
+    });
+
+    // Attach click listeners directly to all lang-btn elements
+    document.querySelectorAll('.lang-btn').forEach(b => {
+        const lang = b.getAttribute('data-lang');
+        
+        // Fix gibberish text caused by encoding issues in the HTML
+        if (lang === 'mr') b.textContent = 'मराठी';
+        if (lang === 'en') b.textContent = 'English';
+        if (lang === 'hi') b.textContent = 'हिंदी';
+        
+        b.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             i18n.changeLanguage(lang);
         });
     });

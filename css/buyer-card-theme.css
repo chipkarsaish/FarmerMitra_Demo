@@ -37,7 +37,8 @@
 /* Buyer KPI cards deliberately mirror the farmer dashboard's .kpi-card. */
 .dashboard-body .dash-kpi,
 .dashboard-body .verify-kpi,
-.dashboard-body .settle-kpi {
+.dashboard-body .settle-kpi,
+.dashboard-body .buyer-demand-kpi {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -52,7 +53,8 @@
 
 .dashboard-body .dash-kpi::before,
 .dashboard-body .verify-kpi::before,
-.dashboard-body .settle-kpi::before {
+.dashboard-body .settle-kpi::before,
+.dashboard-body .buyer-demand-kpi::before {
     top: -20px;
     right: -20px;
     bottom: auto;
@@ -70,7 +72,8 @@
 
 .dashboard-body .dash-kpi:hover,
 .dashboard-body .verify-kpi:hover,
-.dashboard-body .settle-kpi:hover {
+.dashboard-body .settle-kpi:hover,
+.dashboard-body .buyer-demand-kpi:hover {
     transform: translateY(-3px);
     border-color: rgba(45, 80, 22, .3);
     box-shadow: 0 8px 20px rgba(45, 80, 22, .08);
@@ -87,7 +90,8 @@
 
 .dashboard-body .dash-kpi > .buyer-kpi-header > i,
 .dashboard-body .verify-kpi > .buyer-kpi-header > i,
-.dashboard-body .settle-kpi > .buyer-kpi-header > i {
+.dashboard-body .settle-kpi > .buyer-kpi-header > i,
+.dashboard-body .buyer-demand-kpi > .buyer-kpi-header > i {
     position: static;
     display: flex;
     width: 32px;
@@ -103,7 +107,8 @@
 .dashboard-body .buyer-kpi-title,
 .dashboard-body .dash-kpi .buyer-kpi-title,
 .dashboard-body .verify-kpi .buyer-kpi-title,
-.dashboard-body .settle-kpi .buyer-kpi-title {
+.dashboard-body .settle-kpi .buyer-kpi-title,
+.dashboard-body .buyer-demand-kpi .buyer-kpi-title {
     margin: 0;
     color: #555;
     font-size: .8rem;
@@ -118,7 +123,8 @@
 
 .dashboard-body .dash-kpi b,
 .dashboard-body .verify-kpi b,
-.dashboard-body .settle-kpi b {
+.dashboard-body .settle-kpi b,
+.dashboard-body .buyer-demand-kpi b {
     margin: 0 0 4px;
     color: #1a1a1a;
     font: 800 1.6rem Poppins, sans-serif;

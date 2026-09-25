@@ -61,7 +61,7 @@
         .invoice-card { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); max-width: 700px; margin: 0 auto; border: 1px solid #eee; }
         .inv-header { display: flex; justify-content: space-between; border-bottom: 2px solid #eee; padding-bottom: 20px; margin-bottom: 20px; }
     </style>
-<link rel="stylesheet" href="../css/buyer-card-theme.css"></head>
+<link rel="stylesheet" href="../css/buyer-card-theme.css"><link rel="stylesheet" href="../css/language-switcher.css"></head>
 <body class="dashboard-body">
     <button class="mobile-sidebar-toggle"><i class="fa-solid fa-bars"></i></button>
     <aside class="farmer-sidebar" id="buyerSidebar"></aside>
@@ -74,7 +74,7 @@
                 <a href="#" style="margin-right: 15px; color: var(--primary-green); font-size: 1.2rem; display: flex; align-items: center; text-decoration: none;" title="click for demo">
                     <i class="fa-solid fa-circle-question"></i>
                 </a>
-                <div class="user-menu"><div class="user-avatar" id="userMenuBtn"><span id="userInitials">B</span></div></div>
+                <div class="language-switcher"><button class="lang-btn active" data-lang="en">English</button><button class="lang-btn" data-lang="mr">मराठी</button></div><div class="user-menu"><div class="user-avatar" id="userMenuBtn"><span id="userInitials">B</span></div></div>
             </div>
         </div>
     </header>
@@ -289,5 +289,5 @@
             switchTab('transactions');
         }
     </script>
-</body>
+<script src="../js/i18n.js"></script></body>
 </html>

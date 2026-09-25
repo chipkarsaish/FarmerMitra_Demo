@@ -1226,6 +1226,7 @@
             }
         }
     </style>
+<link rel="stylesheet" href="../css/language-switcher.css">
 </head>
 
 <body class="dashboard-body">
@@ -1262,6 +1263,10 @@
                                 class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span></span>
             </div>
             <div class="header-actions">
+                <div class="language-switcher">
+                    <button class="lang-btn active" data-lang="en">English</button>
+                    <button class="lang-btn" data-lang="mr">मराठी</button>
+                </div>
                 <div class="user-menu">
                     <div class="user-avatar"><span id="userInitials">F</span></div>
                 </div>
@@ -1490,6 +1495,7 @@
         document.querySelector('#harvestDate').addEventListener('input', event => { marketIntelligenceData.farmer.expectedHarvestDate = event.target.value; renderPage(); });
         renderPage();
     </script>
+<script src="../js/i18n.js"></script>
 </body>
 
 </html>
