@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,10 +17,106 @@
 </head>
 <body>
   <button class="mobile-sidebar-toggle" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
-  <aside class="farmer-sidebar" id="farmerSidebar"><div class="sidebar-header"><div class="sidebar-brand"><div class="brand-logo-icon"><i class="fa-solid fa-leaf"></i></div><div class="brand-text"><span class="brand-agri">Kisan</span><span class="brand-mitra">Mitra</span></div></div></div><nav class="sidebar-nav"><ul><li><a href="farmer-dashboard.html"><span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span><span class="nav-text">Dashboard</span></a></li><li><a href="market-intelligence.html"><span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span><span class="nav-text">Market Prices</span></a></li><li><a href="crop-listings.html"><span class="nav-icon"><i class="fa-solid fa-wheat-awn"></i></span><span class="nav-text">My Crops</span></a></li><li><a href="my-lots.html"><span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">My Lots</span></a></li><li><a href="buyer-portal-offers.html"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span class="nav-text">Live Bids</span></a></li><li><a href="transport-optimizer.html"><span class="nav-icon"><i class="fa-solid fa-truck"></i></span><span class="nav-text">Transport &amp; Storage</span></a></li><li><a href="transactions.html"><span class="nav-icon"><i class="fa-solid fa-box"></i></span><span class="nav-text">Transactions</span></a></li><li class="active"><a href="farmer-profile.html"><span class="nav-icon"><i class="fa-solid fa-user"></i></span><span class="nav-text">Profile</span></a></li></ul></nav><div class="sidebar-footer"><a href="#" class="sidebar-logout-btn" id="sidebarLogoutBtn"><span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span><span class="nav-text">Logout</span></a></div></aside>
+  <aside class="farmer-sidebar" id="farmerSidebar">
+        <!-- Logo / Brand -->
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <div class="brand-logo-icon"><i class="fa-solid fa-leaf"></i></div>
+                <div class="brand-text">
+                    <span class="brand-agri">Kisan</span><span class="brand-mitra">Mitra</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav" aria-label="Farmer navigation">
+            <ul>
+                <!-- MAIN -->
+                <span class="nav-group-label">Main</span>
+
+                <li data-tour="dashboard">
+                    <a href="farmer-dashboard.html" aria-label="Dashboard">
+                        <span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.dashboard">Dashboard</span>
+                    </a>
+                </li>
+
+                <li data-tour="market-prices">
+                    <a href="market-intelligence.html" aria-label="Market Prices">
+                        <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.marketIntelligence">Market Prices</span>
+                    </a>
+                </li>
+
+                <li data-tour="my-crops">
+                    <a href="crop-listings.html" aria-label="My Crops">
+                        <span class="nav-icon"><i class="fa-solid fa-wheat-awn"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.myCrops">My Crops</span>
+                    </a>
+                </li>
+
+                <li data-tour="my-lots">
+                    <a href="my-lots.html" aria-label="My Lots">
+                        <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span>
+                        <span class="nav-text">My Lots</span>
+                    </a>
+                </li>
+
+                <!-- TRADING -->
+                <span class="nav-group-label">Trading</span>
+
+                <li data-tour="buyers">
+                    <a href="buyer-portal-offers.html" aria-label="Live Bids">
+                        <span class="nav-icon"><i class="fa-solid fa-handshake"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.buyers">Live Bids</span>
+                    </a>
+                </li>
+
+                <li data-tour="transactions">
+                    <a href="transactions.html" aria-label="Transactions">
+                        <span class="nav-icon"><i class="fa-solid fa-receipt"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.transactions">Transactions</span>
+                    </a>
+                </li>
+
+                <!-- OPERATIONS -->
+                <span class="nav-group-label">Operations</span>
+
+                <li data-tour="smart-selling">
+                    <a href="transport-optimizer.html" aria-label="Transport &amp; Storage">
+                        <span class="nav-icon"><i class="fa-solid fa-truck"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.smartSelling">Transport &amp; Storage</span>
+                    </a>
+                </li>
+
+                <!-- ACCOUNT -->
+                <span class="nav-group-label">Account</span>
+
+                <li class="active" data-tour="profile">
+                    <a href="farmer-profile.html" aria-label="Profile">
+                        <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.profile">Profile</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Sidebar Footer / Logout -->
+        <div class="sidebar-footer">
+            <a href="#" class="sidebar-logout-btn" id="sidebarLogoutBtn" aria-label="Logout">
+                <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                <span class="nav-text" data-i18n="dashboard.logout">Logout</span>
+            </a>
+        </div>
+</aside>
   <header class="dashboard-header"><div class="header-container"><div class="logo"><span class="logo-text"><span class="logo-agri">Kisan<span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span></span></div><div class="header-actions"><a href="#" style="margin-right:15px;color:var(--primary-green);font-size:1.2rem"><i class="fa-solid fa-circle-question"></i></a><div class="language-switcher"><button class="lang-btn active" data-lang="en">English</button><button class="lang-btn" data-lang="mr">मराठी</button></div><div class="user-menu"><div class="user-avatar" id="userMenuBtn"><span id="userInitials">R</span></div><div class="dropdown-menu" id="userDropdown"><a href="farmer-profile.html" class="dropdown-item"><span class="item-icon"><i class="fa-solid fa-user"></i></span> My Profile</a><div class="dropdown-divider"></div><a href="#" class="dropdown-item logout-item" id="logoutBtn"><span class="item-icon"><i class="fa-solid fa-right-from-bracket"></i></span> Logout</a></div></div></div></div></header>
   <main class="page">
-    <section class="profile-card"><div class="profile-image" id="profileImage"><i class="fa-solid fa-user"></i></div><div><p class="eyebrow">Farmer profile</p><h1 id="headerName">Rajesh Patil</h1><p class="sub">Farmer ID: FM-102938 · <i class="fa-solid fa-location-dot"></i> Nashik, Maharashtra</p><div class="badges"><span class="badge"><i class="fa-solid fa-circle-check"></i> Mobile Verified</span><span class="badge"><i class="fa-solid fa-shield-halved"></i> KYC Verified</span></div></div><div class="completion"><div class="completion-ring"><b class="percentage">0%</b></div><div class="completion-copy"><div class="completion-top"><span>Profile Completion</span></div><small class="completion-count">0 of 0 profile items completed</small><button data-go="personal"><i class="fa-solid fa-pen"></i> Complete Profile</button></div></div></section>
+        <div class="page-heading-block">
+            <div class="page-label">FARMER WORKSPACE <span class="label-dot">&middot;</span> ACCOUNT</div>
+            <h1 class="page-title">My Profile</h1>
+            <p class="page-subtitle">Manage your farm details, contact information, and account settings.</p>
+        </div>
+    <section class="profile-card"><div class="profile-image" id="profileImage"><i class="fa-solid fa-user"></i></div><div><p class="eyebrow">Farmer profile</p><h2 id="headerName" style="margin:4px 0 2px; font-size:1.4rem; color:#173D18;">Rajesh Patil</h2><p class="sub">Farmer ID: FM-102938 · <i class="fa-solid fa-location-dot"></i> Nashik, Maharashtra</p><div class="badges"><span class="badge"><i class="fa-solid fa-circle-check"></i> Mobile Verified</span><span class="badge"><i class="fa-solid fa-shield-halved"></i> KYC Verified</span></div></div><div class="completion"><div class="completion-ring"><b class="percentage">0%</b></div><div class="completion-copy"><div class="completion-top"><span>Profile Completion</span></div><small class="completion-count">0 of 0 profile items completed</small><button data-go="personal"><i class="fa-solid fa-pen"></i> Complete Profile</button></div></div></section>
     <section class="completion-card"><div><h2>Complete Your Farmer Profile</h2><p class="sub">Add details to get better market insights, buyer matches and personalised recommendations.</p><div class="section-list" id="sectionList"></div></div><aside class="next"><h3>Complete Next</h3><div id="nextList"></div></aside></section>
     <nav class="tabs" aria-label="Profile sections"><button class="tab active" data-tab="overview"><i class="fa-solid fa-house"></i> Overview</button><button class="tab" data-tab="personal"><i class="fa-solid fa-user"></i> Personal</button><button class="tab" data-tab="kyc"><i class="fa-solid fa-shield-halved"></i> Identity</button><button class="tab" data-tab="bank"><i class="fa-solid fa-building-columns"></i> Bank</button><button class="tab" data-tab="farms"><i class="fa-solid fa-wheat-awn"></i> Farms</button><button class="tab" data-tab="crops"><i class="fa-solid fa-leaf"></i> Crops</button><button class="tab" data-tab="preferences"><i class="fa-solid fa-gear"></i> Preferences</button></nav>
     <section class="tab-pane active" id="overview"><div class="grid-2"><article class="panel"><div class="panel-head"><h2>Personal Information</h2><button class="secondary" data-go="personal">Edit</button></div><div class="details"><div><span>Name</span><b id="overviewName">Rajesh Patil</b></div><div><span>Mobile number</span><b>+91 98765 43210</b></div><div><span>Preferred language</span><b>Marathi</b></div><div><span>Identity verification</span><b class="verified">Verified</b></div></div></article><article class="panel"><div class="panel-head"><h2>Location</h2><button class="secondary" data-go="farms">Edit</button></div><div class="details"><div><span>State</span><b>Maharashtra</b></div><div><span>District</span><b>Nashik</b></div><div><span>Taluka</span><b>Niphad</b></div><div><span>Preferred mandi</span><b id="mandiValue">Not added</b></div></div></article></div><article class="panel" style="margin-top:17px"><div class="panel-head"><h2>Your Farms</h2><button data-open="farmModal"><i class="fa-solid fa-plus"></i> Add Farm</button></div><div class="farm-grid" id="overviewFarms"></div></article><article class="panel" style="margin-top:17px"><div class="panel-head"><h2>Current Crops</h2><button class="secondary" data-go="crops">View Crops</button></div><div class="crop-grid" id="overviewCrops"></div></article></section>

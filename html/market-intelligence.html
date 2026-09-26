@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 
 <head>
@@ -44,12 +44,21 @@
             margin: auto
         }
 
+        .dashboard-main.mi>.page-heading-block {
+            max-width: 1480px;
+            margin: 0 auto 20px
+        }
+
         .head {
             display: flex;
             justify-content: space-between;
             gap: 20px;
             border-bottom: 1px solid var(--b);
             padding: 2px 0 22px
+        }
+
+        .head .loc {
+            margin-left: auto
         }
 
         .head h1,
@@ -1230,33 +1239,98 @@
 </head>
 
 <body class="dashboard-body">
-    <aside class="farmer-sidebar"><button class="sidebar-toggle">◀</button>
-        <nav class="sidebar-nav">
+    <aside class="farmer-sidebar">
+        <!-- Logo / Brand -->
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <div class="brand-logo-icon"><i class="fa-solid fa-leaf"></i></div>
+                <div class="brand-text">
+                    <span class="brand-agri">Kisan</span><span class="brand-mitra">Mitra</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav" aria-label="Farmer navigation">
             <ul>
-                <li><a href="farmer-dashboard.html"><span class="nav-icon"><i
-                                class="fa-solid fa-chart-pie"></i></span><span class="nav-text">Dashboard</span></a>
+                <!-- MAIN -->
+                <span class="nav-group-label">Main</span>
+
+                <li data-tour="dashboard">
+                    <a href="farmer-dashboard.html" aria-label="Dashboard">
+                        <span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.dashboard">Dashboard</span>
+                    </a>
                 </li>
-                <li class="active"><a href="market-intelligence.html"><span class="nav-icon"><i
-                                class="fa-solid fa-chart-line"></i></span><span class="nav-text">Market
-                            Intelligence</span></a></li>
-                <li><a href="crop-listings.html"><span class="nav-icon"><i
-                                class="fa-solid fa-wheat-awn"></i></span><span class="nav-text">My Crops</span></a></li>
-                <li><a href="my-lots.html"><span class="nav-icon"><i
-                                class="fa-solid fa-layer-group"></i></span><span class="nav-text">My Lots</span></a></li>
-                <li><a href="buyer-portal-offers.html"><span class="nav-icon"><i
-                                class="fa-solid fa-handshake"></i></span><span class="nav-text">Live Bids</span></a></li>
-                <li><a href="transport-optimizer.html"><span class="nav-icon"><i
-                                class="fa-solid fa-truck"></i></span><span class="nav-text">Transport &
-                            Storage</span></a></li>
-                <li><a href="transactions.html"><span class="nav-icon"><i class="fa-solid fa-box"></i></span><span
-                            class="nav-text">Transactions</span></a></li>
-                <li><a href="farmer-profile.html"><span class="nav-icon"><i class="fa-solid fa-user"></i></span><span
-                            class="nav-text">Profile</span></a></li>
+
+                <li class="active" data-tour="market-prices">
+                    <a href="market-intelligence.html" aria-label="Market Prices">
+                        <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.marketIntelligence">Market Prices</span>
+                    </a>
+                </li>
+
+                <li data-tour="my-crops">
+                    <a href="crop-listings.html" aria-label="My Crops">
+                        <span class="nav-icon"><i class="fa-solid fa-wheat-awn"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.myCrops">My Crops</span>
+                    </a>
+                </li>
+
+                <li data-tour="my-lots">
+                    <a href="my-lots.html" aria-label="My Lots">
+                        <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span>
+                        <span class="nav-text">My Lots</span>
+                    </a>
+                </li>
+
+                <!-- TRADING -->
+                <span class="nav-group-label">Trading</span>
+
+                <li data-tour="buyers">
+                    <a href="buyer-portal-offers.html" aria-label="Live Bids">
+                        <span class="nav-icon"><i class="fa-solid fa-handshake"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.buyers">Live Bids</span>
+                    </a>
+                </li>
+
+                <li data-tour="transactions">
+                    <a href="transactions.html" aria-label="Transactions">
+                        <span class="nav-icon"><i class="fa-solid fa-receipt"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.transactions">Transactions</span>
+                    </a>
+                </li>
+
+                <!-- OPERATIONS -->
+                <span class="nav-group-label">Operations</span>
+
+                <li data-tour="smart-selling">
+                    <a href="transport-optimizer.html" aria-label="Transport &amp; Storage">
+                        <span class="nav-icon"><i class="fa-solid fa-truck"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.smartSelling">Transport &amp; Storage</span>
+                    </a>
+                </li>
+
+                <!-- ACCOUNT -->
+                <span class="nav-group-label">Account</span>
+
+                <li data-tour="profile">
+                    <a href="farmer-profile.html" aria-label="Profile">
+                        <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.profile">Profile</span>
+                    </a>
+                </li>
             </ul>
         </nav>
-        <div class="sidebar-footer"><a class="sidebar-logout-btn" href="index.html"><span class="nav-icon"><i
-                        class="fa-solid fa-right-from-bracket"></i></span><span class="nav-text">Logout</span></a></div>
-    </aside>
+
+        <!-- Sidebar Footer / Logout -->
+        <div class="sidebar-footer">
+            <a href="#" class="sidebar-logout-btn" id="sidebarLogoutBtn" aria-label="Logout">
+                <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                <span class="nav-text" data-i18n="dashboard.logout">Logout</span>
+            </a>
+        </div>
+</aside>
     <header class="dashboard-header">
         <div class="header-container">
             <div class="logo"><span class="logo-text"><span class="logo-agri">Kisan<span class="logo-leaf"><i
@@ -1274,12 +1348,13 @@
         </div>
     </header>
     <main class="dashboard-main mi">
+        <div class="page-heading-block">
+            <div class="page-label">FARMER WORKSPACE <span class="label-dot">&middot;</span> MARKET ACCESS</div>
+            <h1 class="page-title">Market Intelligence</h1>
+            <p class="page-subtitle">Compare prices, identify selling opportunities, and track trends before harvest.</p>
+        </div>
         <div class="shell" id="app">
             <div class="head">
-                <div>
-                    <h1>Market Intelligence</h1>
-                    <p>Understand market prices, selling opportunities and expected price conditions before harvest.</p>
-                </div>
                 <div class="loc"><i class="fa-solid fa-location-dot"></i> <span id="location"></span><span class="updated" id="headerMeta"></span></div>
             </div>
             <section class="sec">

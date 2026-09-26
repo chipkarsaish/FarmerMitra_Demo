@@ -1,3 +1,94 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Transport Dashboard | KisanMitra</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="../css/styles.css"><link rel="stylesheet" href="../css/farmer-sidebar.css"><link rel="stylesheet" href="../css/provider-workspace.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="../css/language-switcher.css">
-</head><body class="dashboard-body" data-provider-role="transport" data-provider-page="dashboard"><button class="mobile-sidebar-toggle"><i class="fa-solid fa-bars"></i></button><aside class="farmer-sidebar" id="providerSidebar"></aside><header class="dashboard-header"><div class="header-container"><div class="logo"><span class="logo-text"><span class="logo-agri">Kisan<span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span></span></div><div class="header-actions"><div class="user-menu"><div class="user-avatar" id="userMenuBtn"><span id="userInitials">T</span></div><div class="dropdown-menu" id="userDropdown"><div class="dropdown-user-info"><div class="dropdown-avatar"><span id="dropdownInitials">T</span></div><div><div id="dropdownName">Transport Provider</div><div id="dropdownEmail"></div></div></div><div class="dropdown-divider"></div><a href="transport-profile.html" class="dropdown-item"><span class="item-icon"><i class="fa-solid fa-user"></i></span>My Profile</a><a href="#" class="dropdown-item logout-item" id="logoutBtn"><span class="item-icon"><i class="fa-solid fa-right-from-bracket"></i></span>Logout</a></div></div></div></div></header><main class="provider-main" id="providerPage"></main><script src="../js/provider-sidebar.js"></script><script src="../js/provider-workspace.js"></script><script src="../js/i18n.js"></script>
+</head><body class="dashboard-body" data-provider-role="transport" data-provider-page="dashboard"><button class="mobile-sidebar-toggle"><i class="fa-solid fa-bars"></i></button><aside class="farmer-sidebar" id="providerSidebar">
+        <!-- Logo / Brand -->
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <div class="brand-logo-icon"><i class="fa-solid fa-leaf"></i></div>
+                <div class="brand-text">
+                    <span class="brand-agri">Kisan</span><span class="brand-mitra">Mitra</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav" aria-label="Farmer navigation">
+            <ul>
+                <!-- MAIN -->
+                <span class="nav-group-label">Main</span>
+
+                <li class="active" data-tour="dashboard">
+                    <a href="farmer-dashboard.html" aria-label="Dashboard">
+                        <span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.dashboard">Dashboard</span>
+                    </a>
+                </li>
+
+                <li data-tour="market-prices">
+                    <a href="market-intelligence.html" aria-label="Market Prices">
+                        <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.marketIntelligence">Market Prices</span>
+                    </a>
+                </li>
+
+                <li data-tour="my-crops">
+                    <a href="crop-listings.html" aria-label="My Crops">
+                        <span class="nav-icon"><i class="fa-solid fa-wheat-awn"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.myCrops">My Crops</span>
+                    </a>
+                </li>
+
+                <li data-tour="my-lots">
+                    <a href="my-lots.html" aria-label="My Lots">
+                        <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span>
+                        <span class="nav-text">My Lots</span>
+                    </a>
+                </li>
+
+                <!-- TRADING -->
+                <span class="nav-group-label">Trading</span>
+
+                <li data-tour="buyers">
+                    <a href="buyer-portal-offers.html" aria-label="Live Bids">
+                        <span class="nav-icon"><i class="fa-solid fa-handshake"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.buyers">Live Bids</span>
+                    </a>
+                </li>
+
+                <li data-tour="transactions">
+                    <a href="transactions.html" aria-label="Transactions">
+                        <span class="nav-icon"><i class="fa-solid fa-receipt"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.transactions">Transactions</span>
+                    </a>
+                </li>
+
+                <!-- OPERATIONS -->
+                <span class="nav-group-label">Operations</span>
+
+                <li data-tour="smart-selling">
+                    <a href="transport-optimizer.html" aria-label="Transport &amp; Storage">
+                        <span class="nav-icon"><i class="fa-solid fa-truck"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.smartSelling">Transport &amp; Storage</span>
+                    </a>
+                </li>
+
+                <!-- ACCOUNT -->
+                <span class="nav-group-label">Account</span>
+
+                <li data-tour="profile">
+                    <a href="farmer-profile.html" aria-label="Profile">
+                        <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.profile">Profile</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Sidebar Footer / Logout -->
+        <div class="sidebar-footer">
+            <a href="#" class="sidebar-logout-btn" id="sidebarLogoutBtn" aria-label="Logout">
+                <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                <span class="nav-text" data-i18n="dashboard.logout">Logout</span>
+            </a>
+        </div>
+</aside><header class="dashboard-header"><div class="header-container"><div class="logo"><span class="logo-text"><span class="logo-agri">Kisan<span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span></span></div><div class="header-actions"><div class="user-menu"><div class="user-avatar" id="userMenuBtn"><span id="userInitials">T</span></div><div class="dropdown-menu" id="userDropdown"><div class="dropdown-user-info"><div class="dropdown-avatar"><span id="dropdownInitials">T</span></div><div><div id="dropdownName">Transport Provider</div><div id="dropdownEmail"></div></div></div><div class="dropdown-divider"></div><a href="transport-profile.html" class="dropdown-item"><span class="item-icon"><i class="fa-solid fa-user"></i></span>My Profile</a><a href="#" class="dropdown-item logout-item" id="logoutBtn"><span class="item-icon"><i class="fa-solid fa-right-from-bracket"></i></span>Logout</a></div></div></div></div></header><main class="provider-main" id="providerPage"></main><script src="../js/provider-sidebar.js"></script><script src="../js/provider-workspace.js"></script><script src="../js/i18n.js"></script>
 </body></html>

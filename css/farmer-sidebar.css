@@ -1,219 +1,353 @@
 /* =======================================================
-   KISANMITRA ALWAYS-EXPANDED SIDEBAR STYLES
-   Sidebar sits BELOW the top navbar (header spans full width)
+   KISANMITRA SIDEBAR REDESIGN — v2.0
+   Light, premium, agricultural — matching the landing page
    ======================================================= */
 
-/* Sidebar Container - Always Expanded, starts below header */
+/* ------ Design Tokens ------ */
+:root {
+    --sb-primary: #2F6B24;
+    --sb-deep: #173D18;
+    --sb-dark-text: #203A20;
+    --sb-light-bg: #E7F3E3;
+    --sb-active-bg: #D6EBCD;
+    --sb-page-bg: #F7F9F5;
+    --sb-white: #FFFFFF;
+    --sb-border: #E1E9DD;
+    --sb-accent: #F6C744;
+    --sb-muted: #70806D;
+    --sb-danger: #C45B5B;
+    --sb-icon-bg: #E7F3E3;
+    --sb-icon-color: #4C8B42;
+    --sb-width: 270px;
+}
+
+/* ------ Sidebar Container ------ */
 .farmer-sidebar {
-    width: 210px;
-    background: linear-gradient(180deg, #173012 0%, #10200d 56%, #0d1a0b 100%);
-    color: white;
-    padding: 14px 9px 12px;
+    width: var(--sb-width);
+    background: var(--sb-white);
+    border-right: 1px solid var(--sb-border);
+    box-shadow: 2px 0 10px rgba(31, 70, 28, 0.03);
+    padding: 0 0 16px 0;
     display: flex;
     flex-direction: column;
     position: fixed;
     left: 0;
     top: 64px;
-    /* starts below the sticky header */
     height: calc(100vh - 64px);
-    /* fills remaining viewport */
     z-index: 1000;
-    /* below header (1100) */
-    box-shadow: 4px 0 18px rgba(19, 45, 15, 0.14);
     box-sizing: border-box;
     overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-/* Hide the toggle button entirely */
+/* ------ Hide old elements ------ */
 .sidebar-toggle-btn,
 .sidebar-toggle {
     display: none !important;
 }
 
-/* Hide the sidebar brand/logo section - top navbar has the logo */
+/* ------ Logo / Brand section inside sidebar ------ */
 .sidebar-header {
-    display: none;
+    display: none !important;
+    align-items: center;
+    padding: 20px 20px 0 20px;
+    gap: 10px;
+    flex-shrink: 0;
 }
 
-/* Navigation List */
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+}
+
+.brand-logo-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--sb-primary);
+    color: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 2px;
+}
+
+.brand-agri {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--sb-deep);
+    letter-spacing: -0.3px;
+}
+
+.brand-mitra {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--sb-primary);
+}
+
+/* Profile card removed */
+.sidebar-profile-card {
+    display: none !important;
+}
+
+/* ------ Nav Area (non-scrollable, compact) ------ */
 .sidebar-nav {
     flex-grow: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding-top: 2px;
+    overflow: hidden;
+    padding: 14px 10px 8px 10px;
 }
 
-.sidebar-nav::before {
-    content: 'FARMER WORKSPACE';
+/* ------ Section Group Labels ------ */
+.nav-group-label {
     display: block;
-    padding: 0 11px 9px;
-    color: rgba(208, 237, 204, 0.52);
-    font-size: 0.61rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
+    font-family: 'Poppins', sans-serif;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: var(--sb-muted);
+    text-transform: uppercase;
+    padding: 0 4px 5px 4px;
+    margin-top: 14px;
 }
 
-.sidebar-nav::-webkit-scrollbar {
-    display: none;
+.nav-group-label:first-child {
+    margin-top: 0;
 }
 
+/* ------ Nav List ------ */
 .sidebar-nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 3px;
+    gap: 1px;
 }
 
 .sidebar-nav li {
     margin-bottom: 0;
 }
 
+/* ------ Nav Links ------ */
 .sidebar-nav a {
-    color: #b8dcb8;
+    font-family: 'Poppins', sans-serif;
+    color: #4A5E47;
     text-decoration: none;
-    padding: 9px 10px;
+    padding: 6px 9px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    border-radius: 9px;
-    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    font-weight: 600;
-    font-size: 0.84rem;
+    gap: 9px;
+    border-radius: 10px;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+    font-weight: 500;
+    font-size: 0.83rem;
     white-space: nowrap;
+    border-left: 3px solid transparent;
+    position: relative;
 }
 
+/* ------ Nav Icon Container ------ */
 .sidebar-nav a .nav-icon {
-    font-size: 0.95rem;
-    width: 29px;
-    height: 29px;
+    font-size: 0.85rem;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: #9fd5a2;
+    color: var(--sb-icon-color);
     border-radius: 8px;
-    background: rgba(214, 244, 209, 0.07);
+    background: var(--sb-icon-bg);
+    transition: background 0.18s ease, color 0.18s ease;
 }
 
 .sidebar-nav a .nav-text {
-    opacity: 1;
+    flex: 1;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/* Hover State */
+/* ------ Hover State ------ */
 .sidebar-nav a:hover {
-    background: rgba(204, 239, 199, 0.1);
-    color: #ffffff;
+    background: #F0F6ED;
+    color: var(--sb-primary);
     transform: translateX(2px);
 }
 
 .sidebar-nav a:hover .nav-icon {
-    color: #dff5dc;
-    background: rgba(214, 244, 209, 0.13);
+    background: #D6EBCD;
+    color: var(--sb-primary);
 }
 
-/* Active State - Green highlight matching the site's brand */
-.sidebar-nav li.active a {
-    background: linear-gradient(90deg, rgba(107, 226, 124, 0.15) 0%, transparent 100%);
-    color: #6be27c;
+/* ------ Active State ------ */
+.sidebar-nav li.active>a {
+    background: var(--sb-active-bg);
+    color: var(--sb-primary);
     font-weight: 700;
-    box-shadow: inset 3px 0 0 #6be27c;
+    border-left: 3px solid var(--sb-primary);
 }
 
-.sidebar-nav li.active a .nav-icon {
-    background: #6be27c;
-    color: #0d1a0b;
-    box-shadow: 0 0 12px rgba(107, 226, 124, 0.4);
+.sidebar-nav li.active>a .nav-icon {
+    background: var(--sb-primary);
+    color: #fff;
 }
 
-.sidebar-nav li.active a:hover {
-    background: linear-gradient(90deg, rgba(107, 226, 124, 0.25) 0%, transparent 100%);
-    color: #8af59a;
+.sidebar-nav li.active>a:hover {
+    transform: none;
 }
 
-/* Hide flyout popups */
+/* ------ Badge (for Live Bids etc.) ------ */
+.nav-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    background: var(--sb-accent);
+    color: var(--sb-deep);
+    border-radius: 20px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+/* ------ Hide flyout popups ------ */
 .nav-flyout {
     display: none !important;
 }
 
-/* Sidebar Footer (Sign Out) */
+/* ------ Sidebar Footer ------ */
 .sidebar-footer {
-    padding-top: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px 12px 0 12px;
+    border-top: 1px solid var(--sb-border);
     margin-top: auto;
+    flex-shrink: 0;
 }
 
+/* ------ Logout Button ------ */
 .sidebar-logout-btn {
-    color: #f5a09b;
+    font-family: 'Poppins', sans-serif;
+    color: var(--sb-danger);
     text-decoration: none;
-    padding: 9px 10px;
+    padding: 10px 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    border-radius: 9px;
-    transition: all 0.2s ease;
-    font-weight: 700;
-    font-size: 0.84rem;
+    gap: 11px;
+    border-radius: 12px;
+    transition: background 0.18s ease, color 0.18s ease;
+    font-weight: 600;
+    font-size: 0.875rem;
     white-space: nowrap;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
 }
 
 .sidebar-logout-btn .nav-icon {
-    font-size: 1rem;
-    width: 29px;
-    height: 29px;
-    border-radius: 8px;
-    background: rgba(248, 113, 113, 0.08);
+    font-size: 0.9rem;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: #FDEAEA;
+    color: var(--sb-danger);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-}
-
-.sidebar-logout-btn .nav-text {
-    opacity: 1;
+    transition: background 0.18s ease;
 }
 
 .sidebar-logout-btn:hover {
-    background: rgba(239, 68, 68, 0.13);
-    color: #ffd1ce;
+    background: #FBECEC;
+    color: #a03030;
 }
 
-/* -------------------------------------------------------
-   Header: full width (no left margin) - spans over sidebar
-   ------------------------------------------------------- */
+.sidebar-logout-btn:hover .nav-icon {
+    background: #F8D7D7;
+}
+
+/* ------ Header (full width, sits above sidebar) ------ */
 .dashboard-header {
     margin-left: 0 !important;
     width: 100% !important;
 }
 
-/* -------------------------------------------------------
-   Main Content: offset by sidebar width only
-   ------------------------------------------------------- */
+/* ------ Main Content: offset by sidebar width ------ */
 .dashboard-main,
-.main-content-with-sidebar {
-    margin-left: 210px !important;
+.main-content-with-sidebar,
+.market-main,
+.provider-main,
+.lots-main,
+.page,
+.offers-main {
+    box-sizing: border-box;
+    width: calc(100% - var(--sb-width)) !important;
+    max-width: none;
+    margin-left: var(--sb-width) !important;
+    overflow-x: hidden;
 }
 
-/* Mobile Responsiveness */
+.dashboard-main > h1,
+.dashboard-main .page-header,
+.dashboard-main .page-head,
+.market-main .page-header,
+.provider-main .provider-head,
+.lots-main .lots-hero,
+.page > .profile-card,
+.offers-main .offers-header {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* ------ Mobile Sidebar Toggle Button ------ */
+.mobile-sidebar-toggle {
+    display: none;
+}
+
+/* -------------------------------------------------------
+   Responsive
+   ------------------------------------------------------- */
 @media (max-width: 768px) {
     .farmer-sidebar {
         width: 280px;
         transform: translateX(-100%);
-        transition: transform 0.3s ease;
         top: 56px;
         height: calc(100vh - 56px);
+        z-index: 1100;
     }
 
     .farmer-sidebar.mobile-open {
         transform: translateX(0);
+        box-shadow: 4px 0 30px rgba(31, 70, 28, 0.12);
     }
 
     .dashboard-main,
-    .main-content-with-sidebar {
+    .main-content-with-sidebar,
+    .market-main,
+    .provider-main,
+    .lots-main,
+    .page,
+    .offers-main {
+        width: 100% !important;
         margin-left: 0 !important;
     }
 
@@ -225,15 +359,19 @@
         top: 14px;
         left: 14px;
         z-index: 1200;
-        background: #173012;
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: var(--sb-white);
+        color: var(--sb-deep);
+        border: 1px solid var(--sb-border);
         width: 40px;
         height: 40px;
         border-radius: 10px;
         cursor: pointer;
-        font-size: 1.2rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        font-size: 1.1rem;
+        box-shadow: 0 2px 10px rgba(31, 70, 28, 0.08);
+    }
+
+    .mobile-sidebar-toggle:hover {
+        background: var(--sb-light-bg);
     }
 }
 
@@ -241,4 +379,77 @@
     .mobile-sidebar-toggle {
         display: none !important;
     }
+}
+/* =======================================================
+   PAGE LABEL + HEADING BLOCK
+   ======================================================= */
+
+.page-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #2F6B24;
+    background: #E7F3E3;
+    border: 1px solid #C8E3BF;
+    border-radius: 20px;
+    padding: 4px 12px;
+    width: fit-content;
+    user-select: none;
+    margin-bottom: 6px;
+}
+
+.page-label .label-dot {
+    color: #70806D;
+    font-size: 0.75em;
+}
+
+/* Heading block — stacks label / title / subtitle vertically by default */
+.page-heading-block {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.page-heading-block .page-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #173D18;
+    margin: 0 0 3px 0;
+    line-height: 1.25;
+}
+
+.page-heading-block .page-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 400;
+    color: #70806D;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Modifier: use on pages that have a right-side action (button/link) */
+.page-heading-block--row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.page-heading-block--row > div:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.page-heading-block--row .head-actions,
+.page-heading-block--row .history-link,
+.page-heading-block--row > a {
+    flex-shrink: 0;
+    align-self: flex-end;
+    margin-bottom: 2px;
 }

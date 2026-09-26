@@ -1,12 +1,34 @@
-/* Buyer Sidebar Specific Overrides */
+/* Buyer Sidebar — overrides & compatibility */
 
-/* The shared sidebar styling is reused, with buyer-specific context text. */
+/* Remove old workspace subheading label */
 .farmer-sidebar .sidebar-nav::before {
-    content: 'BUYER WORKSPACE';
+    display: none !important;
+    content: none !important;
 }
 
 /* Allow text wrapping for long navigation names in buyer portal */
 .sidebar-nav a {
     white-space: normal;
     line-height: 1.3;
+}
+
+/* Keep buyer content fully clear of the fixed sidebar on desktop. */
+.buyer-main {
+    box-sizing: border-box;
+    width: calc(100% - var(--sb-width));
+    max-width: none;
+    margin-left: var(--sb-width) !important;
+}
+
+.buyer-wrap {
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .buyer-main {
+        width: 100%;
+        margin-left: 0 !important;
+    }
 }

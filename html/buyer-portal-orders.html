@@ -61,7 +61,98 @@
 <link rel="stylesheet" href="../css/buyer-card-theme.css"><link rel="stylesheet" href="../css/language-switcher.css"></head>
 <body class="dashboard-body">
     <button class="mobile-sidebar-toggle"><i class="fa-solid fa-bars"></i></button>
-    <aside class="farmer-sidebar" id="buyerSidebar"></aside>
+    <aside class="farmer-sidebar" id="buyerSidebar">
+        <!-- Logo / Brand -->
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <div class="brand-logo-icon"><i class="fa-solid fa-leaf"></i></div>
+                <div class="brand-text">
+                    <span class="brand-agri">Kisan</span><span class="brand-mitra">Mitra</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav" aria-label="Farmer navigation">
+            <ul>
+                <!-- MAIN -->
+                <span class="nav-group-label">Main</span>
+
+                <li data-tour="dashboard">
+                    <a href="farmer-dashboard.html" aria-label="Dashboard">
+                        <span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.dashboard">Dashboard</span>
+                    </a>
+                </li>
+
+                <li data-tour="market-prices">
+                    <a href="market-intelligence.html" aria-label="Market Prices">
+                        <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.marketIntelligence">Market Prices</span>
+                    </a>
+                </li>
+
+                <li data-tour="my-crops">
+                    <a href="crop-listings.html" aria-label="My Crops">
+                        <span class="nav-icon"><i class="fa-solid fa-wheat-awn"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.myCrops">My Crops</span>
+                    </a>
+                </li>
+
+                <li data-tour="my-lots">
+                    <a href="my-lots.html" aria-label="My Lots">
+                        <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span>
+                        <span class="nav-text">My Lots</span>
+                    </a>
+                </li>
+
+                <!-- TRADING -->
+                <span class="nav-group-label">Trading</span>
+
+                <li class="active" data-tour="buyers">
+                    <a href="buyer-portal-offers.html" aria-label="Live Bids">
+                        <span class="nav-icon"><i class="fa-solid fa-handshake"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.buyers">Live Bids</span>
+                    </a>
+                </li>
+
+                <li data-tour="transactions">
+                    <a href="transactions.html" aria-label="Transactions">
+                        <span class="nav-icon"><i class="fa-solid fa-receipt"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.transactions">Transactions</span>
+                    </a>
+                </li>
+
+                <!-- OPERATIONS -->
+                <span class="nav-group-label">Operations</span>
+
+                <li data-tour="smart-selling">
+                    <a href="transport-optimizer.html" aria-label="Transport &amp; Storage">
+                        <span class="nav-icon"><i class="fa-solid fa-truck"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.smartSelling">Transport &amp; Storage</span>
+                    </a>
+                </li>
+
+                <!-- ACCOUNT -->
+                <span class="nav-group-label">Account</span>
+
+                <li data-tour="profile">
+                    <a href="farmer-profile.html" aria-label="Profile">
+                        <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.profile">Profile</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Sidebar Footer / Logout -->
+        <div class="sidebar-footer">
+            <a href="#" class="sidebar-logout-btn" id="sidebarLogoutBtn" aria-label="Logout">
+                <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                <span class="nav-text" data-i18n="dashboard.logout">Logout</span>
+            </a>
+        </div>
+</aside>
 
     <header class="dashboard-header">
         <div class="header-container">

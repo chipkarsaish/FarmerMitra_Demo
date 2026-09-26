@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -12,10 +12,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root{--offers-deep:#173b21;--offers-green:#2f7d42;--offers-soft:#edf7ee;--offers-border:#d9e8da;--offers-muted:#647269}
-.offers-body{background:#f5f8f4;color:#213127}.offers-main{margin-left:210px;padding:32px;max-width:1540px}.offers-wrap{max-width:1320px;margin:auto}.offers-header{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:25px}.eyebrow{margin:0 0 7px;color:var(--offers-green);font:800 .7rem Poppins,sans-serif;letter-spacing:.1em;text-transform:uppercase}.offers-header h1{margin:0;color:var(--offers-deep);font:900 2rem Montserrat,sans-serif}.offers-header p:not(.eyebrow){margin:8px 0 0;color:var(--offers-muted);font-size:.85rem}.header-tools{display:flex;align-items:center;gap:12px}.live-indicator{padding:9px 12px;border:1px solid #cae1cd;border-radius:8px;background:#f0f8f0;color:var(--offers-green);font-size:.72rem;font-weight:700;white-space:nowrap}.history-btn,.outline-btn{border:1px solid var(--offers-border);border-radius:8px;padding:10px 13px;background:#fff;color:#425146;font:700 .73rem Poppins,sans-serif;cursor:pointer}.summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:26px}.summary-card{position:relative;min-height:82px;padding:14px 16px;overflow:hidden;border:1px solid var(--offers-border);border-radius:12px;background:#fff}.summary-card:before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--offers-green)}.summary-card span{display:block;color:var(--offers-muted);font-size:.67rem;font-weight:800;letter-spacing:.04em}.summary-card strong{display:block;margin-top:7px;color:var(--offers-deep);font:900 1.7rem Montserrat,sans-serif}.summary-card small{position:absolute;right:14px;bottom:15px;color:var(--offers-muted);font-size:.68rem}.activity-strip{display:flex;align-items:center;gap:9px;margin-bottom:20px;padding:10px 13px;border:1px solid #d3e7d5;border-radius:8px;background:#f0f8f0;color:#2e6840;font-size:.73rem}.activity-strip i{font-size:.52rem}.offers-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:14px}.offers-section-head h2{margin:0;color:var(--offers-deep);font:800 1.2rem Montserrat,sans-serif}.offers-section-head p{margin:5px 0 0;color:var(--offers-muted);font-size:.75rem}.controls{display:flex;gap:8px}.controls input,.controls select{height:36px;border:1px solid var(--offers-border);border-radius:8px;background:#fff;color:#425146;font:600 .72rem Poppins,sans-serif;padding:0 10px}.controls input{width:180px}.lot-list{display:grid;gap:12px}.lot-card{display:grid;grid-template-columns:1.15fr 1fr 1.15fr;align-items:center;gap:20px;padding:17px 20px;border:1px solid var(--offers-border);border-radius:12px;background:#fff;box-shadow:0 3px 12px #1d472508;transition:border-color .18s,background .18s}.lot-card.selected{border-color:var(--offers-green);background:#f4faf4;box-shadow:0 5px 18px #2f7d4218}.lot-label{color:var(--offers-green);font-size:.68rem;font-weight:800;letter-spacing:.05em}.lot-card h3{margin:5px 0 2px;color:var(--offers-deep);font:800 1.1rem Montserrat,sans-serif}.lot-variety{color:#54665a;font-size:.76rem}.grade{display:inline-block;margin-left:7px;padding:3px 7px;border-radius:5px;background:var(--offers-soft);color:var(--offers-green);font-size:.62rem;font-weight:800}.lot-info{display:grid;grid-template-columns:1fr 1fr;gap:10px}.info-item span,.offer-summary span{display:block;color:var(--offers-muted);font-size:.64rem;font-weight:700}.info-item strong,.offer-summary strong{display:block;margin-top:3px;color:#35453a;font-size:.76rem}.offer-summary{display:grid;grid-template-columns:1fr 1fr;gap:7px 14px}.offer-summary .offer-count{color:var(--offers-green);font-weight:800}.view-offers{grid-column:2;justify-self:start;margin-top:5px;border:0;border-radius:7px;padding:9px 12px;background:var(--offers-green);color:#fff;font:700 .7rem Poppins,sans-serif;cursor:pointer}.offer-accepted{padding:10px 12px;border-radius:7px;background:#f0f8f0;color:var(--offers-green);font-size:.7rem;font-weight:700}.recent{margin-top:28px;padding-top:18px;border-top:1px solid var(--offers-border)}.recent h3{margin:0 0 10px;color:var(--offers-deep);font:800 .95rem Montserrat,sans-serif}.recent-list{display:flex;gap:22px;color:var(--offers-muted);font-size:.7rem}.recent-list i{color:var(--offers-green);margin-right:5px}
+.offers-body{background:#f5f8f4;color:#213127}.offers-main{box-sizing:border-box;width:calc(100% - var(--sb-width));margin-left:var(--sb-width);padding:32px;max-width:none}.offers-wrap{max-width:1320px;margin:auto}.offers-header{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:25px}.eyebrow{margin:0 0 7px;color:var(--offers-green);font:800 .7rem Poppins,sans-serif;letter-spacing:.1em;text-transform:uppercase}.offers-header h1{margin:0;color:var(--offers-deep);font:900 2rem Montserrat,sans-serif}.offers-header p:not(.eyebrow){margin:8px 0 0;color:var(--offers-muted);font-size:.85rem}.header-tools{display:flex;align-items:center;gap:12px}.live-indicator{padding:9px 12px;border:1px solid #cae1cd;border-radius:8px;background:#f0f8f0;color:var(--offers-green);font-size:.72rem;font-weight:700;white-space:nowrap}.history-btn,.outline-btn{border:1px solid var(--offers-border);border-radius:8px;padding:10px 13px;background:#fff;color:#425146;font:700 .73rem Poppins,sans-serif;cursor:pointer}.summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:26px}.summary-card{position:relative;min-height:82px;padding:14px 16px;overflow:hidden;border:1px solid var(--offers-border);border-radius:12px;background:#fff}.summary-card:before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--offers-green)}.summary-card span{display:block;color:var(--offers-muted);font-size:.67rem;font-weight:800;letter-spacing:.04em}.summary-card strong{display:block;margin-top:7px;color:var(--offers-deep);font:900 1.7rem Montserrat,sans-serif}.summary-card small{position:absolute;right:14px;bottom:15px;color:var(--offers-muted);font-size:.68rem}.activity-strip{display:flex;align-items:center;gap:9px;margin-bottom:20px;padding:10px 13px;border:1px solid #d3e7d5;border-radius:8px;background:#f0f8f0;color:#2e6840;font-size:.73rem}.activity-strip i{font-size:.52rem}.offers-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:14px}.offers-section-head h2{margin:0;color:var(--offers-deep);font:800 1.2rem Montserrat,sans-serif}.offers-section-head p{margin:5px 0 0;color:var(--offers-muted);font-size:.75rem}.controls{display:flex;gap:8px}.controls input,.controls select{height:36px;border:1px solid var(--offers-border);border-radius:8px;background:#fff;color:#425146;font:600 .72rem Poppins,sans-serif;padding:0 10px}.controls input{width:180px}.lot-list{display:grid;gap:12px}.lot-card{display:grid;grid-template-columns:1.15fr 1fr 1.15fr;align-items:center;gap:20px;padding:17px 20px;border:1px solid var(--offers-border);border-radius:12px;background:#fff;box-shadow:0 3px 12px #1d472508;transition:border-color .18s,background .18s}.lot-card.selected{border-color:var(--offers-green);background:#f4faf4;box-shadow:0 5px 18px #2f7d4218}.lot-label{color:var(--offers-green);font-size:.68rem;font-weight:800;letter-spacing:.05em}.lot-card h3{margin:5px 0 2px;color:var(--offers-deep);font:800 1.1rem Montserrat,sans-serif}.lot-variety{color:#54665a;font-size:.76rem}.grade{display:inline-block;margin-left:7px;padding:3px 7px;border-radius:5px;background:var(--offers-soft);color:var(--offers-green);font-size:.62rem;font-weight:800}.lot-info{display:grid;grid-template-columns:1fr 1fr;gap:10px}.info-item span,.offer-summary span{display:block;color:var(--offers-muted);font-size:.64rem;font-weight:700}.info-item strong,.offer-summary strong{display:block;margin-top:3px;color:#35453a;font-size:.76rem}.offer-summary{display:grid;grid-template-columns:1fr 1fr;gap:7px 14px}.offer-summary .offer-count{color:var(--offers-green);font-weight:800}.view-offers{grid-column:2;justify-self:start;margin-top:5px;border:0;border-radius:7px;padding:9px 12px;background:var(--offers-green);color:#fff;font:700 .7rem Poppins,sans-serif;cursor:pointer}.offer-accepted{padding:10px 12px;border-radius:7px;background:#f0f8f0;color:var(--offers-green);font-size:.7rem;font-weight:700}.recent{margin-top:28px;padding-top:18px;border-top:1px solid var(--offers-border)}.recent h3{margin:0 0 10px;color:var(--offers-deep);font:800 .95rem Montserrat,sans-serif}.recent-list{display:flex;gap:22px;color:var(--offers-muted);font-size:.7rem}.recent-list i{color:var(--offers-green);margin-right:5px}
 .drawer-backdrop{display:none;position:fixed;inset:0;background:#10201466;z-index:1200}.drawer-backdrop.open{display:block}.offer-drawer{position:fixed;z-index:1210;top:0;right:0;width:min(550px,100%);height:100vh;overflow-y:auto;padding:28px;background:#fff;box-shadow:-12px 0 35px #173b2130;transform:translateX(100%);transition:transform .25s ease}.drawer-backdrop.open .offer-drawer{transform:translateX(0)}.drawer-top{display:flex;justify-content:space-between;gap:15px}.drawer-close,.modal-close{border:0;background:transparent;color:#647269;font-size:1.05rem;cursor:pointer}.offer-drawer h2{margin:0;color:var(--offers-deep);font:900 1.45rem Montserrat,sans-serif}.drawer-lot{margin:20px 0 14px;padding-bottom:15px;border-bottom:1px solid var(--offers-border)}.drawer-lot strong{display:block;color:var(--offers-green);font-size:.7rem}.drawer-lot h3{margin:5px 0;color:var(--offers-deep);font:800 1.08rem Montserrat,sans-serif}.drawer-lot p{margin:0;color:var(--offers-muted);font-size:.74rem}.drawer-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:19px;padding:11px;border-radius:8px;background:var(--offers-soft)}.drawer-strip span{display:block;color:var(--offers-muted);font-size:.62rem}.drawer-strip strong{display:block;margin-top:4px;color:var(--offers-green);font-size:.73rem}.bids-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.bids-heading h3{margin:0;color:var(--offers-deep);font:800 .95rem Montserrat,sans-serif}.bids-heading span{color:var(--offers-muted);font-size:.67rem}.bid-card{margin-bottom:10px;padding:14px;border:1px solid var(--offers-border);border-radius:10px;background:#fff}.bid-head{display:flex;justify-content:space-between;gap:10px}.buyer-name{color:var(--offers-deep);font-weight:800;font-size:.82rem}.verified{margin-top:3px;color:var(--offers-green);font-size:.64rem;font-weight:700}.bid-price{color:var(--offers-green);font:900 1rem Montserrat,sans-serif}.bid-main{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}.bid-main span,.bid-extra span{display:block;color:var(--offers-muted);font-size:.61rem}.bid-main strong,.bid-extra strong{display:block;margin-top:3px;color:#35453a;font-size:.7rem}.bid-extra{display:flex;gap:16px;border-top:1px solid #edf2ed;padding-top:9px}.bid-actions{display:flex;justify-content:flex-end;gap:7px;margin-top:11px}.bid-actions button{border:1px solid var(--offers-border);border-radius:6px;padding:7px 9px;background:#fff;color:#425146;font:700 .66rem Poppins,sans-serif;cursor:pointer}.bid-actions .accept,.accept-primary{border-color:var(--offers-green);background:var(--offers-green);color:#fff}
 .modal-layer{display:none;position:fixed;inset:0;z-index:1300;align-items:center;justify-content:center;padding:16px;background:#10201480}.modal-layer.open{display:flex}.modal{position:relative;width:min(560px,100%);max-height:92vh;overflow-y:auto;padding:26px;border-radius:14px;background:#fff;box-shadow:0 24px 70px #173b2140}.modal h2{margin:0;color:var(--offers-deep);font:900 1.3rem Montserrat,sans-serif}.modal-subtitle{margin:6px 0 18px;color:var(--offers-muted);font-size:.75rem}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:15px 0;border-top:1px solid var(--offers-border);border-bottom:1px solid var(--offers-border)}.detail-grid h4{grid-column:1/-1;margin:0;color:var(--offers-green);font-size:.68rem;text-transform:uppercase;letter-spacing:.05em}.detail-grid span{display:block;color:var(--offers-muted);font-size:.65rem}.detail-grid strong{display:block;margin-top:3px;color:#35453a;font-size:.75rem}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.modal-actions button{border:1px solid var(--offers-border);border-radius:7px;padding:9px 12px;background:#fff;color:#425146;font:700 .7rem Poppins,sans-serif;cursor:pointer}.modal-actions .accept-primary{background:var(--offers-green);color:#fff}.modal label{display:block;margin:12px 0 5px;color:#425146;font-size:.72rem;font-weight:700}.modal input,.modal textarea{width:100%;box-sizing:border-box;padding:10px;border:1px solid var(--offers-border);border-radius:7px;font:500 .75rem Poppins,sans-serif}.success-state{text-align:center;padding:12px 0}.success-icon{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 12px;border-radius:50%;background:var(--offers-soft);color:var(--offers-green);font-size:1.4rem}.success-state h2{font-size:1.2rem}.success-state p{color:var(--offers-muted);font-size:.75rem}.success-state .accept-primary{display:inline-block;margin-top:10px;border:0;text-decoration:none}
-@media(max-width:900px){.offers-main{margin-left:0;padding:22px 15px}.offers-header,.offers-section-head{align-items:flex-start;flex-direction:column}.header-tools,.controls{width:100%}.controls input,.controls select{flex:1}.summary-row{grid-template-columns:1fr 1fr}.lot-card{grid-template-columns:1fr 1fr;gap:14px}.offer-summary{grid-column:2;grid-row:1 / span 2}.view-offers{grid-column:1}.recent-list{flex-direction:column;gap:8px}}
+@media(max-width:900px){.offers-header,.offers-section-head{align-items:flex-start;flex-direction:column}.header-tools,.controls{width:100%}.controls input,.controls select{flex:1}.summary-row{grid-template-columns:1fr 1fr}.lot-card{grid-template-columns:1fr 1fr;gap:14px}.offer-summary{grid-column:2;grid-row:1 / span 2}.view-offers{grid-column:1}.recent-list{flex-direction:column;gap:8px}}
+@media(max-width:768px){.offers-main{width:100%;margin-left:0;padding:22px 15px}}
 @media(max-width:560px){.offers-header h1{font-size:1.6rem}.header-tools{justify-content:space-between}.live-indicator{font-size:.65rem}.lot-card{grid-template-columns:1fr}.lot-info,.offer-summary{grid-column:auto;grid-row:auto}.view-offers{grid-column:auto;width:100%}.drawer-strip{grid-template-columns:1fr 1fr}.drawer-strip div:last-child{grid-column:1/-1}.bid-main{grid-template-columns:1fr 1fr}.bid-extra{flex-wrap:wrap}.modal{padding:21px}.detail-grid{grid-template-columns:1fr}}
 .lot-card.accepted{opacity:.78}.accepted-summary{grid-column:3;padding:10px 12px;border-radius:7px;background:#f0f8f0;color:var(--offers-green);font-size:.7rem;font-weight:700}.accepted-summary strong{display:block;margin-top:4px;font-size:.76rem}
 /* Lot state highlights: orange while bidding is live, green once a winner is selected. */
@@ -24,10 +25,106 @@
 <link rel="stylesheet" href="../css/buyer-card-theme.css"><link rel="stylesheet" href="../css/language-switcher.css"></head>
 <body class="dashboard-body offers-body">
 <button class="mobile-sidebar-toggle" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
-<aside class="farmer-sidebar" id="farmerSidebar"><nav class="sidebar-nav"><ul><li><a href="farmer-dashboard.html"><span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span><span class="nav-text">Dashboard</span></a></li><li><a href="market-intelligence.html"><span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span><span class="nav-text">Market Prices</span></a></li><li><a href="crop-listings.html"><span class="nav-icon"><i class="fa-solid fa-wheat-awn"></i></span><span class="nav-text">My Crops</span></a></li><li><a href="my-lots.html"><span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span><span class="nav-text">My Lots</span></a></li><li class="active"><a href="buyer-portal-offers.html"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span><span class="nav-text">Buyers</span></a></li><li><a href="transport-optimizer.html"><span class="nav-icon"><i class="fa-solid fa-truck"></i></span><span class="nav-text">Transport &amp; Storage</span></a></li><li><a href="transactions.html"><span class="nav-icon"><i class="fa-solid fa-box"></i></span><span class="nav-text">Transactions</span></a></li><li><a href="farmer-profile.html"><span class="nav-icon"><i class="fa-solid fa-user"></i></span><span class="nav-text">Profile</span></a></li></ul></nav><div class="sidebar-footer"><a href="#" class="sidebar-logout-btn" id="sidebarLogoutBtn"><span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span><span class="nav-text">Logout</span></a></div></aside>
+<aside class="farmer-sidebar" id="farmerSidebar">
+        <!-- Logo / Brand -->
+        <div class="sidebar-header">
+            <div class="sidebar-brand">
+                <div class="brand-logo-icon"><i class="fa-solid fa-leaf"></i></div>
+                <div class="brand-text">
+                    <span class="brand-agri">Kisan</span><span class="brand-mitra">Mitra</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="sidebar-nav" aria-label="Farmer navigation">
+            <ul>
+                <!-- MAIN -->
+                <span class="nav-group-label">Main</span>
+
+                <li data-tour="dashboard">
+                    <a href="farmer-dashboard.html" aria-label="Dashboard">
+                        <span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.dashboard">Dashboard</span>
+                    </a>
+                </li>
+
+                <li data-tour="market-prices">
+                    <a href="market-intelligence.html" aria-label="Market Prices">
+                        <span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.marketIntelligence">Market Prices</span>
+                    </a>
+                </li>
+
+                <li data-tour="my-crops">
+                    <a href="crop-listings.html" aria-label="My Crops">
+                        <span class="nav-icon"><i class="fa-solid fa-wheat-awn"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.myCrops">My Crops</span>
+                    </a>
+                </li>
+
+                <li data-tour="my-lots">
+                    <a href="my-lots.html" aria-label="My Lots">
+                        <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span>
+                        <span class="nav-text">My Lots</span>
+                    </a>
+                </li>
+
+                <!-- TRADING -->
+                <span class="nav-group-label">Trading</span>
+
+                <li class="active" data-tour="buyers">
+                    <a href="buyer-portal-offers.html" aria-label="Live Bids">
+                        <span class="nav-icon"><i class="fa-solid fa-handshake"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.buyers">Live Bids</span>
+                    </a>
+                </li>
+
+                <li data-tour="transactions">
+                    <a href="transactions.html" aria-label="Transactions">
+                        <span class="nav-icon"><i class="fa-solid fa-receipt"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.transactions">Transactions</span>
+                    </a>
+                </li>
+
+                <!-- OPERATIONS -->
+                <span class="nav-group-label">Operations</span>
+
+                <li data-tour="smart-selling">
+                    <a href="transport-optimizer.html" aria-label="Transport &amp; Storage">
+                        <span class="nav-icon"><i class="fa-solid fa-truck"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.smartSelling">Transport &amp; Storage</span>
+                    </a>
+                </li>
+
+                <!-- ACCOUNT -->
+                <span class="nav-group-label">Account</span>
+
+                <li data-tour="profile">
+                    <a href="farmer-profile.html" aria-label="Profile">
+                        <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
+                        <span class="nav-text" data-i18n="sidebar.profile">Profile</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Sidebar Footer / Logout -->
+        <div class="sidebar-footer">
+            <a href="#" class="sidebar-logout-btn" id="sidebarLogoutBtn" aria-label="Logout">
+                <span class="nav-icon"><i class="fa-solid fa-right-from-bracket"></i></span>
+                <span class="nav-text" data-i18n="dashboard.logout">Logout</span>
+            </a>
+        </div>
+</aside>
 <header class="dashboard-header"><div class="header-container"><div class="logo"><span class="logo-text"><span class="logo-agri">Kisan<span class="logo-leaf"><i class="fa-solid fa-leaf"></i></span></span><span class="logo-mitra">Mitra</span></span></div><div class="header-actions"><div class="language-switcher"><button class="lang-btn active" data-lang="en">English</button><button class="lang-btn" data-lang="mr">मराठी</button></div><div class="user-menu"><div class="user-avatar"><span>F</span></div></div></div></div></header>
-<main class="offers-main"><div class="offers-wrap">
-<section class="offers-header"><div><p class="eyebrow">Farmer workspace · Buyer interest</p><h1>Buyers &amp; Live Offers</h1><p>View buyer interest and manage live offers across your active produce lots.</p></div><div class="header-tools"><span class="live-indicator"><i class="fa-solid fa-circle"></i> Live offers updating</span><button class="history-btn"><i class="fa-solid fa-clock-rotate-left"></i> Offer History</button></div></section>
+<main class="offers-main">
+        <div class="page-heading-block">
+            <div class="page-label">FARMER WORKSPACE <span class="label-dot">&middot;</span> LIVE BIDS</div>
+            <h1 class="page-title">Live Bids</h1>
+            <p class="page-subtitle">Review incoming buyer offers and accept the best deal for your produce.</p>
+        </div><div class="offers-wrap">
+<section class="offers-header"><div></div><div class="header-tools"><span class="live-indicator"><i class="fa-solid fa-circle"></i> Live offers updating</span><button class="history-btn"><i class="fa-solid fa-clock-rotate-left"></i> Offer History</button></div></section>
 <section class="summary-row"><article class="summary-card"><span>ACTIVE LOTS</span><strong>4</strong><small>Lots receiving offers</small></article><article class="summary-card"><span>LIVE OFFERS</span><strong>11</strong><small>Across all active lots</small></article><article class="summary-card"><span>BUYERS</span><strong>8</strong><small>Unique buyers</small></article><article class="summary-card"><span>PENDING ACTION</span><strong>3</strong><small>Offers needing review</small></article></section>
 <div class="activity-strip"><i class="fa-solid fa-circle"></i><span>2 new offers received in the last 10 minutes</span></div>
 <section><div class="offers-section-head"><div><h2>Your Active Lots</h2><p>Lots currently receiving buyer offers.</p></div><div class="controls"><input id="lotSearch" type="search" placeholder="Search lot or crop..." aria-label="Search lot or crop"><select id="lotFilter" aria-label="Filter lots"><option value="all">All Lots</option><option value="receiving">Receiving Offers</option><option value="accepted">Offer Accepted</option></select><select id="lotSort" aria-label="Sort lots"><option>Latest Activity</option><option>Highest Offer</option></select></div></div><div class="lot-list" id="lotList"></div></section>

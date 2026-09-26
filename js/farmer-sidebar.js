@@ -1,7 +1,8 @@
-// Farmer Sidebar - Static always-expanded, no toggle needed
+// Farmer Sidebar — v2.0 (Premium KisanMitra design)
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Mobile sidebar toggle (for small screens only)
+
+    // ── Mobile sidebar toggle ──────────────────────────────────
     const mobileToggle = document.querySelector('.mobile-sidebar-toggle');
     const sidebar = document.querySelector('.farmer-sidebar');
 
@@ -11,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
         sidebar?.classList.toggle('mobile-open');
     });
 
-    // Close sidebar when clicking outside on mobile
     document.addEventListener('click', function (e) {
         if (window.innerWidth <= 768) {
             if (!sidebar?.contains(e.target) && !mobileToggle?.contains(e.target)) {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // User Dropdown toggle
+    // ── User Dropdown toggle ───────────────────────────────────
     const userMenuBtn = document.getElementById('userMenuBtn');
     const userDropdown = document.getElementById('userDropdown');
 
@@ -35,37 +35,61 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Populate user info from sessionStorage
+    // ── Populate user info ─────────────────────────────────────
     const currentUserStr = sessionStorage.getItem('currentUser');
     if (currentUserStr) {
         try {
             const currentUser = JSON.parse(currentUserStr);
-            const initials = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'F';
-            const initialsEl = document.getElementById('userInitials');
-            const dropInitialsEl = document.getElementById('dropdownInitials');
-            const welcomeNameEl = document.getElementById('welcomeName');
-            const dropNameEl = document.getElementById('dropdownName');
-            const dropEmailEl = document.getElementById('dropdownEmail');
+            const name = currentUser.name || 'Farmer';
+            const initials = name.charAt(0).toUpperCase();
 
+            // Header avatar
+            const initialsEl = document.getElementById('userInitials');
             if (initialsEl) initialsEl.textContent = initials;
+
+            // Dropdown fields
+            const dropInitialsEl = document.getElementById('dropdownInitials');
+            const welcomeNameEl  = document.getElementById('welcomeName');
+            const dropNameEl     = document.getElementById('dropdownName');
+            const dropEmailEl    = document.getElementById('dropdownEmail');
+
             if (dropInitialsEl) dropInitialsEl.textContent = initials;
-            if (welcomeNameEl) welcomeNameEl.textContent = currentUser.name;
-            if (dropNameEl) dropNameEl.textContent = currentUser.name;
-            if (dropEmailEl) dropEmailEl.textContent = currentUser.email || '';
-        } catch (e) {
-            console.error('Error parsing currentUser data:', e);
+            if (welcomeNameEl)  welcomeNameEl.textContent  = name;
+            if (dropNameEl)     dropNameEl.textContent     = name;
+            if (dropEmailEl)    dropEmailEl.textContent    = currentUser.email || '';
+
+            // ── Sidebar profile card ───────────────────────────
+            const avatarEl = document.getElementById('sidebarProfileAvatar');
+            const nameEl   = document.getElementById('sidebarProfileName');
+
+            if (avatarEl) avatarEl.textContent = initials;
+            if (nameEl)   nameEl.textContent   = name;
+
+        } catch (err) {
+            console.error('Error parsing currentUser:', err);
         }
     }
 
-    // Logout functionality
+    // ── Logout ────────────────────────────────────────────────
     function performLogout(e) {
         if (e) e.preventDefault();
         sessionStorage.removeItem('currentUser');
-        window.location.href = '../website.html';
+        // Navigate relative to current file depth
+        const depth = (window.location.pathname.match(/html\//)) ? '../' : '';
+        window.location.href = depth + 'website.html';
     }
 
-    const logoutBtn = document.getElementById('logoutBtn');
+    const logoutBtn        = document.getElementById('logoutBtn');
     const sidebarLogoutBtn = document.getElementById('sidebarLogoutBtn');
     logoutBtn?.addEventListener('click', performLogout);
     sidebarLogoutBtn?.addEventListener('click', performLogout);
+
+    // ── Mark active nav item by current page ──────────────────
+    const currentPage = window.location.pathname.split('/').pop();
+    document.querySelectorAll('.sidebar-nav a').forEach(link => {
+        const href = link.getAttribute('href')?.split('/').pop();
+        if (href && href === currentPage) {
+            link.closest('li')?.classList.add('active');
+        }
+    });
 });

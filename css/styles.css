@@ -1212,6 +1212,10 @@ body.dashboard-body>main.dashboard-main {
     padding-top: 35px;
 }
 
+body.dashboard-body>main.dashboard-main.farmer-dashboard-main>.page-heading-block {
+    padding: 0 20px;
+}
+
 body.dashboard-body>main.dashboard-main>h1,
 body.dashboard-body .page-header>h1,
 body.dashboard-body .page-header>div>h1,
